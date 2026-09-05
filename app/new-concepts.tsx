@@ -974,6 +974,21 @@ function Booking() {
         </form>
       </TabsContent>
       <TabsContent value="gift">
+        <div className="n-gift-options">
+          <article>
+            <Gift size={24} />
+            <h2>Give a gift certificate</h2>
+            <p>Gift certificates will be purchased securely through the practice’s Square page. No amount, recipient information, or payment is collected in this review site.</p>
+            <button className="n-button" onClick={() => setNotice('Square gift certificate link placeholder — no purchase was started.')}>Open Square gift cards <ArrowRight size={18} /></button>
+          </article>
+          <article>
+            <CalendarDays size={24} />
+            <h2>Book an appointment</h2>
+            <p>Choose a service and time through the practice’s Square booking page. This button is ready for the final booking URL.</p>
+            <button className="n-button" onClick={() => setNotice('Square booking link placeholder — no appointment was started.')}>Open Square booking <ArrowRight size={18} /></button>
+          </article>
+        </div>
+        {/*
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -1023,7 +1038,7 @@ function Booking() {
               Review gift details <ArrowRight size={18} />
             </button>
           </div>
-        </form>
+        </form>*/}
       </TabsContent>
       <p className="n-prototype-note">
         Design preview: no booking, purchase, email, or payment will be made.
