@@ -1351,6 +1351,36 @@
   background: #eee8e5;
   border-radius: 35px;
 }
+
+/* Booking and gift cards are one calm, non-transactional handoff page in
+   every concept. The cards inherit each concept's surface, radius, and ink. */
+.n-booking .n-gift-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.n-booking .n-gift-options article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 260px;
+  padding: clamp(24px, 3vw, 38px);
+  background: var(--n-paper, #f5f3ee);
+  color: var(--n-ink, #304438);
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 24px;
+}
+.n-booking .n-gift-options svg { margin-bottom: 20px; }
+.n-booking .n-gift-options h2 { margin: 0 0 12px; font-size: clamp(26px, 3vw, 38px); }
+.n-booking .n-gift-options p { max-width: 42ch; line-height: 1.7; margin: 0 0 24px; }
+.n-booking .n-gift-options .n-button { margin-top: auto; }
+.n-courtyard .n-booking .n-gift-options article { border-radius: 34px; background: #f7f2eb; }
+.n-desk .n-booking .n-gift-options article { border-radius: 8px; background: #eef2ed; }
+.n-everyday .n-booking .n-gift-options article { border-radius: 35px; background: #eee8e5; }
+.n-house .n-booking .n-gift-options article { border-radius: 14px; background: #e5e9e1; }
+@media (max-width: 700px) {
+  .n-booking .n-gift-options { grid-template-columns: 1fr; }
+}
 .novel .selections-page {
   background: transparent;
   padding: 0;
