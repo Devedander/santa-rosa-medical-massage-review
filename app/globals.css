@@ -55,7 +55,10 @@
 .social-links a{width:22px;height:22px;display:grid;place-items:center;opacity:.82;transition:opacity .2s ease,transform .2s ease}
 .social-links img{width:18px;height:18px;filter:brightness(0) invert(1);object-fit:contain}
 .tpl-head .social-links img,.poster-nav .social-links img{filter:none}
-.webwell .tpl-head .social-links{margin-left:16px}
+.webwell .tpl-head nav{display:flex;align-items:center;gap:24px}
+.webwell .tpl-head nav button{margin:0;padding:0;background:transparent;color:#53605b}
+.webwell .tpl-head nav button:nth-child(6){order:6}
+.webwell .tpl-head .social-links{order:7;margin-left:4px}
 .social-links a:hover{opacity:1;transform:translateY(-1px)}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:9px;white-space:nowrap}
 .topbar .cred{margin:0}
