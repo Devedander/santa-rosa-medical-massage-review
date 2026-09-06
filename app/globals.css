@@ -162,7 +162,7 @@
 .site.finder .avant-head { top: 0; }
 .site.finder .avant-logo { width: 190px; height: 52px; font-size: 0; background: url('/logo-correct.png') center/contain no-repeat; }
 .site.finder .avant-logo br, .site.finder .avant-logo i { display: none; }
-.site.finder .avant-head>button:last-child::after { content: '  ·  Call (707) 303-7707'; margin-left: 10px; font-size: 12px; }
+.avant-social{display:flex;align-items:center;gap:8px;margin-left:auto}.avant-social a{display:grid;place-items:center;width:22px;height:22px}.avant-social img{width:17px;height:17px;object-fit:contain}.avant-call{border:1px solid currentColor;padding:10px 13px;font:700 12px Arial;white-space:nowrap}
 .site.finder .finder-orbit { min-width: 0; }
 .site.finder .finder-orbit > b { right: clamp(8px, 5vw, 60px); bottom: clamp(16px, 12%, 58px); }
 @media (max-width: 700px) { .site.finder > .avant-concept { width: calc(100% - 20px); margin: 10px auto 28px; border-radius: 20px; } }
