@@ -129,7 +129,7 @@ function Brand() {
       onClick={() => onPage('home')}
     aria-label="Santa Rosa Medical Massage home"
     >
-      <img src="/logo-live.png" alt="" className="n-brand-logo" />
+      <img src="/logo-correct.png" alt="" className="n-brand-logo" />
       <span>Santa Rosa</span>
       <span>Medical Massage</span>
     </button>
