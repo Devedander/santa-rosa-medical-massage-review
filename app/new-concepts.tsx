@@ -127,8 +127,9 @@ function Brand() {
     <button
       className="n-brand"
       onClick={() => onPage('home')}
-      aria-label="Santa Rosa Medical Massage home"
+    aria-label="Santa Rosa Medical Massage home"
     >
+      <img src="/logo-live.png" alt="" className="n-brand-logo" />
       <span>Santa Rosa</span>
       <span>Medical Massage</span>
     </button>
@@ -1445,6 +1446,7 @@ export default function NewConcepts(props: Props) {
             <button onClick={() => go('gift')}>Gift cards</button>
           </nav>
           <Action to="book">Schedule now</Action>
+          <a className="n-call" href="tel:+17073037707">Call <span>(707) 303-7707</span></a>
           {props.design === 'desk' && (
             <div className="desk-nav-bottom">
               <span>Here to help.</span>
