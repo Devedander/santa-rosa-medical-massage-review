@@ -158,7 +158,7 @@
 .site.finder .mock-page { width: min(1240px, calc(100% - 48px)); margin: 24px auto 48px; border-radius: 30px; overflow: hidden; box-shadow: 0 18px 50px rgba(35,56,48,.08); }
 @media (max-width: 700px) { .site.finder .mock-page { width: calc(100% - 20px); margin: 10px auto 28px; border-radius: 20px; } }
 .site.finder > .avant-concept { width: min(1320px, calc(100% - 48px)); margin: 0 auto 48px; overflow: hidden; border-radius: 30px; box-shadow: 0 18px 50px rgba(35,56,48,.08); }
-.site.finder .finder-hero { padding-inline: clamp(32px, 7vw, 110px); }
+.site.finder .finder-hero { padding-top: 28px; padding-inline: clamp(32px, 7vw, 110px); }
 .site.finder .finder-orbit { min-width: 0; }
 .site.finder .finder-orbit > b { right: clamp(8px, 5vw, 60px); bottom: clamp(16px, 12%, 58px); }
 @media (max-width: 700px) { .site.finder > .avant-concept { width: calc(100% - 20px); margin: 10px auto 28px; border-radius: 20px; } }
