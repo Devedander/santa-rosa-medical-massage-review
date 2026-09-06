@@ -14,10 +14,10 @@ const serviceDetails=[
  ['Somatic Experiencing','A body-centered approach that can support people working with post-traumatic stress.','This service centers awareness, pacing, and body-based support; it is not a substitute for mental-health care.']
 ];
 const serviceImages=['/mockup-photos/yelp-treatment.jpg','/mockup-photos/therapy-hands.jpg','/mockup-photos/therapy-room.jpg','/mockup-photos/yelp-detail-4.jpg','/mockup-photos/yelp-treatment.jpg','/mockup-photos/therapy-hands.jpg'];
-const concepts=[['editorial-photo','1 · Sonoma modern','New business imagery'],['webwell-photo','2 · Wellness guide','New business imagery'],['house-photo','3 · Familiar','Editorial reference format'],['cloud-photo','4 · Cloud studio','Soft rounded template'],['finder-photo','5 · Care finder','Guided selection flow'],['courtyard-photo','6 · Courtyard welcome','Cinematic and spacious'],['desk-photo','7 · Practice desk','Compact care directory']];
+const concepts=[['house-photo','1 · Familiar','Editorial reference format'],['webwell-photo','2 · Wellness guide','New business imagery'],['finder-photo','3 · Care finder','Guided selection flow'],['desk-photo','4 · Practice desk','Compact care directory']];
 
 function Switcher({style,setStyle}:{style:string,setStyle:(s:string)=>void}) {
- return <div className="switcher combined-concepts" role="group" aria-label="Compare all seven website designs"><div><b>Design review</b><span>Choose your finalists</span></div>{concepts.map(c=><button key={c[0]} aria-pressed={style===c[0]} className={style===c[0]?'active':''} onClick={()=>setStyle(c[0])}><b>{c[1]}</b></button>)}</div>;
+ return <div className="switcher combined-concepts" role="group" aria-label="Compare the four website designs"><div><b>Design review</b><span>Choose your finalists</span></div>{concepts.map(c=><button key={c[0]} aria-pressed={style===c[0]} className={style===c[0]?'active':''} onClick={()=>setStyle(c[0])}><b>{c[1]}</b></button>)}</div>;
 }
 
 const reviewQuotes=[['“Matty is an excellent masseuse… he created a sense of safety, deep relaxation, and helped her body release stress.”','Yelp review · August 2026'],['“Matty does a great job listening to what problem areas you have and combining the right pressure with stretches.”','Yelp review · January 2026'],['“Everyone is so incredible… I leave pain free every time.”','Yelp review · April 2026']];
@@ -178,7 +178,7 @@ function TemplateMock({kind,photo=false,onPage}:{kind:'wixsoft'|'wpspa'|'webwell
 }
 
 export default function Home(){
- const [style,setStyle]=useState('courtyard-photo');
+ const [style,setStyle]=useState('house-photo');
  const [page,setPage]=useState('home');
  const siteRef=useRef<HTMLElement>(null);
 
@@ -192,7 +192,7 @@ export default function Home(){
   } catch {}
  },[]);
 
- useEffect(()=>{if(!concepts.some(([id])=>id===style))setStyle('courtyard-photo')},[style]);
+ useEffect(()=>{if(!concepts.some(([id])=>id===style))setStyle('house-photo')},[style]);
 
  useEffect(()=>{
   const root=siteRef.current;
