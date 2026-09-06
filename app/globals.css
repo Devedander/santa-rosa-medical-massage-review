@@ -159,6 +159,9 @@
 @media (max-width: 700px) { .site.finder .mock-page { width: calc(100% - 20px); margin: 10px auto 28px; border-radius: 20px; } }
 .site.finder > .avant-concept { width: min(1320px, calc(100% - 48px)); margin: 0 auto 48px; overflow: hidden; border-radius: 30px; box-shadow: 0 18px 50px rgba(35,56,48,.08); }
 .site.finder .finder-hero { padding-top: 28px; padding-inline: clamp(32px, 7vw, 110px); }
+.site.finder .avant-head { top: 0; }
+.site.finder .avant-logo { width: 190px; height: 52px; font-size: 0; background: url('/logo-correct.png') center/contain no-repeat; }
+.site.finder .avant-logo br, .site.finder .avant-logo i { display: none; }
 .site.finder .finder-orbit { min-width: 0; }
 .site.finder .finder-orbit > b { right: clamp(8px, 5vw, 60px); bottom: clamp(16px, 12%, 58px); }
 @media (max-width: 700px) { .site.finder > .avant-concept { width: calc(100% - 20px); margin: 10px auto 28px; border-radius: 20px; } }
