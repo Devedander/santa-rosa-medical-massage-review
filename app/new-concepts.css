@@ -1359,6 +1359,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
+.n-booking-book [data-slot='tabs-trigger']:nth-child(2),
+.n-booking-gift [data-slot='tabs-trigger']:first-child { display: none; }
 .n-booking .n-gift-options article {
   display: flex;
   flex-direction: column;

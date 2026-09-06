@@ -903,7 +903,7 @@ function Booking() {
   return (
     <Tabs
       defaultValue={page === 'gift' ? 'gift' : 'appointment'}
-      className="n-booking"
+      className={`n-booking n-booking-${page}`}
       onValueChange={() => setNotice('')}
     >
       <TabsList aria-label="Appointments or gift certificates">
