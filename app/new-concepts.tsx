@@ -900,6 +900,44 @@ function House() {
 function Booking() {
   const { services, page } = useContent();
   const [notice, setNotice] = useState('');
+  if (page === 'gift')
+    return (
+      <section className="n-booking standalone-booking n-booking-gift">
+        <div className="standalone-booking-card">
+          <Gift size={28} />
+          <span className="n-kicker">Gift cards</span>
+          <h1>Give someone time for care.</h1>
+          <p>
+            Gift certificates will be purchased securely through the practice’s
+            Square page. This review page does not collect an amount,
+            recipient information, or payment details.
+          </p>
+          <button className="n-button" onClick={() => setNotice('Square gift-card link placeholder — no purchase was started.')}>
+            Continue to Square gift cards <ArrowRight size={18} />
+          </button>
+          {notice && <p className="n-notice" role="status"><Check size={18} />{notice}</p>}
+        </div>
+      </section>
+    );
+  if (page === 'book')
+    return (
+      <section className="n-booking standalone-booking n-booking-book">
+        <div className="standalone-booking-card">
+          <CalendarDays size={28} />
+          <span className="n-kicker">Appointments</span>
+          <h1>Find a time that works for you.</h1>
+          <p>
+            Appointment selection will continue to the practice’s Square
+            booking page. This review page is only showing the finished-form
+            direction and does not submit a booking.
+          </p>
+          <button className="n-button" onClick={() => setNotice('Square booking link placeholder — no appointment was started.')}>
+            Continue to Square booking <ArrowRight size={18} />
+          </button>
+          {notice && <p className="n-notice" role="status"><Check size={18} />{notice}</p>}
+        </div>
+      </section>
+    );
   return (
     <Tabs
       defaultValue={page === 'gift' ? 'gift' : 'appointment'}

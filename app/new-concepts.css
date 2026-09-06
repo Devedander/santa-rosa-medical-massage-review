@@ -1359,6 +1359,15 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
+.standalone-booking { min-height: 70vh; display: grid; place-items: center; padding: 8vh 6vw; }
+.standalone-booking-card { width: min(680px, 100%); padding: clamp(30px, 6vw, 72px); background: var(--n-paper, #f5f3ee); color: var(--n-ink, #304438); border-radius: 28px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+.standalone-booking-card h1 { margin: 16px 0 18px; font-size: clamp(38px, 6vw, 68px); }
+.standalone-booking-card > p { max-width: 52ch; font-size: 18px; line-height: 1.7; margin-bottom: 28px; }
+.standalone-booking-card .n-notice { margin-top: 22px; }
+.n-desk .standalone-booking-card { border-radius: 8px; background: #eef2ed; }
+.n-everyday .standalone-booking-card { border-radius: 40px; background: #eee8e5; }
+.n-house .standalone-booking-card { border-radius: 14px; background: #e5e9e1; }
+.n-courtyard .standalone-booking-card { border-radius: 36px; background: #f7f2eb; }
 .n-booking-book [data-slot='tabs-trigger']:nth-child(2),
 .n-booking-gift [data-slot='tabs-trigger']:first-child { display: none; }
 .n-booking .n-gift-options article {
