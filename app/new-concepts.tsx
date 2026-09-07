@@ -1661,9 +1661,9 @@ export default function NewConcepts(props: Props) {
                 {label}
               </button>
             ))}
+            <button onClick={() => go("blog")}>Blog</button>
             {props.design !== "house" && (
               <>
-                <button onClick={() => go("blog")}>Blog</button>
                 {props.design !== "desk" && <button onClick={() => go("gift")}>Gift cards</button>}
               </>
             )}
