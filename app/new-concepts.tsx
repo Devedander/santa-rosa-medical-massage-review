@@ -474,6 +474,7 @@ function Courtyard() {
   );
 }
 function Desk() {
+  const { awards } = useContent();
   return (
     <div className="desk-home">
       <section className="desk-opening">
@@ -501,6 +502,7 @@ function Desk() {
             what you’re looking for. Your questions, comfort, and preferences
             belong in that discussion.
           </p>
+          <div className="n-hero-awards">{awards}</div>
           <div className="n-actions">
             <Action to="about">Learn how care begins.</Action>
             <Action to="contact" quiet>
@@ -1484,7 +1486,7 @@ export default function NewConcepts(props: Props) {
             </div>
           )}
         </div>
-        {props.page === "home" && props.design !== "house" && props.awards}
+        {props.page === "home" && !["house", "desk"].includes(props.design) && props.awards}
         <div id="n-content" className="n-content" tabIndex={-1}>
           {props.page === "home" ? (
             props.design === "house" ? (

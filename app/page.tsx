@@ -2699,6 +2699,7 @@ function AvantConcept({
                   need to choose the right treatment on your own—we can talk
                   through the options together.
                 </p>
+                <AwardStrip />
               </div>
               <div className="finder-orbit">
                 <InlineGallery
@@ -2847,6 +2848,7 @@ function TemplateMock({
             this is your first visit or part of ongoing care, we’ll help you
             find a thoughtful place to begin.
           </p>
+          {kind === "webwell" && <AwardStrip />}
           <button onClick={() => wix ? onPage("book") : kind === "webwell" ? jumpServices() : onPage("treatments")}>
             {wix
               ? "Book an appointment"
@@ -3132,7 +3134,7 @@ export default function Home() {
     >
       <Switcher style={style} setStyle={chooseConcept} />
         <PrototypeNav page={page} setPage={setPage} />
-        {page === "home" && <AwardStrip />}
+        {page === "home" && !["webwell", "finder"].includes(baseStyle) && <AwardStrip />}
       {page !== "home" ? (
         <MockPages page={page} setPage={setPage} />
       ) : (

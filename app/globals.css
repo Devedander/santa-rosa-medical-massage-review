@@ -6277,6 +6277,13 @@ footer img {
 .house-hero-awards .award-strip > span { display: none; }
 .house-hero-awards .award-strip > div { gap: 24px; }
 .house-hero-awards .award-strip img { width: 132px; height: 176px; }
+.n-hero-awards { margin: 24px 0 22px; }
+.n-hero-awards .award-strip, .tpl-copy .award-strip, .finder-hero .award-strip { justify-content: flex-start; min-height: 0; padding: 0; gap: 16px; background: transparent; border: 0; }
+.n-hero-awards .award-strip > span, .tpl-copy .award-strip > span, .finder-hero .award-strip > span { display: none; }
+.n-hero-awards .award-strip > div, .tpl-copy .award-strip > div, .finder-hero .award-strip > div { gap: 24px; }
+.n-hero-awards .award-strip img, .tpl-copy .award-strip img, .finder-hero .award-strip img { width: 132px; height: 176px; }
+.tpl-copy .award-strip, .finder-hero .award-strip { margin: 24px 0 22px; }
 .site.webwell .award-strip { background: #edf4ee; color: #183f3a; }
 .site.finder .award-strip { width: var(--finder-canvas); margin: 0 auto 32px; border-radius: 30px; overflow: hidden; box-shadow: 0 18px 50px rgba(35,56,48,.08); background: #e6f1ef; color: #29414a; }
+.site.webwell .tpl-copy .award-strip, .site.finder .finder-hero .award-strip { width: auto; min-height: 0; margin: 24px 0 22px; padding: 0; overflow: visible; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
 @media (max-width: 640px) { .award-strip { justify-content: space-between; gap: 12px; padding: 14px 5vw; } .award-strip > span { font-size: 11px; } .award-strip img { width: 58px; height: 78px; } .house-hero-awards { margin: 18px 0; } .house-hero-awards .award-strip { padding: 0; } .house-hero-awards .award-strip > div { gap: 14px; } .house-hero-awards .award-strip img { width: 86px; height: 116px; } }
