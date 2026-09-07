@@ -291,6 +291,16 @@
 .n-house .n-concern-expand p { margin: 0 0 12px; }
 .n-house .n-concern-expand .n-link { margin-top: 2px; }
 @keyframes n-concern-reveal { from { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; transform: translateY(-8px); } to { max-height: 420px; opacity: 1; transform: translateY(0); } }
+.n-house .n-more-concerns { margin-top: 34px; border-top: 1px solid var(--n-line); border-bottom: 1px solid var(--n-line); }
+.n-house .n-more-concerns-toggle { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 24px; padding: 23px 0; color: var(--n-ink); background: transparent; border: 0; text-align: left; }
+.n-house .n-more-concerns-toggle span { display: grid; gap: 5px; }
+.n-house .n-more-concerns-toggle b { font-family: var(--n-serif); font-size: 25px; font-weight: 400; }
+.n-house .n-more-concerns-toggle small { font-size: 14px; line-height: 1.4; }
+.n-house .n-more-concerns-toggle svg { transition: transform .2s ease; }
+.n-house .n-more-concerns.is-open .n-more-concerns-toggle svg { transform: rotate(45deg); }
+.n-house .n-more-concern-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 52px; padding: 0 0 32px; animation: n-concern-reveal .42s cubic-bezier(.22,.8,.3,1) both; }
+.n-house .n-more-concern-groups h3 { margin: 0 0 7px; color: var(--n-wine); font-size: 14px; }
+.n-house .n-more-concern-list .n-concern-item > button { font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .n-house .n-concern-expand { animation: none; } }
 .novel .n-visit-details {
   display: grid;
@@ -1856,6 +1866,8 @@
     grid-template-columns: 1fr;
     gap: 0;
   }
+  .n-house .n-more-concern-groups { grid-template-columns: 1fr; gap: 24px; }
+  .n-house .n-more-concerns-toggle b { font-size: 22px; }
   .novel .n-visit-details,
   .novel .n-about-more {
     grid-template-columns: 1fr;

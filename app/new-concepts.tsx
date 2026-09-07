@@ -133,6 +133,31 @@ const conditionGuidance: Record<
     consideration: "Share any recent change in activity, injury, swelling, circulation concerns, or provider recommendations before treatment.",
   },
 };
+const additionalConcernGroups = [
+  ["Injury & recovery", ["Low back pain", "Auto injuries & whiplash", "Pain associated with bulged or injured spinal discs", "Tendonitis"]],
+  ["Hands, arms & repetitive use", ["Tingling in hands", "Tennis elbow & golfer's elbow", "Other repetitive-use injuries"]],
+  ["Whole-body & chronic concerns", ["Stress", "Leg cramps", "Postural imbalances", "Joint aches", "Fibromyalgia pain"]],
+  ["Specialized support", ["Lymphedema", "Constipation", "Breast pain"]],
+] as const;
+function additionalGuidance(concern: string) {
+  if (concern === "Lymphedema")
+    return {
+      intro: "Lymphedema care needs an especially thoughtful starting point, including an understanding of your diagnosis, treatment history, and medical guidance.",
+      approach: "With appropriate referral or clearance, Lymphatic Facilitation may be discussed as a very light-touch supportive approach. The practice can help you talk through whether this service is an appropriate fit.",
+      consideration: "Please share any history of cancer treatment, infection, blood clots, swelling changes, or current provider instructions before booking.",
+    };
+  if (concern === "Breast pain")
+    return {
+      intro: "Breast pain or a new breast change deserves medical evaluation first, so your care team can help identify the right next step.",
+      approach: "After appropriate guidance, a conversation about gentle, supportive massage around the upper body, neck, shoulders, or chest may be considered—always with your comfort and boundaries leading the plan.",
+      consideration: "Massage does not evaluate breast symptoms. Please contact a medical professional about new, persistent, or changing breast pain.",
+    };
+  return {
+    intro: `${concern} can affect the routines that make up a day—work, rest, movement, hobbies, and sleep. A useful starting point is what you want to do more comfortably.`,
+    approach: "Medical Massage, Trigger Point Therapy, Deep Tissue / Full Body work, or a gentler Swedish approach may be discussed based on your symptoms, comfort, and any relevant care guidance.",
+    consideration: "Share any diagnosis, recent injury or surgery, medications, and recommendations from your medical or rehabilitation team before your session.",
+  };
+}
 const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
 const navItems = [
   ["treatments", "Treatments"],
@@ -206,37 +231,66 @@ function Brand() {
 function ConcernLinks() {
   const { onPage, design } = useContent();
   const [openConcern, setOpenConcern] = useState<string | null>(null);
-  return (
-    <div className="n-concerns">
-      {concerns.map((c) => {
-        const expanded = design === "house" && openConcern === c;
-        const guidance = conditionGuidance[c];
-        return (
-          <div className={`n-concern-item ${expanded ? "is-open" : ""}`} key={c}>
-            <button
-              onClick={() =>
-                design === "house"
-                  ? setOpenConcern(expanded ? null : c)
-                  : onPage(`condition-${encodeURIComponent(c)}`)
-              }
-              aria-expanded={design === "house" ? expanded : undefined}
-            >
-              {c}
-              <Plus size={16} aria-hidden="true" />
-            </button>
-            {expanded && guidance && (
-              <div className="n-concern-expand">
-                <p>{guidance.intro}</p>
-                <p>{guidance.approach}</p>
-                <Action to="book" quiet>
-                  Schedule a visit
-                </Action>
-              </div>
-            )}
+  const [showMore, setShowMore] = useState(false);
+  const renderConcern = (c: string) => {
+    const expanded = design === "house" && openConcern === c;
+    const guidance = conditionGuidance[c] || additionalGuidance(c);
+    return (
+      <div className={`n-concern-item ${expanded ? "is-open" : ""}`} key={c}>
+        <button
+          onClick={() =>
+            design === "house"
+              ? setOpenConcern(expanded ? null : c)
+              : onPage(`condition-${encodeURIComponent(c)}`)
+          }
+          aria-expanded={design === "house" ? expanded : undefined}
+        >
+          {c}
+          <Plus size={16} aria-hidden="true" />
+        </button>
+        {expanded && (
+          <div className="n-concern-expand">
+            <p>{guidance.intro}</p>
+            <p>{guidance.approach}</p>
+            <Action to="book" quiet>
+              Schedule a visit
+            </Action>
           </div>
-        );
-      })}
-    </div>
+        )}
+      </div>
+    );
+  };
+  return (
+    <>
+      <div className="n-concerns">{concerns.map(renderConcern)}</div>
+      {design === "house" && (
+        <section className={`n-more-concerns ${showMore ? "is-open" : ""}`}>
+          <button
+            className="n-more-concerns-toggle"
+            onClick={() => setShowMore(!showMore)}
+            aria-expanded={showMore}
+          >
+            <span>
+              <b>More concerns we support</b>
+              <small>Explore additional reasons clients begin a conversation with us.</small>
+            </span>
+            <Plus size={20} aria-hidden="true" />
+          </button>
+          {showMore && (
+            <div className="n-more-concern-groups">
+              {additionalConcernGroups.map(([group, groupConcerns]) => (
+                <section key={group}>
+                  <h3>{group}</h3>
+                  <div className="n-more-concern-list">
+                    {groupConcerns.map(renderConcern)}
+                  </div>
+                </section>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+    </>
   );
 }
 function ServiceList({
