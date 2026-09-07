@@ -387,18 +387,18 @@ function Reviews() {
   return (
     <div className="n-reviews">
       <div className="n-review-grid" aria-live="polite">
-        {reviews.slice(group * 5, group * 5 + 5).map(([name, quote]) => (
+        {reviews.slice(group * 5, group * 5 + 5).map(([name, quote, source]) => (
           <article key={name}>
             <span className="n-quote-mark" aria-hidden="true">
               “
             </span>
             <blockquote>
               {quote.startsWith("Five-star")
-                ? "Read this client’s review on Google."
+                ? `Read this client’s review on ${source || "Google"}.`
                 : quote}
             </blockquote>
             <b>{name}</b>
-            <span>Google</span>
+            <span>{source || "Google"}</span>
           </article>
         ))}
       </div>
@@ -424,7 +424,14 @@ function Reviews() {
           target="_blank"
           rel="noreferrer"
         >
-          Read on Google <ArrowUpRight size={16} />
+          Google reviews <ArrowUpRight size={16} />
+        </a>
+        <a
+          href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Yelp reviews <ArrowUpRight size={16} />
         </a>
       </div>
     </div>
@@ -478,7 +485,7 @@ function Notes({ compact = false }: { compact?: boolean }) {
             <h3>{title}</h3>
             <p>{excerpt}</p>
             <Action to={`post-${slug}`} quiet>
-              Read note
+              Read blog post
             </Action>
           </article>
         ))}
@@ -622,7 +629,7 @@ function Courtyard() {
       </section>
       <section className="n-section court-notes">
         <div className="n-section-heading">
-          <h2>A few helpful notes.</h2>
+          <h2>A few helpful blog posts.</h2>
           <Action to="blog" quiet>
             Browse the journal
           </Action>
@@ -734,7 +741,7 @@ function Desk() {
         <div className="n-section-heading">
           <h2>Questions & reading.</h2>
           <Action to="blog" quiet>
-            All notes
+            View blog
           </Action>
         </div>
         <Notes compact />
@@ -898,7 +905,7 @@ function Everyday() {
             at your own pace.
           </h2>
           <Action to="blog" quiet>
-            All notes
+            View blog
           </Action>
         </div>
         <Notes compact />
@@ -1047,7 +1054,7 @@ function House() {
         <div className="n-section-heading">
           <h2>A little reading before your visit.</h2>
           <Action to="blog" quiet>
-            All notes
+            View blog
           </Action>
         </div>
         <Notes compact />
@@ -1356,7 +1363,7 @@ function NewPages() {
     about: "A practice that listens.",
     reviews: "In our clients’ words.",
     gallery: "Welcome inside.",
-    blog: "Notes for everyday care.",
+    blog: "Helpful articles for everyday care.",
     contact: "Let’s start a conversation.",
     book: "Appointments & gift cards.",
     gift: "Appointments & gift cards.",
@@ -1443,7 +1450,7 @@ function NewPages() {
           </p>
           <Action to="contact">Ask a question</Action>
           <Action to="blog" quiet>
-            All notes
+            View blog
           </Action>
         </div>
       ) : page === "treatments" ? (
@@ -1601,7 +1608,7 @@ export default function NewConcepts(props: Props) {
             ))}
             {props.design !== "house" && (
               <>
-                <button onClick={() => go("blog")}>Notes</button>
+                <button onClick={() => go("blog")}>Blog</button>
                 {props.design !== "desk" && <button onClick={() => go("gift")}>Gift cards</button>}
               </>
             )}

@@ -238,6 +238,18 @@ const googleReviews = [
   ["Accounts Payable", "Five-star Google rating.", "A year ago"],
   ["jeff wolcott", "Five-star Google rating.", "A year ago"],
 ];
+const yelpReviews = [
+  ["Susan D.", "“I immediately made another appointment… in 75 minutes, I received more attention, expertise, therapeutic intervention and relief than I’d had in years.”", "Yelp"],
+  ["Annie L.", "“Avocado took the time to listen to me and get to know me and my pain before we began. I felt more at ease and grounded after.”", "Yelp"],
+  ["Ellen K.", "“I was not making post-surgery progress with shoulder range of motion, and Mariah saved me. I have had trigger point massage regularly to get functional again.”", "Yelp"],
+  ["Tom S.", "“I went in with a rotator cuff concern and she did an excellent job. I’ll have to go back—massage does not always fix everything in one sitting.”", "Yelp"],
+  ["Adrienne S.", "“They really listen to my needs and address those issues during treatment. They also give helpful tips and stretches to take home.”", "Yelp"],
+  ["Jackie C.", "“I have chronic back pain and a hard time finding relief. My appointment was so helpful, and they gave me good recommendations for aftercare.”", "Yelp"],
+];
+const allReviews = [
+  ...googleReviews.map(([name, quote]) => [name, quote, "Google"]),
+  ...yelpReviews,
+];
 const blogPosts = [
   [
     "sciatica-and-your-next-session",
@@ -3119,7 +3131,7 @@ export default function Home() {
           services={serviceDetails}
           photos={allPhotoOptions}
           posts={blogPosts}
-          reviews={googleReviews}
+          reviews={allReviews}
           Photo={InlineGallery}
           selections={<SelectionPage setPage={setPage} />}
           awards={<AwardStrip />}
