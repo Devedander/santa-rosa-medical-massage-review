@@ -278,18 +278,16 @@ function ConcernLinks() {
               </span>
               <Plus size={20} aria-hidden="true" />
             </button>
-            {showMore && (
-              <div className="n-more-concern-groups">
-                {additionalConcernGroups.map(([group, groupConcerns]) => (
-                  <section key={group}>
-                    <h3>{group}</h3>
-                    <div className="n-more-concern-list">
-                      {groupConcerns.map(renderConcern)}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            )}
+            <div className="n-more-concern-groups">
+              {additionalConcernGroups.map(([group, groupConcerns]) => (
+                <section key={group}>
+                  <h3>{group}</h3>
+                  <div className="n-more-concern-list">
+                    {groupConcerns.map(renderConcern)}
+                  </div>
+                </section>
+              ))}
+            </div>
           </section>
           <section className="n-category-concerns">
             <p className="n-kicker">Alternate layout</p>
@@ -304,7 +302,7 @@ function ConcernLinks() {
                       {group}
                       <Plus size={18} aria-hidden="true" />
                     </button>
-                    {expanded && <div>{groupConcerns.map(renderConcern)}</div>}
+                    <div>{groupConcerns.map(renderConcern)}</div>
                   </section>
                 );
               })}
