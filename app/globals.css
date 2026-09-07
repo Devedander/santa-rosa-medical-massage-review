@@ -6265,3 +6265,5 @@ footer img {
 .site.webwell .contact-layout article::after, .site.webwell .contact-layout form::after { content: ""; position: absolute; bottom: -17px; width: 34px; height: 34px; background: #fff; transform: rotate(45deg); border-radius: 0 0 8px 0; box-shadow: 12px 12px 22px #183f3a08; }
 .site.webwell .contact-layout article::after { left: 52px; }
 .site.webwell .contact-layout form::after { right: 52px; }
+.site.webwell .booking-options { width: 100%; max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.site.webwell .booking-options article { min-height: 330px; }
