@@ -771,6 +771,7 @@ function House() {
             enjoy, or making room for ongoing care, we begin with your
             experience, your questions, and your comfort.
           </p>
+          <div className="house-hero-awards">{awards}</div>
           <a className="n-button" href="#n-about">
             Get to know us
           </a>
@@ -789,9 +790,6 @@ function House() {
           <Photo key={file} name={`welcome-strip-${i}`} first={file} />
         ))}
       </div>
-      <section className="house-recognition n-section">
-        {awards}
-      </section>
       <section id="n-about" className="house-story n-section">
         <div>
           <span className="n-kicker">A personal approach</span>

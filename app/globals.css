@@ -6272,10 +6272,11 @@ footer img {
 .award-strip > span { max-width: 270px; font: 700 13px/1.45 Arial; letter-spacing: .04em; }
 .award-strip > div { display: flex; align-items: center; gap: 24px; }
 .award-strip img { display: block; width: 92px; height: 122px; object-fit: contain; }
-.house-recognition { padding-top: 44px; padding-bottom: 44px; }
-.house-recognition .award-strip { width: min(760px, 100%); min-height: 190px; margin: 0 auto; padding: 24px 42px; border: 1px solid rgba(119, 55, 56, .22); border-radius: 6px; box-shadow: 0 14px 34px rgba(68, 45, 40, .08); }
-.house-recognition .award-strip > span { font-family: var(--n-serif); font-size: 22px; font-weight: 400; letter-spacing: 0; line-height: 1.15; }
-.house-recognition .award-strip img { width: 112px; height: 148px; }
+.house-hero-awards { margin: 24px 0 22px; }
+.house-hero-awards .award-strip { justify-content: flex-start; min-height: 0; padding: 0; gap: 16px; background: transparent; border: 0; }
+.house-hero-awards .award-strip > span { display: none; }
+.house-hero-awards .award-strip > div { gap: 12px; }
+.house-hero-awards .award-strip img { width: 66px; height: 88px; }
 .site.webwell .award-strip { background: #edf4ee; color: #183f3a; }
 .site.finder .award-strip { width: var(--finder-canvas); margin: 0 auto 32px; border-radius: 30px; overflow: hidden; box-shadow: 0 18px 50px rgba(35,56,48,.08); background: #e6f1ef; color: #29414a; }
-@media (max-width: 640px) { .award-strip { justify-content: space-between; gap: 12px; padding: 14px 5vw; } .award-strip > span { font-size: 11px; } .award-strip img { width: 58px; height: 78px; } .house-recognition { padding-top: 26px; padding-bottom: 26px; } .house-recognition .award-strip { min-height: 150px; padding: 18px; gap: 16px; } .house-recognition .award-strip > span { font-size: 18px; } .house-recognition .award-strip > div { gap: 8px; } .house-recognition .award-strip img { width: 70px; height: 96px; } }
+@media (max-width: 640px) { .award-strip { justify-content: space-between; gap: 12px; padding: 14px 5vw; } .award-strip > span { font-size: 11px; } .award-strip img { width: 58px; height: 78px; } .house-hero-awards { margin: 18px 0; } .house-hero-awards .award-strip { padding: 0; } .house-hero-awards .award-strip img { width: 52px; height: 70px; } }
