@@ -395,7 +395,7 @@ function Reviews() {
             </span>
             <blockquote>
               {quote.startsWith("Five-star")
-                ? `Read this client’s review on ${source || "Google"}.`
+                ? `Five-star rating on ${source || "Google"}.`
                 : quote}
             </blockquote>
             <b>{name}</b>
