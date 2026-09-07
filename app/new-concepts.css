@@ -1119,12 +1119,35 @@
   background: #edf0eb;
   border-radius: 12px;
 }
+.novel .n-review-grid article.is-expanded {
+  height: auto;
+  min-height: 300px;
+}
 .novel .n-review-grid blockquote {
   margin: 10px 0 18px;
   font: 22px/1.35 var(--n-display);
   letter-spacing: -0.02em;
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+.novel .n-review-grid blockquote.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+.novel .n-review-expand {
+  width: fit-content;
+  margin: 0 0 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--n-wine);
+  font: 700 13px/1.2 "Segoe UI", sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 .novel .n-review-grid article > b {
   font:

@@ -384,6 +384,7 @@ function ServiceList({
 function Reviews() {
   const { reviews } = useContent();
   const [activeReview, setActiveReview] = useState(0);
+  const [expandedReview, setExpandedReview] = useState<string | null>(null);
   const visibleReviews = Array.from(
     { length: Math.min(5, reviews.length) },
     (_, offset) => reviews[(activeReview + offset) % reviews.length],
@@ -392,13 +393,24 @@ function Reviews() {
     <div className="n-reviews">
       <div className="n-review-grid" aria-live="polite">
         {visibleReviews.map(([name, quote, source]) => (
-          <article key={name}>
+          <article key={name} className={expandedReview === name ? "is-expanded" : ""}>
             <span className="n-quote-mark" aria-hidden="true">
               “
             </span>
-            <blockquote>
+            <blockquote className={expandedReview === name ? "is-expanded" : ""}>
               {quote}
             </blockquote>
+            {quote.length > 110 && (
+              <button
+                className="n-review-expand"
+                aria-expanded={expandedReview === name}
+                onClick={() =>
+                  setExpandedReview(expandedReview === name ? null : name)
+                }
+              >
+                {expandedReview === name ? "Show less" : "Read full review"}
+              </button>
+            )}
             <b>{name}</b>
             <span>{source || "Google"}</span>
           </article>
