@@ -6253,3 +6253,7 @@ footer img {
 /* Let the Wellness Guide contact page use the same generous measure as its hero. */
 .site.webwell .contact-layout { width: 100%; max-width: none; grid-template-columns: minmax(360px, .7fr) minmax(0, 1.7fr); gap: 28px; }
 .site.webwell .contact-layout article, .site.webwell .contact-layout form { min-height: 490px; padding: 44px; }
+.site.webwell .contact-layout article, .site.webwell .contact-layout form { position: relative; border-radius: 32px; background: #fff; box-shadow: 0 16px 36px #183f3a12; }
+.site.webwell .contact-layout article::after, .site.webwell .contact-layout form::after { content: ""; position: absolute; bottom: -17px; width: 34px; height: 34px; background: #fff; transform: rotate(45deg); border-radius: 0 0 8px 0; box-shadow: 12px 12px 22px #183f3a08; }
+.site.webwell .contact-layout article::after { left: 52px; }
+.site.webwell .contact-layout form::after { right: 52px; }
