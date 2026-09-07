@@ -1140,12 +1140,20 @@
   color: var(--n-wine);
 }
 .novel .n-review-sources {
+  margin: 18px 0 0;
+  text-align: center;
+}
+.novel .n-review-sources > p {
+  margin: 0 0 10px;
+  font-family: var(--n-display);
+  font-size: 21px;
+}
+.novel .n-review-sources > div {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px 30px;
-  margin: 0 0 24px;
+  gap: 10px 28px;
 }
 .novel .n-review-sources a {
   display: inline-flex;
@@ -1156,6 +1164,7 @@
   font-weight: 700;
 }
 .novel .n-review-sources svg { color: #a6403f; }
+.novel .n-review-sources img { width: 18px; height: 18px; object-fit: contain; }
 .novel .n-carousel-controls {
   display: flex;
   align-items: center;
