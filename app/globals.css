@@ -6251,5 +6251,5 @@ footer img {
 .site.webwell .tpl-testimonial small { position: relative; z-index: 1; display: inline-block; margin-top: 12px; }
 
 /* Let the Wellness Guide contact page use the same generous measure as its hero. */
-.site.webwell .contact-layout { width: 100%; max-width: 1540px; grid-template-columns: minmax(300px, .72fr) minmax(620px, 1.55fr); gap: 28px; }
+.site.webwell .contact-layout { width: 100%; max-width: none; grid-template-columns: minmax(360px, .7fr) minmax(0, 1.7fr); gap: 28px; }
 .site.webwell .contact-layout article, .site.webwell .contact-layout form { min-height: 490px; padding: 44px; }
