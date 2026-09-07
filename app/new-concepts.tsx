@@ -1567,9 +1567,21 @@ function NewPages() {
   );
 }
 function Footer() {
+  const { onPage } = useContent();
   return (
     <footer className="n-footer">
-      <Brand />
+      <button
+        className="n-footer-brand"
+        onClick={() => onPage("home")}
+        aria-label="Santa Rosa Medical Massage home"
+      >
+        <img src="/logo-correct.png" alt="" aria-hidden="true" />
+        <span>
+          Santa Rosa
+          <br />
+          Medical Massage
+        </span>
+      </button>
       <div className="n-footer-contact">
         <span>{address}</span>
         <a href="tel:+17073037707">(707) 303-7707</a>
