@@ -287,9 +287,11 @@
 }
 .n-house .n-concern-item > button svg { transition: transform .2s ease; }
 .n-house .n-concern-item.is-open > button svg { transform: rotate(45deg); }
-.n-house .n-concern-expand { padding: 18px 22px 22px; margin-top: -1px; border-bottom: 1px solid var(--n-line); background: rgba(255,255,255,.56); color: var(--n-ink); font-size: 14px; line-height: 1.55; }
+.n-house .n-concern-expand { padding: 18px 22px 22px; margin-top: -1px; border-bottom: 1px solid var(--n-line); background: rgba(255,255,255,.56); color: var(--n-ink); font-size: 14px; line-height: 1.55; transform-origin: top; animation: n-concern-reveal .42s cubic-bezier(.22,.8,.3,1) both; overflow: hidden; }
 .n-house .n-concern-expand p { margin: 0 0 12px; }
 .n-house .n-concern-expand .n-link { margin-top: 2px; }
+@keyframes n-concern-reveal { from { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; transform: translateY(-8px); } to { max-height: 420px; opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .n-house .n-concern-expand { animation: none; } }
 .novel .n-visit-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
