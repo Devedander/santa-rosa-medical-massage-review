@@ -1484,6 +1484,7 @@ function NewPages() {
         </div>
       ) : post ? (
         <div className="n-reading">
+          <span className="n-reading-kicker">{post[2]}</span>
           <h2>{post[1]}</h2>
           {articleImage && (
             <img
