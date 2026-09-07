@@ -1405,6 +1405,9 @@ function NewPages() {
     : "";
   const concernCopy = conditionGuidance[concern];
   const post = posts.find(([slug]) => page === `post-${slug}`);
+  const postIndex = post ? posts.findIndex(([slug]) => slug === post[0]) : -1;
+  const previousPost = postIndex >= 0 ? posts[(postIndex - 1 + posts.length) % posts.length] : null;
+  const nextPost = postIndex >= 0 ? posts[(postIndex + 1) % posts.length] : null;
   const articleBody = post?.[5] || post?.[3] || "";
   const articleImage = post?.[6];
   const titles: Record<string, string> = {
@@ -1516,6 +1519,18 @@ function NewPages() {
             <span>Categories: {post[2]}</span>
             <span>Tags: No Tag</span>
           </div>
+          <nav className="n-reading-nav" aria-label="Blog article navigation">
+            {previousPost && (
+              <Action to={`post-${previousPost[0]}`} quiet>
+                ← Previous article
+              </Action>
+            )}
+            {nextPost && (
+              <Action to={`post-${nextPost[0]}`} quiet>
+                Next article →
+              </Action>
+            )}
+          </nav>
           <p>
             Bring questions about comfort, timing, and relevant medical guidance
             to your conversation with the practice.

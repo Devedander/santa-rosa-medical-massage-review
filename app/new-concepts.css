@@ -1356,6 +1356,15 @@
   color: var(--novel-muted);
   font-size: 13px;
 }
+.novel .n-reading-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 30px;
+  padding: 18px 0;
+  border-top: 1px solid color-mix(in srgb, var(--novel-ink) 16%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--novel-ink) 16%, transparent);
+}
 .novel .n-reading .n-link {
   margin-left: 25px;
 }
