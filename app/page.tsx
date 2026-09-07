@@ -269,6 +269,7 @@ const blogPosts = [
     "Client experiences",
     "A client describes how a third visit became an extraordinary experience.",
     "https://santarosamedicalmassage.com/testimonials/",
+    "This client story describes a third visit that became an extraordinary experience through careful listening, focused therapeutic work, and relief that felt different from earlier care.",
   ],
   [
     "thai-foot-massage",
@@ -276,6 +277,8 @@ const blogPosts = [
     "Treatment guide",
     "A bodywork therapy for the mind, body, and soul, using focused work through the feet and lower legs.",
     "https://santarosamedicalmassage.com/thai-foot-massage/",
+    "Thai Foot Massage is a body work therapy for the mind body and soul and involves reflexology using the foot. When pressure is applied to certain areas of the foot it stimulates another part of the body. Thai foot massage is an ancient reflexology technique that has made a comeback recently.\n\nThai foot reflexology is said to be a marriage between reflexology, Chinese Tuina, Japanese Shiatsu, and Indian Ayurvedi oga. Focusing on the feet, lower leg, and knees, it frees up blocked energy in the body’s Thai-based meridians to bring about deep relaxation, balance, and well-being.\n\nAlongside the acupressure and acupuncture theory it is believed that 7,200 sensory nerves exist within the foot which are connected to internal organs. Mapping out these connections on the foot is part of the therapists goal with each client. During a typical session the lower legs, and feet are stretched, opening Sen (energy). Then pressure points on the foot are stimulated. The pressure points connect to 10 major energy lines which run throughout the body. This careful stimulation of pressure points on the foot help the body restore its own natural balance.\n\n## Benefits of Thai Massage\n\nThe benefits of Thai Foot Massage are many. Besides restoring the body to its own natural balance other benefits include:\n\n- Improved circulation\n- Improved lymphatic drainage\n- Boosts the immune system\n- Reduces stiffness\n- Increases range of motion\n- Accelerates healing\n- Relieves stress\n- Improves sleep\n- Elevates mood\n- Improves concentration and clarity of mind\n- Creates feelings of tranquility, calmness, and well being",
+    "https://santarosamedicalmassage.com/wp-content/uploads/2012/02/Reflexology.png",
   ],
   [
     "thai-massage",
@@ -283,6 +286,7 @@ const blogPosts = [
     "Treatment guide",
     "An introduction to Thai bodywork, including Tok Sen and its cultural roots.",
     "https://santarosamedicalmassage.com/thai-massage/",
+    "Thai massage is a floor-based, assisted form of bodywork that combines rhythmic pressure, guided movement, and stretches. The practice also introduces Tok Sen, a traditional technique using gentle percussive work along the body’s energy lines.",
   ],
   [
     "massage-cupping",
@@ -290,6 +294,7 @@ const blogPosts = [
     "Treatment guide",
     "How suction-based massage cupping may be used as part of a bodywork session.",
     "https://santarosamedicalmassage.com/massage-cupping/",
+    "Massage Cupping uses gentle suction as part of a bodywork session. The cups create a lifting sensation through the soft tissue and may be combined with hands-on massage to support relaxation and a sense of spacious movement.",
   ],
   [
     "fascia",
@@ -297,6 +302,7 @@ const blogPosts = [
     "Bodywork education",
     "A look at the connective tissue that runs throughout the body.",
     "https://santarosamedicalmassage.com/fascia-what-is-it-and-where-isnt-it/",
+    "Fascia is the connective tissue that surrounds and links muscles, bones, nerves, organs, blood vessels, and cells. It provides support and space for fluids and nerves to move. Repetitive use or trauma can make fascial tissue taut, sometimes creating restriction or discomfort away from the original area.",
   ],
   [
     "sports-massage",
@@ -304,6 +310,7 @@ const blogPosts = [
     "Treatment guide",
     "A discussion of massage for active people and the wear that sport can place on the body.",
     "https://santarosamedicalmassage.com/sports-massage/",
+    "Sports massage is designed for active people whose training and competition place repeated demands on the body. Sessions can be shaped around preparation, recovery, persistent tightness, and the movement patterns that matter to an athlete.",
   ],
   [
     "lymphatic-facilitation",
@@ -311,6 +318,7 @@ const blogPosts = [
     "Treatment guide",
     "An overview of gentle, rhythmic work intended to support lymph movement.",
     "https://santarosamedicalmassage.com/lymphatic-facilitation-therapy/",
+    "Lymphatic Facilitation Therapy uses gentle, rhythmic touch intended to support lymph movement, especially around areas of swelling. The approach is light and individualized, with medical guidance and treatment history helping determine whether it is appropriate.",
   ],
   [
     "trigger-point-therapy",
@@ -318,6 +326,7 @@ const blogPosts = [
     "Treatment guide",
     "Focused bodywork for sensitive muscle points that may refer pain elsewhere in the body.",
     "https://santarosamedicalmassage.com/trigger-point-therapy/",
+    "Trigger Point Therapy focuses on hyper-irritable areas of muscle that can refer pain elsewhere. Focused pressure and other techniques may be used for concerns such as a sore neck, chronic pain, a painful low back, or muscle discomfort after activity.",
   ],
   [
     "deep-tissue-massage",
@@ -325,6 +334,7 @@ const blogPosts = [
     "Treatment guide",
     "An introduction to working with chronic stress and tension in deeper layers of tissue.",
     "https://santarosamedicalmassage.com/deep-tissue-massage/",
+    "Deep Tissue Massage works with deeper layers of tissue to address tension related to repetitive motion, misalignment, chronic stress, or lingering injuries. Pressure is discussed and adapted to the client’s comfort and goals.",
   ],
   [
     "treated-dysfunctions",
@@ -332,6 +342,7 @@ const blogPosts = [
     "Care information",
     "An overview of conditions and concerns that may be discussed when considering massage therapy.",
     "https://santarosamedicalmassage.com/treated-dysfunctions/",
+    "The practice’s treated-dysfunctions guide is a starting point for conversations about pain, movement, recovery, and everyday function. A diagnosis and relevant medical guidance help shape whether massage is an appropriate supportive option.",
   ],
   [
     "medical-massage",
@@ -339,6 +350,7 @@ const blogPosts = [
     "Care information",
     "How medical massage differs from general bodywork when care is directed toward a diagnosed condition.",
     "https://santarosamedicalmassage.com/medical-massage/",
+    "Medical Massage is directed toward a condition diagnosed by a medical professional. The session is planned around the relevant history, current guidance, comfort, and functional goals rather than a one-size-fits-all routine.",
   ],
 ];
 const googleGalleryLabels = [

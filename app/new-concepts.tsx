@@ -533,14 +533,12 @@ function Notes({ compact = false }: { compact?: boolean }) {
     <div className="n-notes">
       {posts
         .slice(0, compact ? 3 : posts.length)
-        .map(([slug, title, category, excerpt, url]) => (
+        .map(([slug, title, category, excerpt]) => (
           <article key={slug}>
             <span>{category}</span>
             <h3>{title}</h3>
             <p>{excerpt}</p>
-            <a className="n-link" href={url} target="_blank" rel="noreferrer">
-              Read full article <ArrowUpRight size={17} />
-            </a>
+            <Action to={`post-${slug}`} quiet>Read full article</Action>
           </article>
         ))}
     </div>
@@ -1407,6 +1405,8 @@ function NewPages() {
     : "";
   const concernCopy = conditionGuidance[concern];
   const post = posts.find(([slug]) => page === `post-${slug}`);
+  const articleBody = post?.[5] || post?.[3] || "";
+  const articleImage = post?.[6];
   const titles: Record<string, string> = {
     treatments: "Care around your needs.",
     conditions: "Start with what you’re feeling.",
@@ -1484,23 +1484,34 @@ function NewPages() {
         </div>
       ) : post ? (
         <div className="n-reading">
-          <p className="n-prototype-note">
-            Draft topic preview — original-site article import is still pending.
-          </p>
-          <h2>Bring the details that matter.</h2>
+          <h2>{post[1]}</h2>
+          {articleImage && (
+            <img
+              className="n-reading-image"
+              src={articleImage}
+              alt={`${post[1]} illustration`}
+            />
+          )}
+          {articleBody.split(/\n\n+/).map((block, index) => {
+            if (block.startsWith("## "))
+              return <h2 key={index}>{block.slice(3)}</h2>;
+            const lines = block.split("\n");
+            if (lines.every((line) => line.startsWith("- "))) {
+              return (
+                <ul key={index}>
+                  {lines.map((line) => <li key={line}>{line.slice(2)}</li>)}
+                </ul>
+              );
+            }
+            return <p key={index}>{block}</p>;
+          })}
           <p>
-            Notice what makes the concern feel different, when it gets in your
-            way, and what you hope to return to. Those details help you prepare
-            for a focused conversation about your goals.
-          </p>
-          <p>
-            Share relevant medical guidance with your therapist. Ask questions
-            about treatment options, comfort, and what to expect before choosing
-            a session.
+            Bring questions about comfort, timing, and relevant medical guidance
+            to your conversation with the practice.
           </p>
           <Action to="contact">Ask a question</Action>
           <Action to="blog" quiet>
-            View blog
+            Back to blog
           </Action>
         </div>
       ) : page === "treatments" ? (
@@ -1581,6 +1592,7 @@ function Footer() {
         <span>{address}</span>
         <a href="tel:+17073037707">(707) 303-7707</a>
       </div>
+      <small className="n-footer-credit">Website by JW Consulting Services</small>
     </footer>
   );
 }

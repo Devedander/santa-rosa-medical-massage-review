@@ -1324,6 +1324,20 @@
 .novel .n-reading p {
   margin-bottom: 25px;
 }
+.novel .n-reading-image {
+  display: block;
+  width: min(100%, 720px);
+  max-height: 420px;
+  margin: 0 0 30px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+.novel .n-reading ul {
+  margin: 0 0 26px;
+  padding-left: 24px;
+  font-size: 18px;
+  line-height: 1.75;
+}
 .novel .n-reading .n-link {
   margin-left: 25px;
 }
@@ -2763,6 +2777,13 @@
   font-weight: 700;
   white-space: nowrap;
 }
+.novel .n-footer-credit {
+  margin-left: auto;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
+  white-space: nowrap;
+}
 .n-house .n-footer > .n-footer-contact {
   justify-self: auto;
   text-align: left;
@@ -2777,6 +2798,9 @@
     justify-content: flex-start;
     margin-left: 0;
     text-align: left;
+  }
+  .novel .n-footer-credit {
+    margin-left: 0;
   }
 }
 .n-call {
