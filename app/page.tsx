@@ -3010,10 +3010,19 @@ function TemplateMock({
 export default function Home() {
   const [style, setStyle] = useState("house-photo");
   const [page, setPage] = useState("home");
+  const [shareMode, setShareMode] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("share") === "familiar",
+  );
   const siteRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const selected = new URLSearchParams(window.location.search).get("concept");
+    if (new URLSearchParams(window.location.search).get("share") === "familiar") {
+      setShareMode(true);
+      setStyle("house-photo");
+    }
     if (selected && concepts.some(([id]) => id === selected))
       setStyle(selected);
     try {
@@ -3111,9 +3120,9 @@ export default function Home() {
   };
   if (["courtyard", "desk", "everyday", "house"].includes(baseStyle))
     return (
-      <main ref={siteRef} className={`site ${baseStyle}`}>
-        <Switcher style={style} setStyle={chooseConcept} />
-        <div className="new-review-tools">
+    <main ref={siteRef} className={`site ${baseStyle}`}>
+        {!shareMode && <Switcher style={style} setStyle={chooseConcept} />}
+        {!shareMode && <div className="new-review-tools">
           <button
             onClick={() => {
               setPage("selections");
@@ -3122,7 +3131,7 @@ export default function Home() {
           >
             Photo selections
           </button>
-        </div>
+        </div>}
         <NewConcepts
           key={baseStyle}
           design={baseStyle as "courtyard" | "desk" | "everyday" | "house"}
