@@ -1,10 +1,10 @@
-'use client';
+"use client";
 import {
   careCopy,
   agingCopy,
   referralCopy,
   practiceCopy,
-} from './care-content';
+} from "./care-content";
 
 import {
   createContext,
@@ -15,7 +15,7 @@ import {
   useState,
   type ComponentType,
   type ReactNode,
-} from 'react';
+} from "react";
 import {
   ArrowUpRight,
   ArrowLeft,
@@ -28,8 +28,8 @@ import {
   Gift,
   Plus,
   Check,
-} from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+} from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 type PhotoProps = {
   images: string[][];
@@ -37,7 +37,7 @@ type PhotoProps = {
   alt?: string;
   slot?: string;
 };
-type Design = 'courtyard' | 'desk' | 'everyday' | 'house';
+type Design = "courtyard" | "desk" | "everyday" | "house";
 type Props = {
   design: Design;
   page: string;
@@ -54,26 +54,26 @@ function useContent() {
   return useContext(Content)!;
 }
 const concerns = [
-  'Headaches & migraines',
-  'Neck tension',
-  'Shoulder impingement',
-  'Hip pain',
-  'TMJ pain',
-  'Sciatica & piriformis',
-  'Rotator cuff recovery',
-  'Post-surgical stiffness',
-  'Carpal tunnel',
-  'Reduced range of motion',
-  'Chronic pain',
-  'Plantar fasciitis',
+  "Headaches & migraines",
+  "Neck tension",
+  "Shoulder impingement",
+  "Hip pain",
+  "TMJ pain",
+  "Sciatica & piriformis",
+  "Rotator cuff recovery",
+  "Post-surgical stiffness",
+  "Carpal tunnel",
+  "Reduced range of motion",
+  "Chronic pain",
+  "Plantar fasciitis",
 ];
-const address = '630 Third Street, Suite B, Santa Rosa, CA 95404';
+const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
 const navItems = [
-  ['treatments', 'Treatments'],
-  ['conditions', 'Common concerns'],
-  ['about', 'The practice'],
-  ['reviews', 'Reviews'],
-  ['visit', 'Visit & gallery'],
+  ["treatments", "Treatments"],
+  ["conditions", "Common concerns"],
+  ["about", "The practice"],
+  ["reviews", "Reviews"],
+  ["visit", "Visit & gallery"],
 ];
 
 function Action({
@@ -88,7 +88,7 @@ function Action({
   const { onPage } = useContent();
   return (
     <button
-      className={quiet ? 'n-link' : 'n-button'}
+      className={quiet ? "n-link" : "n-button"}
       onClick={() => onPage(to)}
     >
       {children}
@@ -98,8 +98,8 @@ function Action({
 }
 function Photo({
   name,
-  first = 'google-remodel-room.jpg',
-  className = '',
+  first = "google-remodel-room.jpg",
+  className = "",
 }: {
   name: string;
   first?: string;
@@ -126,10 +126,14 @@ function Brand() {
   return (
     <button
       className="n-brand"
-      onClick={() => onPage('home')}
-    aria-label="Santa Rosa Medical Massage home"
+      onClick={() => onPage("home")}
+      aria-label="Santa Rosa Medical Massage home"
     >
-      <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" className="n-brand-logo" />
+      <img
+        src="/logo-correct.png"
+        alt="Santa Rosa Medical Massage"
+        className="n-brand-logo"
+      />
     </button>
   );
 }
@@ -150,12 +154,12 @@ function ConcernLinks() {
   );
 }
 function ServiceList({
-  mode = 'cards',
+  mode = "cards",
 }: {
-  mode?: 'cards' | 'accordion' | 'tabs';
+  mode?: "cards" | "accordion" | "tabs";
 }) {
   const { services } = useContent();
-  if (mode === 'tabs')
+  if (mode === "tabs")
     return (
       <Tabs defaultValue="0" className="n-treatment-tabs">
         <TabsList aria-label="Treatments">
@@ -177,7 +181,7 @@ function ServiceList({
         ))}
       </Tabs>
     );
-  if (mode === 'accordion')
+  if (mode === "accordion")
     return (
       <div className="n-treatment-accordion">
         {services.map(([name, summary], i) => (
@@ -202,7 +206,7 @@ function ServiceList({
         <article key={name}>
           <Photo
             name={`treatment-${i}`}
-            first={i % 2 ? 'therapy-hands.jpg' : 'yelp-treatment.jpg'}
+            first={i % 2 ? "therapy-hands.jpg" : "yelp-treatment.jpg"}
           />
           <div>
             <h3>{name}</h3>
@@ -229,8 +233,8 @@ function Reviews() {
               “
             </span>
             <blockquote>
-              {quote.startsWith('Five-star')
-                ? 'Read this client’s review on Google.'
+              {quote.startsWith("Five-star")
+                ? "Read this client’s review on Google."
                 : quote}
             </blockquote>
             <b>{name}</b>
@@ -246,7 +250,7 @@ function Reviews() {
           <ArrowLeft size={20} />
         </button>
         <span>
-          {group * 5 + 1}–{Math.min(group * 5 + 5, reviews.length)} of{' '}
+          {group * 5 + 1}–{Math.min(group * 5 + 5, reviews.length)} of{" "}
           {reviews.length}
         </span>
         <button
@@ -270,43 +274,48 @@ function Visit() {
   const { onPage } = useContent();
   return (
     <div className="n-visit-combined">
-    <div className="n-visit-details">
-      <div>
-        <MapPin size={23} />
-        <h3>Find us downtown</h3>
-        <p>{address}</p>
-        <p>Private parking. Visits by appointment.</p>
-        <a
-          className="n-link"
-          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Santa Rosa Medical Massage ' + address)}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Get directions <ArrowUpRight size={18} />
-        </a>
+      <div className="n-visit-details">
+        <div>
+          <MapPin size={23} />
+          <h3>Find us downtown</h3>
+          <p>{address}</p>
+          <p>Private parking. Visits by appointment.</p>
+          <a
+            className="n-link"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Santa Rosa Medical Massage " + address)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Get directions <ArrowUpRight size={18} />
+          </a>
+        </div>
+        <div>
+          <Phone size={23} />
+          <h3>Let’s talk before you visit</h3>
+          <a className="n-phone" href="tel:+17073037707">
+            (707) 303-7707
+          </a>
+          <p>
+            Ask about session lengths, current pricing, payment, receipts, or
+            access needs.
+          </p>
+          <Action to="contact" quiet>
+            Contact the practice
+          </Action>
+        </div>
       </div>
-      <div>
-        <Phone size={23} />
-        <h3>Let’s talk before you visit</h3>
-        <a className="n-phone" href="tel:+17073037707">
-          (707) 303-7707
-        </a>
-        <p>
-          Ask about session lengths, current pricing, payment, receipts, or
-          access needs.
-        </p>
-        <Action to="contact" quiet>
-          Contact the practice
-        </Action>
-      </div>
-    </div>
       <div className="n-visit-gallery">
         <Photo name="visit-gallery" first="google-remodel-room.jpg" />
         <div>
           <span>Inside the practice</span>
           <h3>Take a look around.</h3>
-          <p>See the refreshed treatment rooms and the details that make an appointment feel easy from arrival onward.</p>
-          <button className="n-link" onClick={() => onPage('gallery')}>Browse all photos <ArrowUpRight size={18} /></button>
+          <p>
+            See the refreshed treatment rooms and the details that make an
+            appointment feel easy from arrival onward.
+          </p>
+          <button className="n-link" onClick={() => onPage("gallery")}>
+            Browse all photos <ArrowUpRight size={18} />
+          </button>
         </div>
       </div>
     </div>
@@ -658,9 +667,9 @@ function Everyday() {
         <p>Explore all six treatments. We’ll help you find a starting point.</p>
         <div className="every-goals">
           {[
-            ['A longer walk', 'Plantar fasciitis'],
-            ['Time in the garden', 'Reduced range of motion'],
-            ['An easier morning', 'Chronic pain'],
+            ["A longer walk", "Plantar fasciitis"],
+            ["Time in the garden", "Reduced range of motion"],
+            ["An easier morning", "Chronic pain"],
           ].map(([label, concern]) => (
             <button
               key={label}
@@ -783,12 +792,12 @@ function House() {
       </section>
       <div className="house-photo-strip" aria-label="Scenes from the practice">
         {[
-          'google-gallery-3.jpg',
-          'google-remodel-room.jpg',
-          'yelp-treatment.jpg',
-          'therapy-room.jpg',
-          'google-gallery-4.jpg',
-          'therapy-hands.jpg',
+          "google-gallery-3.jpg",
+          "google-remodel-room.jpg",
+          "yelp-treatment.jpg",
+          "therapy-room.jpg",
+          "google-gallery-4.jpg",
+          "therapy-hands.jpg",
         ].map((file, i) => (
           <Photo key={file} name={`welcome-strip-${i}`} first={file} />
         ))}
@@ -900,8 +909,8 @@ function House() {
 
 function Booking() {
   const { services, page } = useContent();
-  const [notice, setNotice] = useState('');
-  if (page === 'gift')
+  const [notice, setNotice] = useState("");
+  if (false && page === "gift")
     return (
       <section className="n-booking standalone-booking n-booking-gift">
         <div className="standalone-booking-card">
@@ -910,17 +919,29 @@ function Booking() {
           <h1>Give someone time for care.</h1>
           <p>
             Gift certificates will be purchased securely through the practice’s
-            Square page. This review page does not collect an amount,
-            recipient information, or payment details.
+            Square page. This review page does not collect an amount, recipient
+            information, or payment details.
           </p>
-          <button className="n-button" onClick={() => setNotice('Square gift-card link placeholder — no purchase was started.')}>
+          <button
+            className="n-button"
+            onClick={() =>
+              setNotice(
+                "Square gift-card link placeholder — no purchase was started.",
+              )
+            }
+          >
             Continue to Square gift cards <ArrowRight size={18} />
           </button>
-          {notice && <p className="n-notice" role="status"><Check size={18} />{notice}</p>}
+          {notice && (
+            <p className="n-notice" role="status">
+              <Check size={18} />
+              {notice}
+            </p>
+          )}
         </div>
       </section>
     );
-  if (page === 'book')
+  if (false && page === "book")
     return (
       <section className="n-booking standalone-booking n-booking-book">
         <div className="standalone-booking-card">
@@ -928,22 +949,34 @@ function Booking() {
           <span className="n-kicker">Appointments</span>
           <h1>Find a time that works for you.</h1>
           <p>
-            Appointment selection will continue to the practice’s Square
-            booking page. This review page is only showing the finished-form
-            direction and does not submit a booking.
+            Appointment selection will continue to the practice’s Square booking
+            page. This review page is only showing the finished-form direction
+            and does not submit a booking.
           </p>
-          <button className="n-button" onClick={() => setNotice('Square booking link placeholder — no appointment was started.')}>
+          <button
+            className="n-button"
+            onClick={() =>
+              setNotice(
+                "Square booking link placeholder — no appointment was started.",
+              )
+            }
+          >
             Continue to Square booking <ArrowRight size={18} />
           </button>
-          {notice && <p className="n-notice" role="status"><Check size={18} />{notice}</p>}
+          {notice && (
+            <p className="n-notice" role="status">
+              <Check size={18} />
+              {notice}
+            </p>
+          )}
         </div>
       </section>
     );
   return (
     <Tabs
-      defaultValue={page === 'gift' ? 'gift' : 'appointment'}
+      defaultValue={page === "gift" ? "gift" : "appointment"}
       className={`n-booking n-booking-${page}`}
-      onValueChange={() => setNotice('')}
+      onValueChange={() => setNotice("")}
     >
       <TabsList aria-label="Appointments or gift certificates">
         <TabsTrigger value="appointment">
@@ -960,7 +993,7 @@ function Booking() {
           onSubmit={(e) => {
             e.preventDefault();
             setNotice(
-              'Your appointment preferences are ready to review. This mockup has not booked an appointment or sent your information.',
+              "Your appointment preferences are ready to review. This mockup has not booked an appointment or sent your information.",
             );
           }}
         >
@@ -1017,14 +1050,39 @@ function Booking() {
           <article>
             <Gift size={24} />
             <h2>Give a gift certificate</h2>
-            <p>Gift certificates will be purchased securely through the practice’s Square page. No amount, recipient information, or payment is collected in this review site.</p>
-            <button className="n-button" onClick={() => setNotice('Square gift certificate link placeholder — no purchase was started.')}>Open Square gift cards <ArrowRight size={18} /></button>
+            <p>
+              Gift certificates will be purchased securely through the
+              practice’s Square page. No amount, recipient information, or
+              payment is collected in this review site.
+            </p>
+            <button
+              className="n-button"
+              onClick={() =>
+                setNotice(
+                  "Square gift certificate link placeholder — no purchase was started.",
+                )
+              }
+            >
+              Open Square gift cards <ArrowRight size={18} />
+            </button>
           </article>
           <article>
             <CalendarDays size={24} />
             <h2>Book an appointment</h2>
-            <p>Choose a service and time through the practice’s Square booking page. This button is ready for the final booking URL.</p>
-            <button className="n-button" onClick={() => setNotice('Square booking link placeholder — no appointment was started.')}>Open Square booking <ArrowRight size={18} /></button>
+            <p>
+              Choose a service and time through the practice’s Square booking
+              page. This button is ready for the final booking URL.
+            </p>
+            <button
+              className="n-button"
+              onClick={() =>
+                setNotice(
+                  "Square booking link placeholder — no appointment was started.",
+                )
+              }
+            >
+              Open Square booking <ArrowRight size={18} />
+            </button>
           </article>
         </div>
         {/*
@@ -1136,28 +1194,28 @@ function ContactForm() {
 function NewPages() {
   const { page, services, photos, posts, onPage, selections } = useContent();
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const service = page.startsWith('service-')
+  const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
-  const concern = page.startsWith('condition-')
+  const concern = page.startsWith("condition-")
     ? decodeURIComponent(page.slice(10))
-    : '';
+    : "";
   const post = posts.find(([slug]) => page === `post-${slug}`);
   const titles: Record<string, string> = {
-    treatments: 'Care around your needs.',
-    conditions: 'Start with what you’re feeling.',
-    about: 'A practice that listens.',
-    reviews: 'In our clients’ words.',
-    gallery: 'Welcome inside.',
-    blog: 'Notes for everyday care.',
-    contact: 'Let’s start a conversation.',
-    book: 'Appointments & gift cards.',
-    gift: 'Appointments & gift cards.',
-    selections: 'Your photo selections.',
+    treatments: "Care around your needs.",
+    conditions: "Start with what you’re feeling.",
+    about: "A practice that listens.",
+    reviews: "In our clients’ words.",
+    gallery: "Welcome inside.",
+    blog: "Notes for everyday care.",
+    contact: "Let’s start a conversation.",
+    book: "Appointments & gift cards.",
+    gift: "Appointments & gift cards.",
+    selections: "Your photo selections.",
   };
   return (
     <div className="n-inner">
-      <button className="n-link n-back" onClick={() => onPage('home')}>
+      <button className="n-link n-back" onClick={() => onPage("home")}>
         <ArrowLeft size={18} />
         Back to home
       </button>
@@ -1173,7 +1231,7 @@ function NewPages() {
         <p>
           {service?.[1] ||
             (concern
-              ? 'A place to begin a conversation about comfort, movement, and your goals.'
+              ? "A place to begin a conversation about comfort, movement, and your goals."
               : post?.[3])}
         </p>
       </div>
@@ -1237,17 +1295,17 @@ function NewPages() {
             All notes
           </Action>
         </div>
-      ) : page === 'treatments' ? (
+      ) : page === "treatments" ? (
         <ServiceList />
-      ) : page === 'conditions' ? (
+      ) : page === "conditions" ? (
         <ConcernLinks />
-      ) : page === 'book' || page === 'gift' ? (
+      ) : page === "book" || page === "gift" ? (
         <Booking key={page} />
-      ) : page === 'reviews' ? (
+      ) : page === "reviews" ? (
         <Reviews />
-      ) : page === 'blog' ? (
+      ) : page === "blog" ? (
         <Notes />
-      ) : page === 'gallery' ? (
+      ) : page === "gallery" ? (
         <div className="n-full-gallery">
           <div className="n-gallery-stage">
             <img src={photos[galleryIndex][0]} alt={photos[galleryIndex][1]} />
@@ -1288,7 +1346,7 @@ function NewPages() {
             ))}
           </div>
         </div>
-      ) : page === 'about' ? (
+      ) : page === "about" ? (
         <>
           <div className="n-detail">
             <Photo name="about" />
@@ -1314,7 +1372,7 @@ function NewPages() {
           </div>
           <Visit />
         </>
-      ) : page === 'selections' ? (
+      ) : page === "selections" ? (
         selections
       ) : (
         <div className="n-contact-layout">
@@ -1344,51 +1402,51 @@ export default function NewConcepts(props: Props) {
     pendingSection.current = null;
     setMenu(false);
     props.onPage(page);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
   const jump = (section: string) => {
     setMenu(false);
-    if (props.page !== 'home') {
+    if (props.page !== "home") {
       pendingSection.current = section;
-      props.onPage('home');
+      props.onPage("home");
     } else
       document.getElementById(`n-${section}`)?.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'instant'
-          : 'smooth',
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
       });
   };
   useEffect(() => {
-    if (props.page === 'home' && pendingSection.current) {
+    if (props.page === "home" && pendingSection.current) {
       document.getElementById(`n-${pendingSection.current}`)?.scrollIntoView();
       pendingSection.current = null;
     }
   }, [props.page]);
   useEffect(() => {
-    const elements = root.current?.querySelectorAll('.n-section');
+    const elements = root.current?.querySelectorAll(".n-section");
     if (
       !elements ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      !('IntersectionObserver' in window)
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
     )
       return;
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('n-arrived');
+            entry.target.classList.add("n-arrived");
             observer.unobserve(entry.target);
           }
         }),
       { threshold: 0.04 },
     );
     elements.forEach((el) => {
-      el.classList.add('n-enter');
+      el.classList.add("n-enter");
       observer.observe(el);
     });
     return () => {
       observer.disconnect();
-      elements.forEach((el) => el.classList.remove('n-enter', 'n-arrived'));
+      elements.forEach((el) => el.classList.remove("n-enter", "n-arrived"));
     };
   }, [props.page, props.design]);
   return (
@@ -1401,7 +1459,7 @@ export default function NewConcepts(props: Props) {
           <Brand />
           <button
             className="n-menu-toggle"
-            aria-label={menu ? 'Close menu' : 'Open menu'}
+            aria-label={menu ? "Close menu" : "Open menu"}
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
@@ -1409,29 +1467,51 @@ export default function NewConcepts(props: Props) {
           </button>
           <nav
             aria-label="Website navigation"
-            className={menu ? 'n-nav-open' : ''}
+            className={menu ? "n-nav-open" : ""}
           >
             {navItems.map(([id, label]) => (
               <button key={id} onClick={() => jump(id)}>
                 {label}
               </button>
             ))}
-            {props.design !== 'house' && (
+            {props.design !== "house" && (
               <>
-                <button onClick={() => jump('visit')}>Visit & gallery</button>
-                <button onClick={() => go('blog')}>Notes</button>
-                <button onClick={() => go('gift')}>Gift cards</button>
+                <button onClick={() => go("blog")}>Notes</button>
+                <button onClick={() => go("gift")}>Gift cards</button>
               </>
             )}
           </nav>
           <div className="n-social" aria-label="Social media links">
-            <a href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021" target="_blank" rel="noreferrer" aria-label="Facebook"><img src="/social-facebook.svg" alt="" /></a>
-            <a href="https://www.instagram.com/santarosamedicalmassage/" target="_blank" rel="noreferrer" aria-label="Instagram"><img src="/social-instagram.svg" alt="" /></a>
-            <a href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4" target="_blank" rel="noreferrer" aria-label="Yelp"><img src="/social-yelp.svg" alt="" /></a>
+            <a
+              href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+            >
+              <img src="/social-facebook.svg" alt="" />
+            </a>
+            <a
+              href="https://www.instagram.com/santarosamedicalmassage/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+            >
+              <img src="/social-instagram.svg" alt="" />
+            </a>
+            <a
+              href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Yelp"
+            >
+              <img src="/social-yelp.svg" alt="" />
+            </a>
           </div>
-          <a className="n-call" href="tel:+17073037707">Call <span>(707) 303-7707</span></a>
+          <a className="n-call" href="tel:+17073037707">
+            Call <span>(707) 303-7707</span>
+          </a>
           <Action to="book">Schedule now</Action>
-          {props.design === 'desk' && (
+          {props.design === "desk" && (
             <div className="desk-nav-bottom">
               <span>Here to help.</span>
               <a href="tel:+17073037707">(707) 303-7707</a>
@@ -1444,12 +1524,12 @@ export default function NewConcepts(props: Props) {
           )}
         </div>
         <div id="n-content" className="n-content" tabIndex={-1}>
-          {props.page === 'home' ? (
-            props.design === 'house' ? (
+          {props.page === "home" ? (
+            props.design === "house" ? (
               <House />
-            ) : props.design === 'courtyard' ? (
+            ) : props.design === "courtyard" ? (
               <Courtyard />
-            ) : props.design === 'desk' ? (
+            ) : props.design === "desk" ? (
               <Desk />
             ) : (
               <Everyday />
