@@ -1341,11 +1341,20 @@
   border-radius: 14px;
   object-fit: cover;
 }
-.novel .n-reading ul {
+.novel .n-reading ul,
+.novel .n-reading ol {
   margin: 0 0 26px;
   padding-left: 24px;
   font-size: 18px;
   line-height: 1.75;
+}
+.novel .n-reading-taxonomy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 34px 0 26px;
+  color: var(--novel-muted);
+  font-size: 13px;
 }
 .novel .n-reading .n-link {
   margin-left: 25px;

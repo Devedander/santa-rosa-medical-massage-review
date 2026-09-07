@@ -1497,15 +1497,25 @@ function NewPages() {
             if (block.startsWith("## "))
               return <h2 key={index}>{block.slice(3)}</h2>;
             const lines = block.split("\n");
-            if (lines.every((line) => line.startsWith("- "))) {
-              return (
+            const isList = lines.every((line) => /^(- |\d+\. |•)/.test(line));
+            if (isList) {
+              const ordered = lines.every((line) => /^\d+\. /.test(line));
+              return ordered ? (
+                <ol key={index}>
+                  {lines.map((line) => <li key={line}>{line.replace(/^\d+\. /, "")}</li>)}
+                </ol>
+              ) : (
                 <ul key={index}>
-                  {lines.map((line) => <li key={line}>{line.slice(2)}</li>)}
+                  {lines.map((line) => <li key={line}>{line.replace(/^- |^•/, "")}</li>)}
                 </ul>
               );
             }
             return <p key={index}>{block}</p>;
           })}
+          <div className="n-reading-taxonomy">
+            <span>Categories: {post[2]}</span>
+            <span>Tags: No Tag</span>
+          </div>
           <p>
             Bring questions about comfort, timing, and relevant medical guidance
             to your conversation with the practice.
