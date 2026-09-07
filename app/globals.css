@@ -6249,3 +6249,7 @@ footer img {
 .site.webwell .tpl-testimonial blockquote { position: relative; max-width: 740px; margin: 30px auto 20px; padding: 28px 34px; border-radius: 28px; background: #fffdf9; color: #183f3a; box-shadow: 0 12px 26px #0c2e2a33; }
 .site.webwell .tpl-testimonial blockquote::after { content: ""; position: absolute; left: 13%; bottom: -16px; width: 30px; height: 30px; background: #fffdf9; transform: rotate(45deg); border-radius: 0 0 5px 0; }
 .site.webwell .tpl-testimonial small { position: relative; z-index: 1; display: inline-block; margin-top: 12px; }
+
+/* Let the Wellness Guide contact page use the same generous measure as its hero. */
+.site.webwell .contact-layout { width: 100%; max-width: 1540px; grid-template-columns: minmax(300px, .72fr) minmax(620px, 1.55fr); gap: 28px; }
+.site.webwell .contact-layout article, .site.webwell .contact-layout form { min-height: 490px; padding: 44px; }
