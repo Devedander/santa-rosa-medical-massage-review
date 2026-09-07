@@ -162,9 +162,9 @@ function additionalGuidance(concern: string) {
 }
 const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
 const navItems = [
+  ["about", "The practice"],
   ["treatments", "Treatments"],
   ["conditions", "Common concerns"],
-  ["about", "The practice"],
   ["reviews", "Reviews"],
   ["visit", "Visit & gallery"],
 ];
@@ -1046,10 +1046,6 @@ function House() {
             <span className="n-kicker">Thoughtfully chosen care</span>
             <h2>Begin with what you need.</h2>
           </div>
-          <p>
-            Explore six approaches to soft-tissue care. There’s time to talk
-            through the differences before choosing.
-          </p>
         </div>
         <ServiceList />
       </section>
