@@ -9,6 +9,7 @@ import {
   Brain,
   CalendarDays,
   Check,
+  ChevronRight,
   CircleDot,
   Footprints,
   Gift,
@@ -269,7 +270,7 @@ const blogPosts = [
     "Client experiences",
     "A client describes how a third visit became an extraordinary experience.",
     "https://santarosamedicalmassage.com/testimonials/",
-    "This client story describes a third visit that became an extraordinary experience through careful listening, focused therapeutic work, and relief that felt different from earlier care.",
+    "Stacy is a wonderful massage therapist; however, on a third visit something extraordinary happened. She decided to spend time getting to know the client’s body before beginning focused work. That careful listening and therapeutic intervention brought relief that felt different from earlier care. The story is a reminder that effective bodywork starts with attention, communication, and a plan shaped around the person in front of the therapist.",
   ],
   [
     "thai-foot-massage",
@@ -286,7 +287,7 @@ const blogPosts = [
     "Treatment guide",
     "An introduction to Thai bodywork, including Tok Sen and its cultural roots.",
     "https://santarosamedicalmassage.com/thai-massage/",
-    "Thai massage is a floor-based, assisted form of bodywork that combines rhythmic pressure, guided movement, and stretches. The practice also introduces Tok Sen, a traditional technique using gentle percussive work along the body’s energy lines.",
+    "## Tok Sen\n\nNow if you’ve ever been to Thailand and had the opportunity to visit Chiang Mai in the North, you may have felt a certain vibe on the street: a tap, tap, tap. It’s the sound of the ancient Thai massage Tok Sen, still practiced today after 500 years. It was originally prescribed by wives for husbands after a hard day’s work in the fields. They would place the husband on a hard table and tap along the body with wooden sticks to ease aching pains.\n\nThere is still very little known about this bodywork technique. It has to be taught orally, and the practitioner was lucky enough to experience the treatment first-hand in Thailand before bringing it back to Santa Rosa.\n\n## The instruments\n\nThe Tok Sen is made from wood from a tamarind tree that has been struck by lightning. This is thought to remove negative energy trapped in the body. Different sizes and shapes of hammer are used depending on the body section.\n\n## The mind\n\nThe rhythm of the taps can feel hypnotizing. During a treatment, the sound leads the mind toward a meditative state, helping the physical body loosen so the massage can become more effective.\n\n## The body\n\nTraditionally, Thai massage is given fully clothed and tiger balm is used on the skin. The same energy lines, or Sen lines, used in general Thai massage are followed with the hammer. The resonance passes through the muscles and helps dislodge long-held tension. As the body releases, a sense of ease returns and a more natural flow of energy is re-established.\n\n## Benefits\n\n- Provides pain relief\n- Improves blood circulation\n- Removes energy blockages\n- Helps with sore tendons, pinched nerves, and numbness",
   ],
   [
     "massage-cupping",
@@ -294,7 +295,7 @@ const blogPosts = [
     "Treatment guide",
     "How suction-based massage cupping may be used as part of a bodywork session.",
     "https://santarosamedicalmassage.com/massage-cupping/",
-    "Massage Cupping uses gentle suction as part of a bodywork session. The cups create a lifting sensation through the soft tissue and may be combined with hands-on massage to support relaxation and a sense of spacious movement.",
+    "Massage Cupping™ is a type of massage therapy that uses suction to promote healing of the joints and muscles. Silicone or plastic cups are glided along muscles while gently lifting and pulling the skin. Techniques such as gliding, shaking, popping, and rotating can loosen soft and connective tissue, increase lymphatic flow and circulation, and move stagnation such as lactic acid where sore muscles reside.\n\nThis suction-based therapy can draw toxins and inflammation toward the surface of the skin, where the lymphatic system can help with elimination. The work may reach deep into soft tissue, attachments, and organs, making it an option to discuss as part of an overall care plan.\n\n## Possible after-effects\n\n- Tenderness, usually less than after deep tissue work\n- Redness and itching from increased vasodilation or inflammation at the surface\n- A temporary decrease in blood pressure from vasodilation or nervous-system sedation\n\n## Aftercare\n\nDrink plenty of water. Avoid showers, steam, sauna, and exercise immediately after bodywork. Light stretching and range-of-motion exercises can be helpful. Exercise the next day may increase circulation and help cup marks fade.\n\n## Contraindications\n\nPeople taking blood thinners should avoid Massage Cupping™ and should tell the therapist if medication changes. If you are under the care of an acupuncturist, cupping may interfere with acupuncture treatment and should be avoided unless the providers agree it is appropriate.",
   ],
   [
     "fascia",
@@ -302,7 +303,7 @@ const blogPosts = [
     "Bodywork education",
     "A look at the connective tissue that runs throughout the body.",
     "https://santarosamedicalmassage.com/fascia-what-is-it-and-where-isnt-it/",
-    "Fascia is the connective tissue that surrounds and links muscles, bones, nerves, organs, blood vessels, and cells. It provides support and space for fluids and nerves to move. Repetitive use or trauma can make fascial tissue taut, sometimes creating restriction or discomfort away from the original area.",
+    "Like roads and highways on a map, converging and connecting across a large area, fibers in the body called fascia cover and connect the body from one end to the other. Often seen on chicken meat as tough, white, sometimes-clear fibers, fascia acts as a protective layer around every muscle, bone, nerve, organ, blood vessel, and cell.\n\nBecause it is everywhere, fascia provides support and cushioning and creates space between vessels, bones, organs, and muscles. Those spaces allow fluids and nerves to pass.\n\n## What does fascia consist of?\n\nFascia is a three-part complex:\n\n- Elastin fibers, which make up the stretchy and elastic part\n- Collagen fibers, which provide toughness and support\n- Ground substance or matrix, a gel-like substance that transfers metabolic material throughout the body\n\n## Trauma to fascia\n\nWhen collagen fibers are healthy and un-irritated, they wrap around elastic fibers loosely in a wavy pattern. Repetitive use or trauma can cause fascia to become hard and taut. This tightness may be felt far from where the original trauma occurred. That chain-like reaction can be why pain in one area is treated in another.\n\n## More severe effects of fascial restrictions\n\nFascial restrictions can add substantial pressure to an affected area. Pulling and tightness can draw the body out of alignment, compress joint surfaces, and contribute to bulging discs, pain, loss of motion, and weakness.",
   ],
   [
     "sports-massage",
@@ -310,7 +311,7 @@ const blogPosts = [
     "Treatment guide",
     "A discussion of massage for active people and the wear that sport can place on the body.",
     "https://santarosamedicalmassage.com/sports-massage/",
-    "Sports massage is designed for active people whose training and competition place repeated demands on the body. Sessions can be shaped around preparation, recovery, persistent tightness, and the movement patterns that matter to an athlete.",
+    "Sports Massage is designed for highly active people who engage in athletics. Sports can be harsh on the body and can lead to injuries in both the short and long term. Sports Massage may enhance performance and prolong a sports career by helping prevent injury, reduce pain and swelling, relax the mind, increase flexibility, and improve recovery rates. It may also support an athlete’s recovery from injury by encouraging greater kinesthetic awareness and the body’s natural immune function.",
   ],
   [
     "lymphatic-facilitation",
@@ -318,7 +319,7 @@ const blogPosts = [
     "Treatment guide",
     "An overview of gentle, rhythmic work intended to support lymph movement.",
     "https://santarosamedicalmassage.com/lymphatic-facilitation-therapy/",
-    "Lymphatic Facilitation Therapy uses gentle, rhythmic touch intended to support lymph movement, especially around areas of swelling. The approach is light and individualized, with medical guidance and treatment history helping determine whether it is appropriate.",
+    "This type of massage aims to gently and rhythmically move lymph through the body, especially around swollen areas, relieving pressure and supporting immune-system function. As both a preventative and remedial technique, Lymphatic Facilitation may be used for a range of purposes, including faster recovery from injury, reduction of swelling and discomfort during pregnancy, and strengthened resistance to illness. Treatment history and relevant medical guidance help determine whether this light, individualized approach is appropriate.",
   ],
   [
     "trigger-point-therapy",
@@ -326,7 +327,7 @@ const blogPosts = [
     "Treatment guide",
     "Focused bodywork for sensitive muscle points that may refer pain elsewhere in the body.",
     "https://santarosamedicalmassage.com/trigger-point-therapy/",
-    "Trigger Point Therapy focuses on hyper-irritable areas of muscle that can refer pain elsewhere. Focused pressure and other techniques may be used for concerns such as a sore neck, chronic pain, a painful low back, or muscle discomfort after activity.",
+    "Trigger Point Therapy is an advanced style of bodywork that focuses on stimulating and releasing trigger points. Trigger points are hyper-irritable muscle tissue that can refer pain elsewhere. These knots build up throughout a person’s life due to physical, mental, or emotional stress. During a session, focused pressure is applied through a variety of techniques to release the trigger points. The process can be intense at times, while the effects may feel lasting and transformative.\n\n## Consider this approach when\n\n- You wake with a sore neck that needs attention\n- You have a chronic pain condition\n- You hurt your back cleaning the garage\n- Your shoulder is sore after golf\n- Your low back pain is flaring up\n- Your knee hurts after a busy day\n- Your back generally hurts and needs treatment\n- Your leg hurts from cycling, running, or golfing\n- You want relaxation massage combined with focused treatment for a specific issue",
   ],
   [
     "deep-tissue-massage",
@@ -334,7 +335,7 @@ const blogPosts = [
     "Treatment guide",
     "An introduction to working with chronic stress and tension in deeper layers of tissue.",
     "https://santarosamedicalmassage.com/deep-tissue-massage/",
-    "Deep Tissue Massage works with deeper layers of tissue to address tension related to repetitive motion, misalignment, chronic stress, or lingering injuries. Pressure is discussed and adapted to the client’s comfort and goals.",
+    "Deep Tissue Massage is a form of bodywork that aims to relieve tension in deeper layers of tissue. It can be an effective method for releasing chronic stress areas related to misalignment, repetitive motion, and lingering injuries. Because of the nature of deep tissue work, open communication during the session is important so pressure does not become too uncomfortable. Some soreness can be common afterward; hydration and appropriate aftercare can support recovery.",
   ],
   [
     "treated-dysfunctions",
@@ -342,7 +343,7 @@ const blogPosts = [
     "Care information",
     "An overview of conditions and concerns that may be discussed when considering massage therapy.",
     "https://santarosamedicalmassage.com/treated-dysfunctions/",
-    "The practice’s treated-dysfunctions guide is a starting point for conversations about pain, movement, recovery, and everyday function. A diagnosis and relevant medical guidance help shape whether massage is an appropriate supportive option.",
+    "Even if you have tried chiropractic treatment, physical therapy, or massage therapy in the past, there may be another way to approach a persistent concern. The practice uses consultation and soft-tissue work to discuss pain, movement, recovery, and everyday function. A diagnosis and relevant medical guidance help shape whether massage is an appropriate supportive option. Topics on the live guide include headaches and migraines, low-back and neck pain, shoulder impingement, hip and TMJ pain, leg cramps, whiplash, sciatica, rotator-cuff injuries, tingling hands, carpal tunnel syndrome, reduced range of motion, postural imbalances, post-surgical recovery, chronic pain, lymphedema, joint aches, fibromyalgia pain, plantar fasciitis, disc-related pain, tendonitis, constipation, breast pain, and repetitive-use injuries such as tennis or golfer’s elbow.\n\nThe goal is to devise a massage-therapy plan that supports the body’s natural healing process and helps you return to comfortable function.",
   ],
   [
     "medical-massage",
@@ -350,7 +351,7 @@ const blogPosts = [
     "Care information",
     "How medical massage differs from general bodywork when care is directed toward a diagnosed condition.",
     "https://santarosamedicalmassage.com/medical-massage/",
-    "Medical Massage is directed toward a condition diagnosed by a medical professional. The session is planned around the relevant history, current guidance, comfort, and functional goals rather than a one-size-fits-all routine.",
+    "Medical Massage is designed to target a medical condition diagnosed by a doctor. During treatment, the therapist may use different massage techniques and procedures based on the relevant history, current guidance, comfort, and functional goals. The approach is not a one-size-fits-all routine: consultation, communication during the session, and coordination with a medical or rehabilitation plan help shape the work.",
   ],
 ];
 const googleGalleryLabels = [
