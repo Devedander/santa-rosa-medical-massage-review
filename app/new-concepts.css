@@ -1111,17 +1111,37 @@
   gap: 20px;
   text-align: left;
 }
-.novel .n-review-grid article {
+.novel .n-review-card-slot {
+  position: relative;
+  min-width: 0;
   height: 300px;
+}
+.novel .n-review-grid article {
+  box-sizing: border-box;
+  width: 100%;
+  height: 300px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   padding: 24px 20px;
   background: #edf0eb;
   border-radius: 12px;
+  overflow: hidden;
+  transition: max-height 280ms ease, box-shadow 280ms ease, transform 280ms ease;
 }
 .novel .n-review-grid article.is-expanded {
+  position: absolute;
+  inset: 0 0 auto;
   height: auto;
   min-height: 300px;
+  max-height: 640px;
+  z-index: 5;
+  box-shadow: 0 20px 38px rgba(33, 54, 45, 0.22);
+  transform: translateY(-4px);
+}
+.novel .n-review-grid article.is-expanded.is-closing {
+  max-height: 300px;
+  transform: translateY(0);
 }
 .novel .n-review-grid blockquote {
   margin: 10px 0 18px;
@@ -1135,6 +1155,7 @@
 }
 .novel .n-review-grid blockquote.is-expanded {
   display: block;
+  flex: 0 0 auto;
   -webkit-line-clamp: unset;
 }
 .novel .n-review-expand {

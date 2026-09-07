@@ -385,6 +385,7 @@ function Reviews() {
   const { reviews } = useContent();
   const [activeReview, setActiveReview] = useState(0);
   const [expandedReview, setExpandedReview] = useState<string | null>(null);
+  const [closingReview, setClosingReview] = useState<string | null>(null);
   const visibleReviews = Array.from(
     { length: Math.min(5, reviews.length) },
     (_, offset) => reviews[(activeReview + offset) % reviews.length],
@@ -392,29 +393,45 @@ function Reviews() {
   return (
     <div className="n-reviews">
       <div className="n-review-grid" aria-live="polite">
-        {visibleReviews.map(([name, quote, source]) => (
-          <article key={name} className={expandedReview === name ? "is-expanded" : ""}>
+        {visibleReviews.map(([name, quote, source]) => {
+          const isExpanded = expandedReview === name;
+          const isClosing = closingReview === name;
+          const toggleReview = () => {
+            if (!isExpanded) {
+              setClosingReview(null);
+              setExpandedReview(name);
+              return;
+            }
+            setClosingReview(name);
+            window.setTimeout(() => {
+              setExpandedReview((current) => (current === name ? null : current));
+              setClosingReview((current) => (current === name ? null : current));
+            }, 280);
+          };
+          return (
+          <div className="n-review-card-slot" key={name}>
+          <article className={`${isExpanded ? "is-expanded" : ""} ${isClosing ? "is-closing" : ""}`}>
             <span className="n-quote-mark" aria-hidden="true">
               “
             </span>
-            <blockquote className={expandedReview === name ? "is-expanded" : ""}>
+            <blockquote className={isExpanded || isClosing ? "is-expanded" : ""}>
               {quote}
             </blockquote>
             {quote.length > 110 && (
               <button
                 className="n-review-expand"
-                aria-expanded={expandedReview === name}
-                onClick={() =>
-                  setExpandedReview(expandedReview === name ? null : name)
-                }
+                aria-expanded={isExpanded && !isClosing}
+                onClick={toggleReview}
               >
-                {expandedReview === name ? "Show less" : "Read full review"}
+                {isExpanded && !isClosing ? "Show less" : "Read full review"}
               </button>
             )}
             <b>{name}</b>
             <span>{source || "Google"}</span>
           </article>
-        ))}
+          </div>
+          );
+        })}
       </div>
       <div className="n-carousel-controls">
         <button
