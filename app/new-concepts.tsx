@@ -747,6 +747,7 @@ function Everyday() {
 }
 
 function House() {
+  const { awards } = useContent();
   return (
     <div className="house-home">
       <section className="house-opening">
@@ -788,6 +789,9 @@ function House() {
           <Photo key={file} name={`welcome-strip-${i}`} first={file} />
         ))}
       </div>
+      <section className="house-recognition n-section">
+        {awards}
+      </section>
       <section id="n-about" className="house-story n-section">
         <div>
           <span className="n-kicker">A personal approach</span>
@@ -1482,7 +1486,7 @@ export default function NewConcepts(props: Props) {
             </div>
           )}
         </div>
-        {props.page === "home" && props.awards}
+        {props.page === "home" && props.design !== "house" && props.awards}
         <div id="n-content" className="n-content" tabIndex={-1}>
           {props.page === "home" ? (
             props.design === "house" ? (
