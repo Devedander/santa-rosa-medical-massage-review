@@ -6273,7 +6273,7 @@ footer img {
 .award-strip > div { display: flex; align-items: center; gap: 24px; }
 .award-strip img { display: block; width: 92px; height: 122px; object-fit: contain; }
 .house-hero-awards { margin: 24px 0 22px; }
-.house-hero-awards .award-strip { justify-content: center; min-height: 0; padding: 0; gap: 16px; background: transparent; border: 0; }
+.house-hero-awards .award-strip { justify-content: flex-start; min-height: 0; padding: 0; gap: 16px; background: transparent; border: 0; }
 .house-hero-awards .award-strip > span { display: none; }
 .house-hero-awards .award-strip > div { gap: 24px; }
 .house-hero-awards .award-strip img { width: 132px; height: 176px; }
