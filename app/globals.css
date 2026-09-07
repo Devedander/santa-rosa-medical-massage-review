@@ -6250,6 +6250,8 @@ footer img {
 
 /* Keep Wellness Guide's referral language and practical actions clear and calm. */
 .site.webwell .strategy-referral > div:last-child > p { color: #f7fbfa; font: 18px/1.65 Georgia; letter-spacing: normal; text-transform: none; }
+.strategy-referral > div:first-child > p:first-child { font: 700 11px Arial; letter-spacing: .11em; text-transform: uppercase; }
+.strategy-referral > div:last-child > p:first-child { font: 18px/1.65 Georgia; letter-spacing: normal; text-transform: none; }
 .strategy-practical article { display: flex; flex-direction: column; }
 .strategy-practical article button { margin-top: auto; }
 .site.webwell .tpl-testimonial blockquote { position: relative; max-width: 740px; margin: 30px auto 20px; padding: 28px 34px; border-radius: 28px; background: #fffdf9; color: #183f3a; box-shadow: 0 12px 26px #0c2e2a33; }
