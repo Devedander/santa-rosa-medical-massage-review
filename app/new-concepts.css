@@ -2464,6 +2464,9 @@
 .n-house .house-concerns p {
   margin-top: 23px;
 }
+.n-house .house-concerns > .n-more-concerns {
+  grid-column: 1 / -1;
+}
 .n-house .house-reviews > h2 {
   margin-bottom: 35px;
 }
