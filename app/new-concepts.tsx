@@ -68,6 +68,71 @@ const concerns = [
   "Chronic pain",
   "Plantar fasciitis",
 ];
+const conditionGuidance: Record<
+  string,
+  { intro: string; approach: string; consideration: string }
+> = {
+  "Headaches & migraines": {
+    intro: "For recurring head pain, the conversation often begins with tension through the neck, shoulders, jaw, and upper back—and with the patterns you notice before symptoms build.",
+    approach: "Trigger Point Therapy, Medical Massage, or a gentler Swedish approach may be discussed to address muscle tightness and support relaxation. Your therapist can tailor pressure and positioning around your comfort.",
+    consideration: "New, severe, or changing headaches should be discussed with a medical professional before massage.",
+  },
+  "Neck tension": {
+    intro: "Neck tension can make driving, desk work, sleep, and ordinary turns of the head feel more demanding than they should.",
+    approach: "Medical Massage, Trigger Point Therapy, and focused Deep Tissue work can be adapted to the neck, shoulders, chest, and upper back—the connected areas that may be contributing to a sense of tightness.",
+    consideration: "Share any recent injury, dizziness, numbness, or guidance from your care team so the session can be planned appropriately.",
+  },
+  "Shoulder impingement": {
+    intro: "Shoulder discomfort can show up when reaching overhead, getting dressed, lifting, or finding a comfortable sleeping position.",
+    approach: "A focused Medical Massage session may include the shoulder, upper back, chest, and surrounding soft tissue, with pressure and range kept within your comfort. Trigger Point Therapy may also be part of the conversation.",
+    consideration: "If you have a diagnosis, imaging, or a physical-therapy plan, bring that context so care can complement—not replace—your medical guidance.",
+  },
+  "Hip pain": {
+    intro: "Hip discomfort often affects more than one movement: walking, stairs, sitting, sleeping, and the way the low back or legs feel through the day.",
+    approach: "Medical Massage and Deep Tissue / Full Body work can be tailored around the hips, glutes, low back, and legs, with the goal of supporting comfort and easier movement in the activities that matter to you.",
+    consideration: "Tell your therapist about any recent fall, joint replacement, radiating pain, or provider recommendations before your session.",
+  },
+  "TMJ pain": {
+    intro: "Jaw tension can be connected to clenching, headaches, neck tightness, stress, or habits that build up over a busy day.",
+    approach: "Gentle Medical Massage or Trigger Point work may focus on the jaw, temples, scalp, neck, and shoulders. The plan is always paced to your comfort; you do not need to push through discomfort.",
+    consideration: "For new jaw pain, dental concerns, or a changing bite, it is wise to involve the appropriate medical or dental professional.",
+  },
+  "Sciatica & piriformis": {
+    intro: "Low-back, hip, and leg symptoms can make sitting, walking, driving, or sleeping feel complicated. Your experience and any diagnosis help guide the conversation.",
+    approach: "Medical Massage, Trigger Point Therapy, and carefully paced Deep Tissue work may be used to address soft-tissue tension around the low back, hips, and glutes while keeping your comfort in view.",
+    consideration: "New weakness, loss of bladder or bowel control, or rapidly worsening symptoms need prompt medical attention rather than massage.",
+  },
+  "Rotator cuff recovery": {
+    intro: "Recovery around the shoulder is often gradual, and the best starting point depends on your stage of healing and your clinician’s guidance.",
+    approach: "When appropriate, gentle Medical Massage can focus on surrounding areas such as the neck, upper back, chest, and arm, helping make space for a more comfortable recovery routine.",
+    consideration: "Bring any post-injury or post-procedure restrictions. Massage does not replace a rehabilitation plan or clearance from your provider.",
+  },
+  "Post-surgical stiffness": {
+    intro: "After surgery, stiffness and changes in movement can make everyday tasks feel unfamiliar. The timing and approach should follow your surgical team’s guidance.",
+    approach: "With appropriate clearance, gentle Medical Massage or Lymphatic Facilitation may be discussed as supportive care around—not over—healing tissues, with pressure and positioning adjusted for your comfort.",
+    consideration: "Please share your procedure, recovery stage, medications, and any restrictions before booking so the practice can help determine an appropriate next step.",
+  },
+  "Carpal tunnel": {
+    intro: "Hand, wrist, and forearm discomfort can affect typing, gripping, sleep, and the small tasks that fill a day.",
+    approach: "Medical Massage and focused Trigger Point work may include the forearm, hand, wrist, shoulder, and neck, looking at the soft-tissue patterns around the areas that feel restricted or overworked.",
+    consideration: "Numbness, weakness, or symptoms that are progressing deserve medical evaluation; massage is supportive care, not a diagnosis.",
+  },
+  "Reduced range of motion": {
+    intro: "When movement feels limited, it helps to start with the activity you want to do more comfortably—not just a measurement of how far something moves.",
+    approach: "Deep Tissue / Full Body work, Medical Massage, and gentler Swedish techniques can be tailored to the muscles and connective tissue around the movement that feels restricted, without forcing a range.",
+    consideration: "Tell us about injuries, surgery, joint conditions, and any movement guidance you have received before your appointment.",
+  },
+  "Chronic pain": {
+    intro: "Persistent pain can change energy, sleep, movement, and the confidence to make plans. A session starts with listening to what your day is like now.",
+    approach: "Medical Massage, Swedish Massage, Somatic Experiencing, and focused Trigger Point work offer different ways to shape a session around comfort, pacing, and the areas that are asking for attention.",
+    consideration: "Massage can be one part of a broader care plan. Bring relevant medical guidance so your therapist can work thoughtfully alongside it.",
+  },
+  "Plantar fasciitis": {
+    intro: "Foot pain can change a walk, a shift at work, an exercise routine, or simply the first few steps of the day.",
+    approach: "Medical Massage and focused Deep Tissue work may include the feet, calves, ankles, and legs—the connected soft-tissue areas that can be useful to explore when walking or standing feels uncomfortable.",
+    consideration: "Share any recent change in activity, injury, swelling, circulation concerns, or provider recommendations before treatment.",
+  },
+};
 const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
 const navItems = [
   ["treatments", "Treatments"],
@@ -1189,6 +1254,7 @@ function NewPages() {
   const concern = page.startsWith("condition-")
     ? decodeURIComponent(page.slice(10))
     : "";
+  const concernCopy = conditionGuidance[concern];
   const post = posts.find(([slug]) => page === `post-${slug}`);
   const titles: Record<string, string> = {
     treatments: "Care around your needs.",
@@ -1220,7 +1286,8 @@ function NewPages() {
         <p>
           {service?.[1] ||
             (concern
-              ? "A place to begin a conversation about comfort, movement, and your goals."
+              ? concernCopy?.intro ||
+                "A place to begin a conversation about comfort, movement, and your goals."
               : post?.[3])}
         </p>
       </div>
@@ -1240,15 +1307,16 @@ function NewPages() {
       ) : concern ? (
         <div className="n-condition-detail">
           <div>
-            <h2>Begin with your experience.</h2>
-            <p>{practiceCopy}</p>
+            <h2>How massage may fit into your care.</h2>
+            <p>{concernCopy?.approach || practiceCopy}</p>
             <p>
-              Tell us how long the concern has been present, what changes it,
-              and any relevant guidance from your medical or rehabilitation
-              team.
+              {concernCopy?.consideration ||
+                "Tell us how long the concern has been present, what changes it, and any relevant guidance from your medical or rehabilitation team."}
             </p>
             <p>
-              Massage does not diagnose a condition or replace medical care.
+              Massage does not diagnose a condition or replace medical care;
+              it can be discussed as supportive care alongside the right
+              medical or rehabilitation plan.
             </p>
             <Action to="treatments">Explore treatment options</Action>
           </div>
