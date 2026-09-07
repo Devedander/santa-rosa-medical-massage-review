@@ -1177,8 +1177,7 @@ function ContactForm() {
   );
 }
 function NewPages() {
-  const { page, services, photos, posts, onPage, selections } = useContent();
-  const [galleryIndex, setGalleryIndex] = useState(0);
+  const { page, services, posts, onPage, selections } = useContent();
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
@@ -1293,44 +1292,15 @@ function NewPages() {
       ) : page === "gallery" ? (
         <>
           <Visit />
-          <div className="n-full-gallery n-visit-full-gallery">
-            <div className="n-gallery-stage">
-              <img src={photos[galleryIndex][0]} alt={photos[galleryIndex][1]} />
-            </div>
-            <div className="n-carousel-controls">
-              <button
-                aria-label="Previous gallery image"
-                onClick={() =>
-                  setGalleryIndex(
-                    (galleryIndex + photos.length - 1) % photos.length,
-                  )
-                }
-              >
-                <ArrowLeft />
-              </button>
-              <span>
-                {galleryIndex + 1} / {photos.length}
-              </span>
-              <button
-                aria-label="Next gallery image"
-                onClick={() =>
-                  setGalleryIndex((galleryIndex + 1) % photos.length)
-                }
-              >
-                <ArrowRight />
-              </button>
-            </div>
-            <div className="n-gallery-thumbs">
-              {photos.map(([src, alt], i) => (
-                <button
-                  aria-label={`Show photo ${i + 1}`}
-                  aria-pressed={i === galleryIndex}
-                  key={src}
-                  onClick={() => setGalleryIndex(i)}
-                >
-                  <img src={src} alt={alt} />
-                </button>
-              ))}
+          <div className="n-visit-gallery n-visit-mini-gallery">
+            <Photo name="visit-gallery" first="google-remodel-room.jpg" />
+            <div>
+              <span>Inside the practice</span>
+              <h3>Take a look around.</h3>
+              <p>
+                See the refreshed treatment rooms and the details that make an
+                appointment feel easy from arrival onward.
+              </p>
             </div>
           </div>
         </>
