@@ -386,6 +386,23 @@ function Reviews() {
   const [activeReview, setActiveReview] = useState(0);
   const [expandedReview, setExpandedReview] = useState<string | null>(null);
   const [closingReview, setClosingReview] = useState<string | null>(null);
+  useEffect(() => {
+    if (!expandedReview || closingReview) return;
+    const closeOnAnyClick = () => {
+      const reviewName = expandedReview;
+      setClosingReview(reviewName);
+      window.setTimeout(() => {
+        setExpandedReview((current) =>
+          current === reviewName ? null : current,
+        );
+        setClosingReview((current) =>
+          current === reviewName ? null : current,
+        );
+      }, 280);
+    };
+    document.addEventListener("pointerdown", closeOnAnyClick);
+    return () => document.removeEventListener("pointerdown", closeOnAnyClick);
+  }, [expandedReview, closingReview]);
   const visibleReviews = Array.from(
     { length: Math.min(5, reviews.length) },
     (_, offset) => reviews[(activeReview + offset) % reviews.length],
