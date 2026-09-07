@@ -6230,6 +6230,8 @@ footer img {
 .site.finder .mock-condition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .site.finder > .avant-concept { width: 100%; margin: 0; border-radius: 0; box-shadow: none; }
 .site.finder .complete-care { border-radius: 0; }
+.site.finder .finder-hero { grid-template-columns: minmax(0, 610px) 430px; justify-content: center; gap: clamp(44px, 6vw, 110px); }
+.site.finder .finder-hero > div:first-child { max-width: 610px; }
 .site.finder .avant-footer, .site.finder .complete-care > .simple-footer { display: none !important; }
 .site.finder .strategy-practical article { display: flex; flex-direction: column; }
 .site.finder .strategy-practical article button { margin-top: auto; }
@@ -6241,6 +6243,7 @@ footer img {
 .tpl-testimonial-controls { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 28px; font: 700 11px Arial; letter-spacing: .08em; }
 .tpl-testimonial-controls button { width: 34px; height: 34px; border: 1px solid #ffffff88; border-radius: 50%; background: transparent; color: inherit; font-size: 18px; cursor: pointer; }
 @media (max-width: 850px) { .site.finder .mock-condition-grid { grid-template-columns: 1fr; } .finder-orbit .finder-start { right: calc(50% - 155px); bottom: 8px; } }
+@media (max-width: 850px) { .site.finder .finder-hero { grid-template-columns: 1fr; } }
 
 /* Keep Wellness Guide's referral language and practical actions clear and calm. */
 .site.webwell .strategy-referral > div:last-child > p { color: #f7fbfa; font: 18px/1.65 Georgia; letter-spacing: normal; text-transform: none; }
