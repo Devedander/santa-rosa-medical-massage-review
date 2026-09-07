@@ -248,10 +248,11 @@ const yelpReviews = [
 ];
 // Spread Yelp voices through the rotation so each set of five feels like a
 // genuine cross-section of the public feedback, rather than two separate lists.
-const allReviews = googleReviews.reduce<string[][]>((mixed, [name, quote], index) => {
+const writtenGoogleReviews = googleReviews.filter(([, quote]) => quote.startsWith("“"));
+const allReviews = writtenGoogleReviews.reduce<string[][]>((mixed, [name, quote], index) => {
   mixed.push([name, quote, "Google"]);
   const yelpIndex =
-    Math.floor(((index + 1) * yelpReviews.length) / googleReviews.length) - 1;
+    Math.floor(((index + 1) * yelpReviews.length) / writtenGoogleReviews.length) - 1;
   if (yelpIndex >= 0 && yelpIndex < yelpReviews.length) {
     mixed.push(yelpReviews[yelpIndex]);
   }

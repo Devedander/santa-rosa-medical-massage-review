@@ -383,20 +383,21 @@ function ServiceList({
 }
 function Reviews() {
   const { reviews } = useContent();
-  const [group, setGroup] = useState(0);
-  const count = Math.ceil(reviews.length / 5);
+  const [activeReview, setActiveReview] = useState(0);
+  const visibleReviews = Array.from(
+    { length: Math.min(5, reviews.length) },
+    (_, offset) => reviews[(activeReview + offset) % reviews.length],
+  );
   return (
     <div className="n-reviews">
       <div className="n-review-grid" aria-live="polite">
-        {reviews.slice(group * 5, group * 5 + 5).map(([name, quote, source]) => (
+        {visibleReviews.map(([name, quote, source]) => (
           <article key={name}>
             <span className="n-quote-mark" aria-hidden="true">
               “
             </span>
             <blockquote>
-              {quote.startsWith("Five-star")
-                ? `Five-star rating on ${source || "Google"}.`
-                : quote}
+              {quote}
             </blockquote>
             <b>{name}</b>
             <span>{source || "Google"}</span>
@@ -405,14 +406,16 @@ function Reviews() {
       </div>
       <div className="n-carousel-controls">
         <button
-          aria-label="Previous five reviews"
-          onClick={() => setGroup((group + count - 1) % count)}
+          aria-label="Previous review"
+          onClick={() =>
+            setActiveReview((activeReview + reviews.length - 1) % reviews.length)
+          }
         >
           <ArrowLeft size={20} />
         </button>
         <button
-          aria-label="Next five reviews"
-          onClick={() => setGroup((group + 1) % count)}
+          aria-label="Next review"
+          onClick={() => setActiveReview((activeReview + 1) % reviews.length)}
         >
           <ArrowRight size={20} />
         </button>
