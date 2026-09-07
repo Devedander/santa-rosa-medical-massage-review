@@ -48,6 +48,7 @@ type Props = {
   reviews: string[][];
   Photo: ComponentType<PhotoProps>;
   selections: ReactNode;
+  awards: ReactNode;
 };
 const Content = createContext<Props | null>(null);
 function useContent() {
@@ -1481,6 +1482,7 @@ export default function NewConcepts(props: Props) {
             </div>
           )}
         </div>
+        {props.page === "home" && props.awards}
         <div id="n-content" className="n-content" tabIndex={-1}>
           {props.page === "home" ? (
             props.design === "house" ? (

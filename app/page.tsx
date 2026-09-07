@@ -1245,6 +1245,9 @@ function SimpleFooter({ className = "" }: { className?: string }) {
     </footer>
   );
 }
+function AwardStrip() {
+  return <section className="award-strip" aria-label="Practice recognition"><span>Recognized for massage therapy in Santa Rosa</span><div><img src="/award-businessrate.png" alt="BusinessRate Best of 2026 Award Winner, Massage Therapist" /><img src="/award-recognition.png" alt="BusinessRate Best of 2025 Massage Therapist recognition" /></div></section>;
+}
 
 function FullBleed() {
   return (
@@ -3117,6 +3120,7 @@ export default function Home() {
           reviews={googleReviews}
           Photo={InlineGallery}
           selections={<SelectionPage setPage={setPage} />}
+          awards={<AwardStrip />}
         />
       </main>
     );
@@ -3127,7 +3131,8 @@ export default function Home() {
       className={`site ${baseStyle} ${photo ? "with-photos" : ""}`}
     >
       <Switcher style={style} setStyle={chooseConcept} />
-      <PrototypeNav page={page} setPage={setPage} />
+        <PrototypeNav page={page} setPage={setPage} />
+        {page === "home" && <AwardStrip />}
       {page !== "home" ? (
         <MockPages page={page} setPage={setPage} />
       ) : (

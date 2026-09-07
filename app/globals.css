@@ -6267,3 +6267,11 @@ footer img {
 .site.webwell .contact-layout form::after { right: 52px; }
 .site.webwell .booking-options { width: 100%; max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .site.webwell .booking-options article { min-height: 330px; }
+
+.award-strip { display: flex; align-items: center; justify-content: center; gap: 26px; min-height: 104px; padding: 12px 6vw; background: #f8f6f1; color: #38272b; border-bottom: 1px solid #77373824; }
+.award-strip > span { max-width: 230px; font: 700 12px/1.35 Arial; letter-spacing: .04em; }
+.award-strip > div { display: flex; align-items: center; gap: 14px; }
+.award-strip img { display: block; width: 58px; height: 78px; object-fit: contain; }
+.site.webwell .award-strip { background: #edf4ee; color: #183f3a; }
+.site.finder .award-strip { width: var(--finder-canvas); margin: 0 auto 32px; border-radius: 30px; overflow: hidden; box-shadow: 0 18px 50px rgba(35,56,48,.08); background: #e6f1ef; color: #29414a; }
+@media (max-width: 640px) { .award-strip { justify-content: space-between; gap: 12px; padding: 10px 5vw; } .award-strip > span { font-size: 10px; } .award-strip img { width: 44px; height: 58px; } }
