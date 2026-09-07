@@ -522,6 +522,11 @@ function InlineGallery({
       }
     } catch {}
   }, [images, slot, storageKey]);
+  useEffect(() => {
+    const clearLock = () => setLocked(false);
+    window.addEventListener("srmm-photo-clear", clearLock);
+    return () => window.removeEventListener("srmm-photo-clear", clearLock);
+  }, []);
   const [src, label] = images[active];
   const previous = () => {
     setActive((active + images.length - 1) % images.length);
@@ -605,6 +610,7 @@ function SelectionPage({ setPage }: { setPage: (page: string) => void }) {
     const url = new URL(window.location.href);
     url.hash = "";
     window.history.replaceState(null, "", url);
+    window.dispatchEvent(new Event("srmm-photo-clear"));
     refresh();
     setNotice("Selections cleared.");
   };
@@ -642,6 +648,51 @@ function SelectionPage({ setPage }: { setPage: (page: string) => void }) {
         )}
       </div>
     </section>
+  );
+}
+function PhotoSelectionTools({ setPage }: { setPage: (page: string) => void }) {
+  const [count, setCount] = useState(0);
+  const refresh = () =>
+    setCount(
+      Object.keys(window.localStorage).filter((key) =>
+        key.startsWith("srmm-photo-"),
+      ).length,
+    );
+  useEffect(() => {
+    refresh();
+    window.addEventListener("srmm-photo-selection", refresh);
+    window.addEventListener("srmm-photo-clear", refresh);
+    return () => {
+      window.removeEventListener("srmm-photo-selection", refresh);
+      window.removeEventListener("srmm-photo-clear", refresh);
+    };
+  }, []);
+  const clear = () => {
+    Object.keys(window.localStorage)
+      .filter((key) => key.startsWith("srmm-photo-"))
+      .forEach((key) => window.localStorage.removeItem(key));
+    window.dispatchEvent(new Event("srmm-photo-clear"));
+  };
+  return (
+    <div className="n-photo-selection-tools" aria-label="Photo selection tools">
+      <div>
+        <strong>Photo selections</strong>
+        <span>{count ? `${count} photo${count === 1 ? "" : "s"} locked` : "Lock a photo from any gallery"}</span>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            setPage("selections");
+            window.scrollTo(0, 0);
+          }}
+        >
+          View selections
+        </button>
+        <button onClick={clear} disabled={!count}>
+          Clear all
+        </button>
+      </div>
+    </div>
   );
 }
 function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
@@ -3154,6 +3205,7 @@ export default function Home() {
           reviews={allReviews}
           Photo={InlineGallery}
           selections={<SelectionPage setPage={setPage} />}
+          photoTools={<PhotoSelectionTools setPage={setPage} />}
           awards={<AwardStrip />}
         />
       </main>

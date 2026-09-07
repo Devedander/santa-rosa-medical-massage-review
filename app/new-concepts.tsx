@@ -49,6 +49,7 @@ type Props = {
   reviews: string[][];
   Photo: ComponentType<PhotoProps>;
   selections: ReactNode;
+  photoTools: ReactNode;
   awards: ReactNode;
 };
 const Content = createContext<Props | null>(null);
@@ -1401,7 +1402,7 @@ function ContactForm() {
   );
 }
 function NewPages() {
-  const { page, services, posts, onPage, selections } = useContent();
+  const { page, services, posts, onPage, selections, photoTools } = useContent();
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
@@ -1530,6 +1531,7 @@ function NewPages() {
               </p>
             </div>
           </div>
+          {photoTools}
         </>
       ) : page === "about" ? (
         <>
