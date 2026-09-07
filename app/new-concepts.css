@@ -139,6 +139,7 @@
   background: var(--n-paper);
   box-shadow: 0 10px 25px #303b3610;
 }
+.site.share-mode .novel .n-site-nav { top: 0; }
 .novel .n-site-nav nav {
   display: flex;
   margin-left: auto;
