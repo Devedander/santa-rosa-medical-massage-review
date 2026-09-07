@@ -1331,31 +1331,6 @@ function Footer() {
         <p>{address}</p>
         <a href="tel:+17073037707">(707) 303-7707</a>
       </div>
-      <div className="n-footer-links">
-        <Action to="gallery" quiet>
-          Gallery
-        </Action>
-        <Action to="blog" quiet>
-          Notes
-        </Action>
-        <Action to="book" quiet>
-          Appointments & gifts
-        </Action>
-        <a
-          href="https://www.instagram.com/santarosamedicalmassage/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Instagram
-        </a>
-        <a
-          href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Yelp
-        </a>
-      </div>
     </footer>
   );
 }
