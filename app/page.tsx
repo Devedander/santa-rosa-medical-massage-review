@@ -773,7 +773,7 @@ function ReviewCarousel() {
         ))}
       </div>
       <a
-        href="https://www.google.com/search?q=Santa+Rosa+Medical+Massage+reviews"
+        href="https://www.google.com/search?q=Santa+Rosa+Medical+Massage+reviews#"
         target="_blank"
         rel="noreferrer"
       >
