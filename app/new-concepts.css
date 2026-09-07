@@ -263,7 +263,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 0 30px;
 }
-.novel .n-concerns button {
+.novel .n-concerns > button,
+.novel .n-concern-item > button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -277,12 +278,18 @@
   font-size: 16px;
   min-height: 62px;
 }
-.novel .n-concerns button:hover {
+.novel .n-concerns > button:hover,
+.novel .n-concern-item > button:hover {
   color: var(--n-wine);
 }
 .novel .n-concerns svg {
   flex-shrink: 0;
 }
+.n-house .n-concern-item > button svg { transition: transform .2s ease; }
+.n-house .n-concern-item.is-open > button svg { transform: rotate(45deg); }
+.n-house .n-concern-expand { padding: 18px 22px 22px; margin-top: -1px; border-bottom: 1px solid var(--n-line); background: rgba(255,255,255,.56); color: var(--n-ink); font-size: 14px; line-height: 1.55; }
+.n-house .n-concern-expand p { margin: 0 0 12px; }
+.n-house .n-concern-expand .n-link { margin-top: 2px; }
 .novel .n-visit-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -730,7 +737,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0 22px;
 }
-.n-desk .n-concerns button {
+.n-desk .n-concerns .n-concern-item > button {
   font-size: 15px;
 }
 .n-desk .desk-practice {
@@ -1009,7 +1016,7 @@
   gap: 12px;
   align-content: center;
 }
-.n-everyday .n-concerns button {
+.n-everyday .n-concerns .n-concern-item > button {
   border: 0;
   border-radius: 12px;
   background: #faf8f7;

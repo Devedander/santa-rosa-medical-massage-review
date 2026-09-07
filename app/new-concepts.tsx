@@ -204,18 +204,38 @@ function Brand() {
   );
 }
 function ConcernLinks() {
-  const { onPage } = useContent();
+  const { onPage, design } = useContent();
+  const [openConcern, setOpenConcern] = useState<string | null>(null);
   return (
     <div className="n-concerns">
-      {concerns.map((c) => (
-        <button
-          key={c}
-          onClick={() => onPage(`condition-${encodeURIComponent(c)}`)}
-        >
-          {c}
-          <Plus size={16} aria-hidden="true" />
-        </button>
-      ))}
+      {concerns.map((c) => {
+        const expanded = design === "house" && openConcern === c;
+        const guidance = conditionGuidance[c];
+        return (
+          <div className={`n-concern-item ${expanded ? "is-open" : ""}`} key={c}>
+            <button
+              onClick={() =>
+                design === "house"
+                  ? setOpenConcern(expanded ? null : c)
+                  : onPage(`condition-${encodeURIComponent(c)}`)
+              }
+              aria-expanded={design === "house" ? expanded : undefined}
+            >
+              {c}
+              <Plus size={16} aria-hidden="true" />
+            </button>
+            {expanded && guidance && (
+              <div className="n-concern-expand">
+                <p>{guidance.intro}</p>
+                <p>{guidance.approach}</p>
+                <Action to="book" quiet>
+                  Schedule a visit
+                </Action>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
