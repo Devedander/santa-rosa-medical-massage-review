@@ -232,6 +232,7 @@ function ConcernLinks() {
   const { onPage, design } = useContent();
   const [openConcern, setOpenConcern] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
   const renderConcern = (c: string) => {
     const expanded = design === "house" && openConcern === c;
     const guidance = conditionGuidance[c] || additionalGuidance(c);
@@ -264,31 +265,52 @@ function ConcernLinks() {
     <>
       <div className="n-concerns">{concerns.map(renderConcern)}</div>
       {design === "house" && (
-        <section className={`n-more-concerns ${showMore ? "is-open" : ""}`}>
-          <button
-            className="n-more-concerns-toggle"
-            onClick={() => setShowMore(!showMore)}
-            aria-expanded={showMore}
-          >
-            <span>
-              <b>More concerns we support</b>
-              <small>Explore additional reasons clients begin a conversation with us.</small>
-            </span>
-            <Plus size={20} aria-hidden="true" />
-          </button>
-          {showMore && (
-            <div className="n-more-concern-groups">
-              {additionalConcernGroups.map(([group, groupConcerns]) => (
-                <section key={group}>
-                  <h3>{group}</h3>
-                  <div className="n-more-concern-list">
-                    {groupConcerns.map(renderConcern)}
-                  </div>
-                </section>
-              ))}
+        <>
+          <section className={`n-more-concerns ${showMore ? "is-open" : ""}`}>
+            <button
+              className="n-more-concerns-toggle"
+              onClick={() => setShowMore(!showMore)}
+              aria-expanded={showMore}
+            >
+              <span>
+                <b>More concerns we support</b>
+                <small>Explore additional reasons clients begin a conversation with us.</small>
+              </span>
+              <Plus size={20} aria-hidden="true" />
+            </button>
+            {showMore && (
+              <div className="n-more-concern-groups">
+                {additionalConcernGroups.map(([group, groupConcerns]) => (
+                  <section key={group}>
+                    <h3>{group}</h3>
+                    <div className="n-more-concern-list">
+                      {groupConcerns.map(renderConcern)}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            )}
+          </section>
+          <section className="n-category-concerns">
+            <p className="n-kicker">Alternate layout</p>
+            <h3>Browse by category.</h3>
+            <p>Open a category to see the concerns within it.</p>
+            <div className="n-category-list">
+              {additionalConcernGroups.map(([group, groupConcerns]) => {
+                const expanded = openCategory === group;
+                return (
+                  <section className={expanded ? "is-open" : ""} key={group}>
+                    <button onClick={() => setOpenCategory(expanded ? null : group)} aria-expanded={expanded}>
+                      {group}
+                      <Plus size={18} aria-hidden="true" />
+                    </button>
+                    {expanded && <div>{groupConcerns.map(renderConcern)}</div>}
+                  </section>
+                );
+              })}
             </div>
-          )}
-        </section>
+          </section>
+        </>
       )}
     </>
   );
