@@ -532,15 +532,15 @@ function Notes({ compact = false }: { compact?: boolean }) {
   return (
     <div className="n-notes">
       {posts
-        .slice(0, compact ? 3 : 6)
-        .map(([slug, title, category, excerpt]) => (
+        .slice(0, compact ? 3 : posts.length)
+        .map(([slug, title, category, excerpt, url]) => (
           <article key={slug}>
             <span>{category}</span>
             <h3>{title}</h3>
             <p>{excerpt}</p>
-            <Action to={`post-${slug}`} quiet>
-              Read blog post
-            </Action>
+            <a className="n-link" href={url} target="_blank" rel="noreferrer">
+              Read full article <ArrowUpRight size={17} />
+            </a>
           </article>
         ))}
     </div>
