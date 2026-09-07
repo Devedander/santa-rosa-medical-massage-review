@@ -28,6 +28,7 @@ import {
   Gift,
   Plus,
   Check,
+  Star,
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -386,6 +387,24 @@ function Reviews() {
   const count = Math.ceil(reviews.length / 5);
   return (
     <div className="n-reviews">
+      <div className="n-review-sources" aria-label="Review sources">
+        <a
+          href="https://www.google.com/search?q=Santa+Rosa+Medical+Massage+reviews"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Star size={17} fill="currentColor" aria-hidden="true" />
+          <span>5-star reviews on Google</span>
+        </a>
+        <a
+          href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Star size={17} fill="currentColor" aria-hidden="true" />
+          <span>5-star reviews on Yelp</span>
+        </a>
+      </div>
       <div className="n-review-grid" aria-live="polite">
         {reviews.slice(group * 5, group * 5 + 5).map(([name, quote, source]) => (
           <article key={name}>
@@ -409,30 +428,12 @@ function Reviews() {
         >
           <ArrowLeft size={20} />
         </button>
-        <span>
-          {group * 5 + 1}–{Math.min(group * 5 + 5, reviews.length)} of{" "}
-          {reviews.length}
-        </span>
         <button
           aria-label="Next five reviews"
           onClick={() => setGroup((group + 1) % count)}
         >
           <ArrowRight size={20} />
         </button>
-        <a
-          href="https://www.google.com/search?q=Santa+Rosa+Medical+Massage+reviews"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Google reviews <ArrowUpRight size={16} />
-        </a>
-        <a
-          href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Yelp reviews <ArrowUpRight size={16} />
-        </a>
       </div>
     </div>
   );

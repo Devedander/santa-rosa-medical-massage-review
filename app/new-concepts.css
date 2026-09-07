@@ -1139,6 +1139,23 @@
   font: 40px/0.8 var(--n-display);
   color: var(--n-wine);
 }
+.novel .n-review-sources {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  margin: 0 0 24px;
+}
+.novel .n-review-sources a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--n-wine);
+  font-size: 14px;
+  font-weight: 700;
+}
+.novel .n-review-sources svg { color: #a6403f; }
 .novel .n-carousel-controls {
   display: flex;
   align-items: center;
@@ -1157,13 +1174,6 @@
   height: 46px;
   background: transparent;
   color: inherit;
-}
-.novel .n-carousel-controls > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  margin-left: auto;
 }
 .n-everyday .n-review-grid article {
   background: #f0e9e5;
@@ -2093,11 +2103,6 @@
   }
   .novel .n-carousel-controls {
     gap: 15px;
-  }
-  .novel .n-carousel-controls > a {
-    width: 100%;
-    justify-content: center;
-    margin-left: 0;
   }
   .novel .n-inner {
     padding: 30px 6vw 60px;
