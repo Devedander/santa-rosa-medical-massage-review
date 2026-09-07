@@ -1574,8 +1574,8 @@ function Footer() {
   return (
     <footer className="n-footer">
       <Brand />
-      <div>
-        <p>{address}</p>
+      <div className="n-footer-contact">
+        <span>{address}</span>
         <a href="tel:+17073037707">(707) 303-7707</a>
       </div>
     </footer>

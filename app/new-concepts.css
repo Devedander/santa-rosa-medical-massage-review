@@ -2708,6 +2708,43 @@
   display: block;
   flex: none;
 }
+.novel .n-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 34px;
+  padding-block: 28px;
+}
+.novel .n-footer .n-brand {
+  flex: 0 0 auto;
+}
+.novel .n-footer .n-brand-logo {
+  width: 190px;
+  max-height: 54px;
+}
+.novel .n-footer-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font: 15px/1.4 "Segoe UI", sans-serif;
+}
+.novel .n-footer-contact a {
+  color: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.n-house .n-footer > .n-footer-contact {
+  justify-self: auto;
+  text-align: left;
+}
+@media (max-width: 640px) {
+  .novel .n-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
 .n-call {
   display: inline-flex;
   align-items: center;
