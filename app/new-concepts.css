@@ -2732,9 +2732,12 @@
 .novel .n-footer-contact {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 10px 22px;
+  margin-left: auto;
   font: 15px/1.4 "Segoe UI", sans-serif;
+  text-align: right;
 }
 .novel .n-footer-contact a {
   color: inherit;
@@ -2750,6 +2753,11 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 16px;
+  }
+  .novel .n-footer-contact {
+    justify-content: flex-start;
+    margin-left: 0;
+    text-align: left;
   }
 }
 .n-call {
