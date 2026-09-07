@@ -295,6 +295,12 @@
   max-width: 39ch;
   margin-bottom: 16px;
 }
+.novel .n-visit-combined { display: grid; gap: 40px; }
+.novel .n-visit-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; padding: 24px; background: color-mix(in srgb, var(--n-glass) 82%, var(--n-mist)); border-radius: 16px; }
+.novel .n-visit-gallery .n-photo { height: 260px; border-radius: 10px; }
+.novel .n-visit-gallery > div > span { display:block; margin-bottom:12px; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.novel .n-visit-gallery h3 { margin: 0 0 15px; }
+.novel .n-visit-gallery p { margin-bottom: 20px; max-width: 42ch; }
 .novel .n-phone {
   display: inline-block;
   font-size: 24px;
@@ -745,6 +751,7 @@
 .n-desk .desk-gallery p {
   margin: 20px 0;
 }
+.n-desk .n-visit-gallery { margin-top: 4px; background: #e2e8e3; border-radius: 12px; }
 .n-desk .n-notes {
   grid-template-columns: 1fr;
   gap: 0;
@@ -2360,8 +2367,13 @@
   background: #304438;
   color: #f8f5ed;
 }
+.n-house .n-footer > div:last-child { justify-self: end; text-align: right; }
 .n-house .n-inner-title h1 {
   font-size: clamp(42px, 5vw, 68px);
+}
+@media (max-width: 640px) {
+  .novel .n-visit-gallery { grid-template-columns: 1fr; gap: 22px; padding: 18px; }
+  .n-house .n-footer > div:last-child { justify-self: start; text-align: left; }
 }
 @media (max-width: 1200px) {
   .n-house .house-opening,

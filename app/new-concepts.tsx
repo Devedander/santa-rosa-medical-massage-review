@@ -73,7 +73,7 @@ const navItems = [
   ['conditions', 'Common concerns'],
   ['about', 'The practice'],
   ['reviews', 'Reviews'],
-  ['visit', 'Visit & contact'],
+  ['visit', 'Visit & gallery'],
 ];
 
 function Action({
@@ -267,7 +267,9 @@ function Reviews() {
   );
 }
 function Visit() {
+  const { onPage } = useContent();
   return (
+    <div className="n-visit-combined">
     <div className="n-visit-details">
       <div>
         <MapPin size={23} />
@@ -296,6 +298,16 @@ function Visit() {
         <Action to="contact" quiet>
           Contact the practice
         </Action>
+      </div>
+    </div>
+      <div className="n-visit-gallery">
+        <Photo name="visit-gallery" first="google-remodel-room.jpg" />
+        <div>
+          <span>Inside the practice</span>
+          <h3>Take a look around.</h3>
+          <p>See the refreshed treatment rooms and the details that make an appointment feel easy from arrival onward.</p>
+          <button className="n-link" onClick={() => onPage('gallery')}>Browse all photos <ArrowUpRight size={18} /></button>
+        </div>
       </div>
     </div>
   );
@@ -552,16 +564,6 @@ function Desk() {
           <Action to="book">Appointments & gifts</Action>
         </div>
         <Visit />
-        <div className="desk-gallery">
-          <Photo name="gallery" />
-          <div>
-            <h3>Take a look around.</h3>
-            <p>See the rooms and the refreshed practice space.</p>
-            <Action to="gallery" quiet>
-              Open gallery
-            </Action>
-          </div>
-        </div>
       </section>
       <section id="n-reviews" className="n-section desk-reviews">
         <div className="n-section-heading">
@@ -1416,7 +1418,7 @@ export default function NewConcepts(props: Props) {
             ))}
             {props.design !== 'house' && (
               <>
-                <button onClick={() => go('gallery')}>Gallery</button>
+                <button onClick={() => jump('visit')}>Visit & gallery</button>
                 <button onClick={() => go('blog')}>Notes</button>
                 <button onClick={() => go('gift')}>Gift cards</button>
               </>
