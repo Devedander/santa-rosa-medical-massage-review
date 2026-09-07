@@ -328,6 +328,7 @@ const blogPosts = [
     "Focused bodywork for sensitive muscle points that may refer pain elsewhere in the body.",
     "https://santarosamedicalmassage.com/trigger-point-therapy/",
     "An AMAZING style of bodywork that focuses on stimulating and releasing “trigger points” in your body. Trigger points are hyper-irritable muscle tissue that refer pain. These ‘knots’ are built up throughout a person’s life due to physical, mental, and/or emotional stress. During a session, focused pressure is applied through a variety of techniques in order to release your trigger points. This process can be quite painful at times, yet the effects are lasting and profoundly transformative.\n\nChoose this advanced therapeutic massage if you are visiting us primarily to treat a medical conditions such as…\n\n- You woke up this morning with a sore neck you need treated\n- You suffer from any type of chronic pain condition\n- You hurt your back cleaning the garage\n- Your shoulder is sore from golf over the weekend\n- Your low back pain is flaring up\n- Your knee hurts after a busy day yesterday\n- Your back generally hurts and needs treatment\n- Your leg hurts from cycling, running or golfing\n- You want a relaxation massage combined with specific treatment for an issue such as listed above\n\nRead what our customers say about our therapies",
+    "https://santarosamedicalmassage.com/wp-content/uploads/2012/02/trigger-point-therapy-e1431859485121.png",
   ],
   [
     "deep-tissue-massage",

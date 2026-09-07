@@ -1406,7 +1406,18 @@ function NewPages() {
   const concernCopy = conditionGuidance[concern];
   const post = posts.find(([slug]) => page === `post-${slug}`);
   const articleBody = post?.[5] || post?.[3] || "";
-  const articleImage = post?.[6];
+  const articleFallbackImages: Record<string, string> = {
+    testimonials: "/mockup-photos/therapy-room.jpg",
+    "thai-massage": "/mockup-photos/therapy-hands.jpg",
+    "massage-cupping": "/mockup-photos/yelp-treatment.jpg",
+    fascia: "/mockup-photos/yelp-detail-4.jpg",
+    "sports-massage": "/mockup-photos/therapy-room.jpg",
+    "lymphatic-facilitation": "/mockup-photos/therapy-hands.jpg",
+    "deep-tissue-massage": "/mockup-photos/yelp-treatment.jpg",
+    "treated-dysfunctions": "/mockup-photos/yelp-detail-4.jpg",
+    "medical-massage": "/mockup-photos/therapy-room.jpg",
+  };
+  const articleImage = post?.[6] || articleFallbackImages[post?.[0] || ""];
   const titles: Record<string, string> = {
     treatments: "Care around your needs.",
     conditions: "Start with what you’re feeling.",
