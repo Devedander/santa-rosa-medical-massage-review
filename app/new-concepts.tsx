@@ -271,7 +271,6 @@ function Reviews() {
   );
 }
 function Visit() {
-  const { onPage } = useContent();
   return (
     <div className="n-visit-combined">
       <div className="n-visit-details">
@@ -302,20 +301,6 @@ function Visit() {
           <Action to="contact" quiet>
             Contact the practice
           </Action>
-        </div>
-      </div>
-      <div className="n-visit-gallery">
-        <Photo name="visit-gallery" first="google-remodel-room.jpg" />
-        <div>
-          <span>Inside the practice</span>
-          <h3>Take a look around.</h3>
-          <p>
-            See the refreshed treatment rooms and the details that make an
-            appointment feel easy from arrival onward.
-          </p>
-          <button className="n-link" onClick={() => onPage("gallery")}>
-            Browse all photos <ArrowUpRight size={18} />
-          </button>
         </div>
       </div>
     </div>
@@ -1306,46 +1291,49 @@ function NewPages() {
       ) : page === "blog" ? (
         <Notes />
       ) : page === "gallery" ? (
-        <div className="n-full-gallery">
-          <div className="n-gallery-stage">
-            <img src={photos[galleryIndex][0]} alt={photos[galleryIndex][1]} />
-          </div>
-          <div className="n-carousel-controls">
-            <button
-              aria-label="Previous gallery image"
-              onClick={() =>
-                setGalleryIndex(
-                  (galleryIndex + photos.length - 1) % photos.length,
-                )
-              }
-            >
-              <ArrowLeft />
-            </button>
-            <span>
-              {galleryIndex + 1} / {photos.length}
-            </span>
-            <button
-              aria-label="Next gallery image"
-              onClick={() =>
-                setGalleryIndex((galleryIndex + 1) % photos.length)
-              }
-            >
-              <ArrowRight />
-            </button>
-          </div>
-          <div className="n-gallery-thumbs">
-            {photos.map(([src, alt], i) => (
+        <>
+          <Visit />
+          <div className="n-full-gallery n-visit-full-gallery">
+            <div className="n-gallery-stage">
+              <img src={photos[galleryIndex][0]} alt={photos[galleryIndex][1]} />
+            </div>
+            <div className="n-carousel-controls">
               <button
-                aria-label={`Show photo ${i + 1}`}
-                aria-pressed={i === galleryIndex}
-                key={src}
-                onClick={() => setGalleryIndex(i)}
+                aria-label="Previous gallery image"
+                onClick={() =>
+                  setGalleryIndex(
+                    (galleryIndex + photos.length - 1) % photos.length,
+                  )
+                }
               >
-                <img src={src} alt={alt} />
+                <ArrowLeft />
               </button>
-            ))}
+              <span>
+                {galleryIndex + 1} / {photos.length}
+              </span>
+              <button
+                aria-label="Next gallery image"
+                onClick={() =>
+                  setGalleryIndex((galleryIndex + 1) % photos.length)
+                }
+              >
+                <ArrowRight />
+              </button>
+            </div>
+            <div className="n-gallery-thumbs">
+              {photos.map(([src, alt], i) => (
+                <button
+                  aria-label={`Show photo ${i + 1}`}
+                  aria-pressed={i === galleryIndex}
+                  key={src}
+                  onClick={() => setGalleryIndex(i)}
+                >
+                  <img src={src} alt={alt} />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       ) : page === "about" ? (
         <>
           <div className="n-detail">
@@ -1470,7 +1458,7 @@ export default function NewConcepts(props: Props) {
             className={menu ? "n-nav-open" : ""}
           >
             {navItems.map(([id, label]) => (
-              <button key={id} onClick={() => jump(id)}>
+              <button key={id} onClick={() => id === "visit" ? go("gallery") : jump(id)}>
                 {label}
               </button>
             ))}

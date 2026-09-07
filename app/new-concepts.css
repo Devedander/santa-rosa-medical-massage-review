@@ -2471,6 +2471,8 @@
 .n-house .n-visit-gallery > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 18px; }
 .n-house .n-visit-gallery > div > p { grid-column: 1; }
 .n-house .n-visit-gallery > div > button { grid-column: 2; grid-row: 1 / span 2; }
+.n-visit-full-gallery { margin-top: 56px; }
+.n-house .n-visit-full-gallery { width: 100%; }
 .n-house .n-visit-gallery { grid-template-columns: 1fr; }
 .n-house .n-visit-gallery .n-photo { height: min(44vw, 460px); }
 .n-house .n-visit-gallery > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 18px; }
