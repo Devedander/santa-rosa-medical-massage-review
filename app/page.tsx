@@ -251,9 +251,13 @@ const yelpReviews = [
 const writtenGoogleReviews = googleReviews.filter(([, quote]) => quote.startsWith("“"));
 const allReviews = writtenGoogleReviews.reduce<string[][]>((mixed, [name, quote], index) => {
   mixed.push([name, quote, "Google"]);
-  const yelpIndex =
-    Math.floor(((index + 1) * yelpReviews.length) / writtenGoogleReviews.length) - 1;
-  if (yelpIndex >= 0 && yelpIndex < yelpReviews.length) {
+  const yelpIndex = Math.floor(
+    (index * yelpReviews.length) / writtenGoogleReviews.length,
+  );
+  const shouldInsertYelp =
+    Math.floor(((index + 1) * yelpReviews.length) / writtenGoogleReviews.length) >
+    yelpIndex;
+  if (shouldInsertYelp && yelpIndex < yelpReviews.length) {
     mixed.push(yelpReviews[yelpIndex]);
   }
   return mixed;
