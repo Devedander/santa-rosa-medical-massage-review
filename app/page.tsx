@@ -3097,10 +3097,6 @@ export default function Home() {
       <main ref={siteRef} className={`site ${baseStyle}`}>
         <Switcher style={style} setStyle={chooseConcept} />
         <div className="new-review-tools">
-          <span>
-            Design review · Forms are previews. Review sources and journal copy
-            await final verification.
-          </span>
           <button
             onClick={() => {
               setPage("selections");
