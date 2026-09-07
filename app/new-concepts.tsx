@@ -1575,12 +1575,7 @@ function Footer() {
         onClick={() => onPage("home")}
         aria-label="Santa Rosa Medical Massage home"
       >
-        <img src="/logo-correct.png" alt="" aria-hidden="true" />
-        <span>
-          Santa Rosa
-          <br />
-          Medical Massage
-        </span>
+        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
       </button>
       <div className="n-footer-contact">
         <span>{address}</span>
