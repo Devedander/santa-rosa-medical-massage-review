@@ -650,8 +650,9 @@ function SelectionPage({ setPage }: { setPage: (page: string) => void }) {
     </section>
   );
 }
-function PhotoSelectionTools({ setPage }: { setPage: (page: string) => void }) {
+function PhotoSelectionTools() {
   const [count, setCount] = useState(0);
+  const [notice, setNotice] = useState("");
   const refresh = () =>
     setCount(
       Object.keys(window.localStorage).filter((key) =>
@@ -672,6 +673,22 @@ function PhotoSelectionTools({ setPage }: { setPage: (page: string) => void }) {
       .filter((key) => key.startsWith("srmm-photo-"))
       .forEach((key) => window.localStorage.removeItem(key));
     window.dispatchEvent(new Event("srmm-photo-clear"));
+    setNotice("Photo selections cleared.");
+  };
+  const copyReviewLink = async () => {
+    const choices = Object.keys(window.localStorage)
+      .filter((key) => key.startsWith("srmm-photo-"))
+      .map((key) => JSON.parse(window.localStorage.getItem(key) || "{}"))
+      .filter((choice) => choice.slot);
+    const payload = btoa(encodeURIComponent(JSON.stringify(choices)));
+    await navigator.clipboard.writeText(
+      `${window.location.origin}${window.location.pathname}${window.location.search}#choices=${payload}`,
+    );
+    setNotice(
+      choices.length
+        ? "Review link copied with the locked photos."
+        : "Review link copied. Lock photos first to include them.",
+    );
   };
   return (
     <div className="n-photo-selection-tools" aria-label="Photo selection tools">
@@ -680,18 +697,12 @@ function PhotoSelectionTools({ setPage }: { setPage: (page: string) => void }) {
         <span>{count ? `${count} photo${count === 1 ? "" : "s"} locked` : "Lock a photo from any gallery"}</span>
       </div>
       <div>
-        <button
-          onClick={() => {
-            setPage("selections");
-            window.scrollTo(0, 0);
-          }}
-        >
-          View selections
-        </button>
+        <button onClick={copyReviewLink}>Copy review link</button>
         <button onClick={clear} disabled={!count}>
           Clear all
         </button>
       </div>
+      {notice && <p className="n-photo-tools-notice" role="status">{notice}</p>}
     </div>
   );
 }
@@ -3205,7 +3216,7 @@ export default function Home() {
           reviews={allReviews}
           Photo={InlineGallery}
           selections={<SelectionPage setPage={setPage} />}
-          photoTools={<PhotoSelectionTools setPage={setPage} />}
+          photoTools={<PhotoSelectionTools />}
           awards={<AwardStrip />}
         />
       </main>

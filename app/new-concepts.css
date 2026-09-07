@@ -1693,6 +1693,13 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+.novel .n-photo-tools-notice {
+  flex-basis: 100%;
+  order: 3;
+  margin: -8px 0 0;
+  color: var(--n-wine);
+  font-size: 13px;
+}
 .novel .n-photo-selection-tools button {
   padding: 10px 14px;
   border: 1px solid var(--n-ink);
