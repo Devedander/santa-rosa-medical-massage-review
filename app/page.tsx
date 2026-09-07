@@ -246,10 +246,17 @@ const yelpReviews = [
   ["Adrienne S.", "“They really listen to my needs and address those issues during treatment. They also give helpful tips and stretches to take home.”", "Yelp"],
   ["Jackie C.", "“I have chronic back pain and a hard time finding relief. My appointment was so helpful, and they gave me good recommendations for aftercare.”", "Yelp"],
 ];
-const allReviews = [
-  ...googleReviews.map(([name, quote]) => [name, quote, "Google"]),
-  ...yelpReviews,
-];
+// Spread Yelp voices through the rotation so each set of five feels like a
+// genuine cross-section of the public feedback, rather than two separate lists.
+const allReviews = googleReviews.reduce<string[][]>((mixed, [name, quote], index) => {
+  mixed.push([name, quote, "Google"]);
+  const yelpIndex =
+    Math.floor(((index + 1) * yelpReviews.length) / googleReviews.length) - 1;
+  if (yelpIndex >= 0 && yelpIndex < yelpReviews.length) {
+    mixed.push(yelpReviews[yelpIndex]);
+  }
+  return mixed;
+}, []);
 const blogPosts = [
   [
     "sciatica-and-your-next-session",

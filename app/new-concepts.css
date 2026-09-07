@@ -1147,6 +1147,7 @@
   margin: 0 0 10px;
   font-family: var(--n-display);
   font-size: 21px;
+  text-align: center;
 }
 .novel .n-review-sources > div {
   display: flex;
