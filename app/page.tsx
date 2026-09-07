@@ -3022,11 +3022,10 @@ function TemplateMock({
 export default function Home() {
   const [style, setStyle] = useState("house-photo");
   const [page, setPage] = useState("home");
-  const [shareMode, setShareMode] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("share") === "familiar",
-  );
+  // Keep the server and browser's first render identical. URL-specific review
+  // mode is applied after hydration, which also prevents the selector flashing
+  // permanently in the Familiar-only link.
+  const [shareMode, setShareMode] = useState(false);
   const siteRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
