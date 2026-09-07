@@ -1439,9 +1439,13 @@ export default function NewConcepts(props: Props) {
                 {label}
               </button>
             ))}
-            <button onClick={() => go('gallery')}>Gallery</button>
-            <button onClick={() => go('blog')}>Notes</button>
-            <button onClick={() => go('gift')}>Gift cards</button>
+            {props.design !== 'house' && (
+              <>
+                <button onClick={() => go('gallery')}>Gallery</button>
+                <button onClick={() => go('blog')}>Notes</button>
+                <button onClick={() => go('gift')}>Gift cards</button>
+              </>
+            )}
           </nav>
           <div className="n-social" aria-label="Social media links">
             <a href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021" target="_blank" rel="noreferrer" aria-label="Facebook"><img src="/social-facebook.svg" alt="" /></a>
