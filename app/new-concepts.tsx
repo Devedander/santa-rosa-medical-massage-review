@@ -248,7 +248,7 @@ function ConcernLinks() {
           {c}
           <Plus size={16} aria-hidden="true" />
         </button>
-        {expanded && (
+        {guidance && (
           <div className="n-concern-expand">
             <p>{guidance.intro}</p>
             <p>{guidance.approach}</p>
