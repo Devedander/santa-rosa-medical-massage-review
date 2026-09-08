@@ -279,7 +279,7 @@ const blogPosts = [
     "A bodywork therapy for the mind, body, and soul, using focused work through the feet and lower legs.",
     "https://santarosamedicalmassage.com/thai-foot-massage/",
     "Thai Foot Massage is a body work therapy for the mind body and soul and involves reflexology using the foot. When pressure is applied to certain areas of the foot it stimulates another part of the body. Thai foot massage is an ancient reflexology technique that has made a comeback recently.\n\nThai foot reflexology is said to be a marriage between reflexology, Chinese Tuina, Japanese Shiatsu, and Indian Ayurvedi oga. Focusing on the feet, lower leg, and knees, it frees up blocked energy in the body’s Thai-based meridians to bring about deep relaxation, balance, and well-being.\n\nAlongside the acupressure and acupuncture theory it is believed that 7,200 sensory nerves exist within the foot which are connected to internal organs. Mapping out these connections on the foot is part of the therapists goal with each client. During a typical session the lower legs, and feet are stretched, opening Sen (energy). Then pressure points on the foot are stimulated. The pressure points connect to 10 major energy lines which run throughout the body. This careful stimulation of pressure points on the foot help the body restore its own natural balance.\n\n## Benefits of Thai Massage\n\nThe benefits of Thai Foot Massage are many. Besides restoring the body to its own natural balance other benefits include:\n\n- Improved circulation\n- Improved lymphatic drainage\n- Boosts the immune system\n- Reduces stiffness\n- Increases range of motion\n- Accelerates healing\n- Relieves stress\n- Improves sleep\n- Elevates mood\n- Improves concentration and clarity of mind\n- Creates feelings of tranquility, calmness, and well being",
-    "https://santarosamedicalmassage.com/wp-content/uploads/2012/02/Reflexology.png",
+    "/blog-assets/thai-foot-massage.png",
   ],
   [
     "thai-massage",
@@ -288,6 +288,7 @@ const blogPosts = [
     "An introduction to Thai bodywork, including Tok Sen and its cultural roots.",
     "https://santarosamedicalmassage.com/thai-massage/",
     "## Tok Sen\n\nNow if you’ve ever been to Thailand and had the opportunity to visit Chiang Mai in the North you may have felt a certain vibe on the street, a buzz…no not quite that more of a tap tap tap.\n\nIt’s the sound of the ancient Thai massage Tok Sen still practiced today after 500 years. It was originally prescribed by wives to the husbands after a hard days work in the fields. They would place the husband on the hard table and tap along the body with wooden sticks to ease their aching pains.\n\nThere is still very little known today about this body-work technique. There are no books or videos to use as a guide and it has to be taught orally. I was lucky enough to experience the treatment first hand in Thailand and fell in love with the practice as well as the history behind it. So much, that I decided to bring it back to Santa Rosa with me.\n\n## The Instruments\n\nThe Tok Sen is actually made from wood from a tamarind tree that has been struck by lightning. This is thought to remove the negative energy that we trap in our bodies. We use different sizes and shapes of hammer depending on body section.\n\n## The Mind\n\nThe rhythm of the taps is found to be quite hypnotizing. During a treatment you will find yourself following the tapping sound which will lead you to a meditative state. This will help you loosen your physical body even more making the massage more effective.\n\n## The Body\n\nTraditionally the massage is given fully clothed and tiger balm is used to massage into the skin. The Same energy lines / Sen Lines as general Thai massage are used to follow with the hammer. This creates a resonance that passes through the muscles and into the rest of the body. This resonance helps to dislodge long held and stubborn tension. By helping to release and relax the body a sense of well being and ease is felt, as a more natural flow of energy is re-established.\n\n## Benefits\n\n•Provides pain relief\n•Improves blood circulation\n•Removes energy blockages\n•Helps with sore tendons, pinched nerves and numbness",
+    "/blog-assets/thai-massage.jpg",
   ],
   [
     "massage-cupping",
@@ -296,6 +297,7 @@ const blogPosts = [
     "How suction-based massage cupping may be used as part of a bodywork session.",
     "https://santarosamedicalmassage.com/massage-cupping/",
     "Massage Cupping™ is a type of massage therapy that uses suction as a way to promote healing of the joints and muscles. Utilizing silicone or plastic cups with a vacuum pistol they are glided along the muscles while gently lifting and pulling up the skin. Using techniques like gliding, shaking, popping and rotating, this therapy promotes health and healing by loosening soft and connective tissue, increasing lymphatic flow and circulation and moving stagnation within the body like lactic acid where sore muscles reside. This suction based therapy has the ability to pull toxins and inflammation to the surface of the skin where elimination is made possible by the lymphatic system. The suction is able to reach deep into the soft tissue, attachments and organs where toxins generally reside making it an effective therapy for overall health and well being. Side effects of this therapy are generally mild but may include:\n\n- Post tenderness: usually less than experienced from deep tissue work\n\n- Redness and Itching: increased vaso-dilation and/or inflammation brought to the surface\n\n- Decreased Blood Pressure: due to vaso-dilation and/or nervous system sedation\n\nSome after care suggestions we recommend are:\n\n- As always, plenty of water should be consumed to eliminate the surface toxins brought to the skin surface.\n\n- Avoid showers, steam, sauna and exercise immediately following bodywork.\n\n- Light stretching and range of motion exercises are helpful\n\n- Exercise the next day will help increase circulation to aid in fading of cup kisses.\n\n## Contraindications\n\nPeople who are on blood thinners should avoid Massage Cupping™. If you start taking such medication please inform the therapist so your treatment plan can be adjusted. If you are under the care of an acupuncturist, massage cupping could potentially interfere with acupuncture treatments, and should be avoided.",
+    "/blog-assets/massage-cupping.jpg",
   ],
   [
     "fascia",
@@ -312,6 +314,7 @@ const blogPosts = [
     "A discussion of massage for active people and the wear that sport can place on the body.",
     "https://santarosamedicalmassage.com/sports-massage/",
     "Sports Massage is a type of massage designed for highly active people who engage in athletics. Engaging in sports is harsh on the body and can often lead to injuries in both the short and long term. Sports Massage enhances performance and prolongs a sports career by helping to prevent injury, reduce pain and swelling in the body, relax the mind, increase flexibility, and dramatically improve recovery rates. Sports Massage is also highly effective in aiding the rapid recovery of an athlete from an injury by encouraging greater kinesthetic awareness and in turn promoting the body’s natural immune function.",
+    "/blog-assets/sports-massage.jpg",
   ],
   [
     "lymphatic-facilitation",
@@ -320,6 +323,7 @@ const blogPosts = [
     "An overview of gentle, rhythmic work intended to support lymph movement.",
     "https://santarosamedicalmassage.com/lymphatic-facilitation-therapy/",
     "This type of massage aims to gently and rhythmically move the lymph through the body, especially swollen areas of the body, relieving pressure and enhancing the functioning of the immune system …As both a preventative and remedial technique, Lymphatic Facilitation can be used for a wide range of purposes including faster recovery from injury, reduction of swelling and discomfort from pregnancy, and strengthened resistance to illness.",
+    "/blog-assets/lymphatic-facilitation.png",
   ],
   [
     "trigger-point-therapy",
@@ -328,7 +332,7 @@ const blogPosts = [
     "Focused bodywork for sensitive muscle points that may refer pain elsewhere in the body.",
     "https://santarosamedicalmassage.com/trigger-point-therapy/",
     "An AMAZING style of bodywork that focuses on stimulating and releasing “trigger points” in your body. Trigger points are hyper-irritable muscle tissue that refer pain. These ‘knots’ are built up throughout a person’s life due to physical, mental, and/or emotional stress. During a session, focused pressure is applied through a variety of techniques in order to release your trigger points. This process can be quite painful at times, yet the effects are lasting and profoundly transformative.\n\nChoose this advanced therapeutic massage if you are visiting us primarily to treat a medical conditions such as…\n\n- You woke up this morning with a sore neck you need treated\n- You suffer from any type of chronic pain condition\n- You hurt your back cleaning the garage\n- Your shoulder is sore from golf over the weekend\n- Your low back pain is flaring up\n- Your knee hurts after a busy day yesterday\n- Your back generally hurts and needs treatment\n- Your leg hurts from cycling, running or golfing\n- You want a relaxation massage combined with specific treatment for an issue such as listed above\n\nRead what our customers say about our therapies",
-    "https://santarosamedicalmassage.com/wp-content/uploads/2012/02/trigger-point-therapy-e1431859485121.png",
+    "/blog-assets/trigger-point-therapy.png",
   ],
   [
     "deep-tissue-massage",
@@ -337,6 +341,7 @@ const blogPosts = [
     "An introduction to working with chronic stress and tension in deeper layers of tissue.",
     "https://santarosamedicalmassage.com/deep-tissue-massage/",
     "This modality is a form of bodywork that aims to relieve tension in the deeper layers of tissue in the body. Deep Tissue Massage is a highly effective method for releasing chronic stress areas due to misalignment, repetitive motions, and past lingering injuries. Due to the nature of the deep tissue work, open communication during the session is crucial to make sure you don’t get too uncomfortable. Keep in mind that soreness is pretty common after the treatment, and that plenty of water should be ingested to aid with the flushing and removal of toxins that will have been released from the deep tissue during the session.",
+    "/blog-assets/deep-tissue-massage.jpg",
   ],
   [
     "treated-dysfunctions",
@@ -345,6 +350,7 @@ const blogPosts = [
     "An overview of conditions and concerns that may be discussed when considering massage therapy.",
     "https://santarosamedicalmassage.com/treated-dysfunctions/",
     "Even if you have tried chiropractic treatments, physical therapy, or even massage therapy in the past, there may be another way to approach your pain.\n\n## Ailments We Treat\n\n- Headaches/Migraines\n- Low Back Pain Neck Tension/Pain/Stiffness\n- Shoulder Impingement Stress\n- Hip Pain\n- TMJ Pain\n- Leg Cramps\n- Auto Injuries – Whiplash Associated Disorder (WAD)\n- Sciatica and Piriformis Syndrome\n- Rotator Cuff Injuries\n- Tingling in Hands\n- Carpal Tunnel Syndrome\n- Reduced Range of Motion\n- Postural Imbalances\n- Recovery after Surgery\n- Chronic Pain in any area\n- Lymphedema\n- Joint Aches\n- Fibromyalgia Pain\n- Plantar Fasciitis\n- Pain associated with bulged or injured spinal discs\n- Tendonitis\n- Constipation\n- Breast Pain\n- Repetitive use injuries such as Tennis Elbow or Golfers Elbow\n- and Much more…\n\nWe are confident that we can help relieve your tension and pain, assist your body’s own healing process and get you back to feeling like you should. Our goal is to devise a plan of massage therapy treatment that will provide the quickest relief with results that are long lasting.",
+    "/blog-assets/treated-dysfunctions.jpg",
   ],
   [
     "medical-massage",
@@ -353,6 +359,7 @@ const blogPosts = [
     "How medical massage differs from general bodywork when care is directed toward a diagnosed condition.",
     "https://santarosamedicalmassage.com/medical-massage/",
     "Medical massage therapy is designed to specifically target medical conditions that are diagnosed by a doctor. During your treatment your therapist will use different massage techniques and procedures.",
+    "/blog-assets/medical-massage.png",
   ],
 ];
 const googleGalleryLabels = [

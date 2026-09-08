@@ -1335,11 +1335,14 @@
 }
 .novel .n-reading-image {
   display: block;
-  width: min(100%, 720px);
-  max-height: 420px;
+  width: auto;
+  max-width: min(100%, 640px);
+  height: auto;
+  max-height: 440px;
   margin: 0 0 30px;
   border-radius: 14px;
-  object-fit: cover;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--novel-bg) 88%, white);
 }
 .novel .n-reading ul,
 .novel .n-reading ol {

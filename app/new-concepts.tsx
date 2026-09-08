@@ -1409,7 +1409,9 @@ function NewPages() {
   const previousPost = postIndex >= 0 ? posts[(postIndex - 1 + posts.length) % posts.length] : null;
   const nextPost = postIndex >= 0 ? posts[(postIndex + 1) % posts.length] : null;
   const articleBody = post?.[5] || post?.[3] || "";
-  const articleImage = post?.[6];
+  const articleImage =
+    post?.[6] ||
+    (post?.[0] === "testimonials" ? "/blog-assets/testimonials.jpg" : undefined);
   const titles: Record<string, string> = {
     treatments: "Care around your needs.",
     conditions: "Start with what you’re feeling.",
