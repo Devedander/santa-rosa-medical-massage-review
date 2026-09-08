@@ -1260,6 +1260,28 @@
   font-size: 20px;
   max-width: 60ch;
 }
+.novel .n-blog-layout-test .n-inner-title,
+.novel .n-blog-layout-test .n-reading {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.novel .n-blog-layout-test .n-inner-title {
+  margin-top: 46px;
+  margin-bottom: 38px;
+}
+.novel .n-blog-layout-test .n-inner-title h1 {
+  font-size: clamp(42px, 5vw, 66px);
+  margin-bottom: 18px;
+}
+.novel .n-blog-layout-test .n-reading-nav {
+  margin-top: 38px;
+  border: 0;
+  padding: 16px 0;
+}
+.novel .n-blog-layout-test .n-reading-nav .n-link {
+  margin-left: 0;
+}
 .novel .n-detail {
   display: grid;
   grid-template-columns: 1fr 1fr;
