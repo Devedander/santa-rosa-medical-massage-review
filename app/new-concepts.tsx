@@ -1411,7 +1411,7 @@ function NewPages() {
   const articleBody = post?.[5] || post?.[3] || "";
   const articleImage =
     post?.[6] ||
-    (post?.[0] === "testimonials" ? "/blog-assets/testimonials.jpg" : undefined);
+    (post?.[0] === "testimonials" ? "blog-assets/testimonials.jpg" : undefined);
   const articleBlocks = articleBody.split(/\n\n+/);
   const wrapImageWithLead = [
     "thai-foot-massage",
