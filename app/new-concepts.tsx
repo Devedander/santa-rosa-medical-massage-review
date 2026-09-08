@@ -1412,6 +1412,32 @@ function NewPages() {
   const articleImage =
     post?.[6] ||
     (post?.[0] === "testimonials" ? "/blog-assets/testimonials.jpg" : undefined);
+  const articleBlocks = articleBody.split(/\n\n+/);
+  const wrapImageWithLead = [
+    "thai-foot-massage",
+    "sports-massage",
+    "trigger-point-therapy",
+    "treated-dysfunctions",
+    "medical-massage",
+  ].includes(post?.[0] || "");
+  const renderArticleBlock = (block: string, index: number) => {
+    if (block.startsWith("## ")) return <h2 key={index}>{block.slice(3)}</h2>;
+    const lines = block.split("\n");
+    const isList = lines.every((line) => /^(- |\d+\. |•)/.test(line));
+    if (isList) {
+      const ordered = lines.every((line) => /^\d+\. /.test(line));
+      return ordered ? (
+        <ol key={index}>
+          {lines.map((line) => <li key={line}>{line.replace(/^\d+\. /, "")}</li>)}
+        </ol>
+      ) : (
+        <ul key={index}>
+          {lines.map((line) => <li key={line}>{line.replace(/^- |^•/, "")}</li>)}
+        </ul>
+      );
+    }
+    return <p key={index}>{block}</p>;
+  };
   const titles: Record<string, string> = {
     treatments: "Care around your needs.",
     conditions: "Start with what you’re feeling.",
@@ -1491,32 +1517,30 @@ function NewPages() {
         <div className="n-reading">
           <span className="n-reading-kicker">{post[2]}</span>
           <h2>{post[1]}</h2>
-          {articleImage && (
+          {articleImage && wrapImageWithLead ? (
+            <div className="n-reading-lead">
+              <img
+                className="n-reading-image"
+                src={articleImage}
+                alt={`${post[1]} illustration`}
+              />
+              {renderArticleBlock(articleBlocks[0], 0)}
+            </div>
+          ) : articleImage ? (
             <img
               className="n-reading-image"
               src={articleImage}
               alt={`${post[1]} illustration`}
             />
-          )}
-          {articleBody.split(/\n\n+/).map((block, index) => {
-            if (block.startsWith("## "))
-              return <h2 key={index}>{block.slice(3)}</h2>;
-            const lines = block.split("\n");
-            const isList = lines.every((line) => /^(- |\d+\. |•)/.test(line));
-            if (isList) {
-              const ordered = lines.every((line) => /^\d+\. /.test(line));
-              return ordered ? (
-                <ol key={index}>
-                  {lines.map((line) => <li key={line}>{line.replace(/^\d+\. /, "")}</li>)}
-                </ol>
-              ) : (
-                <ul key={index}>
-                  {lines.map((line) => <li key={line}>{line.replace(/^- |^•/, "")}</li>)}
-                </ul>
-              );
-            }
-            return <p key={index}>{block}</p>;
-          })}
+          ) : null}
+          {articleBlocks
+            .slice(wrapImageWithLead && articleImage ? 1 : 0)
+            .map((block, index) =>
+              renderArticleBlock(
+                block,
+                index + (wrapImageWithLead && articleImage ? 1 : 0),
+              ),
+            )}
           <div className="n-reading-taxonomy">
             <span>Categories: {post[2]}</span>
             <span>Tags: No Tag</span>
