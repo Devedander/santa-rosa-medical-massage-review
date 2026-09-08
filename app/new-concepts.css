@@ -1277,7 +1277,7 @@
 .novel .n-blog-layout-test .n-reading-nav {
   margin-top: 38px;
   border: 0;
-  padding: 16px 0;
+  padding: 16px 46px 16px 0;
 }
 .novel .n-blog-layout-test .n-reading-nav .n-link {
   margin-left: 0;
@@ -2343,6 +2343,9 @@
     float: none;
     max-width: min(100%, 640px);
     margin: 0 0 22px;
+  }
+  .novel .n-blog-layout-test .n-reading-nav {
+    padding-right: 0;
   }
   .novel .selection-actions {
     flex-wrap: wrap;
