@@ -1451,7 +1451,7 @@ function NewPages() {
     selections: "Your photo selections.",
   };
   return (
-    <div className={`n-inner${post?.[0] === "fascia" ? " n-blog-layout-test" : ""}`}>
+    <div className={`n-inner${post ? " n-blog-layout-test" : ""}`}>
       <button className="n-link n-back" onClick={() => onPage("home")}>
         <ArrowLeft size={18} />
         Back to home
