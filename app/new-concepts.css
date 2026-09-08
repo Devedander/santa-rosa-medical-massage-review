@@ -2980,6 +2980,23 @@
   .novel .n-site-nav > nav.n-nav-open {
     display: flex !important;
   }
+
+  /* Social links belong to the expanded mobile menu, while phone and booking
+     remain immediately available in the header. */
+  .novel .n-site-nav > nav.n-nav-open .n-social {
+    order: initial;
+    width: 100%;
+    margin: 12px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--n-line);
+  }
+
+  .novel .n-site-nav > .n-call,
+  .novel .n-site-nav > .n-button {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
   .n-desk .n-content {
     width: calc(100% - 20px);
     margin: 10px auto 28px;

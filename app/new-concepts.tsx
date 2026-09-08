@@ -1736,33 +1736,33 @@ export default function NewConcepts(props: Props) {
                 {props.design !== "desk" && <button onClick={() => go("gift")}>Gift cards</button>}
               </>
             )}
+            <div className="n-social" aria-label="Social media links">
+              <a
+                href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+              >
+                <img src="/social-facebook.svg" alt="" />
+              </a>
+              <a
+                href="https://www.instagram.com/santarosamedicalmassage/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+              >
+                <img src="/social-instagram.svg" alt="" />
+              </a>
+              <a
+                href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Yelp"
+              >
+                <img src="/social-yelp.svg" alt="" />
+              </a>
+            </div>
           </nav>
-          <div className="n-social" aria-label="Social media links">
-            <a
-              href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook"
-            >
-              <img src="/social-facebook.svg" alt="" />
-            </a>
-            <a
-              href="https://www.instagram.com/santarosamedicalmassage/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-            >
-              <img src="/social-instagram.svg" alt="" />
-            </a>
-            <a
-              href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Yelp"
-            >
-              <img src="/social-yelp.svg" alt="" />
-            </a>
-          </div>
           <a className="n-call" href="tel:+17073037707">
             Call <span>(707) 303-7707</span>
           </a>
