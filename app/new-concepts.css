@@ -2973,6 +2973,13 @@
   }
 }
 @media (max-width: 960px) {
+  /* Keep the desktop links out of the compact header until the menu is opened. */
+  .novel .n-site-nav > nav:not(.n-nav-open) {
+    display: none !important;
+  }
+  .novel .n-site-nav > nav.n-nav-open {
+    display: flex !important;
+  }
   .n-desk .n-content {
     width: calc(100% - 20px);
     margin: 10px auto 28px;
