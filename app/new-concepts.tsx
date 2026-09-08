@@ -161,6 +161,7 @@ function additionalGuidance(concern: string) {
   };
 }
 const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
+const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 const navItems = [
   ["about", "The practice"],
   ["treatments", "Treatments"],
@@ -223,7 +224,7 @@ function Brand() {
       aria-label="Santa Rosa Medical Massage home"
     >
       <img
-        src="/logo-correct.png"
+        src="./logo-correct.png"
         alt="Santa Rosa Medical Massage"
         className="n-brand-logo"
       />
@@ -483,7 +484,7 @@ function Reviews() {
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/social-yelp.svg" alt="" />
+            <img src="./social-yelp.svg" alt="" />
             <span>5-star reviews on Yelp</span>
           </a>
         </div>
@@ -1521,7 +1522,7 @@ function NewPages() {
             <div className="n-reading-lead">
               <img
                 className="n-reading-image"
-                src={articleImage}
+                src={assetPath(articleImage)}
                 alt={`${post[1]} illustration`}
               />
               {renderArticleBlock(articleBlocks[0], 0)}
@@ -1529,7 +1530,7 @@ function NewPages() {
           ) : articleImage ? (
             <img
               className="n-reading-image"
-              src={articleImage}
+              src={assetPath(articleImage)}
               alt={`${post[1]} illustration`}
             />
           ) : null}
@@ -1638,7 +1639,7 @@ function Footer() {
         onClick={() => onPage("home")}
         aria-label="Santa Rosa Medical Massage home"
       >
-        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
+        <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
       </button>
       <div className="n-footer-meta">
         <div className="n-footer-contact">
@@ -1743,7 +1744,7 @@ export default function NewConcepts(props: Props) {
                 rel="noreferrer"
                 aria-label="Facebook"
               >
-                <img src="/social-facebook.svg" alt="" />
+                <img src="./social-facebook.svg" alt="" />
               </a>
               <a
                 href="https://www.instagram.com/santarosamedicalmassage/"
@@ -1751,7 +1752,7 @@ export default function NewConcepts(props: Props) {
                 rel="noreferrer"
                 aria-label="Instagram"
               >
-                <img src="/social-instagram.svg" alt="" />
+                <img src="./social-instagram.svg" alt="" />
               </a>
               <a
                 href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
@@ -1759,7 +1760,7 @@ export default function NewConcepts(props: Props) {
                 rel="noreferrer"
                 aria-label="Yelp"
               >
-                <img src="/social-yelp.svg" alt="" />
+                <img src="./social-yelp.svg" alt="" />
               </a>
             </div>
           </nav>

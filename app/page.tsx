@@ -550,6 +550,7 @@ const allPhotoOptions = Array.from(
     ]),
   ).values(),
 );
+const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 function InlineGallery({
   images,
   className = "",
@@ -608,7 +609,7 @@ function InlineGallery({
   };
   return (
     <div className={`inline-gallery ${className} ${locked ? "is-locked" : ""}`}>
-      <img src={src} alt={alt || label} />
+      <img src={assetPath(src)} alt={alt || label} />
       <button
         className="inline-gallery-arrow previous"
         onClick={previous}
@@ -698,7 +699,7 @@ function SelectionPage({ setPage }: { setPage: (page: string) => void }) {
         {choices.length ? (
           choices.map((choice) => (
             <article key={choice.slot}>
-              <img src={choice.src} alt="Selected option" />
+              <img src={assetPath(choice.src)} alt="Selected option" />
               <div>
                 <b>{choice.slot.replaceAll("-", " ")}</b>
                 <span>{choice.src.split("/").pop()}</span>
@@ -822,7 +823,7 @@ function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
         >
           ←
         </button>
-        <img src={src} alt={label} />
+        <img src={assetPath(src)} alt={label} />
         <button
           className="gallery-arrow next"
           onClick={next}
@@ -845,7 +846,7 @@ function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
             onClick={() => setActive(i)}
             aria-label={`Show ${alt}`}
           >
-            <img src={image} alt="" />
+            <img src={assetPath(image)} alt="" />
           </button>
         ))}
       </div>
@@ -1361,7 +1362,7 @@ function SocialLinks() {
         rel="noreferrer"
         aria-label="Santa Rosa Medical Massage on Facebook"
       >
-        <img src="/social-facebook.svg" alt="" />
+        <img src="./social-facebook.svg" alt="" />
       </a>
       <a
         href="https://www.instagram.com/santarosamedicalmassage/"
@@ -1369,7 +1370,7 @@ function SocialLinks() {
         rel="noreferrer"
         aria-label="Santa Rosa Medical Massage on Instagram"
       >
-        <img src="/social-instagram.svg" alt="" />
+        <img src="./social-instagram.svg" alt="" />
       </a>
       <a
         href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4?osq=Santa+Rosa+Medical+Massage"
@@ -1377,7 +1378,7 @@ function SocialLinks() {
         rel="noreferrer"
         aria-label="Santa Rosa Medical Massage on Yelp"
       >
-        <img src="/social-yelp.svg" alt="" />
+        <img src="./social-yelp.svg" alt="" />
       </a>
     </span>
   );
@@ -1385,7 +1386,7 @@ function SocialLinks() {
 function SimpleFooter({ className = "" }: { className?: string }) {
   return (
     <footer className={`simple-footer ${className}`}>
-      <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
+      <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
       <div>
         <span>630 Third Street, Suite B · Santa Rosa, CA 95404</span>
         <a href="tel:+17073037707">(707) 303-7707</a>
@@ -1394,7 +1395,7 @@ function SimpleFooter({ className = "" }: { className?: string }) {
   );
 }
 function AwardStrip() {
-  return <section className="award-strip" aria-label="Practice recognition"><span>Recognized for massage therapy in Santa Rosa</span><div><img src="/award-businessrate.png" alt="BusinessRate Best of 2026 Award Winner, Massage Therapist" /><img src="/award-recognition.png" alt="BusinessRate Best of 2025 Massage Therapist recognition" /></div></section>;
+  return <section className="award-strip" aria-label="Practice recognition"><span>Recognized for massage therapy in Santa Rosa</span><div><img src="./award-businessrate.png" alt="BusinessRate Best of 2026 Award Winner, Massage Therapist" /><img src="./award-recognition.png" alt="BusinessRate Best of 2025 Massage Therapist recognition" /></div></section>;
 }
 
 function FullBleed() {
@@ -1419,7 +1420,7 @@ function FullBleed() {
         </button>
       </header>
       <section className="fb-hero">
-        <img src="/hero.jpeg" alt="Therapeutic trigger point anatomy study" />
+        <img src="./hero.jpeg" alt="Therapeutic trigger point anatomy study" />
         <div className="fb-wash" />
         <div className="fb-hero-copy">
           <p>Advanced neuromuscular therapy · Santa Rosa</p>
@@ -1547,7 +1548,7 @@ function DuncanInspired() {
         </nav>
       </header>
       <section className="dh-hero">
-        <img src="/hero.jpeg" alt="Therapeutic trigger point anatomy study" />
+        <img src="./hero.jpeg" alt="Therapeutic trigger point anatomy study" />
         <div className="dh-vignette" />
         <div className="dh-hero-copy">
           <span>Est. in Santa Rosa</span>
@@ -1581,7 +1582,7 @@ function DuncanInspired() {
         <section id="dh-treatments" className="dh-split">
           <div className="dh-photo">
             <img
-              src="/hero.jpeg"
+              src="./hero.jpeg"
               alt="Anatomy illustration used in therapeutic assessment"
             />
           </div>
@@ -1693,7 +1694,7 @@ function Classic({
         </span>
       </div>
       <header>
-        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
+        <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
         <nav>
           <button onClick={() => onPage("treatments")}>Services</button>
           <button onClick={() => onPage("conditions")}>Conditions</button>
@@ -1936,7 +1937,7 @@ function Classic({
           </p>
           <span>★★★★★ Susan D. · Yelp</span>
         </div>
-        <img src="/award.png" alt="Best of 2026 recognition plaque" />
+        <img src="./award.png" alt="Best of 2026 recognition plaque" />
       </section>
       <section id="conditions" className="conditions">
         <div>
@@ -1984,7 +1985,7 @@ function Navigator() {
   return (
     <div className="navx">
       <div className="navx-head">
-        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
+        <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
         <span>PAIN RELIEF, MAPPED TO YOU</span>
         <SocialLinks />
         <button>Book now</button>
@@ -2003,7 +2004,7 @@ function Navigator() {
           </p>
         </div>
         <div className="body-map">
-          <img src="/hero.jpeg" alt="Back and shoulder trigger point map" />
+          <img src="./hero.jpeg" alt="Back and shoulder trigger point map" />
           <div className="pulse p1" />
           <div className="pulse p2" />
         </div>
@@ -2092,7 +2093,7 @@ function Atelier() {
       <section className="atelier-hero">
         <div className="vertical">THIRD STREET · SANTA ROSA · CALIFORNIA</div>
         <div className="atelier-photo">
-          <img src="/hero.jpeg" alt="Therapeutic anatomy study" />
+          <img src="./hero.jpeg" alt="Therapeutic anatomy study" />
           <span>THE BODY, STUDIED WITH CARE</span>
         </div>
         <div className="atelier-copy">
@@ -2213,7 +2214,7 @@ function Poster() {
             <br />
             MOTION
           </div>
-          <img src="/hero.jpeg" alt="Trigger point map of the back" />
+          <img src="./hero.jpeg" alt="Trigger point map of the back" />
           <div className="angle-note">
             ADVANCED
             <br />
@@ -2702,21 +2703,21 @@ function AvantConcept({
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/social-facebook.svg" alt="Facebook" />
+            <img src="./social-facebook.svg" alt="Facebook" />
           </a>
           <a
             href="https://www.instagram.com/santarosamedicalmassage/"
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/social-instagram.svg" alt="Instagram" />
+            <img src="./social-instagram.svg" alt="Instagram" />
           </a>
           <a
             href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/social-yelp.svg" alt="Yelp" />
+            <img src="./social-yelp.svg" alt="Yelp" />
           </a>
         </span>
         <a className="avant-call" href="tel:+17073037707">
@@ -2955,7 +2956,7 @@ function TemplateMock({
             : "WEBFLOW HEALTH & WELLNESS"}
       </div>
       <header className="tpl-head">
-        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
+        <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
         <nav>
           <button onClick={() => onPage("home")}>Home</button>
           <button onClick={() => onPage("about")}>About</button>
