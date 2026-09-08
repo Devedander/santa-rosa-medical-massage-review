@@ -1614,11 +1614,13 @@ function Footer() {
       >
         <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
       </button>
-      <div className="n-footer-contact">
-        <span>{address}</span>
-        <a href="tel:+17073037707">(707) 303-7707</a>
+      <div className="n-footer-meta">
+        <div className="n-footer-contact">
+          <span>{address}</span>
+          <a href="tel:+17073037707">(707) 303-7707</a>
+        </div>
+        <small className="n-footer-credit">Website by JW Consulting Services</small>
       </div>
-      <small className="n-footer-credit">Website by JW Consulting Services</small>
     </footer>
   );
 }

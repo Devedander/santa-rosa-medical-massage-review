@@ -2786,6 +2786,13 @@
   object-position: right center;
   flex: none;
 }
+.novel .n-footer-meta {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  margin-left: auto;
+  text-align: right;
+}
 .n-house .n-footer-brand img {
   filter: brightness(0) invert(1);
 }
@@ -2795,7 +2802,7 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 10px 22px;
-  margin-left: auto;
+  margin-left: 0;
   font: 15px/1.4 "Segoe UI", sans-serif;
   text-align: right;
 }
@@ -2805,7 +2812,7 @@
   white-space: nowrap;
 }
 .novel .n-footer-credit {
-  margin-left: auto;
+  margin-left: 0;
   font-size: 11px;
   letter-spacing: 0.02em;
   opacity: 0.72;
@@ -2821,10 +2828,13 @@
     flex-direction: column;
     gap: 16px;
   }
+  .novel .n-footer-meta {
+    width: 100%;
+  }
   .novel .n-footer-contact {
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin-left: 0;
-    text-align: left;
+    text-align: right;
   }
   .novel .n-footer-credit {
     margin-left: 0;
