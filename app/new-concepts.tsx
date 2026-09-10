@@ -1720,7 +1720,15 @@ export default function NewConcepts(props: Props) {
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
-            {menu ? <X /> : <span className="n-menu-mark" aria-hidden="true" />}
+            {menu ? (
+              <X />
+            ) : (
+              <img
+                className="n-menu-mark"
+                src="./mobile-menu-mark.png"
+                alt=""
+              />
+            )}
           </button>
           <nav
             aria-label="Website navigation"

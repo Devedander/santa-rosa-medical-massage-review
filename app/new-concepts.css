@@ -3068,7 +3068,7 @@
     display: block;
     width: 44px;
     height: 44px;
-    background: url("./logo-correct.png") left center / auto 48px no-repeat;
+    object-fit: contain;
   }
   .novel .n-site-nav > .n-call {
     gap: 5px;
