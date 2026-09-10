@@ -3052,6 +3052,9 @@
     gap: 6px;
     padding-inline: 12px;
   }
+  .n-house .n-site-nav {
+    padding-left: 4vw;
+  }
   .novel .n-menu-toggle,
   .novel .n-site-nav > .n-call,
   .novel .n-site-nav > .n-button {
@@ -3063,6 +3066,7 @@
     margin-right: auto;
     overflow: hidden;
     border: 0;
+    transform: translateX(11px);
   }
   .novel .n-menu-mark {
     display: block;
