@@ -973,6 +973,9 @@ function House() {
     <div className="house-home">
       <section className="house-opening">
         <div className="house-welcome">
+          <div className="house-mobile-brand">
+            <Brand />
+          </div>
           <span className="n-kicker">Welcome to our practice</span>
           <h1>
             Santa Rosa
