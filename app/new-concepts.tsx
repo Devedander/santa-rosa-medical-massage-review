@@ -1726,6 +1726,9 @@ export default function NewConcepts(props: Props) {
             aria-label="Website navigation"
             className={menu ? "n-nav-open" : ""}
           >
+            <div className="n-mobile-menu-brand">
+              <Brand />
+            </div>
             {navItems.map(([id, label]) => (
               <button key={id} onClick={() => id === "visit" ? go("gallery") : jump(id)}>
                 {label}

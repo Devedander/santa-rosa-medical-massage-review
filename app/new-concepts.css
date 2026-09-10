@@ -2900,6 +2900,9 @@
   font-weight: 500;
   font-size: 0.86em;
 }
+.n-mobile-menu-brand {
+  display: none;
+}
 .n-social {
   display: flex;
   align-items: center;
@@ -2917,6 +2920,14 @@
   width: 18px;
   height: 18px;
   object-fit: contain;
+}
+.novel .n-site-nav > .n-call,
+.novel .n-site-nav > .n-button {
+  height: 52px;
+  min-height: 52px;
+}
+.novel .n-site-nav > .n-button {
+  padding-block: 0;
 }
 .n-desk .n-call {
   order: 7;
@@ -3001,5 +3012,46 @@
     width: calc(100% - 20px);
     margin: 10px auto 28px;
     border-radius: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Free the compact header for the two primary actions; the full mark is
+     available at the top of the opened menu. */
+  .novel .n-site-nav > .n-brand {
+    display: none;
+  }
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand {
+    display: block;
+    padding: 2px 0 14px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--n-line);
+  }
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-brand {
+    display: flex;
+  }
+
+  .novel .n-site-nav {
+    justify-content: flex-end;
+    gap: 6px;
+    padding-inline: 12px;
+  }
+  .novel .n-menu-toggle,
+  .novel .n-site-nav > .n-call,
+  .novel .n-site-nav > .n-button {
+    height: 44px;
+    min-height: 44px;
+  }
+  .novel .n-menu-toggle {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .novel .n-site-nav > .n-call {
+    gap: 5px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .novel .n-site-nav > .n-button {
+    padding: 0 12px;
   }
 }
