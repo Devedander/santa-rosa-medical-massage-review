@@ -2596,9 +2596,6 @@
   margin-top: 23px;
   font-size: 14px;
 }
-.house-mobile-brand {
-  display: none;
-}
 .n-house .house-opening > .n-photo {
   min-height: 650px;
   border-radius: 0 0 14px 14px;
@@ -2764,14 +2761,6 @@
   .n-house .house-welcome {
     padding-top: 35px;
     padding-bottom: 10px;
-  }
-  .n-house .house-mobile-brand {
-    display: block;
-    margin-bottom: 24px;
-  }
-  .n-house .house-mobile-brand .n-brand-logo {
-    width: min(240px, 74vw);
-    height: auto;
   }
   .n-house .house-welcome h1 {
     font-size: 46px;
@@ -3072,6 +3061,14 @@
   .novel .n-menu-toggle {
     margin-left: 0;
     margin-right: auto;
+    overflow: hidden;
+    border: 0;
+  }
+  .novel .n-menu-mark {
+    display: block;
+    width: 44px;
+    height: 44px;
+    background: url("./logo-correct.png") left center / auto 48px no-repeat;
   }
   .novel .n-site-nav > .n-call {
     gap: 5px;

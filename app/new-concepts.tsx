@@ -973,9 +973,6 @@ function House() {
     <div className="house-home">
       <section className="house-opening">
         <div className="house-welcome">
-          <div className="house-mobile-brand">
-            <Brand />
-          </div>
           <span className="n-kicker">Welcome to our practice</span>
           <h1>
             Santa Rosa
@@ -1723,7 +1720,7 @@ export default function NewConcepts(props: Props) {
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
-            {menu ? <X /> : <Menu />}
+            {menu ? <X /> : <span className="n-menu-mark" aria-hidden="true" />}
           </button>
           <nav
             aria-label="Website navigation"
