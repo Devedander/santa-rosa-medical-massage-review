@@ -161,6 +161,9 @@
 .novel .n-menu-toggle {
   display: none;
 }
+.novel .n-menu-mark {
+  display: none;
+}
 .novel .n-skip {
   position: fixed;
   left: 20px;
@@ -206,14 +209,63 @@
   background: var(--n-glass);
   height: 100%;
   min-height: 240px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.novel .n-photo > img {
+.novel .n-photo .n-photo-image {
   position: absolute;
   inset: 0;
+  display: block;
+  animation: n-photo-arrive 5s cubic-bezier(.22,.8,.3,1) both;
+}
+.novel .n-photo .n-photo-image > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: none;
+  cursor: zoom-in;
+  transform: scale(1);
+  transition: transform 5s, filter 0.3s;
+}
+@keyframes n-photo-arrive {
+  from { opacity: 0; transform: scale(1.11); }
+  to { opacity: 1; transform: scale(1); }
+}
+.n-house .house-staff-preview .n-photo:hover .n-photo-image > img,
+.n-house .house-staff-preview .n-photo:focus-within .n-photo-image > img,
+.n-house .house-treatments .n-photo:hover .n-photo-image > img,
+.n-house .house-treatments .n-photo:focus-within .n-photo-image > img {
+  transform: scale(1.1) !important;
+  transition-duration: 5s !important;
+  filter: saturate(1.05) contrast(1.02);
+}
+.n-house .house-staff-preview .n-photo:hover,
+.n-house .house-staff-preview .n-photo:focus-within,
+.n-house .house-treatments .n-photo:hover,
+  .n-house .house-treatments .n-photo:focus-within {
+  z-index: 4;
+  transform: scale(1.03);
+  box-shadow: 0 20px 42px rgba(26, 39, 32, 0.22);
+}
+@media (prefers-reduced-motion: reduce) {
+  .novel .n-photo .n-photo-image {
+    animation: none;
+  }
+  .novel .n-photo .n-photo-image > img {
+    transition: none;
+    transform: none;
+  }
+  .n-house .house-staff-preview .n-photo:hover .n-photo-image > img,
+  .n-house .house-staff-preview .n-photo:focus-within .n-photo-image > img,
+  .n-house .house-treatments .n-photo:hover .n-photo-image > img,
+  .n-house .house-treatments .n-photo:focus-within .n-photo-image > img {
+    transition: none !important;
+    transform: none !important;
+  }
+  .n-house .house-staff-preview .n-photo:hover,
+  .n-house .house-staff-preview .n-photo:focus-within,
+  .n-house .house-treatments .n-photo:hover,
+  .n-house .house-treatments .n-photo:focus-within { transform: none; }
 }
 .novel .n-photo .inline-gallery-arrow {
   z-index: 3;
@@ -304,18 +356,7 @@
 .n-house .n-more-concerns.is-open .n-more-concern-groups { max-height: 900px; gap: 30px 52px; padding: 0 0 32px; opacity: 1; transform: translateY(0); }
 .n-house .n-more-concern-groups h3 { margin: 0 0 7px; color: var(--n-wine); font-size: 14px; }
 .n-house .n-more-concern-list .n-concern-item > button { font-size: 15px; }
-.n-house .n-category-concerns { margin-top: 48px; padding: 34px 38px; background: rgba(255,255,255,.42); border: 1px solid var(--n-line); }
-.n-house .n-category-concerns > h3 { margin: 8px 0; font-family: var(--n-serif); font-size: 34px; font-weight: 400; }
-.n-house .n-category-concerns > p:not(.n-kicker) { margin: 0 0 22px; }
-.n-house .n-category-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 42px; }
-.n-house .n-category-list > section { border-top: 1px solid var(--n-line); }
-.n-house .n-category-list > section > button { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 62px; padding: 13px 0; border: 0; background: transparent; color: var(--n-ink); font: 600 16px/1.25 var(--n-sans); text-align: left; }
-.n-house .n-category-list > section > button svg { transition: transform .2s ease; }
-.n-house .n-category-list > section.is-open > button svg { transform: rotate(45deg); }
-.n-house .n-category-list > section > div { display: grid; grid-template-columns: 1fr; max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-6px); transition: max-height .42s cubic-bezier(.22,.8,.3,1), opacity .2s ease, transform .42s cubic-bezier(.22,.8,.3,1); }
-.n-house .n-category-list > section.is-open > div { max-height: 760px; opacity: 1; transform: translateY(0); }
-.n-house .n-category-list .n-concern-item > button { font-size: 15px; }
-@media (prefers-reduced-motion: reduce) { .n-house .n-concern-expand, .n-house .n-more-concern-groups, .n-house .n-category-list > section > div { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .n-house .n-concern-expand, .n-house .n-more-concern-groups { transition: none; } }
 .novel .n-visit-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -511,7 +552,7 @@
 .novel .n-treatment-cards .n-photo {
   height: 250px;
   min-height: 0;
-  border-radius: 18px 18px 5px 5px;
+  border-radius: 18px;
 }
 .novel .n-treatment-cards article > div:last-child {
   padding: 24px 4px 0;
@@ -520,6 +561,25 @@
   font-size: 16px;
   margin: 15px 0 18px;
   min-height: 78px;
+}
+.novel .n-treatment-cards .n-button {
+  margin-right: 18px;
+}
+.n-house .house-treatments .n-treatment-cards .n-button {
+  min-height: 43px;
+  padding: 12px 20px;
+  gap: 12px;
+  font-size: 14px;
+  vertical-align: bottom;
+}
+.n-house .house-treatments .n-treatment-cards .n-link {
+  vertical-align: bottom;
+}
+.novel .n-treatment-accordion .n-button {
+  margin-top: 18px;
+}
+.novel .n-treatment-tabs .n-link {
+  margin: 18px 0 0;
 }
 .n-courtyard .court-concerns {
   display: grid;
@@ -1299,6 +1359,11 @@
 .novel .n-detail p {
   margin-bottom: 24px;
 }
+.novel .n-detail .n-service-availability {
+  margin: 28px 0 18px;
+  color: var(--n-ink-muted);
+  font-size: 14px;
+}
 .novel .n-detail .n-link {
   display: flex;
   width: fit-content;
@@ -1486,6 +1551,39 @@
   background: #fff;
   color: var(--n-wine);
 }
+.novel .n-booking-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 20px;
+}
+.novel .n-booking-paths button {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  min-height: 106px;
+  padding: 20px;
+  border: 1px solid var(--n-line);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--n-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.novel .n-booking-paths button:hover,
+.novel .n-booking-paths button:focus-visible {
+  border-color: var(--n-wine);
+  transform: translateY(-2px);
+}
+.novel .n-booking-paths button.is-active {
+  border-color: var(--n-wine);
+  background: color-mix(in srgb, var(--n-wine) 8%, white);
+}
+.novel .n-booking-paths button > svg { color: var(--n-wine); flex: 0 0 auto; }
+.novel .n-booking-paths span { display: grid; gap: 5px; }
+.novel .n-booking-paths strong { font-size: 17px; line-height: 1.2; }
+.novel .n-booking-paths small { color: var(--n-muted); font-size: 14px; line-height: 1.45; }
 .novel .n-booking form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2074,8 +2172,6 @@
   }
   .n-house .n-more-concern-groups { grid-template-columns: 1fr; gap: 24px; }
   .n-house .n-more-concerns-toggle b { font-size: 22px; }
-  .n-house .n-category-concerns { padding: 28px 22px; }
-  .n-house .n-category-list { grid-template-columns: 1fr; }
   .novel .n-visit-details,
   .novel .n-about-more {
     grid-template-columns: 1fr;
@@ -2351,6 +2447,93 @@
     flex-wrap: wrap;
   }
 }
+
+/* Dedicated staff directory — the profile links lead to crawlable pages. */
+.novel .n-staff-directory {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+.novel .n-staff-directory-heading {
+  max-width: 760px;
+  margin-bottom: 44px;
+}
+.novel .n-staff-directory-heading h2 {
+  margin: 12px 0 18px;
+}
+.novel .n-staff-directory-heading p {
+  max-width: 62ch;
+  font: 17px/1.65 Georgia, serif;
+}
+.novel .n-staff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.novel .n-staff-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1fr);
+  overflow: hidden;
+  min-height: 350px;
+  background: #f8f6f1;
+  border: 1px solid #3044381e;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px #3044380b;
+}
+.novel .n-staff-card .n-photo,
+.novel .n-staff-card .inline-gallery {
+  height: 100%;
+  min-height: 350px;
+  border-radius: 0;
+}
+.novel .n-staff-card .n-photo img {
+  height: 100%;
+  object-fit: cover;
+}
+.novel .n-staff-card-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px 26px;
+}
+.novel .n-staff-card-copy > span {
+  color: #803a3a;
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.novel .n-staff-card h3 {
+  margin: 10px 0 16px;
+  font: 400 34px/1 Georgia, serif;
+}
+.novel .n-staff-card p {
+  margin: 0 0 16px;
+  font: 15px/1.55 Georgia, serif;
+}
+.novel .n-staff-card .n-staff-question {
+  color: #304438;
+  font-weight: 700;
+}
+.novel .n-staff-card .n-link { margin-top: auto; }
+.novel .n-staff-award {
+  max-width: 850px;
+  margin: 48px auto 0;
+  padding: 26px 30px;
+  border-left: 4px solid #803a3a;
+  background: #eef3ef;
+  font: 16px/1.6 Georgia, serif;
+}
+.n-house .n-staff-card { border-radius: 0; box-shadow: none; }
+.n-house .n-staff-card-copy { background: #f7f4ed; }
+.n-desk .n-staff-card { border-radius: 0; }
+.n-everyday .n-staff-card { border-radius: 34px; }
+@media (max-width: 880px) {
+  .novel .n-staff-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .novel .n-staff-card { grid-template-columns: 1fr; }
+  .novel .n-staff-card .n-photo,
+  .novel .n-staff-card .inline-gallery { min-height: 270px; height: 270px; }
+}
 .switcher .earlier-concepts {
   margin-left: auto;
   flex-shrink: 0;
@@ -2602,10 +2785,35 @@
 }
 .n-house .house-photo-strip {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   max-width: 1100px;
   gap: 13px;
   margin: 28px auto 48px;
+}
+.n-house .house-team-member {
+  position: relative;
+}
+.n-house .house-team-member .n-photo .n-photo-image > img {
+  /* The supplied portraits include a little of the room at the right edge.
+     A centered, face-forward crop keeps the red portrait wall as the field. */
+  transform: scale(1.28);
+  transform-origin: 43% 36%;
+}
+.n-house .house-team-member .n-photo:hover .n-photo-image > img,
+.n-house .house-team-member .n-photo:focus-within .n-photo-image > img {
+  transform: scale(1.33) !important;
+  transform-origin: 43% 36%;
+}
+.n-house .house-team-member > span {
+  position: absolute;
+  z-index: 5;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 8px;
+  background: #f8f5edf0;
+  color: #304438;
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: 0.04em;
 }
 .n-house .house-photo-strip .n-photo {
   height: 195px;
@@ -2678,11 +2886,62 @@
 .n-house .house-concerns > .n-more-concerns {
   grid-column: 1 / -1;
 }
-.n-house .house-concerns > .n-category-concerns {
-  grid-column: 1 / -1;
+.n-house .house-staff-preview {
+  padding-top: 52px;
+  padding-bottom: 52px;
+  background: #f8f5ed;
+}
+.n-house .house-staff-preview-copy {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto 25px;
+}
+.n-house .house-staff-preview-copy h2 { margin: 7px 0 0; }
+.n-house .house-staff-preview-copy p {
+  max-width: 42ch;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.n-house .house-reviews {
+  background: #eef1ec;
+  border-top: 1px solid #cbd3c9;
+  border-bottom: 1px solid #cbd3c9;
 }
 .n-house .house-reviews > h2 {
   margin-bottom: 35px;
+}
+.n-house .house-reviews .n-review-grid article {
+  background: #fffdf8;
+  border: 1px solid #d7ddd4;
+  border-radius: 18px 18px 18px 5px;
+  box-shadow: 0 8px 18px rgba(48, 68, 56, 0.08);
+}
+.n-house .house-reviews .n-review-grid article:hover {
+  z-index: 2;
+  transform: translateY(-7px) scale(1.025);
+  box-shadow: 0 20px 36px rgba(48, 68, 56, 0.2);
+}
+.n-house .house-treatments .n-treatment-cards article {
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.n-house .house-treatments .n-treatment-cards article:hover {
+  z-index: 2;
+  box-shadow: 0 20px 42px rgba(26, 39, 32, 0.22);
+}
+.n-house .house-treatments .n-treatment-cards article:hover .n-photo {
+  z-index: 4;
+  transform: scale(1.03);
+  box-shadow: 0 20px 42px rgba(26, 39, 32, 0.22);
+}
+.n-house .house-treatments .n-treatment-cards article:hover .n-photo .n-photo-image > img {
+  transform: scale(1.1) !important;
+  transition-duration: 5s !important;
+  filter: saturate(1.05) contrast(1.02);
 }
 .n-house .house-referrals {
   background: #eee9e3;
@@ -2719,6 +2978,7 @@
   font-size: clamp(42px, 5vw, 68px);
 }
 @media (max-width: 640px) {
+  .novel .n-booking-paths { grid-template-columns: 1fr; }
   .novel .n-visit-gallery {
     grid-template-columns: 1fr;
     gap: 22px;
@@ -2774,6 +3034,11 @@
     gap: 9px;
     margin-block: 20px 35px;
   }
+  .n-house .house-staff-preview-copy {
+    display: block;
+    margin-bottom: 18px;
+  }
+  .n-house .house-staff-preview-copy p { margin-top: 16px; }
   .n-house .house-photo-strip .n-photo {
     height: 170px;
   }
@@ -2886,20 +3151,6 @@
     margin-left: 0;
   }
 }
-.n-call {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.n-call span {
-  font-weight: 500;
-  font-size: 0.86em;
-}
 .n-mobile-menu-brand {
   display: none;
 }
@@ -2921,16 +3172,12 @@
   height: 18px;
   object-fit: contain;
 }
-.novel .n-site-nav > .n-call,
 .novel .n-site-nav > .n-button {
   height: 52px;
   min-height: 52px;
 }
 .novel .n-site-nav > .n-button {
   padding-block: 0;
-}
-.n-desk .n-call {
-  order: 7;
 }
 .n-desk .n-site-nav > .n-button {
   order: 8;
@@ -3008,8 +3255,8 @@
       visibility 0s;
   }
 
-  /* Social links belong to the expanded mobile menu, while phone and booking
-     remain immediately available in the header. */
+  /* Social links belong to the expanded mobile menu while scheduling remains
+     immediately available in the header. */
   .novel .n-site-nav > nav.n-nav-open .n-social {
     order: initial;
     width: 100%;
@@ -3018,7 +3265,6 @@
     border-top: 1px solid var(--n-line);
   }
 
-  .novel .n-site-nav > .n-call,
   .novel .n-site-nav > .n-button {
     display: inline-flex;
     flex-shrink: 0;
@@ -3056,7 +3302,6 @@
     padding-left: 4vw;
   }
   .novel .n-menu-toggle,
-  .novel .n-site-nav > .n-call,
   .novel .n-site-nav > .n-button {
     height: 44px;
     min-height: 44px;
@@ -3068,16 +3313,14 @@
     border: 0;
     transform: translateX(11px);
   }
+  .novel .n-menu-icon {
+    display: none;
+  }
   .novel .n-menu-mark {
     display: block;
     width: 44px;
     height: 44px;
     object-fit: contain;
-  }
-  .novel .n-site-nav > .n-call {
-    gap: 5px;
-    padding: 0 10px;
-    font-size: 12px;
   }
   .novel .n-site-nav > .n-button {
     padding: 0 12px;

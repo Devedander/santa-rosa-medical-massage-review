@@ -8,7 +8,7 @@ export const agingCopy =
   'Walking, stairs, gardening, and a comfortable night’s sleep all matter. As your needs change with age, bring those everyday goals to your session. Talk with your therapist about a comfortable pace and whether follow-up care makes sense for you.';
 
 export const referralCopy =
-  'Looking for soft-tissue support alongside medical care or rehabilitation? Contact the practice to discuss a patient’s goals, relevant guidance, and practitioner experience.';
+  'Santa Rosa Medical Massage provides focused soft-tissue care that can complement medical care or rehabilitation. Relevant guidance, a patient’s goals, and practitioner experience can all inform an appropriate appointment.';
 
 export const practiceCopy =
   'Care begins with listening. Share where you feel tension, which movements are difficult, and what you hope to return to. Your preferences and relevant health history help guide the conversation about treatment.';

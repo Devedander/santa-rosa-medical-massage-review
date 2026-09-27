@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import NewConcepts from "./new-concepts";
 import { agingCopy, referralCopy, practiceCopy } from "./care-content";
+import { squareServices } from "./square-services";
 import {
   Activity,
   ArrowRight,
@@ -27,14 +28,7 @@ import {
   Waves,
 } from "lucide-react";
 
-const services = [
-  "Trigger Point Therapy",
-  "Medical Massage",
-  "Deep Tissue / Full Body",
-  "Lymphatic Facilitation",
-  "Swedish Massage",
-  "Somatic Experiencing",
-];
+const services = squareServices.map((service) => service.name);
 const conditionItems = [
   [
     "Headaches & migraines",
@@ -97,38 +91,11 @@ const conditionItems = [
     Footprints,
   ],
 ] as const;
-const serviceDetails = [
-  [
-    "Trigger Point Therapy",
-    "Targeted soft-tissue work for knots, tight bands, and referred pain.",
-    "This session uses a combination of trigger point, myofascial, Swedish, and related techniques to encourage circulation, ease tension, and help restore movement.",
-  ],
-  [
-    "Medical Massage",
-    "Condition-focused massage for concerns that have been diagnosed by a medical professional.",
-    "Your therapist may use a combination of techniques and procedures based on the condition, your goals, and how your body responds during the session.",
-  ],
-  [
-    "Deep Tissue / Full Body",
-    "Focused, full-body care for persistent tension, movement restriction, and recovery.",
-    "Treatment combines hands-on techniques with attention to the areas that are limiting comfort, mobility, and everyday activity.",
-  ],
-  [
-    "Lymphatic Facilitation",
-    "Exceptionally light-touch work intended to support and stimulate the lymphatic system.",
-    "This gentle service is distinct from deep tissue work and should be selected when a lighter, targeted approach is appropriate.",
-  ],
-  [
-    "Swedish Massage",
-    "Restorative full-body massage for relaxation, stress release, and general wellbeing.",
-    "A calming session designed to reduce tension and leave you feeling refreshed and more at ease in your body.",
-  ],
-  [
-    "Somatic Experiencing",
-    "A body-centered approach that can support people working with post-traumatic stress.",
-    "This service centers awareness, pacing, and body-based support; it is not a substitute for mental-health care.",
-  ],
-];
+const serviceDetails = squareServices.map((service) => [
+  service.name,
+  service.summary,
+  service.description,
+]);
 const serviceImages = [
   "/mockup-photos/yelp-treatment.jpg",
   "/mockup-photos/therapy-hands.jpg",
@@ -136,6 +103,8 @@ const serviceImages = [
   "/mockup-photos/yelp-detail-4.jpg",
   "/mockup-photos/yelp-treatment.jpg",
   "/mockup-photos/therapy-hands.jpg",
+  "/mockup-photos/therapy-room.jpg",
+  "/mockup-photos/yelp-detail-4.jpg",
 ];
 const concepts = [
   ["house-photo", "1 · Familiar", "Editorial reference format"],
@@ -536,6 +505,71 @@ const remainingApprovedPhotos = [
     "Santa Rosa Medical Massage — yelp treatment",
   ],
 ];
+const newPracticePhotoFiles = [
+  "assisted-stretching-01.jpeg",
+  "assisted-stretching-02.jpeg",
+  "assisted-stretching-03.jpeg",
+  "assisted-stretching-04.jpeg",
+  "assisted-stretching-05.jpeg",
+  "assisted-stretching-06.jpeg",
+  "assisted-stretching-07.jpeg",
+  "assisted-stretching-08.jpeg",
+  "assisted-stretching-09.jpeg",
+  "assisted-stretching-10.jpeg",
+  "assisted-stretching-11.jpeg",
+  "assisted-stretching-12.jpeg",
+  "assisted-stretching-13.jpeg",
+  "assisted-stretching-14.jpeg",
+  "assisted-stretching-15.jpeg",
+  "assisted-stretching-16.jpeg",
+  "client-lounge-black.jpeg",
+  "client-lounge-blue.jpeg",
+  "client-lounge-burgundy.jpeg",
+  "client-lounge-green.jpeg",
+  "client-lounge-orange.jpeg",
+  "client-lounge-stripe.jpeg",
+  "staff-portrait-01.jpeg",
+  "staff-portrait-02.jpeg",
+  "staff-portrait-03.jpeg",
+  "staff-portrait-04.jpeg",
+  "staff-portrait-05.jpeg",
+  "staff-portrait-06.jpeg",
+  "staff-portrait-07.jpeg",
+  "staff-portrait-08.jpeg",
+  "staff-portrait-09.jpeg",
+  "team-group-lounge-portrait.jpeg",
+  "team-group-lounge-red-wall.jpeg",
+  "team-group-treatment-room-01.jpeg",
+  "team-group-treatment-room-02.jpeg",
+  "team-group-treatment-room-03.jpeg",
+  "team-group-treatment-room-04.jpeg",
+  "team-group-treatment-room-05-portrait.jpeg",
+  "team-group-treatment-room-06-portrait.jpeg",
+  "team-group-treatment-room-07.jpeg",
+  "team-group-treatment-room-08.jpeg",
+  "treatment-arm-work-01.jpeg",
+  "treatment-back-work-01.jpeg",
+  "treatment-back-work-02.jpeg",
+  "treatment-back-work-03.jpeg",
+  "treatment-back-work-04.jpeg",
+  "treatment-back-work-05.jpeg",
+  "treatment-back-work-06.jpeg",
+  "treatment-hand-work-01.jpeg",
+  "treatment-hand-work-02.jpeg",
+  "treatment-hand-work-03.jpeg",
+  "treatment-shoulder-work-01.jpeg",
+  "treatment-shoulder-work-02.jpeg",
+  "treatment-shoulder-work-03.jpeg",
+  "treatment-shoulder-work-04.jpeg",
+  "treatment-table-bodywork-01.jpeg",
+  "treatment-table-bodywork-02.jpeg",
+];
+const newPracticePhotoOptions = newPracticePhotoFiles.map((file) => [
+  `/site-photo-intake/${file}`,
+  `Santa Rosa Medical Massage — ${file
+    .replace(/\.jpeg$/, "")
+    .replaceAll("-", " ")}`,
+]);
 const initialPhotoOptions = [
   ...galleryImages,
   ...treatmentPhotoOptions.filter(
@@ -544,7 +578,11 @@ const initialPhotoOptions = [
 ];
 const allPhotoOptions = Array.from(
   new Map(
-    [...initialPhotoOptions, ...remainingApprovedPhotos].map((photo) => [
+    [
+      ...initialPhotoOptions,
+      ...remainingApprovedPhotos,
+      ...newPracticePhotoOptions,
+    ].map((photo) => [
       photo[0],
       photo,
     ]),
@@ -591,6 +629,7 @@ function InlineGallery({
     return () => window.removeEventListener("srmm-photo-clear", clearLock);
   }, []);
   const [src, label] = images[active];
+  const isNovelPhoto = className.split(/\s+/).includes("n-photo");
   const previous = () => {
     setActive((active + images.length - 1) % images.length);
     setLocked(false);
@@ -609,7 +648,13 @@ function InlineGallery({
   };
   return (
     <div className={`inline-gallery ${className} ${locked ? "is-locked" : ""}`}>
-      <img src={assetPath(src)} alt={alt || label} />
+      {isNovelPhoto ? (
+        <span className="n-photo-image">
+          <img src={assetPath(src)} alt={alt || label} />
+        </span>
+      ) : (
+        <img src={assetPath(src)} alt={alt || label} />
+      )}
       <button
         className="inline-gallery-arrow previous"
         onClick={previous}
@@ -1664,11 +1709,11 @@ function Classic({
     style === "editorial"
       ? [
           "For more than 15 years, Santa Rosa Medical Massage has been a steady, trusted part of downtown Santa Rosa. What began as a focused practice in therapeutic bodywork has grown into a place people return to for both difficult pain patterns and the ongoing care that keeps life moving.",
-          "Clients come to us for trigger point therapy, medical massage, deep tissue work, lymphatic facilitation, Swedish massage, and somatic experiencing. They often mention the same things: knowledgeable therapists, a warm and welcoming environment, and care that begins by listening.",
+          "Clients come to us for trigger point therapy, medical massage, deep tissue work, lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing. They often mention the same things: knowledgeable therapists, a warm and welcoming environment, and care that begins by listening.",
         ]
       : [
           "Established in 2010, Santa Rosa Medical Massage has spent more than 15 years helping Sonoma County clients move with less pain and more confidence. Our approach centers your goals for comfort, recovery, and everyday mobility.",
-          "We offer trigger point therapy, medical massage, deep tissue and full-body work, lymphatic facilitation, Swedish massage, and somatic experiencing. Local clients value the thoughtful consultations, skilled hands, and practical results that make this a practice they recommend to friends, family, and people involved in their care.",
+          "We offer trigger point therapy, medical massage, deep tissue and full-body work, lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing. Local clients value the thoughtful consultations, skilled hands, and practical results that make this a practice they recommend to friends, family, and people involved in their care.",
         ];
   return (
     <>
@@ -3055,7 +3100,7 @@ function TemplateMock({
             </p>
             <p>
               From trigger point therapy and medical massage to deep tissue,
-              lymphatic facilitation, Swedish massage, and somatic experiencing,
+              lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing,
               treatment begins by listening. Clients tell us they value the
               skilled attention, welcoming space, and results that keep them
               coming back and referring the people they love.

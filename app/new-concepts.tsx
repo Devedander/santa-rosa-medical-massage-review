@@ -5,6 +5,8 @@ import {
   referralCopy,
   practiceCopy,
 } from "./care-content";
+import { practitioners, practiceAwardCopy, squareBookingUrl } from "./staff-content";
+import { getSquareService } from "./square-services";
 
 import {
   createContext,
@@ -25,6 +27,7 @@ import {
   MapPin,
   Phone,
   CalendarDays,
+  UserRound,
   Gift,
   Plus,
   Check,
@@ -76,7 +79,7 @@ const conditionGuidance: Record<
 > = {
   "Headaches & migraines": {
     intro: "For recurring head pain, the conversation often begins with tension through the neck, shoulders, jaw, and upper back—and with the patterns you notice before symptoms build.",
-    approach: "Trigger Point Therapy, Medical Massage, or a gentler Swedish approach may be discussed to address muscle tightness and support relaxation. Your therapist can tailor pressure and positioning around your comfort.",
+    approach: "Trigger Point Therapy, Medical Massage, or a gentler relaxation-focused approach may be discussed to address muscle tightness and support comfort. Your therapist can tailor pressure and positioning around your preferences.",
     consideration: "New, severe, or changing headaches should be discussed with a medical professional before massage.",
   },
   "Neck tension": {
@@ -121,12 +124,12 @@ const conditionGuidance: Record<
   },
   "Reduced range of motion": {
     intro: "When movement feels limited, it helps to start with the activity you want to do more comfortably—not just a measurement of how far something moves.",
-    approach: "Deep Tissue / Full Body work, Medical Massage, and gentler Swedish techniques can be tailored to the muscles and connective tissue around the movement that feels restricted, without forcing a range.",
+    approach: "Deep Tissue / Full Body work, Medical Massage, and Assisted Stretching can be tailored to the muscles and connective tissue around the movement that feels restricted, without forcing a range.",
     consideration: "Tell us about injuries, surgery, joint conditions, and any movement guidance you have received before your appointment.",
   },
   "Chronic pain": {
     intro: "Persistent pain can change energy, sleep, movement, and the confidence to make plans. A session starts with listening to what your day is like now.",
-    approach: "Medical Massage, Swedish Massage, Somatic Experiencing, and focused Trigger Point work offer different ways to shape a session around comfort, pacing, and the areas that are asking for attention.",
+    approach: "Medical Massage, Somatic Experiencing, Assisted Stretching, and focused Trigger Point work offer different ways to shape a session around comfort, pacing, and the areas that are asking for attention.",
     consideration: "Massage can be one part of a broader care plan. Bring relevant medical guidance so your therapist can work thoughtfully alongside it.",
   },
   "Plantar fasciitis": {
@@ -156,18 +159,31 @@ function additionalGuidance(concern: string) {
     };
   return {
     intro: `${concern} can affect the routines that make up a day—work, rest, movement, hobbies, and sleep. A useful starting point is what you want to do more comfortably.`,
-    approach: "Medical Massage, Trigger Point Therapy, Deep Tissue / Full Body work, or a gentler Swedish approach may be discussed based on your symptoms, comfort, and any relevant care guidance.",
+    approach: "Medical Massage, Trigger Point Therapy, Deep Tissue / Full Body work, Thai Massage, or Assisted Stretching may be discussed based on your symptoms, comfort, and any relevant care guidance.",
     consideration: "Share any diagnosis, recent injury or surgery, medications, and recommendations from your medical or rehabilitation team before your session.",
   };
 }
 const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
+const squareTreatmentBookingUrl =
+  "https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services/HNPKAYWN4I2AUEHNBZY7XLWT";
 const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 const navItems = [
   ["about", "The practice"],
+  ["staff", "Meet the practice"],
   ["treatments", "Treatments"],
   ["conditions", "Common concerns"],
   ["reviews", "Reviews"],
   ["visit", "Visit & gallery"],
+];
+const treatmentPhotoFirsts = [
+  "treatment-hand-work-02.jpeg",
+  "treatment-shoulder-work-02.jpeg",
+  "treatment-back-work-05.jpeg",
+  "treatment-hand-work-01.jpeg",
+  "assisted-stretching-04.jpeg",
+  "assisted-stretching-01.jpeg",
+  "treatment-table-bodywork-01.jpeg",
+  "treatment-back-work-04.jpeg",
 ];
 
 function Action({
@@ -180,6 +196,14 @@ function Action({
   quiet?: boolean;
 }) {
   const { onPage } = useContent();
+  if (to === "book") {
+    return (
+      <a className={quiet ? "n-link" : "n-button"} href={squareBookingUrl}>
+        {children}
+        <ArrowUpRight size={18} aria-hidden="true" />
+      </a>
+    );
+  }
   return (
     <button
       className={quiet ? "n-link" : "n-button"}
@@ -188,6 +212,51 @@ function Action({
       {children}
       <ArrowUpRight size={18} aria-hidden="true" />
     </button>
+  );
+}
+function TreatmentBookingLink({
+  children,
+  quiet = false,
+  serviceName,
+}: {
+  children: ReactNode;
+  quiet?: boolean;
+  serviceName?: string;
+}) {
+  return (
+    <a
+      className={quiet ? "n-link" : "n-button"}
+      href={getSquareService(serviceName || "")?.bookingUrl || squareTreatmentBookingUrl}
+    >
+      {children}
+      <ArrowUpRight size={18} aria-hidden="true" />
+    </a>
+  );
+}
+function PractitionerProfileLink({
+  slug,
+  name,
+}: {
+  slug: string;
+  name: string;
+}) {
+  const href = `./practitioners/${slug}.html`;
+  return (
+    <a
+      className="n-link"
+      href={href}
+      onClick={(event) => {
+        // The local dev server resolves file-system routes with a trailing
+        // slash, while the static export used by public hosts emits .html.
+        if (window.location.hostname === "localhost") {
+          event.preventDefault();
+          window.location.assign(`./practitioners/${slug}/`);
+        }
+      }}
+    >
+      Read {name}&rsquo;s full profile
+      <ArrowUpRight size={18} aria-hidden="true" />
+    </a>
   );
 }
 function Photo({
@@ -235,7 +304,6 @@ function ConcernLinks() {
   const { onPage, design } = useContent();
   const [openConcern, setOpenConcern] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
-  const [openCategory, setOpenCategory] = useState<string | null>(null);
   const renderConcern = (c: string) => {
     const expanded = design === "house" && openConcern === c;
     const guidance = conditionGuidance[c] || additionalGuidance(c);
@@ -292,25 +360,6 @@ function ConcernLinks() {
               ))}
             </div>
           </section>
-          <section className="n-category-concerns">
-            <p className="n-kicker">Alternate layout</p>
-            <h3>Browse by category.</h3>
-            <p>Open a category to see the concerns within it.</p>
-            <div className="n-category-list">
-              {additionalConcernGroups.map(([group, groupConcerns]) => {
-                const expanded = openCategory === group;
-                return (
-                  <section className={expanded ? "is-open" : ""} key={group}>
-                    <button onClick={() => setOpenCategory(expanded ? null : group)} aria-expanded={expanded}>
-                      {group}
-                      <Plus size={18} aria-hidden="true" />
-                    </button>
-                    <div>{groupConcerns.map(renderConcern)}</div>
-                  </section>
-                );
-              })}
-            </div>
-          </section>
         </>
       )}
     </>
@@ -334,11 +383,17 @@ function ServiceList({
         </TabsList>
         {services.map(([name, summary], i) => (
           <TabsContent key={name} value={String(i)}>
-            <Photo name={`treatment-${i}`} first="yelp-treatment.jpg" />
+            <Photo
+              name={`treatment-${i}`}
+              first={treatmentPhotoFirsts[i] ?? "yelp-treatment.jpg"}
+            />
             <div>
               <h3>{name}</h3>
               <p>{summary}</p>
-              <Action to={`service-${i}`}>View details</Action>
+              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
+              <Action to={`service-${i}`} quiet>
+                More information
+              </Action>
             </div>
           </TabsContent>
         ))}
@@ -355,8 +410,9 @@ function ServiceList({
             </summary>
             <div>
               <p>{summary}</p>
+              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
               <Action to={`service-${i}`} quiet>
-                View details
+                More information
               </Action>
             </div>
           </details>
@@ -369,13 +425,17 @@ function ServiceList({
         <article key={name}>
           <Photo
             name={`treatment-${i}`}
-            first={i % 2 ? "therapy-hands.jpg" : "yelp-treatment.jpg"}
+            first={
+              treatmentPhotoFirsts[i] ??
+              (i % 2 ? "therapy-hands.jpg" : "yelp-treatment.jpg")
+            }
           />
           <div>
             <h3>{name}</h3>
             <p>{summary}</p>
+            <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
             <Action to={`service-${i}`} quiet>
-              View details
+              More information
             </Action>
           </div>
         </article>
@@ -492,7 +552,7 @@ function Reviews() {
     </div>
   );
 }
-function Visit() {
+function Visit({ showPhone = false }: { showPhone?: boolean }) {
   return (
     <div className="n-visit-combined">
       <div className="n-visit-details">
@@ -510,20 +570,31 @@ function Visit() {
             Get directions <ArrowUpRight size={18} />
           </a>
         </div>
-        <div>
-          <Phone size={23} />
-          <h3>Let’s talk before you visit</h3>
-          <a className="n-phone" href="tel:+17073037707">
-            (707) 303-7707
-          </a>
-          <p>
-            Ask about session lengths, current pricing, payment, receipts, or
-            access needs.
-          </p>
-          <Action to="contact" quiet>
-            Contact the practice
-          </Action>
-        </div>
+        {showPhone ? (
+          <div>
+            <Phone size={23} />
+            <h3>Phone</h3>
+            <a className="n-phone" href="tel:+17073037707">
+              (707) 303-7707
+            </a>
+            <p>
+              For non-booking questions, use the form and our team will follow
+              up with you.
+            </p>
+          </div>
+        ) : (
+          <div>
+            <CalendarDays size={23} />
+            <h3>Ready to plan your visit?</h3>
+            <p>
+              Choose your treatment, preferred date, and time through the
+              scheduling page.
+            </p>
+            <Action to="book" quiet>
+              Schedule an appointment
+            </Action>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -569,9 +640,7 @@ function Courtyard() {
               what you’re experiencing, make room for your questions, and talk
               about care with your comfort and everyday goals in mind.
             </p>
-            <a className="n-button" href="#n-about">
-              Come get to know the practice.
-            </a>
+            <Action to="book">Schedule an appointment</Action>
           </div>
         </div>
       </section>
@@ -594,15 +663,13 @@ function Courtyard() {
             for the first time or returning for ongoing care, there’s room to
             ask questions and talk through the next step.
           </p>
-          <Action to="about" quiet>
-            Get to know the practice
-          </Action>
+          <Action to="book" quiet>Schedule an appointment</Action>
         </div>
       </section>
       <section id="n-treatments" className="n-section court-treatments">
         <div className="n-section-heading">
           <h2>Care, with intention.</h2>
-          <p>Six approaches. One starting point: your needs.</p>
+          <p>A range of approaches. One starting point: your needs.</p>
         </div>
         <ServiceList />
       </section>
@@ -630,8 +697,8 @@ function Courtyard() {
             beyond the table.
           </h2>
           <p>{agingCopy}</p>
-          <Action to="contact" quiet>
-            Talk through your goals
+          <Action to="book" quiet>
+            Schedule an appointment
           </Action>
         </div>
       </section>
@@ -670,13 +737,13 @@ function Courtyard() {
         </h2>
         <div>
           <p>{referralCopy}</p>
-          <Action to="contact">Referral inquiries</Action>
+          <Action to="book">Schedule an appointment</Action>
         </div>
       </section>
       <section id="n-visit" className="n-section">
         <div className="n-section-heading">
           <h2>Your next visit.</h2>
-          <Action to="book">Appointments & gifts</Action>
+          <Action to="book">Schedule an appointment</Action>
         </div>
         <Visit />
       </section>
@@ -723,10 +790,7 @@ function Desk() {
           </p>
           <div className="n-hero-awards">{awards}</div>
           <div className="n-actions">
-            <Action to="about">Learn how care begins.</Action>
-            <Action to="contact" quiet>
-              Ask a question
-            </Action>
+            <Action to="book">Schedule an appointment</Action>
           </div>
         </div>
         <Photo name="opening" first="yelp-treatment.jpg" />
@@ -734,7 +798,6 @@ function Desk() {
           <MapPin size={18} />
           <span>630 Third Street, Suite B</span>
           <span>Private parking</span>
-          <a href="tel:+17073037707">(707) 303-7707</a>
         </div>
       </section>
       <section id="n-treatments" className="desk-treatments n-section">
@@ -769,15 +832,15 @@ function Desk() {
           <p>{agingCopy}</p>
           <h3>For referring professionals</h3>
           <p>{referralCopy}</p>
-          <Action to="contact" quiet>
-            Discuss a referral
+          <Action to="book" quiet>
+            Schedule an appointment
           </Action>
         </div>
       </section>
       <section id="n-visit" className="desk-arrival n-section">
         <div className="n-section-heading">
           <h2>Before you arrive.</h2>
-          <Action to="book">Appointments & gifts</Action>
+          <Action to="book">Schedule an appointment</Action>
         </div>
         <Visit />
       </section>
@@ -823,9 +886,7 @@ function Everyday() {
           when discomfort gets in the way, they can become the things you miss
           most.
         </p>
-        <a className="n-button" href="#n-about">
-          Get to know our approach.
-        </a>
+        <Action to="book">Schedule an appointment</Action>
         <div className="every-window">
           <Photo name="opening-left" first="google-gallery-3.jpg" />
           <div>
@@ -861,9 +922,7 @@ function Everyday() {
           conversation stays centered on you.
         </p>
         <p>{agingCopy}</p>
-        <Action to="about" quiet>
-          Meet the practice
-        </Action>
+        <Action to="book" quiet>Schedule an appointment</Action>
       </section>
       <section id="n-treatments" className="every-treatments n-section">
         <h2>
@@ -871,7 +930,7 @@ function Everyday() {
           <br />
           one way to care.
         </h2>
-        <p>Explore all six treatments. We’ll help you find a starting point.</p>
+        <p>Explore the available treatments. We’ll help you find a starting point.</p>
         <div className="every-goals">
           {[
             ["A longer walk", "Plantar fasciitis"],
@@ -918,8 +977,7 @@ function Everyday() {
           </h2>
           <p>
             See the space before you arrive. There’s private parking, and you
-            can call with questions about anything you need for a comfortable
-            visit.
+            can review the space before scheduling a comfortable visit.
           </p>
           <Action to="gallery" quiet>
             Have a look around
@@ -934,8 +992,8 @@ function Everyday() {
           care conversation.
         </h2>
         <p>{referralCopy}</p>
-        <Action to="contact" quiet>
-          Get in touch about a patient
+        <Action to="book" quiet>
+          Schedule an appointment
         </Action>
       </section>
       <section id="n-visit" className="every-visit n-section">
@@ -993,24 +1051,41 @@ function House() {
             experience, your questions, and your comfort.
           </p>
           <div className="house-hero-awards">{awards}</div>
-          <a className="n-button" href="#n-about">
-            Get to know us
-          </a>
+          <Action to="book">Schedule an appointment</Action>
         </div>
         <Photo name="welcome" first="google-remodel-room.jpg" />
       </section>
-      <div className="house-photo-strip" aria-label="Scenes from the practice">
-        {[
-          "google-gallery-3.jpg",
-          "google-remodel-room.jpg",
-          "yelp-treatment.jpg",
-          "therapy-room.jpg",
-          "google-gallery-4.jpg",
-          "therapy-hands.jpg",
-        ].map((file, i) => (
-          <Photo key={file} name={`welcome-strip-${i}`} first={file} />
-        ))}
-      </div>
+      <section className="house-staff-preview n-section" aria-label="Meet the practice">
+        <div className="house-staff-preview-copy">
+          <div>
+            <span className="n-kicker">Meet the practice</span>
+            <h2>The practitioners behind the care.</h2>
+          </div>
+          <p>
+            Get to know the practitioners, their backgrounds, and the
+            therapeutic approaches they bring to each appointment.
+          </p>
+          <Action to="staff" quiet>
+            Meet the practice
+          </Action>
+        </div>
+        <div className="house-photo-strip" aria-label="A preview of the practice team">
+          {practitioners.map((practitioner) => (
+            <div className="house-team-member" key={practitioner.slug}>
+              <Photo
+                name={`welcome-${practitioner.slug}`}
+                first={practitioner.teamPhoto}
+              />
+              <span>{practitioner.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section id="n-reviews" className="house-reviews n-section">
+        <span className="n-kicker">From our clients</span>
+        <h2>Care, in their own words.</h2>
+        <Reviews />
+      </section>
       <section id="n-about" className="house-story n-section">
         <div>
           <span className="n-kicker">A personal approach</span>
@@ -1021,15 +1096,16 @@ function House() {
           </h2>
           <p>{practiceCopy}</p>
           <p>
-            We know that choosing care can bring questions. Talk with us about
-            practitioner experience, what a session involves, and anything that
-            would help you feel more comfortable before your first visit.
+            We know that choosing care can bring questions. The scheduling page
+            makes it easy to select an appointment and note any preferences for
+            your first visit.
           </p>
-          <Action to="about" quiet>
-            Explore the practice
-          </Action>
+          <Action to="book" quiet>Schedule an appointment</Action>
         </div>
-        <Photo name="practice-story" first="google-gallery-3.jpg" />
+        <Photo
+          name="practice-story"
+          first="team-group-treatment-room-01.jpeg"
+        />
       </section>
       <section className="house-pause n-section">
         <h2>
@@ -1063,11 +1139,6 @@ function House() {
         </div>
         <ConcernLinks />
       </section>
-      <section id="n-reviews" className="house-reviews n-section">
-        <span className="n-kicker">From our clients</span>
-        <h2>Care, in their own words.</h2>
-        <Reviews />
-      </section>
       <section className="house-story house-referrals n-section">
         <div>
           <span className="n-kicker">For referring professionals</span>
@@ -1079,11 +1150,11 @@ function House() {
           <p>{referralCopy}</p>
           <p>
             Relevant guidance from a medical or rehabilitation team can help
-            inform the discussion. Contact us before sending private patient
-            information.
+            inform the discussion. Please do not send private patient
+            information through the website.
           </p>
-          <Action to="contact" quiet>
-            Talk with the practice
+          <Action to="book" quiet>
+            Schedule an appointment
           </Action>
         </div>
         <Photo name="referral-care" first="yelp-treatment.jpg" />
@@ -1115,6 +1186,9 @@ function House() {
 function Booking() {
   const { services, page } = useContent();
   const [notice, setNotice] = useState("");
+  const [bookingPath, setBookingPath] = useState<"direct" | "therapist">(
+    "direct",
+  );
   if (false && page === "gift")
     return (
       <section className="n-booking standalone-booking n-booking-gift">
@@ -1194,11 +1268,35 @@ function Booking() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="appointment">
+        <div className="n-booking-paths" aria-label="Choose how to book">
+          <button
+            type="button"
+            className={bookingPath === "direct" ? "is-active" : ""}
+            onClick={() => setBookingPath("direct")}
+          >
+            <CalendarDays size={22} />
+            <span>
+              <strong>Find an appointment</strong>
+              <small>Choose a treatment and the next time that works for you.</small>
+            </span>
+          </button>
+          <button
+            type="button"
+            className={bookingPath === "therapist" ? "is-active" : ""}
+            onClick={() => setBookingPath("therapist")}
+          >
+            <UserRound size={22} />
+            <span>
+              <strong>Choose your therapist</strong>
+              <small>Start with the practitioner you would like to see.</small>
+            </span>
+          </button>
+        </div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             setNotice(
-              "Your appointment preferences are ready to review. This mockup has not booked an appointment or sent your information.",
+              "Your appointment preferences are ready for the next step in scheduling.",
             );
           }}
         >
@@ -1214,10 +1312,24 @@ function Booking() {
                 ))}
               </select>
             </label>
-            <label>
-              Practitioner preference
-              <input placeholder="Any available therapist, or a name" />
-            </label>
+            {bookingPath === "therapist" ? (
+              <label>
+                Therapist
+                <select required defaultValue="">
+                  <option value="" disabled>
+                    Choose a therapist
+                  </option>
+                  {practitioners.map((practitioner) => (
+                    <option key={practitioner.slug}>{practitioner.name}</option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <label>
+                Therapist
+                <input value="Any available therapist" readOnly />
+              </label>
+            )}
             <label>
               Preferred date
               <input type="date" required />
@@ -1241,11 +1353,14 @@ function Booking() {
               <input type="email" autoComplete="email" required />
             </label>
             <p>
-              Contact the practice for current pricing, session lengths, and
-              appointment availability.
+              {bookingPath === "therapist"
+                ? "Choose your therapist first, then Square will show their available services, session lengths, and times."
+                : "Square will show current session lengths, pricing, and the next available times when you continue."}
             </p>
             <button className="n-button" type="submit">
-              Review appointment preferences <ArrowRight size={18} />
+              {bookingPath === "therapist"
+                ? "Continue with this therapist"
+                : "Find an appointment"} <ArrowRight size={18} />
             </button>
           </div>
         </form>
@@ -1256,19 +1371,18 @@ function Booking() {
             <Gift size={24} />
             <h2>Give a gift certificate</h2>
             <p>
-              Gift certificates will be purchased securely through the
-              practice’s Square page. No amount, recipient information, or
-              payment is collected in this review site.
+              Gift certificates are purchased securely through the practice’s
+              Square page.
             </p>
             <button
               className="n-button"
               onClick={() =>
                 setNotice(
-                  "Square gift certificate link placeholder — no purchase was started.",
+                  "Gift certificate options are ready for the next step.",
                 )
               }
             >
-              Open Square gift cards <ArrowRight size={18} />
+              Continue to gift certificates <ArrowRight size={18} />
             </button>
           </article>
           <article>
@@ -1276,17 +1390,17 @@ function Booking() {
             <h2>Book an appointment</h2>
             <p>
               Choose a service and time through the practice’s Square booking
-              page. This button is ready for the final booking URL.
+              page.
             </p>
             <button
               className="n-button"
               onClick={() =>
                 setNotice(
-                  "Square booking link placeholder — no appointment was started.",
+                  "Appointment scheduling is ready for the next step.",
                 )
               }
             >
-              Open Square booking <ArrowRight size={18} />
+              Continue to scheduling <ArrowRight size={18} />
             </button>
           </article>
         </div>
@@ -1342,9 +1456,6 @@ function Booking() {
           </div>
         </form>*/}
       </TabsContent>
-      <p className="n-prototype-note">
-        Design preview: no booking, purchase, email, or payment will be made.
-      </p>
       {notice && (
         <p role="status" className="n-notice">
           <Check size={20} />
@@ -1385,8 +1496,7 @@ function ContactForm() {
         Preview message <ArrowUpRight size={18} />
       </button>
       <p className="n-prototype-note">
-        This review form does not send messages. Please call to contact the
-        practice.
+        This review form does not send messages.
       </p>
       {sent && (
         <p role="status" className="n-notice">
@@ -1396,15 +1506,57 @@ function ContactForm() {
     </form>
   );
 }
+function StaffDirectory() {
+  return (
+    <section className="n-staff-directory" aria-label="Meet the practice">
+      <header className="n-staff-directory-heading">
+        <span className="n-kicker">Meet the practice</span>
+        <h2>Care begins with the right conversation.</h2>
+        <p>
+          Meet the practitioners at this award-winning, award-recognized Santa
+          Rosa practice,
+          explore their backgrounds, and choose a profile that feels relevant
+          to your goals.
+        </p>
+      </header>
+      <div className="n-staff-grid">
+        {practitioners.map((practitioner) => (
+          <article key={practitioner.slug} className="n-staff-card">
+            <Photo
+              name={`staff-${practitioner.slug}`}
+              first={practitioner.teamPhoto}
+            />
+            <div className="n-staff-card-copy">
+              <span>{practitioner.credentials}</span>
+              <h3>{practitioner.name}</h3>
+              <p className="n-staff-question">{practitioner.question}</p>
+              <p>{practitioner.shortAnswer}</p>
+              <PractitionerProfileLink
+                slug={practitioner.slug}
+                name={practitioner.name}
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+      <p className="n-staff-award">{practiceAwardCopy}</p>
+    </section>
+  );
+}
+
 function NewPages() {
   const { page, services, posts, onPage, selections, photoTools } = useContent();
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
+  const servicePhoto = service
+    ? treatmentPhotoFirsts[services.indexOf(service)] ?? "yelp-treatment.jpg"
+    : "yelp-treatment.jpg";
   const concern = page.startsWith("condition-")
     ? decodeURIComponent(page.slice(10))
     : "";
   const concernCopy = conditionGuidance[concern];
+  const squareService = service ? getSquareService(service[0]) : undefined;
   const post = posts.find(([slug]) => page === `post-${slug}`);
   const postIndex = post ? posts.findIndex(([slug]) => slug === post[0]) : -1;
   const previousPost = postIndex >= 0 ? posts[(postIndex - 1 + posts.length) % posts.length] : null;
@@ -1445,8 +1597,9 @@ function NewPages() {
     about: "A practice that listens.",
     reviews: "In our clients’ words.",
     gallery: "Welcome inside.",
+    staff: "Meet the practice.",
     blog: "Helpful articles for everyday care.",
-    contact: "Let’s start a conversation.",
+    contact: "Questions and contact details.",
     book: "Appointments & gift cards.",
     gift: "Appointments & gift cards.",
     selections: "Your photo selections.",
@@ -1476,12 +1629,17 @@ function NewPages() {
       </div>
       {service ? (
         <div className="n-detail">
-          <Photo name={`detail-${page}`} first="yelp-treatment.jpg" />
+          <Photo name={`detail-${page}`} first={servicePhoto} />
           <div>
             <h2>What to expect</h2>
             <p>{service[2]}</p>
             <p>{practiceCopy}</p>
-            <Action to="book">Explore appointments</Action>
+            {squareService && (
+              <p className="n-service-availability">
+                <b>Available with:</b> {squareService.staff.join(", ")}
+              </p>
+            )}
+            <TreatmentBookingLink serviceName={service[0]}>Schedule now</TreatmentBookingLink>
             <Action to="treatments" quiet>
               All treatments
             </Action>
@@ -1509,8 +1667,8 @@ function NewPages() {
               A daily walk, a hobby, or moving more comfortably can be a useful
               starting point.
             </p>
-            <Action to="contact" quiet>
-              Talk with the practice
+            <Action to="book" quiet>
+              Schedule an appointment
             </Action>
           </aside>
         </div>
@@ -1559,10 +1717,10 @@ function NewPages() {
             )}
           </nav>
           <p>
-            Bring questions about comfort, timing, and relevant medical guidance
-            to your conversation with the practice.
+            Bring any relevant comfort, timing, and medical guidance to your
+            appointment.
           </p>
-          <Action to="contact">Ask a question</Action>
+          <Action to="book">Schedule an appointment</Action>
           <Action to="blog" quiet>
             Back to blog
           </Action>
@@ -1571,6 +1729,8 @@ function NewPages() {
         <ServiceList />
       ) : page === "conditions" ? (
         <ConcernLinks />
+      ) : page === "staff" ? (
+        <StaffDirectory />
       ) : page === "book" || page === "gift" ? (
         <Booking key={page} />
       ) : page === "reviews" ? (
@@ -1601,10 +1761,10 @@ function NewPages() {
               <h2>Personal attention, from the beginning.</h2>
               <p>{practiceCopy}</p>
               <p>
-                Have questions about a practitioner’s experience or a particular
-                treatment? Contact the practice before choosing an appointment.
+                Select an appointment to share a practitioner preference or any
+                relevant details before your visit.
               </p>
-              <Action to="contact">Find the right fit</Action>
+              <Action to="book">Schedule an appointment</Action>
             </div>
           </div>
           <div className="n-about-more">
@@ -1623,7 +1783,7 @@ function NewPages() {
         selections
       ) : (
         <div className="n-contact-layout">
-          <Visit />
+          <Visit showPhone />
           <ContactForm />
         </div>
       )}
@@ -1644,7 +1804,6 @@ function Footer() {
       <div className="n-footer-meta">
         <div className="n-footer-contact">
           <span>{address}</span>
-          <a href="tel:+17073037707">(707) 303-7707</a>
         </div>
         <small className="n-footer-credit">Website by JW Consulting Services</small>
       </div>
@@ -1723,11 +1882,14 @@ export default function NewConcepts(props: Props) {
             {menu ? (
               <X />
             ) : (
-              <img
-                className="n-menu-mark"
-                src="./mobile-menu-mark.png"
-                alt=""
-              />
+              <>
+                <Menu className="n-menu-icon" aria-hidden="true" />
+                <img
+                  className="n-menu-mark"
+                  src="./mobile-menu-mark.png"
+                  alt=""
+                />
+              </>
             )}
           </button>
           <nav
@@ -1738,7 +1900,16 @@ export default function NewConcepts(props: Props) {
               <Brand />
             </div>
             {navItems.map(([id, label]) => (
-              <button key={id} onClick={() => id === "visit" ? go("gallery") : jump(id)}>
+              <button
+                key={id}
+                onClick={() =>
+                  id === "visit"
+                    ? go("gallery")
+                    : id === "staff"
+                      ? go("staff")
+                      : jump(id)
+                }
+              >
                 {label}
               </button>
             ))}
@@ -1775,14 +1946,13 @@ export default function NewConcepts(props: Props) {
               </a>
             </div>
           </nav>
-          <a className="n-call" href="tel:+17073037707">
-            Call <span>(707) 303-7707</span>
+          <a className="n-button" href={squareBookingUrl}>
+            Schedule now
+            <ArrowUpRight size={18} aria-hidden="true" />
           </a>
-          <Action to="book">Schedule now</Action>
           {props.design === "desk" && (
             <div className="desk-nav-bottom">
               <span>Here to help.</span>
-              <a href="tel:+17073037707">(707) 303-7707</a>
               <p>
                 Downtown Santa Rosa
                 <br />
