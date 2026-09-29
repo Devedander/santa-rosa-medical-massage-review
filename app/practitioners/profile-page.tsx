@@ -47,11 +47,13 @@ export default function PractitionerProfile({
             <h2>{practitioner.question}</h2>
             <p className="staff-profile-answer">{practitioner.shortAnswer}</p>
           </div>
-          <img
-            className="staff-profile-image"
-            src={`${profileBase}/site-photo-intake/${practitioner.teamPhoto}`}
-            alt={`${practitioner.name}, Santa Rosa Medical Massage practitioner`}
-          />
+          <div className="staff-profile-image-frame">
+            <img
+              className="staff-profile-image"
+              src={`${profileBase}/site-photo-intake/${practitioner.teamPhoto}`}
+              alt={`${practitioner.name}, Santa Rosa Medical Massage practitioner`}
+            />
+          </div>
         </div>
         <section className="staff-profile-copy">
           <div>

@@ -231,8 +231,8 @@
   transition: transform 5s, filter 0.3s;
 }
 @keyframes n-photo-arrive {
-  from { opacity: 0; transform: scale(1.11); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.06); }
 }
 .n-house .house-staff-preview .n-photo:hover .n-photo-image > img,
 .n-house .house-staff-preview .n-photo:focus-within .n-photo-image > img,
