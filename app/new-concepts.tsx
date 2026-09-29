@@ -5,7 +5,12 @@ import {
   referralCopy,
   practiceCopy,
 } from "./care-content";
-import { practitioners, practiceAwardCopy, squareBookingUrl } from "./staff-content";
+import {
+  practitioners,
+  practiceAwardCopy,
+  squareBookingUrl,
+  squareGiftCardUrl,
+} from "./staff-content";
 import { getSquareService } from "./square-services";
 
 import {
@@ -22,7 +27,6 @@ import {
   ArrowUpRight,
   ArrowLeft,
   ArrowRight,
-  Menu,
   X,
   MapPin,
   Phone,
@@ -40,6 +44,9 @@ type PhotoProps = {
   className?: string;
   alt?: string;
   slot?: string;
+  onImageClick?: () => void;
+  imageClickLabel?: string;
+  hideControls?: boolean;
 };
 type Design = "courtyard" | "desk" | "everyday" | "house";
 type Props = {
@@ -204,6 +211,14 @@ function Action({
       </a>
     );
   }
+  if (to === "gift") {
+    return (
+      <a className={quiet ? "n-link" : "n-button"} href={squareGiftCardUrl}>
+        {children}
+        <ArrowUpRight size={18} aria-hidden="true" />
+      </a>
+    );
+  }
   return (
     <button
       className={quiet ? "n-link" : "n-button"}
@@ -263,10 +278,16 @@ function Photo({
   name,
   first = "google-remodel-room.jpg",
   className = "",
+  onImageClick,
+  imageClickLabel,
+  hideControls = false,
 }: {
   name: string;
   first?: string;
   className?: string;
+  onImageClick?: () => void;
+  imageClickLabel?: string;
+  hideControls?: boolean;
 }) {
   const { Photo: Picker, photos, design } = useContent();
   const ordered = useMemo(
@@ -281,6 +302,9 @@ function Photo({
       images={ordered}
       slot={`${design}-${name}`}
       className={`n-photo ${className}`}
+      onImageClick={onImageClick}
+      imageClickLabel={imageClickLabel}
+      hideControls={hideControls}
     />
   );
 }
@@ -552,7 +576,13 @@ function Reviews() {
     </div>
   );
 }
-function Visit({ showPhone = false }: { showPhone?: boolean }) {
+function Visit({
+  showPhone = false,
+  showGift = false,
+}: {
+  showPhone?: boolean;
+  showGift?: boolean;
+}) {
   return (
     <div className="n-visit-combined">
       <div className="n-visit-details">
@@ -590,9 +620,18 @@ function Visit({ showPhone = false }: { showPhone?: boolean }) {
               Choose your treatment, preferred date, and time through the
               scheduling page.
             </p>
-            <Action to="book" quiet>
-              Schedule an appointment
-            </Action>
+            {showGift ? (
+              <div className="n-visit-actions">
+                <Action to="gift" quiet>
+                  Give a gift certificate
+                </Action>
+                <Action to="book">Schedule an appointment</Action>
+              </div>
+            ) : (
+              <Action to="book" quiet>
+                Schedule an appointment
+              </Action>
+            )}
           </div>
         )}
       </div>
@@ -1075,6 +1114,15 @@ function House() {
               <Photo
                 name={`welcome-${practitioner.slug}`}
                 first={practitioner.teamPhoto}
+                imageClickLabel={`Read ${practitioner.name}'s full profile`}
+                hideControls
+                onImageClick={() =>
+                  window.location.assign(
+                    window.location.hostname === "localhost"
+                      ? `./practitioners/${practitioner.slug}/`
+                      : `./practitioners/${practitioner.slug}.html`,
+                  )
+                }
               />
               <span>{practitioner.name}</span>
             </div>
@@ -1162,13 +1210,7 @@ function House() {
       <section id="n-visit" className="house-visit n-section">
         <span className="n-kicker">Downtown Santa Rosa</span>
         <h2>A welcoming place to return to.</h2>
-        <Visit />
-        <div className="n-actions">
-          <Action to="book">Appointments & gift certificates</Action>
-          <Action to="gallery" quiet>
-            Explore the full gallery
-          </Action>
-        </div>
+        <Visit showGift />
       </section>
       <section className="house-notes n-section">
         <div className="n-section-heading">
@@ -1374,16 +1416,9 @@ function Booking() {
               Gift certificates are purchased securely through the practice’s
               Square page.
             </p>
-            <button
-              className="n-button"
-              onClick={() =>
-                setNotice(
-                  "Gift certificate options are ready for the next step.",
-                )
-              }
-            >
+            <a className="n-button" href={squareGiftCardUrl}>
               Continue to gift certificates <ArrowRight size={18} />
-            </button>
+            </a>
           </article>
           <article>
             <CalendarDays size={24} />
@@ -1392,16 +1427,9 @@ function Booking() {
               Choose a service and time through the practice’s Square booking
               page.
             </p>
-            <button
-              className="n-button"
-              onClick={() =>
-                setNotice(
-                  "Appointment scheduling is ready for the next step.",
-                )
-              }
-            >
+            <a className="n-button" href={squareBookingUrl}>
               Continue to scheduling <ArrowRight size={18} />
-            </button>
+            </a>
           </article>
         </div>
         {/*
@@ -1507,6 +1535,7 @@ function ContactForm() {
   );
 }
 function StaffDirectory() {
+  const { awards } = useContent();
   return (
     <section className="n-staff-directory" aria-label="Meet the practice">
       <header className="n-staff-directory-heading">
@@ -1525,6 +1554,14 @@ function StaffDirectory() {
             <Photo
               name={`staff-${practitioner.slug}`}
               first={practitioner.teamPhoto}
+              imageClickLabel={`Read ${practitioner.name}'s full profile`}
+              onImageClick={() =>
+                window.location.assign(
+                  window.location.hostname === "localhost"
+                    ? `./practitioners/${practitioner.slug}/`
+                    : `./practitioners/${practitioner.slug}.html`,
+                )
+              }
             />
             <div className="n-staff-card-copy">
               <span>{practitioner.credentials}</span>
@@ -1539,7 +1576,10 @@ function StaffDirectory() {
           </article>
         ))}
       </div>
-      <p className="n-staff-award">{practiceAwardCopy}</p>
+      <div className="n-staff-awards">
+        <p className="n-staff-award">{practiceAwardCopy}</p>
+        {awards}
+      </div>
     </section>
   );
 }
@@ -1610,23 +1650,25 @@ function NewPages() {
         <ArrowLeft size={18} />
         Back to home
       </button>
-      <div className="n-inner-title">
-        <span>Santa Rosa Medical Massage</span>
-        <h1>
-          {service?.[0] ||
-            concern ||
-            post?.[1] ||
-            titles[page] ||
-            titles.contact}
-        </h1>
-        <p>
-          {service?.[1] ||
-            (concern
-              ? concernCopy?.intro ||
-                "A place to begin a conversation about comfort, movement, and your goals."
-              : post?.[3])}
-        </p>
-      </div>
+      {page !== "staff" && (
+        <div className="n-inner-title">
+          <span>Santa Rosa Medical Massage</span>
+          <h1>
+            {service?.[0] ||
+              concern ||
+              post?.[1] ||
+              titles[page] ||
+              titles.contact}
+          </h1>
+          <p>
+            {service?.[1] ||
+              (concern
+                ? concernCopy?.intro ||
+                  "A place to begin a conversation about comfort, movement, and your goals."
+                : post?.[3])}
+          </p>
+        </div>
+      )}
       {service ? (
         <div className="n-detail">
           <Photo name={`detail-${page}`} first={servicePhoto} />
@@ -1882,14 +1924,11 @@ export default function NewConcepts(props: Props) {
             {menu ? (
               <X />
             ) : (
-              <>
-                <Menu className="n-menu-icon" aria-hidden="true" />
-                <img
-                  className="n-menu-mark"
-                  src="./mobile-menu-mark.png"
-                  alt=""
-                />
-              </>
+              <img
+                className="n-menu-mark"
+                src="./mobile-menu-mark.png"
+                alt=""
+              />
             )}
           </button>
           <nav
@@ -1914,11 +1953,9 @@ export default function NewConcepts(props: Props) {
               </button>
             ))}
             <button onClick={() => go("blog")}>Blog</button>
-            {props.design !== "house" && (
-              <>
-                {props.design !== "desk" && <button onClick={() => go("gift")}>Gift cards</button>}
-              </>
-            )}
+            <a className="n-gift-nav" href={squareGiftCardUrl}>
+              Gift cards
+            </a>
             <div className="n-social" aria-label="Social media links">
               <a
                 href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021"

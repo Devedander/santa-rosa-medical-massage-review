@@ -594,11 +594,17 @@ function InlineGallery({
   className = "",
   alt,
   slot = "photo",
+  onImageClick,
+  imageClickLabel,
+  hideControls = false,
 }: {
   images: string[][];
   className?: string;
   alt?: string;
   slot?: string;
+  onImageClick?: () => void;
+  imageClickLabel?: string;
+  hideControls?: boolean;
 }) {
   const storageKey = `srmm-photo-${slot}`;
   const [active, setActive] = useState(0);
@@ -649,32 +655,48 @@ function InlineGallery({
   return (
     <div className={`inline-gallery ${className} ${locked ? "is-locked" : ""}`}>
       {isNovelPhoto ? (
-        <span className="n-photo-image">
+        <span
+          className="n-photo-image"
+          onClick={onImageClick}
+          role={onImageClick ? "link" : undefined}
+          tabIndex={onImageClick ? 0 : undefined}
+          aria-label={imageClickLabel}
+          onKeyDown={(event) => {
+            if (onImageClick && (event.key === "Enter" || event.key === " ")) {
+              event.preventDefault();
+              onImageClick();
+            }
+          }}
+        >
           <img src={assetPath(src)} alt={alt || label} />
         </span>
       ) : (
         <img src={assetPath(src)} alt={alt || label} />
       )}
-      <button
-        className="inline-gallery-arrow previous"
-        onClick={previous}
-        aria-label="Previous photo"
-      >
-        ←
-      </button>
-      <button
-        className="inline-gallery-arrow next"
-        onClick={next}
-        aria-label="Next photo"
-      >
-        →
-      </button>
-      <button className="lock-photo" onClick={lock}>
-        {locked ? "Locked ✓" : "Lock this photo"}
-      </button>
-      <span className="inline-gallery-count">
-        {active + 1}/{images.length}
-      </span>
+      {!hideControls && (
+        <>
+          <button
+            className="inline-gallery-arrow previous"
+            onClick={previous}
+            aria-label="Previous photo"
+          >
+            ←
+          </button>
+          <button
+            className="inline-gallery-arrow next"
+            onClick={next}
+            aria-label="Next photo"
+          >
+            →
+          </button>
+          <button className="lock-photo" onClick={lock}>
+            {locked ? "Locked ✓" : "Lock this photo"}
+          </button>
+          <span className="inline-gallery-count">
+            {active + 1}/{images.length}
+          </span>
+        </>
+      )}
     </div>
   );
 }

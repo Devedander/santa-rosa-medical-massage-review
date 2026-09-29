@@ -129,14 +129,52 @@ body {
   box-shadow: 0 15px 30px #30443812;
 }
 .staff-profile-copy aside .staff-profile-book { margin-top: 8px; }
+.staff-profile-pager {
+  width: 100%;
+  margin: 0 0 52px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+.staff-profile-pager-link {
+  min-width: 160px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid #30443844;
+  border-radius: 999px;
+  color: #304438;
+  font-weight: 700;
+  transition: transform .2s ease, background .2s ease;
+}
+.staff-profile-pager-link:last-child { flex-direction: row-reverse; text-align: right; }
+.staff-profile-pager-link small { display: block; margin-bottom: 2px; font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .68; }
+.staff-profile-pager-link:hover,
+.staff-profile-pager-link:focus-visible { background: #eef3ef; transform: translateY(-2px); }
 .staff-profile-award {
-  max-width: 780px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 32px 38px;
   border-left: 5px solid #803a3a;
   background: #eef3ef;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 30px;
 }
 .staff-profile-award p:last-child { margin-bottom: 0; }
+.staff-profile-award-badges {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.staff-profile-award-badges img {
+  display: block;
+  width: 88px;
+  height: 116px;
+  object-fit: contain;
+}
 .staff-profile-footer {
   display: flex;
   align-items: center;
@@ -148,6 +186,18 @@ body {
   font-size: 0.9rem;
 }
 .staff-profile-footer img { filter: brightness(0) invert(1); }
+.staff-profile-footer-wordmark {
+  width: 204px;
+  height: 52px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.staff-profile-footer-wordmark img {
+  width: 270px;
+  max-width: none;
+  transform: translateX(-82px);
+}
 @media (max-width: 760px) {
   .staff-profile-nav { min-height: 70px; }
   .staff-profile-brand img { width: 190px; }
@@ -159,7 +209,13 @@ body {
   .staff-profile-image { max-height: 440px; aspect-ratio: 0.68; }
   .staff-profile-copy { padding: 55px 4px; }
   .staff-profile-copy aside { padding: 28px 24px; }
-  .staff-profile-footer { display: grid; }
+  .staff-profile-pager { margin-bottom: 36px; }
+  .staff-profile-award { grid-template-columns: 1fr; }
+  .staff-profile-award-badges { justify-content: center; }
+  .staff-profile-footer { display: grid; justify-items: center; text-align: center; }
+}
+@media (max-width: 480px) {
+  .staff-profile-pager-link { min-width: 0; padding: 11px 12px; }
 }
 .site {
   --ink: #13243b;

@@ -146,14 +146,17 @@
   gap: 19px;
   align-items: center;
 }
-.novel .n-site-nav nav button {
+.novel .n-site-nav nav button,
+.novel .n-site-nav nav .n-gift-nav {
   padding: 5px 0;
   border: 0;
   background: transparent;
   color: inherit;
   font-size: 14px;
 }
-.novel .n-site-nav nav button:hover {
+.novel .n-site-nav nav button:hover,
+.novel .n-site-nav nav .n-gift-nav:hover,
+.novel .n-site-nav nav .n-gift-nav:focus-visible {
   color: var(--n-wine);
   text-decoration: underline;
   text-underline-offset: 6px;
@@ -372,6 +375,12 @@
 .novel .n-visit-combined {
   display: grid;
   gap: 40px;
+}
+.novel .n-visit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
 }
 .novel .n-visit-gallery {
   display: grid;
@@ -1908,7 +1917,8 @@
   .novel .n-site-nav nav {
     gap: 11px;
   }
-  .novel .n-site-nav nav button {
+  .novel .n-site-nav nav button,
+  .novel .n-site-nav nav .n-gift-nav {
     font-size: 13px;
   }
   .novel .n-site-nav > .n-button {
@@ -1977,6 +1987,14 @@
   }
 }
 @media (max-width: 960px) {
+  .novel .n-staff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .n-house .house-photo-strip {
+    grid-template-columns: 1fr;
+  }
+
   .novel .n-site-nav {
     min-height: 84px;
     padding: 17px 5vw;
@@ -1999,7 +2017,8 @@
     align-items: stretch;
     gap: 10px;
   }
-  .novel .n-site-nav nav button {
+  .novel .n-site-nav nav button,
+  .novel .n-site-nav nav .n-gift-nav {
     font-size: 16px;
     text-align: left;
     min-height: 40px;
@@ -2007,13 +2026,21 @@
   .novel .n-menu-toggle {
     display: grid;
     place-items: center;
-    margin-left: auto;
+    margin-left: 0;
+    margin-right: auto;
     min-width: 44px;
     height: 44px;
     background: transparent;
-    border: 1px solid var(--n-line);
+    border: 0;
     border-radius: 50%;
     color: inherit;
+    overflow: hidden;
+  }
+  .novel .n-menu-mark {
+    display: block;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
   }
   .n-desk {
     display: block;
@@ -2372,11 +2399,13 @@
   }
   .novel .n-review-grid article,
   .n-desk .n-review-grid article {
-    height: 205px;
-    padding: 20px 24px;
+    height: 232px;
+    padding: 18px 22px;
   }
   .novel .n-review-grid blockquote {
-    font-size: 23px;
+    font-size: 18px;
+    line-height: 1.4;
+    -webkit-line-clamp: 6;
     margin: 8px 0;
   }
   .novel .n-carousel-controls {
@@ -2454,11 +2483,22 @@
   margin: 0 auto;
 }
 .novel .n-staff-directory-heading {
-  max-width: 760px;
+  /* Override the legacy site-wide header flex styling: this is a page
+     introduction, so its eyebrow, heading, and paragraph must stack. */
+  display: block;
+  height: auto;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  background: transparent;
+  border: 0;
   margin-bottom: 44px;
 }
 .novel .n-staff-directory-heading h2 {
   margin: 12px 0 18px;
+  max-width: 18ch;
+  font-size: clamp(42px, 4.2vw, 62px);
+  line-height: 1.06;
 }
 .novel .n-staff-directory-heading p {
   max-width: 62ch;
@@ -2521,6 +2561,38 @@
   border-left: 4px solid #803a3a;
   background: #eef3ef;
   font: 16px/1.6 Georgia, serif;
+}
+.novel .n-staff-awards {
+  width: 100%;
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 42px;
+}
+.novel .n-staff-awards .n-staff-award {
+  max-width: 850px;
+  margin: 0;
+}
+.novel .n-staff-awards .award-strip {
+  justify-content: flex-start;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.novel .n-staff-awards .award-strip > span {
+  display: none;
+}
+.novel .n-staff-awards .award-strip img {
+  width: 132px;
+  height: 176px;
+}
+@media (max-width: 700px) {
+  .novel .n-staff-awards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 .n-house .n-staff-card { border-radius: 0; box-shadow: none; }
 .n-house .n-staff-card-copy { background: #f7f4ed; }
@@ -2732,7 +2804,8 @@
 .n-house .n-site-nav nav {
   gap: 16px;
 }
-.n-house .n-site-nav nav button {
+.n-house .n-site-nav nav button,
+.n-house .n-site-nav nav .n-gift-nav {
   font-size: 12px;
 }
 .n-house .n-site-nav > .n-button {
@@ -2785,7 +2858,7 @@
 }
 .n-house .house-photo-strip {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   max-width: 1100px;
   gap: 13px;
   margin: 28px auto 48px;
@@ -2810,6 +2883,7 @@
   left: 10px;
   bottom: 10px;
   padding: 5px 8px;
+  border-radius: 999px;
   background: #f8f5edf0;
   color: #304438;
   font: 700 11px Arial, sans-serif;
@@ -3006,7 +3080,7 @@
     gap: 30px;
   }
   .n-house .house-photo-strip {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
   .n-house .house-story,
   .n-house .house-concerns {
@@ -3040,7 +3114,11 @@
   }
   .n-house .house-staff-preview-copy p { margin-top: 16px; }
   .n-house .house-photo-strip .n-photo {
-    height: 170px;
+    height: min(115vw, 480px);
+  }
+  .n-house .house-team-member .n-photo .n-photo-image > img {
+    transform: scale(1.05);
+    transform-origin: 43% 18%;
   }
   .n-house .house-photo-strip .inline-gallery-count {
     display: none;
@@ -3135,17 +3213,20 @@
 }
 @media (max-width: 640px) {
   .novel .n-footer {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     gap: 16px;
+    text-align: center;
   }
   .novel .n-footer-meta {
     width: 100%;
+    justify-items: center;
+    text-align: center;
   }
   .novel .n-footer-contact {
-    justify-content: flex-end;
+    justify-content: center;
     margin-left: 0;
-    text-align: right;
+    text-align: center;
   }
   .novel .n-footer-credit {
     margin-left: 0;
@@ -3270,6 +3351,22 @@
     flex-shrink: 0;
   }
 
+  /* Once navigation collapses, the red mark becomes the menu control. Keep
+     the complete wordmark inside the opened panel so two red circles never
+     compete in the compact header. */
+  .novel .n-site-nav > .n-brand {
+    display: none;
+  }
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand {
+    display: block;
+    padding: 2px 0 14px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--n-line);
+  }
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-brand {
+    display: flex;
+  }
+
   .n-desk .n-content {
     width: calc(100% - 20px);
     margin: 10px auto 28px;
@@ -3312,9 +3409,6 @@
     overflow: hidden;
     border: 0;
     transform: translateX(11px);
-  }
-  .novel .n-menu-icon {
-    display: none;
   }
   .novel .n-menu-mark {
     display: block;

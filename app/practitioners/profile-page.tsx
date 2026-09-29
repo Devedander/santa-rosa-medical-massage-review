@@ -1,4 +1,10 @@
-import { type Practitioner, practiceAwardCopy, squareBookingUrl } from "../staff-content";
+import {
+  type Practitioner,
+  practitioners,
+  practiceAwardCopy,
+  squareBookingUrl,
+} from "../staff-content";
+import ProfilePager from "./profile-pager";
 
 // GitHub Pages builds set this flag; local previews and the existing hosted
 // preview stay rooted at /. Keeping this explicit avoids broken nested-route
@@ -13,6 +19,12 @@ export default function PractitionerProfile({
 }: {
   practitioner: Practitioner;
 }) {
+  const currentIndex = practitioners.findIndex(
+    (candidate) => candidate.slug === practitioner.slug,
+  );
+  const previous =
+    practitioners[(currentIndex + practitioners.length - 1) % practitioners.length];
+  const next = practitioners[(currentIndex + 1) % practitioners.length];
   return (
     <main className="staff-profile-page">
       <header className="staff-profile-nav">
@@ -48,20 +60,34 @@ export default function PractitionerProfile({
           </div>
           <aside>
             <p className="staff-profile-kicker">Choosing care</p>
-            <h2>Why this may be a good option</h2>
             <p>{practitioner.fit}</p>
             <a className="staff-profile-book" href={squareBookingUrl}>
               Schedule an appointment <span aria-hidden="true">↗</span>
             </a>
           </aside>
         </section>
+        <ProfilePager previous={previous} next={next} base={profileBase} />
         <section className="staff-profile-award">
-          <p className="staff-profile-kicker">Award-recognized care</p>
-          <p>{practiceAwardCopy}</p>
+          <div>
+            <p className="staff-profile-kicker">Award-recognized care</p>
+            <p>{practiceAwardCopy}</p>
+          </div>
+          <div className="staff-profile-award-badges" aria-label="Practice awards">
+            <img
+              src={`${profileBase}/award-businessrate.png`}
+              alt="BusinessRate Best of 2026 Award Winner, Massage Therapist"
+            />
+            <img
+              src={`${profileBase}/award-recognition.png`}
+              alt="BusinessRate Best of 2025 Massage Therapist recognition"
+            />
+          </div>
         </section>
       </article>
       <footer className="staff-profile-footer">
-        <img src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />
+        <div className="staff-profile-footer-wordmark">
+          <img src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />
+        </div>
         <span>630 Third Street, Suite B, Santa Rosa, CA 95404</span>
       </footer>
     </main>

@@ -12,6 +12,10 @@ export type Practitioner = {
 export const squareBookingUrl =
   "https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services";
 
+// Gift cards are completed securely by Square, separately from appointments.
+export const squareGiftCardUrl =
+  "https://squareup.com/gift/FH36RAWDBBZ1E/order";
+
 export const practiceAwardCopy =
   "Santa Rosa Medical Massage is an award-winning, award-recognized practice, with BusinessRate Best of 2025 recognition and a 2026 BusinessRate Award Winner, Massage Therapist honor.";
 
@@ -70,6 +74,19 @@ export const practitioners: Practitioner[] = [
     fit:
       "Kimberly may be a good option when a client wants to discuss muscular discomfort in the context of stress, recovery, or feeling stuck in a constantly activated state. Her neuromuscular and vagus-toning training offers a calm, informed starting point for care that supports both physical comfort and a sense of ease.",
     teamPhoto: "client-lounge-black.jpeg",
+  },
+  {
+    slug: "matty-cmt",
+    name: "Matty",
+    credentials: "CMT #99367",
+    question: "How can massage support an active body and a fuller sense of ease?",
+    shortAnswer:
+      "Matty brings a background in bodywork, training, and athletics to thoughtful sessions centered on intentional, nurturing touch.",
+    bio:
+      "Matty studied massage therapy at the National Holistic Institute and fell in love with bodywork and the restorative potential of intentional, nurturing touch. A lifelong artist, musician, and athlete, he brings a personal interest in fitness, wellness, nutrition, and connection to his work. Outside the practice, Matty is also a working trainer, drummer, singer-songwriter, and longtime home cook who enjoys time with his son and the people he loves.",
+    fit:
+      "Matty may be a good option for clients looking for therapeutic bodywork informed by an active, whole-person perspective. His experience as an athlete and trainer creates a natural starting point for a conversation about movement, everyday physical demands, relaxation, and finding a session that feels supportive and grounded.",
+    teamPhoto: "client-lounge-blue.jpeg",
   },
   {
     slug: "stacy-cmt",
