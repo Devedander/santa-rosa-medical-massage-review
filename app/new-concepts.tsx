@@ -1632,8 +1632,9 @@ function NewPages() {
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
+  const serviceIndex = service ? services.indexOf(service) : -1;
   const servicePhoto = service
-    ? treatmentPhotoFirsts[services.indexOf(service)] ?? "yelp-treatment.jpg"
+    ? treatmentPhotoFirsts[serviceIndex] ?? "yelp-treatment.jpg"
     : "yelp-treatment.jpg";
   const concern = page.startsWith("condition-")
     ? decodeURIComponent(page.slice(10))
@@ -1714,7 +1715,7 @@ function NewPages() {
       )}
       {service ? (
         <div className="n-detail">
-          <Photo name={`detail-${page}`} first={servicePhoto} />
+          <Photo name={`treatment-${serviceIndex}`} first={servicePhoto} />
           <div>
             <h2>What to expect</h2>
             <p>{service[2]}</p>
