@@ -1917,7 +1917,7 @@ function Footer() {
         </div>
         <a
           className="n-footer-credit"
-          href="https://jwconsulting.dev/"
+          href="https://johnwangcs.com/"
           target="_blank"
           rel="noreferrer"
         >
