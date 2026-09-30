@@ -409,7 +409,7 @@ function ServiceList({
 }: {
   mode?: "cards" | "accordion" | "tabs";
 }) {
-  const { services } = useContent();
+  const { services, onPage } = useContent();
   if (mode === "tabs")
     return (
       <Tabs defaultValue="0" className="n-treatment-tabs">
@@ -461,7 +461,21 @@ function ServiceList({
   return (
     <div className="n-treatment-cards">
       {services.map(([name, summary], i) => (
-        <article key={name}>
+        <article
+          key={name}
+          role="link"
+          tabIndex={0}
+          onClick={(event) => {
+            if ((event.target as HTMLElement).closest("a")) return;
+            onPage(`service-${i}`);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              onPage(`service-${i}`);
+            }
+          }}
+        >
           <Photo
             name={`treatment-${i}`}
             first={
@@ -472,7 +486,9 @@ function ServiceList({
           <div>
             <h3>{name}</h3>
             <p>{summary}</p>
-            <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
+            <span onClick={(event) => event.stopPropagation()}>
+              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
+            </span>
             <Action to={`service-${i}`} quiet>
               More information
             </Action>

@@ -557,6 +557,11 @@
 }
 .novel .n-treatment-cards article {
   min-width: 0;
+  cursor: pointer;
+}
+.novel .n-treatment-cards article:focus-visible {
+  outline: 3px solid var(--n-accent);
+  outline-offset: 6px;
 }
 .novel .n-treatment-cards .n-photo {
   height: 250px;
