@@ -1,10 +1,16 @@
+"use client";
+
 import {
   type Practitioner,
   practitioners,
   practiceAwardCopy,
   squareBookingUrl,
+  squareGiftCardUrl,
 } from "../staff-content";
 import ProfilePager from "./profile-pager";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 // GitHub Pages builds set this flag; local previews and the existing hosted
 // preview stay rooted at /. Keeping this explicit avoids broken nested-route
@@ -19,6 +25,19 @@ export default function PractitionerProfile({
 }: {
   practitioner: Practitioner;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menu = useRef<HTMLElement>(null);
+  const menuToggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (!menu.current?.contains(target) && !menuToggle.current?.contains(target))
+        setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [menuOpen]);
   const currentIndex = practitioners.findIndex(
     (candidate) => candidate.slug === practitioner.slug,
   );
@@ -29,8 +48,34 @@ export default function PractitionerProfile({
     <main className="staff-profile-page">
       <header className="staff-profile-nav">
         <a href={`${profileBase}/`} className="staff-profile-brand" aria-label="Santa Rosa Medical Massage home">
-          <img src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />
+          <img className="staff-profile-wordmark" src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />
+          <img className="staff-profile-mark" src={`${profileBase}/mobile-menu-mark.png`} alt="" aria-hidden="true" />
         </a>
+        <button
+          className="staff-profile-menu-toggle"
+          ref={menuToggle}
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+        <nav ref={menu} className={`staff-profile-menu${menuOpen ? " is-open" : ""}`} aria-label="Website navigation">
+          <a href={`${profileBase}/#n-content`}>The practice</a>
+          <a href={`${profileBase}/#n-content`}>Meet the practice</a>
+          <a href={`${profileBase}/#n-treatments`}>Treatments</a>
+          <a href={`${profileBase}/#n-conditions`}>Common concerns</a>
+          <a href={`${profileBase}/#n-reviews`}>Reviews</a>
+          <a href={`${profileBase}/#n-visit`}>Visit &amp; gallery</a>
+          <a href={`${profileBase}/#n-blog`}>Blog</a>
+          <a href={squareGiftCardUrl}>Gift cards</a>
+          <div className="staff-profile-social" aria-label="Social media links">
+            <a href="https://www.facebook.com/search/top?q=santa%20rosa%20medical%20massage%2C%20inc.%20ca%2314021" target="_blank" rel="noreferrer" aria-label="Facebook"><img src={`${profileBase}/social-facebook.svg`} alt="" /></a>
+            <a href="https://www.instagram.com/santarosamedicalmassage/" target="_blank" rel="noreferrer" aria-label="Instagram"><img src={`${profileBase}/social-instagram.svg`} alt="" /></a>
+            <a href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4" target="_blank" rel="noreferrer" aria-label="Yelp"><img src={`${profileBase}/social-yelp.svg`} alt="" /></a>
+          </div>
+        </nav>
         <a className="staff-profile-book" href={squareBookingUrl}>
           Schedule now <span aria-hidden="true">↗</span>
         </a>

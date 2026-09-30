@@ -2020,6 +2020,7 @@
   .novel .n-site-nav nav button,
   .novel .n-site-nav nav .n-gift-nav {
     font-size: 16px;
+    font-weight: 700;
     text-align: left;
     min-height: 40px;
   }

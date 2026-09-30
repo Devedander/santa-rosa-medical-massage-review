@@ -1230,7 +1230,7 @@ function House() {
         <h2>A welcoming place to return to.</h2>
         <Visit showGift />
       </section>
-      <section className="house-notes n-section">
+      <section id="n-blog" className="house-notes n-section">
         <div className="n-section-heading">
           <h2>A little reading before your visit.</h2>
           <Action to="blog" quiet>
@@ -1887,6 +1887,8 @@ export default function NewConcepts(props: Props) {
   const [menu, setMenu] = useState(false);
   const pendingSection = useRef<string | null>(null);
   const root = useRef<HTMLDivElement>(null);
+  const nav = useRef<HTMLElement>(null);
+  const menuToggle = useRef<HTMLButtonElement>(null);
   const go = (page: string) => {
     pendingSection.current = null;
     setMenu(false);
@@ -1911,6 +1913,16 @@ export default function NewConcepts(props: Props) {
       pendingSection.current = null;
     }
   }, [props.page]);
+  useEffect(() => {
+    if (!menu) return;
+    const closeOutside = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (!nav.current?.contains(target) && !menuToggle.current?.contains(target))
+        setMenu(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [menu]);
   useEffect(() => {
     const elements = root.current?.querySelectorAll(".n-section");
     if (
@@ -1948,6 +1960,7 @@ export default function NewConcepts(props: Props) {
           <Brand />
           <button
             className="n-menu-toggle"
+            ref={menuToggle}
             aria-label={menu ? "Close menu" : "Open menu"}
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
@@ -1955,6 +1968,7 @@ export default function NewConcepts(props: Props) {
             {menu ? <X /> : <Menu />}
           </button>
           <nav
+            ref={nav}
             aria-label="Website navigation"
             className={menu ? "n-nav-open" : ""}
           >
