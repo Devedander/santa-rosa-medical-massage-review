@@ -36,6 +36,7 @@ import {
   Plus,
   Check,
   Star,
+  Menu,
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -44,6 +45,7 @@ type PhotoProps = {
   className?: string;
   alt?: string;
   slot?: string;
+  imageHref?: string;
   onImageClick?: () => void;
   imageClickLabel?: string;
   hideControls?: boolean;
@@ -55,6 +57,7 @@ type Props = {
   onPage: (page: string) => void;
   services: string[][];
   photos: string[][];
+  galleryPhotos: string[][];
   posts: string[][];
   reviews: string[][];
   Photo: ComponentType<PhotoProps>;
@@ -278,6 +281,8 @@ function Photo({
   name,
   first = "google-remodel-room.jpg",
   className = "",
+  imageHref,
+  photoOptions,
   onImageClick,
   imageClickLabel,
   hideControls = false,
@@ -285,23 +290,27 @@ function Photo({
   name: string;
   first?: string;
   className?: string;
+  imageHref?: string;
+  photoOptions?: string[][];
   onImageClick?: () => void;
   imageClickLabel?: string;
   hideControls?: boolean;
 }) {
   const { Photo: Picker, photos, design } = useContent();
+  const availablePhotos = photoOptions || photos;
   const ordered = useMemo(
     () => [
-      ...photos.filter(([src]) => src.endsWith(`/${first}`)),
-      ...photos.filter(([src]) => !src.endsWith(`/${first}`)),
+      ...availablePhotos.filter(([src]) => src.endsWith(`/${first}`)),
+      ...availablePhotos.filter(([src]) => !src.endsWith(`/${first}`)),
     ],
-    [photos, first],
+    [availablePhotos, first],
   );
   return (
     <Picker
       images={ordered}
       slot={`${design}-${name}`}
       className={`n-photo ${className}`}
+      imageHref={imageHref}
       onImageClick={onImageClick}
       imageClickLabel={imageClickLabel}
       hideControls={hideControls}
@@ -311,17 +320,23 @@ function Photo({
 function Brand() {
   const { onPage } = useContent();
   return (
-    <button
-      className="n-brand"
-      onClick={() => onPage("home")}
-      aria-label="Santa Rosa Medical Massage home"
-    >
-      <img
-        src="./logo-correct.png"
-        alt="Santa Rosa Medical Massage"
-        className="n-brand-logo"
-      />
-    </button>
+      <button
+        className="n-brand"
+        onClick={() => onPage("home")}
+        aria-label="Santa Rosa Medical Massage home"
+      >
+        <img
+          src="./logo-correct.png"
+          alt="Santa Rosa Medical Massage"
+          className="n-brand-logo"
+        />
+        <img
+          src="./mobile-menu-mark.png"
+          alt=""
+          className="n-mobile-brand-mark"
+          aria-hidden="true"
+        />
+      </button>
   );
 }
 function ConcernLinks() {
@@ -1104,9 +1119,6 @@ function House() {
             Get to know the practitioners, their backgrounds, and the
             therapeutic approaches they bring to each appointment.
           </p>
-          <Action to="staff" quiet>
-            Meet the practice
-          </Action>
         </div>
         <div className="house-photo-strip" aria-label="A preview of the practice team">
           {practitioners.map((practitioner) => (
@@ -1114,6 +1126,7 @@ function House() {
               <Photo
                 name={`welcome-${practitioner.slug}`}
                 first={practitioner.teamPhoto}
+                imageHref={`./practitioners/${practitioner.slug}.html`}
                 imageClickLabel={`Read ${practitioner.name}'s full profile`}
                 hideControls
                 onImageClick={() =>
@@ -1127,6 +1140,11 @@ function House() {
               <span>{practitioner.name}</span>
             </div>
           ))}
+        </div>
+        <div className="house-staff-preview-action">
+          <Action to="staff" quiet>
+            Meet the practice
+          </Action>
         </div>
       </section>
       <section id="n-reviews" className="house-reviews n-section">
@@ -1554,6 +1572,7 @@ function StaffDirectory() {
             <Photo
               name={`staff-${practitioner.slug}`}
               first={practitioner.teamPhoto}
+              imageHref={`./practitioners/${practitioner.slug}.html`}
               imageClickLabel={`Read ${practitioner.name}'s full profile`}
               onImageClick={() =>
                 window.location.assign(
@@ -1585,7 +1604,15 @@ function StaffDirectory() {
 }
 
 function NewPages() {
-  const { page, services, posts, onPage, selections, photoTools } = useContent();
+  const {
+    page,
+    services,
+    posts,
+    onPage,
+    selections,
+    photoTools,
+    galleryPhotos,
+  } = useContent();
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
@@ -1783,7 +1810,11 @@ function NewPages() {
         <>
           <Visit />
           <div className="n-visit-gallery n-visit-mini-gallery">
-            <Photo name="visit-gallery" first="google-remodel-room.jpg" />
+            <Photo
+              name="visit-gallery"
+              first="google-remodel-room.jpg"
+              photoOptions={galleryPhotos}
+            />
             <div>
               <span>Inside the practice</span>
               <h3>Take a look around.</h3>
@@ -1921,15 +1952,7 @@ export default function NewConcepts(props: Props) {
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
-            {menu ? (
-              <X />
-            ) : (
-              <img
-                className="n-menu-mark"
-                src="./mobile-menu-mark.png"
-                alt=""
-              />
-            )}
+            {menu ? <X /> : <Menu />}
           </button>
           <nav
             aria-label="Website navigation"

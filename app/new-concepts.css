@@ -2966,19 +2966,21 @@
   background: #f8f5ed;
 }
 .n-house .house-staff-preview-copy {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 28px;
-  max-width: 1100px;
-  margin: 0 auto 25px;
+  display: block;
+  max-width: none;
+  margin: 0 0 25px;
 }
 .n-house .house-staff-preview-copy h2 { margin: 7px 0 0; }
 .n-house .house-staff-preview-copy p {
-  max-width: 42ch;
-  margin: 0;
+  max-width: none;
+  margin: 16px 0 0;
   font-size: 16px;
   line-height: 1.65;
+}
+.n-house .house-staff-preview-action {
+  display: flex;
+  justify-content: flex-end;
+  margin: -20px 4vw 0;
 }
 .n-house .house-reviews {
   background: #eef1ec;
@@ -3057,6 +3059,14 @@
     grid-template-columns: 1fr;
     gap: 22px;
     padding: 18px;
+  }
+  .n-house .n-visit-gallery > div {
+    display: block;
+    width: 100%;
+  }
+  .n-house .n-visit-gallery > div > p {
+    max-width: none;
+    width: 100%;
   }
   .n-house .n-footer > div:last-child {
     justify-self: start;
@@ -3144,6 +3154,9 @@
   object-fit: contain;
   display: block;
   flex: none;
+}
+.n-mobile-brand-mark {
+  display: none;
 }
 .novel .n-footer {
   display: flex;
@@ -3284,7 +3297,12 @@
 }
 .n-house .house-photo-strip {
   max-width: none;
-  margin-inline: 4vw;
+  margin-inline: 0;
+}
+@media (min-width: 961px) {
+  .n-house .house-photo-strip .n-photo {
+    height: clamp(210px, 16vw, 290px);
+  }
 }
 .n-house .n-section {
   padding-inline: 4vw;
@@ -3351,20 +3369,13 @@
     flex-shrink: 0;
   }
 
-  /* Once navigation collapses, the red mark becomes the menu control. Keep
-     the complete wordmark inside the opened panel so two red circles never
-     compete in the compact header. */
+  /* Keep the red circle as a visible brand mark. The adjacent hamburger owns
+     the mobile navigation state. */
   .novel .n-site-nav > .n-brand {
-    display: none;
+    display: flex;
   }
   .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand {
-    display: block;
-    padding: 2px 0 14px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid var(--n-line);
-  }
-  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-brand {
-    display: flex;
+    display: none;
   }
 
   .n-desk .n-content {
@@ -3375,24 +3386,36 @@
 }
 
 @media (max-width: 640px) {
-  /* Free the compact header for the two primary actions; the full mark is
-     available at the top of the opened menu. */
+  /* Keep the compact brand visible beside the menu control. */
   .novel .n-site-nav > .n-brand {
-    display: none;
+    display: flex;
   }
   .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand {
-    display: block;
-    padding: 2px 0 14px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid var(--n-line);
+    display: none;
   }
+
+  .novel .n-site-nav > .n-brand,
   .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-brand {
-    display: flex;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    overflow: hidden;
+  }
+  .novel .n-site-nav > .n-brand .n-brand-logo,
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-brand-logo {
+    display: none;
+  }
+  .novel .n-site-nav > .n-brand .n-mobile-brand-mark,
+  .novel .n-site-nav > nav.n-nav-open .n-mobile-menu-brand .n-mobile-brand-mark {
+    display: block;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
   }
 
   .novel .n-site-nav {
-    justify-content: flex-end;
-    gap: 6px;
+    justify-content: flex-start;
+    gap: 8px;
     padding-inline: 12px;
   }
   .n-house .n-site-nav {
@@ -3405,18 +3428,16 @@
   }
   .novel .n-menu-toggle {
     margin-left: 0;
-    margin-right: auto;
-    overflow: hidden;
-    border: 0;
-    transform: translateX(11px);
-  }
-  .novel .n-menu-mark {
-    display: block;
+    margin-right: 0;
     width: 44px;
-    height: 44px;
-    object-fit: contain;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
   }
+  .novel .n-menu-toggle svg { width: 21px; height: 21px; }
   .novel .n-site-nav > .n-button {
+    margin-left: auto;
     padding: 0 12px;
   }
 }

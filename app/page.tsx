@@ -576,6 +576,34 @@ const initialPhotoOptions = [
     ([src]) => !galleryImages.some(([gallerySrc]) => gallerySrc === src),
   ),
 ];
+const galleryChoicesToRemove = new Set([
+  11, 21, 22, 23, 24, 26, 27, 31, 33, 34, 35, 38, 42, 44, 45, 48, 50,
+  52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 68, 71, 72,
+  74, 75, 76, 80, 86, 87, 88,
+]);
+
+// Approved selections received from Stacy's review link. These remain in the
+// chooser even if one happened to be part of the retired numbered gallery set.
+const approvedPhotoSelections: Record<string, string> = {
+  "desk-treatments-overview": "/mockup-photos/therapy-hands.jpg",
+  "house-referral-care": "/mockup-photos/google-gallery-8.jpg",
+  "house-treatment-7": "/site-photo-intake/treatment-hand-work-02.jpeg",
+  "desk-opening": "/mockup-photos/google-remodel-room.jpg",
+  "house-welcome": "/mockup-photos/google-gallery-3.jpg",
+  "house-practice-story": "/mockup-photos/google-gallery-3.jpg",
+  "house-treatment-10": "/mockup-photos/google-gallery-19.jpg",
+  "house-treatment-8": "/mockup-photos/yelp-detail-4.jpg",
+  "house-treatment-4": "/site-photo-intake/treatment-back-work-02.jpeg",
+  "house-treatment-2": "/site-photo-intake/assisted-stretching-15.jpeg",
+  "house-treatment-0": "/site-photo-intake/treatment-table-bodywork-01.jpeg",
+  "house-treatment-1": "/site-photo-intake/treatment-back-work-06.jpeg",
+  "house-treatment-6": "/site-photo-intake/treatment-hand-work-03.jpeg",
+  "house-treatment-9": "/mockup-photos/therapy-hands.jpg",
+  "house-treatment-5": "/site-photo-intake/assisted-stretching-01.jpeg",
+  "house-treatment-3": "/site-photo-intake/treatment-shoulder-work-03.jpeg",
+};
+
+const approvedPhotoSources = new Set(Object.values(approvedPhotoSelections));
 const allPhotoOptions = Array.from(
   new Map(
     [
@@ -588,12 +616,17 @@ const allPhotoOptions = Array.from(
     ]),
   ).values(),
 );
+const galleryPhotoOptions = allPhotoOptions.filter(
+  ([src], index) =>
+    !galleryChoicesToRemove.has(index + 1) || approvedPhotoSources.has(src),
+);
 const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 function InlineGallery({
   images,
   className = "",
   alt,
   slot = "photo",
+  imageHref,
   onImageClick,
   imageClickLabel,
   hideControls = false,
@@ -602,6 +635,7 @@ function InlineGallery({
   className?: string;
   alt?: string;
   slot?: string;
+  imageHref?: string;
   onImageClick?: () => void;
   imageClickLabel?: string;
   hideControls?: boolean;
@@ -620,7 +654,17 @@ function InlineGallery({
           )
         : null;
       const saved =
-        linked || JSON.parse(window.localStorage.getItem(storageKey) || "null");
+        linked ||
+        JSON.parse(window.localStorage.getItem(storageKey) || "null") ||
+        (approvedPhotoSelections[slot]
+          ? {
+              slot,
+              src: approvedPhotoSelections[slot],
+              label:
+                images.find(([src]) => src === approvedPhotoSelections[slot])?.[1] ||
+                "Approved Santa Rosa Medical Massage photo",
+            }
+          : null);
       if (!saved) return;
       const savedIndex = images.findIndex(([src]) => src === saved.src);
       if (savedIndex >= 0) {
@@ -655,21 +699,37 @@ function InlineGallery({
   return (
     <div className={`inline-gallery ${className} ${locked ? "is-locked" : ""}`}>
       {isNovelPhoto ? (
-        <span
-          className="n-photo-image"
-          onClick={onImageClick}
-          role={onImageClick ? "link" : undefined}
-          tabIndex={onImageClick ? 0 : undefined}
-          aria-label={imageClickLabel}
-          onKeyDown={(event) => {
-            if (onImageClick && (event.key === "Enter" || event.key === " ")) {
-              event.preventDefault();
-              onImageClick();
-            }
-          }}
-        >
-          <img src={assetPath(src)} alt={alt || label} />
-        </span>
+        imageHref ? (
+          <a
+            className="n-photo-image"
+            href={imageHref}
+            aria-label={imageClickLabel}
+            onClick={(event) => {
+              if (onImageClick && window.location.hostname === "localhost") {
+                event.preventDefault();
+                onImageClick();
+              }
+            }}
+          >
+            <img src={assetPath(src)} alt={alt || label} />
+          </a>
+        ) : (
+          <span
+            className="n-photo-image"
+            onClick={onImageClick}
+            role={onImageClick ? "link" : undefined}
+            tabIndex={onImageClick ? 0 : undefined}
+            aria-label={imageClickLabel}
+            onKeyDown={(event) => {
+              if (onImageClick && (event.key === "Enter" || event.key === " ")) {
+                event.preventDefault();
+                onImageClick();
+              }
+            }}
+          >
+            <img src={assetPath(src)} alt={alt || label} />
+          </span>
+        )
       ) : (
         <img src={assetPath(src)} alt={alt || label} />
       )}
@@ -838,10 +898,10 @@ function PhotoSelectionTools() {
 }
 function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
   const [active, setActive] = useState(0);
-  const [src, label] = allPhotoOptions[active];
+  const [src, label] = galleryPhotoOptions[active];
   const previous = () =>
-    setActive((active + allPhotoOptions.length - 1) % allPhotoOptions.length);
-  const next = () => setActive((active + 1) % allPhotoOptions.length);
+    setActive((active + galleryPhotoOptions.length - 1) % galleryPhotoOptions.length);
+  const next = () => setActive((active + 1) % galleryPhotoOptions.length);
   return (
     <section className="mock-page gallery-page">
       <button className="back-link" onClick={() => setPage("home")}>
@@ -901,12 +961,12 @@ function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
         <div className="gallery-caption">
           <b>{label}</b>
           <span>
-            {active + 1} / {allPhotoOptions.length}
+            {active + 1} / {galleryPhotoOptions.length}
           </span>
         </div>
       </div>
       <div className="gallery-thumbs">
-        {allPhotoOptions.map(([image, alt], i) => (
+        {galleryPhotoOptions.map(([image, alt], i) => (
           <button
             key={image}
             className={i === active ? "active" : ""}
@@ -3342,6 +3402,7 @@ export default function Home() {
           onPage={setPage}
           services={serviceDetails}
           photos={allPhotoOptions}
+          galleryPhotos={galleryPhotoOptions}
           posts={blogPosts}
           reviews={allReviews}
           Photo={InlineGallery}

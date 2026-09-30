@@ -31,7 +31,7 @@ export const practitioners: Practitioner[] = [
     shortAnswer:
       "Andrea may be a thoughtful fit for clients looking for focused Trigger Point Therapy and a session shaped around their individual goals.",
     bio:
-      "Born and raised in Santa Rosa, Andrea is proud to serve the community she has called home throughout her life. She graduated from the National Holistic Institute in 2021, where she developed a foundation in therapeutic bodywork and specialized in Trigger Point Therapy. Her approach combines therapeutic knowledge with intuitive care, so each session can be customized around what a client hopes to feel and do more comfortably.",
+      "Born and raised in Santa Rosa, Andrea is proud to serve the community she has called home throughout her life. She graduated from the National Holistic Institute in 2021, where she developed a foundation in therapeutic bodywork and specialized in Trigger Point Therapy. That training informs her work with persistent tension, muscle knots, and referred discomfort. Her approach combines therapeutic knowledge with intuitive care, so each session can be customized around what a client hopes to feel and do more comfortably.",
     fit:
       "For tight, sensitive areas that seem connected to discomfort elsewhere, Andrea can begin with the patterns you are noticing and tailor focused work at a comfortable pace. Her Trigger Point Therapy background makes her a useful option when the goal is to discuss persistent tension, muscle knots, or referred discomfort alongside an overall therapeutic session.",
     teamPhoto: "client-lounge-stripe.jpeg",
@@ -44,7 +44,7 @@ export const practitioners: Practitioner[] = [
     shortAnswer:
       "Cat blends myofascial release, Trigger Point Therapy, neuromuscular work, and cupping in a slow, tailored approach.",
     bio:
-      "Cat has been passionate about helping people work with pain, stress, and inflammation since beginning massage training in 2003. Her additional training includes myofascial release, Trigger Point Therapy, cupping, and manual lymphatic drainage. She tailors sessions to each client and may blend myofascial, trigger point, neuromuscular, and cupping approaches while keeping the pace calm and unhurried.",
+      "Cat has been passionate about helping people work with pain, stress, and inflammation since beginning massage training in 2003. Her additional training includes myofascial release, Trigger Point Therapy, cupping, and manual lymphatic drainage. This range supports conversations about long-standing tension, stress patterns, and areas that feel restricted or overworked. She tailors sessions to each client and may blend myofascial, trigger point, neuromuscular, and cupping approaches while keeping the pace calm and unhurried.",
     fit:
       "Cat may be a good fit when a client wants time to work through long-standing tension or stress patterns without rushing the session. Her range of soft-tissue approaches gives her a practical starting point for discussing areas that feel restricted, sore, or persistently overworked.",
     teamPhoto: "client-lounge-orange.jpeg",
@@ -57,7 +57,7 @@ export const practitioners: Practitioner[] = [
     shortAnswer:
       "Jamie brings therapeutic massage, sports massage, movement guidance, and whole-person care to goals around pain, mobility, and stress management.",
     bio:
-      "Jamie has been practicing therapeutic massage and wellness work since 2009. Her training includes sports massage, Trigger Point Therapy, acupuncture, reflexology, Reiki, cupping, myofascial release, and Gua Sha. With intuitive touch and practical movement guidance, Jamie focuses on helping clients decrease pain, improve mobility, and manage stress through a whole-person approach.",
+      "Jamie has been practicing therapeutic massage and wellness work since 2009. Her training includes sports massage, Trigger Point Therapy, acupuncture, reflexology, Reiki, cupping, myofascial release, and Gua Sha. With intuitive touch and practical movement guidance, Jamie focuses on helping clients decrease pain, improve mobility after activity or everyday strain, and manage stress through a whole-person approach.",
     fit:
       "For a goal such as moving more comfortably after activity, managing a recurring training-related tightness, or returning to a favorite routine, Jamie can help shape a session around function as well as relaxation. Her sports and therapeutic background makes her a useful option for clients who want to connect bodywork with everyday movement.",
     teamPhoto: "client-lounge-burgundy.jpeg",
@@ -83,7 +83,7 @@ export const practitioners: Practitioner[] = [
     shortAnswer:
       "Matty brings a background in bodywork, training, and athletics to thoughtful sessions centered on intentional, nurturing touch.",
     bio:
-      "Matty studied massage therapy at the National Holistic Institute and fell in love with bodywork and the restorative potential of intentional, nurturing touch. A lifelong artist, musician, and athlete, he brings a personal interest in fitness, wellness, nutrition, and connection to his work. Outside the practice, Matty is also a working trainer, drummer, singer-songwriter, and longtime home cook who enjoys time with his son and the people he loves.",
+      "Matty studied massage therapy at the National Holistic Institute and fell in love with bodywork and the restorative potential of intentional, nurturing touch. A lifelong artist, musician, and athlete, he brings a personal interest in fitness, wellness, nutrition, and connection to his work. His experience as an athlete and working trainer informs conversations about movement, everyday physical demands, relaxation, and grounded support. Outside the practice, Matty is also a drummer, singer-songwriter, and longtime home cook who enjoys time with his son and the people he loves.",
     fit:
       "Matty may be a good option for clients looking for therapeutic bodywork informed by an active, whole-person perspective. His experience as an athlete and trainer creates a natural starting point for a conversation about movement, everyday physical demands, relaxation, and finding a session that feels supportive and grounded.",
     teamPhoto: "client-lounge-blue.jpeg",
