@@ -1915,7 +1915,14 @@ function Footer() {
         <div className="n-footer-contact">
           <span>{address}</span>
         </div>
-        <small className="n-footer-credit">Website by JW Consulting Services</small>
+        <a
+          className="n-footer-credit"
+          href="https://jwconsulting.dev/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Website by JW Consulting Services
+        </a>
       </div>
     </footer>
   );
