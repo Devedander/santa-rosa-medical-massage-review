@@ -1378,6 +1378,17 @@
   color: var(--n-ink-muted);
   font-size: 14px;
 }
+.novel .n-detail .n-service-practitioner-link {
+  color: var(--n-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.novel .n-detail .n-service-practitioner-link:hover,
+.novel .n-detail .n-service-practitioner-link:focus-visible {
+  color: var(--n-ink);
+}
 .novel .n-detail .n-link {
   display: flex;
   width: fit-content;

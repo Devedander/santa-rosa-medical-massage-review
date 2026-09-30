@@ -13,6 +13,9 @@ import {
 } from "./staff-content";
 import { getSquareService } from "./square-services";
 
+const practitionerProfileSuffix =
+  process.env.GITHUB_PAGES === "true" ? ".html" : "/";
+
 import {
   createContext,
   useContext,
@@ -258,19 +261,11 @@ function PractitionerProfileLink({
   slug: string;
   name: string;
 }) {
-  const href = `./practitioners/${slug}.html`;
+  const href = `./practitioners/${slug}${practitionerProfileSuffix}`;
   return (
     <a
       className="n-link"
       href={href}
-      onClick={(event) => {
-        // The local dev server resolves file-system routes with a trailing
-        // slash, while the static export used by public hosts emits .html.
-        if (window.location.hostname === "localhost") {
-          event.preventDefault();
-          window.location.assign(`./practitioners/${slug}/`);
-        }
-      }}
     >
       Read {name}&rsquo;s full profile
       <ArrowUpRight size={18} aria-hidden="true" />
@@ -1721,7 +1716,27 @@ function NewPages() {
             <p>{practiceCopy}</p>
             {squareService && (
               <p className="n-service-availability">
-                <b>Available with:</b> {squareService.staff.join(", ")}
+                <b>Available with:</b>{" "}
+                {squareService.staff.map((staffName, index) => {
+                  const practitioner = practitioners.find(
+                    (candidate) => candidate.name === staffName,
+                  );
+                  return (
+                    <span key={staffName}>
+                      {index > 0 ? ", " : ""}
+                      {practitioner ? (
+                        <a
+                          className="n-service-practitioner-link"
+                          href={`./practitioners/${practitioner.slug}${practitionerProfileSuffix}`}
+                        >
+                          {staffName}
+                        </a>
+                      ) : (
+                        staffName
+                      )}
+                    </span>
+                  );
+                })}
               </p>
             )}
             <TreatmentBookingLink serviceName={service[0]}>Schedule now</TreatmentBookingLink>
