@@ -3383,18 +3383,7 @@ export default function Home() {
   };
   if (["courtyard", "desk", "everyday", "house"].includes(baseStyle))
     return (
-    <main ref={siteRef} className={`site ${baseStyle} ${shareMode ? "share-mode" : ""}`}>
-        {!shareMode && <Switcher style={style} setStyle={chooseConcept} />}
-        {!shareMode && <div className="new-review-tools">
-          <button
-            onClick={() => {
-              setPage("selections");
-              window.scrollTo(0, 0);
-            }}
-          >
-            Photo selections
-          </button>
-        </div>}
+      <main ref={siteRef} className={`site ${baseStyle} ${shareMode ? "share-mode" : ""}`}>
         <NewConcepts
           key={baseStyle}
           design={baseStyle as "courtyard" | "desk" | "everyday" | "house"}
