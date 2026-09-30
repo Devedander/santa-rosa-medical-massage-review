@@ -2794,6 +2794,7 @@
   letter-spacing: -0.025em;
 }
 .n-house .n-site-nav {
+  top: 0;
   min-height: 80px;
   padding-block: 15px;
   padding-inline: max(5vw, calc((100% - 1100px) / 2));

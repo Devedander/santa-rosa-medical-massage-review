@@ -22,10 +22,6 @@ function PagerLink({
     <a
       className="staff-profile-pager-link"
       href={href}
-      onClick={(event) => {
-        event.preventDefault();
-        window.location.assign(href);
-      }}
     >
       {direction === "previous" ? "←" : "→"}
       <span>
