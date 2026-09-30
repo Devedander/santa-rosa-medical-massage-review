@@ -10,8 +10,8 @@
     "file": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
     "name": "rolldown-runtime"
   },
-  "_x-D-9hUP0V.js": {
-    "file": "_next/static/chunks/x-D-9hUP0V.js",
+  "_x-De1aUkmK.js": {
+    "file": "_next/static/chunks/x-De1aUkmK.js",
     "name": "x",
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
@@ -19,29 +19,29 @@
     ]
   },
   "app/page.tsx": {
-    "file": "_next/static/chunks/page-SS5tl9Tq.js",
+    "file": "_next/static/chunks/page-BvsELqp2.js",
     "name": "page",
     "src": "app/page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_x-D-9hUP0V.js",
+      "_x-De1aUkmK.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "app/practitioners/profile-page.tsx": {
-    "file": "_next/static/chunks/profile-page-JX9xLlj8.js",
+    "file": "_next/static/chunks/profile-page-CTnAUssv.js",
     "name": "profile-page",
     "src": "app/practitioners/profile-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_x-D-9hUP0V.js",
+      "_x-De1aUkmK.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "_next/static/chunks/app-route-prefetch-policy-BYqyTXl5.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-5L9t_j9d.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -50,7 +50,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-Dklh493K.js",
+    "file": "_next/static/chunks/layout-segment-context-CbhpZbJs.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -71,7 +71,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-D3nfotqf.js",
+    "file": "_next/static/chunks/index-B9n7d_hh.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
