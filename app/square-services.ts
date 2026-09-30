@@ -22,14 +22,6 @@ export const squareServices: SquareService[] = [
     staff: ["Andrea", "Cat", "Jamie", "Matty", "Stacy"],
   },
   {
-    name: "Vagus Toning",
-    summary: "A gentle, relaxation-focused session that supports a shift toward rest, ease, and body awareness.",
-    description:
-      "Vagus Toning uses soothing therapeutic touch, breathing techniques, and focused work around areas associated with relaxation and nervous-system regulation. It may appeal to clients experiencing everyday stress, tension, difficulty unwinding, or a feeling of being constantly on. This wellness service is not a treatment for medical or neurological conditions.",
-    bookingUrl: `${squareServiceBase}ZI2VH54THKM6STNKX64OMIPP`,
-    staff: [],
-  },
-  {
     name: "Thai Massage and Stretching",
     summary: "Gentle assisted movement, passive stretching, and targeted pressure for mobility, flexibility, and circulation.",
     description:

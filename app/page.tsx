@@ -1791,11 +1791,11 @@ function Classic({
     style === "editorial"
       ? [
           "For more than 15 years, Santa Rosa Medical Massage has been a steady, trusted part of downtown Santa Rosa. What began as a focused practice in therapeutic bodywork has grown into a place people return to for both difficult pain patterns and the ongoing care that keeps life moving.",
-          "Clients come to us for trigger point therapy, medical massage, deep tissue work, lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing. They often mention the same things: knowledgeable therapists, a warm and welcoming environment, and care that begins by listening.",
+          "Clients come to us for trigger point therapy, medical massage, deep tissue work, lymphatic facilitation, Thai massage, assisted stretching, and somatic experiencing. They often mention the same things: knowledgeable therapists, a warm and welcoming environment, and care that begins by listening.",
         ]
       : [
           "Established in 2010, Santa Rosa Medical Massage has spent more than 15 years helping Sonoma County clients move with less pain and more confidence. Our approach centers your goals for comfort, recovery, and everyday mobility.",
-          "We offer trigger point therapy, medical massage, deep tissue and full-body work, lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing. Local clients value the thoughtful consultations, skilled hands, and practical results that make this a practice they recommend to friends, family, and people involved in their care.",
+          "We offer trigger point therapy, medical massage, deep tissue and full-body work, lymphatic facilitation, Thai massage, assisted stretching, and somatic experiencing. Local clients value the thoughtful consultations, skilled hands, and practical results that make this a practice they recommend to friends, family, and people involved in their care.",
         ];
   return (
     <>
@@ -3182,7 +3182,7 @@ function TemplateMock({
             </p>
             <p>
               From trigger point therapy and medical massage to deep tissue,
-              lymphatic facilitation, Thai massage, assisted stretching, vagus toning, and somatic experiencing,
+              lymphatic facilitation, Thai massage, assisted stretching, and somatic experiencing,
               treatment begins by listening. Clients tell us they value the
               skilled attention, welcoming space, and results that keep them
               coming back and referring the people they love.
