@@ -63,19 +63,6 @@ export const practitioners: Practitioner[] = [
     teamPhoto: "client-lounge-burgundy.jpeg",
   },
   {
-    slug: "kimberly-nmt-cmt",
-    name: "Kimberly",
-    credentials: "NMT, CMT",
-    question: "How do you support recovery when pain and stress feel connected?",
-    shortAnswer:
-      "Kimberly combines neuromuscular therapy, trigger point pain-pattern knowledge, and vagus toning training with a nervous-system-aware approach.",
-    bio:
-      "Kimberly has been practicing as a neuromuscular therapist since 2022, with a focus on trigger point pain patterns and the experience of moving from injury toward recovery. She has additional training in vagus nerve massage and vagus toning. Her work considers both the body and nervous system, with the aim of supporting relief from stress and helping clients shift toward rest and recovery.",
-    fit:
-      "Kimberly may be a good option when a client wants to discuss muscular discomfort in the context of stress, recovery, or feeling stuck in a constantly activated state. Her neuromuscular and vagus-toning training offers a calm, informed starting point for care that supports both physical comfort and a sense of ease.",
-    teamPhoto: "client-lounge-black.jpeg",
-  },
-  {
     slug: "matty-cmt",
     name: "Matty",
     credentials: "CMT #99367",

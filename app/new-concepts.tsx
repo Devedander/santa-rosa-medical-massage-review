@@ -1720,7 +1720,7 @@ function NewPages() {
             <h2>What to expect</h2>
             <p>{service[2]}</p>
             <p>{practiceCopy}</p>
-            {squareService && (
+            {squareService && squareService.staff.length > 0 && (
               <p className="n-service-availability">
                 <b>Available with:</b>{" "}
                 {squareService.staff.map((staffName, index) => {

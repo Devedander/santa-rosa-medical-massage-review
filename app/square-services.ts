@@ -19,7 +19,7 @@ export const squareServices: SquareService[] = [
     description:
       "For people who have not visited Santa Rosa Medical Massage before, this introductory medical-massage appointment offers a chance to experience the practice and begin discussing goals for comfort, recovery, and easier movement.",
     bookingUrl: `${squareServiceBase}734KHYFCY5M4J7KDAGLH4AEI`,
-    staff: ["Andrea", "Cat", "Jamie", "Kimberly", "Matty", "Stacy"],
+    staff: ["Andrea", "Cat", "Jamie", "Matty", "Stacy"],
   },
   {
     name: "Vagus Toning",
@@ -27,7 +27,7 @@ export const squareServices: SquareService[] = [
     description:
       "Vagus Toning uses soothing therapeutic touch, breathing techniques, and focused work around areas associated with relaxation and nervous-system regulation. It may appeal to clients experiencing everyday stress, tension, difficulty unwinding, or a feeling of being constantly on. This wellness service is not a treatment for medical or neurological conditions.",
     bookingUrl: `${squareServiceBase}ZI2VH54THKM6STNKX64OMIPP`,
-    staff: ["Kimberly"],
+    staff: [],
   },
   {
     name: "Thai Massage and Stretching",
@@ -43,7 +43,7 @@ export const squareServices: SquareService[] = [
     description:
       "Medical Massage focuses on recovery and maintenance for concerns including neck tension, migraines, frozen shoulder, rotator cuff injuries, numbness or tingling, headaches, TMJ, tennis or golfer’s elbow, low-back tightness, sciatica, piriformis syndrome, post-operative hip or knee recovery, and plantar fasciitis. This Square service is contraindicated for pregnancy.",
     bookingUrl: `${squareServiceBase}4GPD55P6W4JQLP24GIIAZW4Z`,
-    staff: ["Andrea", "Cat", "Jamie", "Kimberly", "Matty", "Stacy"],
+    staff: ["Andrea", "Cat", "Jamie", "Matty", "Stacy"],
   },
   {
     name: "Neuromuscular Therapy / Trigger Point Therapy",
@@ -51,7 +51,7 @@ export const squareServices: SquareService[] = [
     description:
       "Neuromuscular Therapy focuses on stimulating and releasing trigger points: muscle fibers held in contraction that can form a knot, nodule, or tight band. The work can be intense and focuses on and around the pain area rather than a full-body session. This Square service is contraindicated for pregnancy.",
     bookingUrl: `${squareServiceBase}HNPKAYWN4I2AUEHNBZY7XLWT`,
-    staff: ["Andrea", "Cat", "Jamie", "Kimberly", "Stacy"],
+    staff: ["Andrea", "Cat", "Jamie", "Stacy"],
   },
   {
     name: "Full Body Deep Tissue Myofascial",
@@ -59,7 +59,7 @@ export const squareServices: SquareService[] = [
     description:
       "A full-body deep-tissue myofascial massage intended to ease tension and support a sense of renewed comfort throughout the body.",
     bookingUrl: `${squareServiceBase}YYLHPMMVWXDVPQJNVNRWL435`,
-    staff: ["Cat", "Kimberly", "Matty"],
+    staff: ["Cat", "Matty"],
   },
   {
     name: "Lymphatic Facilitation",
@@ -83,7 +83,7 @@ export const squareServices: SquareService[] = [
     description:
       "Sports Massage combines modalities that focus on range of motion and flexibility, including deep-tissue work and PNF stretching to help lengthen tight, overworked muscles. Square asks clients to wear loose clothing that accommodates stretching.",
     bookingUrl: `${squareServiceBase}USSQAY2PR6FPUOT7BMV5UUMS`,
-    staff: ["Cat", "Jamie", "Kimberly", "Matty", "Stacy"],
+    staff: ["Cat", "Jamie", "Matty", "Stacy"],
   },
   {
     name: "Swedish Massage",
