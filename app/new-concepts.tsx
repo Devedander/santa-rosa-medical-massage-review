@@ -1690,9 +1690,9 @@ function NewPages() {
   };
   return (
     <div className={`n-inner${post ? " n-blog-layout-test" : ""}`}>
-      <button className="n-link n-back" onClick={() => onPage("home")}>
+      <button className="n-link n-back" onClick={() => onPage(service ? "treatments" : "home")}>
         <ArrowLeft size={18} />
-        Back to home
+        {service ? "Back to treatments" : "Back to home"}
       </button>
       {page !== "staff" && (
         <div className="n-inner-title">
