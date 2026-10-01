@@ -688,7 +688,13 @@ function InlineGallery({
     setActive((active + 1) % images.length);
     setLocked(false);
   };
-  const lock = () => {
+  const toggleLock = () => {
+    if (locked) {
+      window.localStorage.removeItem(storageKey);
+      setLocked(false);
+      window.dispatchEvent(new Event("srmm-photo-selection"));
+      return;
+    }
     window.localStorage.setItem(
       storageKey,
       JSON.stringify({ slot, src, label }),
@@ -749,8 +755,8 @@ function InlineGallery({
           >
             →
           </button>
-          <button className="lock-photo" onClick={lock}>
-            {locked ? "Locked ✓" : "Lock this photo"}
+          <button className="lock-photo" onClick={toggleLock}>
+            {locked ? "Unlock photo" : "Lock this photo"}
           </button>
           <span className="inline-gallery-count">
             {active + 1}/{images.length}
