@@ -283,6 +283,7 @@ function Photo({
   className = "",
   imageHref,
   photoOptions,
+  additionalPhotos,
   onImageClick,
   imageClickLabel,
   hideControls = false,
@@ -292,12 +293,16 @@ function Photo({
   className?: string;
   imageHref?: string;
   photoOptions?: string[][];
+  additionalPhotos?: string[][];
   onImageClick?: () => void;
   imageClickLabel?: string;
   hideControls?: boolean;
 }) {
   const { Photo: Picker, photos, design } = useContent();
-  const availablePhotos = photoOptions || photos;
+  const availablePhotos = [
+    ...(photoOptions || photos),
+    ...(additionalPhotos || []),
+  ];
   const ordered = useMemo(
     () => [
       ...availablePhotos.filter(([src]) => src.endsWith(`/${first}`)),
@@ -1141,8 +1146,16 @@ function House() {
           {practitioners.map((practitioner) => (
             <div className="house-team-member" key={practitioner.slug}>
               <Photo
-                name={`welcome-${practitioner.slug}`}
+                name={`welcome-${practitioner.slug}${practitioner.slug === "stacy-cmt" ? "-new" : ""}`}
                 first={practitioner.teamPhoto}
+                additionalPhotos={
+                  practitioner.slug === "stacy-cmt"
+                    ? [[
+                        "/site-photo-intake/stacy-new-portrait.png",
+                        "Stacy — new portrait",
+                      ]]
+                    : undefined
+                }
                 imageHref={`./practitioners/${practitioner.slug}.html`}
                 imageClickLabel={`Read ${practitioner.name}'s full profile`}
                 hideControls
@@ -1587,8 +1600,16 @@ function StaffDirectory() {
         {practitioners.map((practitioner) => (
           <article key={practitioner.slug} className="n-staff-card">
             <Photo
-              name={`staff-${practitioner.slug}`}
+              name={`staff-${practitioner.slug}${practitioner.slug === "stacy-cmt" ? "-new" : ""}`}
               first={practitioner.teamPhoto}
+              additionalPhotos={
+                practitioner.slug === "stacy-cmt"
+                  ? [[
+                      "/site-photo-intake/stacy-new-portrait.png",
+                      "Stacy — new portrait",
+                    ]]
+                  : undefined
+              }
               imageHref={`./practitioners/${practitioner.slug}.html`}
               imageClickLabel={`Read ${practitioner.name}'s full profile`}
               onImageClick={() =>
