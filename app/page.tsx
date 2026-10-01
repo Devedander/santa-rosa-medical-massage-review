@@ -563,6 +563,11 @@ const newPracticePhotoFiles = [
   "treatment-shoulder-work-04.jpeg",
   "treatment-table-bodywork-01.jpeg",
   "treatment-table-bodywork-02.jpeg",
+  "treatment-new-assisted-leg-01.jpeg",
+  "treatment-new-bodywork-01.jpeg",
+  "treatment-new-back-work-01.jpeg",
+  "treatment-new-assisted-stretching-01.jpeg",
+  "treatment-new-leg-work-01.jpeg",
 ];
 const newPracticePhotoOptions = newPracticePhotoFiles.map((file) => [
   `/site-photo-intake/${file}`,

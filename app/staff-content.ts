@@ -86,7 +86,7 @@ export const practitioners: Practitioner[] = [
       "Stacy has practiced neuromuscular therapy since 2010 and became a Somatic Experiencing Practitioner in 2023. Her work combines intuitive, touch-focused Trigger Point Therapy for pain with Somatic Experiencing, an approach centered on the nervous system and body in relation to trauma and PTSD. Her published modalities include neuromuscular therapy, Reiki, sports massage, myofascial release, deep tissue work, Trigger Point Therapy, electronic cupping, PNF stretching, Tok Sen, and supportive tools such as percussion, cupping, scrapers, Gua Sha, CBD lubricant, and ROC tape when appropriate.",
     fit:
       "Stacy may be a good fit for clients who want a conversation about pain reduction, nervous-system regulation, and individualized therapeutic care. She has particular interest in the psoas, gluteal muscles, and neck and shoulders, and can help identify an approach that respects comfort, goals, and relevant health context.",
-    teamPhoto: "client-lounge-green.jpeg",
+    teamPhoto: "stacy-new-portrait.png",
   },
 ];
 
