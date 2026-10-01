@@ -463,6 +463,7 @@ function ServiceList({
       {services.map(([name, summary], i) => (
         <article
           key={name}
+          id={`n-treatment-${i}`}
           role="link"
           tabIndex={0}
           onClick={(event) => {
@@ -1690,7 +1691,12 @@ function NewPages() {
   };
   return (
     <div className={`n-inner${post ? " n-blog-layout-test" : ""}`}>
-      <button className="n-link n-back" onClick={() => onPage(service ? "treatments" : "home")}>
+      <button
+        className="n-link n-back"
+        onClick={() =>
+          onPage(service ? `home#treatment-${serviceIndex}` : "home")
+        }
+      >
         <ArrowLeft size={18} />
         {service ? "Back to treatments" : "Back to home"}
       </button>
@@ -1934,9 +1940,10 @@ export default function NewConcepts(props: Props) {
   const nav = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const go = (page: string) => {
-    pendingSection.current = null;
+    const [targetPage, targetSection] = page.split("#", 2);
+    pendingSection.current = targetSection || null;
     setMenu(false);
-    props.onPage(page);
+    props.onPage(targetPage);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   const jump = (section: string) => {
