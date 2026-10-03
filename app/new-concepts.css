@@ -3141,9 +3141,9 @@
     padding: 8px 10px;
     border: 0;
     border-radius: 10px;
-    background: #f8f5ed78;
-    -webkit-backdrop-filter: blur(6px) brightness(1.1);
-    backdrop-filter: blur(6px) brightness(1.1);
+    background: #f8f5ed90;
+    -webkit-backdrop-filter: blur(6px) brightness(1.14);
+    backdrop-filter: blur(6px) brightness(1.14);
   }
   .n-house .house-opening > .n-photo {
     position: absolute;
@@ -3163,7 +3163,7 @@
     z-index: 2;
     pointer-events: none;
     background:
-      linear-gradient(180deg, transparent 70%, #f8f5ed 100%),
+      linear-gradient(180deg, transparent 58%, #f8f5ed 100%),
       linear-gradient(90deg, #f8f5ed 0%, #f8f5edcc 22%, #f8f5ed1c 72%, transparent 100%);
   }
   .n-house .house-photo-strip {
