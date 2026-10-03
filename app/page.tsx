@@ -607,7 +607,7 @@ const approvedPhotoSelections: Record<string, string> = {
   "house-treatment-3": "/site-photo-intake/treatment-shoulder-work-03.jpeg",
 };
 
-const allPhotoOptions = Array.from(
+export const allPhotoOptions = Array.from(
   new Map(
     [
       ...initialPhotoOptions,
