@@ -3163,6 +3163,7 @@
     z-index: 2;
     pointer-events: none;
     background:
+      linear-gradient(#f8f5ed26, #f8f5ed26),
       linear-gradient(180deg, transparent 58%, #f8f5ed 100%),
       linear-gradient(90deg, #f8f5ed 0%, #f8f5edcc 22%, #f8f5ed1c 72%, transparent 100%);
   }
