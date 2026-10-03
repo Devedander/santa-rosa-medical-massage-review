@@ -2874,6 +2874,8 @@
   font-size: 14px;
 }
 .n-house .house-opening > .n-photo {
+  grid-column: 2;
+  grid-row: 1;
   min-height: 650px;
   border-radius: 0 0 14px 14px;
 }
@@ -3120,8 +3122,9 @@
 }
 @media (max-width: 640px) {
   .n-house .house-opening {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: block;
+    position: relative;
+    min-height: 0;
   }
   .n-house .house-welcome {
     padding-top: 35px;
@@ -3131,8 +3134,11 @@
     font-size: 46px;
   }
   .n-house .house-opening > .n-photo {
-    min-height: 380px;
-    height: 380px;
+    float: right;
+    width: 38%;
+    min-height: 225px;
+    height: 225px;
+    margin: 22px 0 16px 16px;
     border-radius: 14px;
   }
   .n-house .house-photo-strip {

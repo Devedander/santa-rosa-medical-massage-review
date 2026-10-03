@@ -1106,6 +1106,7 @@ function House() {
   return (
     <div className="house-home">
       <section className="house-opening">
+        <Photo name="welcome" first="google-remodel-room.jpg" />
         <div className="house-welcome">
           <span className="n-kicker">Welcome to our practice</span>
           <h1>
@@ -1129,7 +1130,6 @@ function House() {
           <div className="house-hero-awards">{awards}</div>
           <Action to="book">Schedule an appointment</Action>
         </div>
-        <Photo name="welcome" first="google-remodel-room.jpg" />
       </section>
       <section className="house-staff-preview n-section" aria-label="Meet the practice">
         <div className="house-staff-preview-copy">
