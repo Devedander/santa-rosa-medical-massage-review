@@ -1888,7 +1888,6 @@ function NewPages() {
               </p>
             </div>
           </div>
-          {photoTools}
         </>
       ) : page === "about" ? (
         <>

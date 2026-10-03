@@ -587,8 +587,8 @@ const galleryChoicesToRemove = new Set([
   74, 75, 76, 80, 86, 87, 88,
 ]);
 
-// Approved selections received from Stacy's review link. These remain in the
-// chooser even if one happened to be part of the retired numbered gallery set.
+// Final photo assignments. These are static defaults for their assigned slots;
+// they are not part of the selectable gallery pool.
 const approvedPhotoSelections: Record<string, string> = {
   "desk-treatments-overview": "/mockup-photos/therapy-hands.jpg",
   "house-referral-care": "/mockup-photos/google-gallery-8.jpg",
@@ -608,7 +608,6 @@ const approvedPhotoSelections: Record<string, string> = {
   "house-treatment-3": "/site-photo-intake/treatment-shoulder-work-03.jpeg",
 };
 
-const approvedPhotoSources = new Set(Object.values(approvedPhotoSelections));
 const allPhotoOptions = Array.from(
   new Map(
     [
@@ -622,8 +621,7 @@ const allPhotoOptions = Array.from(
   ).values(),
 );
 const galleryPhotoOptions = allPhotoOptions.filter(
-  ([src], index) =>
-    !galleryChoicesToRemove.has(index + 1) || approvedPhotoSources.has(src),
+  ([,], index) => !galleryChoicesToRemove.has(index + 1),
 );
 const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 function InlineGallery({
@@ -645,70 +643,41 @@ function InlineGallery({
   imageClickLabel?: string;
   hideControls?: boolean;
 }) {
-  const storageKey = `srmm-photo-${slot}`;
-  const [active, setActive] = useState(0);
-  const [locked, setLocked] = useState(false);
+  const staticSource = approvedPhotoSelections[slot];
+  const staticLabel =
+    images.find(([src]) => src === staticSource)?.[1] ||
+    "Final Santa Rosa Medical Massage photo";
+  const staticSourceIsSelectable = images.some(([src]) => src === staticSource);
+  const [active, setActive] = useState(() => {
+    const staticIndex = staticSource
+      ? images.findIndex(([src]) => src === staticSource)
+      : -1;
+    return staticIndex >= 0 ? staticIndex : 0;
+  });
+  const [showStaticDefault, setShowStaticDefault] = useState(
+    Boolean(staticSource && !staticSourceIsSelectable),
+  );
   useEffect(() => {
-    try {
-      const encoded = new URLSearchParams(window.location.hash.slice(1)).get(
-        "choices",
-      );
-      const linked = encoded
-        ? JSON.parse(decodeURIComponent(atob(encoded))).find(
-            (choice: { slot: string }) => choice.slot === slot,
-          )
-        : null;
-      const saved =
-        linked ||
-        JSON.parse(window.localStorage.getItem(storageKey) || "null") ||
-        (approvedPhotoSelections[slot]
-          ? {
-              slot,
-              src: approvedPhotoSelections[slot],
-              label:
-                images.find(([src]) => src === approvedPhotoSelections[slot])?.[1] ||
-                "Approved Santa Rosa Medical Massage photo",
-            }
-          : null);
-      if (!saved) return;
-      const savedIndex = images.findIndex(([src]) => src === saved.src);
-      if (savedIndex >= 0) {
-        setActive(savedIndex);
-        setLocked(true);
-      }
-    } catch {}
-  }, [images, slot, storageKey]);
-  useEffect(() => {
-    const clearLock = () => setLocked(false);
-    window.addEventListener("srmm-photo-clear", clearLock);
-    return () => window.removeEventListener("srmm-photo-clear", clearLock);
-  }, []);
-  const [src, label] = images[active];
+    const staticIndex = staticSource
+      ? images.findIndex(([src]) => src === staticSource)
+      : -1;
+    if (staticIndex >= 0) setActive(staticIndex);
+  }, [images, staticSource]);
+  const [src, label] =
+    showStaticDefault && staticSource
+      ? [staticSource, staticLabel]
+      : images[active];
   const isNovelPhoto = className.split(/\s+/).includes("n-photo");
   const previous = () => {
     setActive((active + images.length - 1) % images.length);
-    setLocked(false);
+    setShowStaticDefault(false);
   };
   const next = () => {
     setActive((active + 1) % images.length);
-    setLocked(false);
-  };
-  const toggleLock = () => {
-    if (locked) {
-      window.localStorage.removeItem(storageKey);
-      setLocked(false);
-      window.dispatchEvent(new Event("srmm-photo-selection"));
-      return;
-    }
-    window.localStorage.setItem(
-      storageKey,
-      JSON.stringify({ slot, src, label }),
-    );
-    setLocked(true);
-    window.dispatchEvent(new Event("srmm-photo-selection"));
+    setShowStaticDefault(false);
   };
   return (
-    <div className={`inline-gallery ${className} ${locked ? "is-locked" : ""}`}>
+    <div className={`inline-gallery ${className}`}>
       {isNovelPhoto ? (
         imageHref ? (
           <a
@@ -760,11 +729,8 @@ function InlineGallery({
           >
             →
           </button>
-          <button className="lock-photo" onClick={toggleLock}>
-            {locked ? "Unlock photo" : "Lock this photo"}
-          </button>
           <span className="inline-gallery-count">
-            {active + 1}/{images.length}
+            {showStaticDefault ? "Final" : `${active + 1}/${images.length}`}
           </span>
         </>
       )}
@@ -1480,12 +1446,6 @@ function PrototypeNav({
         onClick={() => setPage("gift")}
       >
         Gift cards
-      </button>
-      <button
-        className={page === "selections" ? "active" : ""}
-        onClick={() => setPage("selections")}
-      >
-        Selections
       </button>
     </nav>
   );
@@ -3299,25 +3259,6 @@ export default function Home() {
     }
     if (selected && concepts.some(([id]) => id === selected))
       setStyle(selected);
-    try {
-      const encoded = new URLSearchParams(window.location.hash.slice(1)).get(
-        "choices",
-      );
-      const choices = encoded
-        ? JSON.parse(decodeURIComponent(atob(encoded)))
-        : [];
-      if (Array.isArray(choices))
-        choices.forEach((choice) => {
-          if (
-            typeof choice?.slot === "string" &&
-            allPhotoOptions.some(([src]) => src === choice.src)
-          )
-            window.localStorage.setItem(
-              `srmm-photo-${choice.slot}`,
-              JSON.stringify(choice),
-            );
-        });
-    } catch {}
   }, []);
 
   useEffect(() => {
