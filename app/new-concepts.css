@@ -3127,19 +3127,34 @@
     min-height: 0;
   }
   .n-house .house-welcome {
+    position: relative;
+    z-index: 2;
+    min-height: 590px;
     padding-top: 35px;
     padding-bottom: 10px;
+    padding-right: 4vw;
   }
   .n-house .house-welcome h1 {
     font-size: 46px;
   }
   .n-house .house-opening > .n-photo {
-    float: right;
-    width: 48%;
-    min-height: 300px;
-    height: 300px;
-    margin: 22px 0 18px 18px;
-    border-radius: 14px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 78%;
+    min-height: 540px;
+    height: 540px;
+    margin: 0;
+    border-radius: 0 0 14px 14px;
+  }
+  .n-house .house-opening > .n-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(90deg, #f8f5ed 0%, #f8f5edcc 22%, #f8f5ed1c 72%, transparent 100%);
   }
   .n-house .house-photo-strip {
     gap: 9px;
