@@ -3136,6 +3136,10 @@
   }
   .n-house .house-welcome h1 {
     font-size: 46px;
+    text-shadow: 0 1px 0 #f8f5ed, 0 0 12px #f8f5ede0;
+  }
+  .n-house .house-welcome > .n-kicker {
+    text-shadow: 0 0 9px #f8f5ede0;
   }
   .n-house .house-welcome-copy {
     padding: 8px 10px;
