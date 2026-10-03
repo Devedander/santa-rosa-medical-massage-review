@@ -1115,18 +1115,20 @@ function House() {
             Medical Massage
           </h1>
           <h2>A thoughtful place to begin feeling more like yourself.</h2>
-          <p>
-            In the heart of downtown Santa Rosa, there’s a place to slow down,
-            share what you’ve been feeling, and talk about the things you would
-            like to do more comfortably. You don’t need to know which treatment
-            to choose, or have the perfect words for what’s wrong.
-          </p>
-          <p>
-            Our focus is soft-tissue care with personal attention. Whether
-            you’re navigating a recurring concern, returning to activities you
-            enjoy, or making room for ongoing care, we begin with your
-            experience, your questions, and your comfort.
-          </p>
+          <div className="house-welcome-copy">
+            <p>
+              In the heart of downtown Santa Rosa, there’s a place to slow down,
+              share what you’ve been feeling, and talk about the things you would
+              like to do more comfortably. You don’t need to know which treatment
+              to choose, or have the perfect words for what’s wrong.
+            </p>
+            <p>
+              Our focus is soft-tissue care with personal attention. Whether
+              you’re navigating a recurring concern, returning to activities you
+              enjoy, or making room for ongoing care, we begin with your
+              experience, your questions, and your comfort.
+            </p>
+          </div>
           <div className="house-hero-awards">{awards}</div>
           <Action to="book">Schedule an appointment</Action>
         </div>
