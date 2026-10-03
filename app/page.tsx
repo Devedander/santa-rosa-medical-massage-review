@@ -648,6 +648,7 @@ function InlineGallery({
     images.find(([src]) => src === staticSource)?.[1] ||
     "Final Santa Rosa Medical Massage photo";
   const staticSourceIsSelectable = images.some(([src]) => src === staticSource);
+  const isLockedPhoto = Boolean(staticSource);
   const [active, setActive] = useState(() => {
     const staticIndex = staticSource
       ? images.findIndex(([src]) => src === staticSource)
@@ -713,7 +714,7 @@ function InlineGallery({
       ) : (
         <img src={assetPath(src)} alt={alt || label} />
       )}
-      {!hideControls && (
+      {!hideControls && !isLockedPhoto && (
         <>
           <button
             className="inline-gallery-arrow previous"
@@ -730,7 +731,7 @@ function InlineGallery({
             →
           </button>
           <span className="inline-gallery-count">
-            {showStaticDefault ? "Final" : `${active + 1}/${images.length}`}
+            {active + 1}/{images.length}
           </span>
         </>
       )}
