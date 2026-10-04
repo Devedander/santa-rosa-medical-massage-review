@@ -3498,3 +3498,16 @@
     padding: 0 12px;
   }
 }
+
+/* The finalized Familiar gallery is a quiet, non-interactive collection. */
+.n-final-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+.n-final-gallery-grid figure { margin: 0; overflow: hidden; border-radius: 16px; background: #fffaf2; }
+.n-final-gallery-grid img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.n-final-gallery-grid figcaption { padding: 10px 12px 12px; color: #53635b; font: 12px/1.35 Arial, sans-serif; }
+@media (max-width: 760px) { .n-final-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .n-final-gallery-grid { grid-template-columns: 1fr; } }

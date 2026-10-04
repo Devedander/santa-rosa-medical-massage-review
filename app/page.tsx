@@ -668,36 +668,10 @@ function InlineGallery({
   const staticLabel =
     images.find(([src]) => src === staticSource)?.[1] ||
     "Final Santa Rosa Medical Massage photo";
-  const staticSourceIsSelectable = images.some(([src]) => src === staticSource);
-  const isLockedPhoto = Boolean(staticSource);
-  const [active, setActive] = useState(() => {
-    const staticIndex = staticSource
-      ? images.findIndex(([src]) => src === staticSource)
-      : -1;
-    return staticIndex >= 0 ? staticIndex : 0;
-  });
-  const [showStaticDefault, setShowStaticDefault] = useState(
-    Boolean(staticSource && !staticSourceIsSelectable),
-  );
-  useEffect(() => {
-    const staticIndex = staticSource
-      ? images.findIndex(([src]) => src === staticSource)
-      : -1;
-    if (staticIndex >= 0) setActive(staticIndex);
-  }, [images, staticSource]);
-  const [src, label] =
-    showStaticDefault && staticSource
-      ? [staticSource, staticLabel]
-      : images[active];
+  const [src, label] = staticSource
+    ? [staticSource, staticLabel]
+    : images[0];
   const isNovelPhoto = className.split(/\s+/).includes("n-photo");
-  const previous = () => {
-    setActive((active + images.length - 1) % images.length);
-    setShowStaticDefault(false);
-  };
-  const next = () => {
-    setActive((active + 1) % images.length);
-    setShowStaticDefault(false);
-  };
   return (
     <div className={`inline-gallery ${className}`}>
       {isNovelPhoto ? (
@@ -734,27 +708,6 @@ function InlineGallery({
         )
       ) : (
         <img src={assetPath(src)} alt={alt || label} />
-      )}
-      {!hideControls && !isLockedPhoto && (
-        <>
-          <button
-            className="inline-gallery-arrow previous"
-            onClick={previous}
-            aria-label="Previous photo"
-          >
-            ←
-          </button>
-          <button
-            className="inline-gallery-arrow next"
-            onClick={next}
-            aria-label="Next photo"
-          >
-            →
-          </button>
-          <span className="inline-gallery-count">
-            {active + 1}/{images.length}
-          </span>
-        </>
       )}
     </div>
   );
@@ -896,11 +849,6 @@ function PhotoSelectionTools() {
   );
 }
 function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
-  const [active, setActive] = useState(0);
-  const [src, label] = galleryPhotoOptions[active];
-  const previous = () =>
-    setActive((active + galleryPhotoOptions.length - 1) % galleryPhotoOptions.length);
-  const next = () => setActive((active + 1) % galleryPhotoOptions.length);
   return (
     <section className="mock-page gallery-page">
       <button className="back-link" onClick={() => setPage("home")}>
@@ -941,45 +889,14 @@ function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
           </button>
         </article>
       </div>
-      <div className="gallery-carousel">
-        <button
-          className="gallery-arrow prev"
-          onClick={previous}
-          aria-label="Previous image"
-        >
-          ←
-        </button>
-        <img src={assetPath(src)} alt={label} />
-        <button
-          className="gallery-arrow next"
-          onClick={next}
-          aria-label="Next image"
-        >
-          →
-        </button>
-        <div className="gallery-caption">
-          <b>{label}</b>
-          <span>
-            {active + 1} / {galleryPhotoOptions.length}
-          </span>
-        </div>
-      </div>
-      <div className="gallery-thumbs">
-        {galleryPhotoOptions.map(([image, alt], i) => (
-          <button
-            key={image}
-            className={i === active ? "active" : ""}
-            onClick={() => setActive(i)}
-            aria-label={`Show ${alt}`}
-          >
-            <img src={assetPath(image)} alt="" />
-          </button>
+      <div className="gallery-static-grid" aria-label="Visit gallery">
+        {galleryPhotoOptions.map(([image, alt]) => (
+          <figure key={image}>
+            <img src={assetPath(image)} alt={alt} loading="lazy" />
+            <figcaption>{alt}</figcaption>
+          </figure>
         ))}
       </div>
-      <small className="gallery-note">
-        Use any photo picker in this review to compare and lock imagery for a
-        final site.
-      </small>
     </section>
   );
 }

@@ -1875,20 +1875,13 @@ function NewPages() {
       ) : page === "gallery" ? (
         <>
           <Visit />
-          <div className="n-visit-gallery n-visit-mini-gallery">
-            <Photo
-              name="visit-gallery"
-              first="google-remodel-room.jpg"
-              photoOptions={galleryPhotos}
-            />
-            <div>
-              <span>Inside the practice</span>
-              <h3>Take a look around.</h3>
-              <p>
-                See the refreshed treatment rooms and the details that make an
-                appointment feel easy from arrival onward.
-              </p>
-            </div>
+          <div className="n-final-gallery-grid" aria-label="Visit gallery">
+            {galleryPhotos.map(([image, alt]) => (
+              <figure key={image}>
+                <img src={assetPath(image)} alt={alt} loading="lazy" />
+                <figcaption>{alt}</figcaption>
+              </figure>
+            ))}
           </div>
         </>
       ) : page === "about" ? (
