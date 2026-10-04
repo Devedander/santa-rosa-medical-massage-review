@@ -214,9 +214,20 @@ function Action({
   quiet?: boolean;
 }) {
   const { onPage } = useContent();
+  const trackOutbound = (eventName: string, params: Record<string, string>) => {
+    if (typeof window === "undefined") return;
+    const gtag = (window as Window & {
+      gtag?: (command: string, event: string, params: Record<string, string>) => void;
+    }).gtag;
+    gtag?.("event", eventName, params);
+  };
   if (to === "book") {
     return (
-      <a className={quiet ? "n-link" : "n-button"} href={squareBookingUrl}>
+      <a
+        className={quiet ? "n-link" : "n-button"}
+        href={squareBookingUrl}
+        onClick={() => trackOutbound("generate_lead", { method: "square_booking" })}
+      >
         {children}
         <ArrowUpRight size={18} aria-hidden="true" />
       </a>
@@ -224,7 +235,11 @@ function Action({
   }
   if (to === "gift") {
     return (
-      <a className={quiet ? "n-link" : "n-button"} href={squareGiftCardUrl}>
+      <a
+        className={quiet ? "n-link" : "n-button"}
+        href={squareGiftCardUrl}
+        onClick={() => trackOutbound("gift_card_click", { method: "square_gift_card" })}
+      >
         {children}
         <ArrowUpRight size={18} aria-hidden="true" />
       </a>
@@ -249,10 +264,21 @@ function TreatmentBookingLink({
   quiet?: boolean;
   serviceName?: string;
 }) {
+  const trackBooking = () => {
+    if (typeof window === "undefined") return;
+    const gtag = (window as Window & {
+      gtag?: (command: string, event: string, params: Record<string, string>) => void;
+    }).gtag;
+    gtag?.("event", "generate_lead", {
+      method: "square_booking",
+      treatment: serviceName || "general",
+    });
+  };
   return (
     <a
       className={quiet ? "n-link" : "n-button"}
       href={getSquareService(serviceName || "")?.bookingUrl || squareTreatmentBookingUrl}
+      onClick={trackBooking}
     >
       {children}
       <ArrowUpRight size={18} aria-hidden="true" />
