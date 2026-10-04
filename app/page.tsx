@@ -371,6 +371,10 @@ const remainingApprovedPhotos = [
     "Santa Rosa Medical Massage — business listing",
   ],
   [
+    "/blog-assets/sports-massage.jpg",
+    "Sports Massage treatment photo",
+  ],
+  [
     "/mockup-photos/google-gallery-12.jpg",
     "Santa Rosa Medical Massage — google gallery 12",
   ],
@@ -613,7 +617,7 @@ const galleryPhotoFilenames = new Set([
 const approvedPhotoSelections: Record<string, string> = {
   "desk-treatments-overview": "/mockup-photos/therapy-hands.jpg",
   "house-referral-care": "/mockup-photos/google-gallery-8.jpg",
-  "house-treatment-7": "/site-photo-intake/treatment-new-assisted-leg-01.jpeg",
+  "house-treatment-7": "/blog-assets/sports-massage.jpg",
   "desk-opening": "/mockup-photos/google-remodel-room.jpg",
   "house-welcome": "/mockup-photos/google-gallery-3.jpg",
   "house-practice-story": "/mockup-photos/google-remodel-room.jpg",
