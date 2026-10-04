@@ -589,7 +589,7 @@ const galleryPhotoFilenames = new Set([
   "google-gallery-19.jpg", "google-gallery-20.jpg", "google-gallery-22.jpg",
   "google-gallery-23.jpg", "google-gallery-24.jpg", "google-gallery-29.jpg",
   "google-gallery-30.jpg", "google-gallery-32.jpg", "google-gallery-33.jpg",
-  "yelp-gift.jpg", "therapy-hands.jpg", "therapy-room.jpg", "yelp-detail-4.jpg",
+  "yelp-gift.jpg", "therapy-room.jpg", "yelp-detail-4.jpg",
   "google-remodel-room.jpg", "yelp-detail-1.jpg",
   "assisted-stretching-01.jpeg", "assisted-stretching-02.jpeg",
   "assisted-stretching-03.jpeg", "assisted-stretching-04.jpeg",
