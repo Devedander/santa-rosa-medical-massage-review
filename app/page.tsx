@@ -580,10 +580,32 @@ const initialPhotoOptions = [
     ([src]) => !galleryImages.some(([gallerySrc]) => gallerySrc === src),
   ),
 ];
-const galleryChoicesToRemove = new Set([
-  11, 21, 22, 23, 24, 26, 27, 31, 33, 34, 35, 38, 42, 44, 45, 48, 50,
-  52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 68, 71, 72,
-  74, 75, 76, 80, 86, 87, 88,
+// Stacy's definitive Visit & gallery allowlist. Other page imagery continues
+// to use allPhotoOptions, so this only controls the public gallery pool.
+const galleryPhotoFilenames = new Set([
+  "google-gallery-3.jpg", "google-gallery-4.jpg", "google-gallery-5.jpg",
+  "google-gallery-6.jpg", "google-gallery-7.jpg", "google-gallery-8.jpg",
+  "google-gallery-12.jpg", "google-gallery-13.jpg", "google-gallery-17.jpg",
+  "google-gallery-19.jpg", "google-gallery-20.jpg", "google-gallery-22.jpg",
+  "google-gallery-23.jpg", "google-gallery-24.jpg", "google-gallery-29.jpg",
+  "google-gallery-30.jpg", "google-gallery-32.jpg", "google-gallery-33.jpg",
+  "yelp-gift.jpg", "therapy-hands.jpg", "therapy-room.jpg", "yelp-detail-4.jpg",
+  "google-remodel-room.jpg", "yelp-detail-1.jpg",
+  "assisted-stretching-01.jpeg", "assisted-stretching-02.jpeg",
+  "assisted-stretching-03.jpeg", "assisted-stretching-04.jpeg",
+  "assisted-stretching-05.jpeg", "assisted-stretching-06.jpeg",
+  "assisted-stretching-07.jpeg", "assisted-stretching-09.jpeg",
+  "assisted-stretching-13.jpeg", "assisted-stretching-14.jpeg",
+  "assisted-stretching-15.jpeg", "treatment-arm-work-01.jpeg",
+  "treatment-back-work-01.jpeg", "treatment-back-work-02.jpeg",
+  "treatment-back-work-03.jpeg", "treatment-back-work-04.jpeg",
+  "treatment-back-work-05.jpeg", "treatment-hand-work-01.jpeg",
+  "treatment-hand-work-02.jpeg", "treatment-hand-work-03.jpeg",
+  "treatment-shoulder-work-02.jpeg", "treatment-shoulder-work-03.jpeg",
+  "treatment-table-bodywork-01.jpeg", "treatment-table-bodywork-02.jpeg",
+  "treatment-new-assisted-leg-01.jpeg", "treatment-new-bodywork-01.jpeg",
+  "treatment-new-back-work-01.jpeg", "treatment-new-assisted-stretching-01.jpeg",
+  "treatment-new-leg-work-01.jpeg",
 ]);
 
 // Final photo assignments. These are static defaults for their assigned slots;
@@ -620,7 +642,7 @@ export const allPhotoOptions = Array.from(
   ).values(),
 );
 const galleryPhotoOptions = allPhotoOptions.filter(
-  ([,], index) => !galleryChoicesToRemove.has(index + 1),
+  ([src]) => galleryPhotoFilenames.has(src.split("/").pop() || src),
 );
 const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
 function InlineGallery({
