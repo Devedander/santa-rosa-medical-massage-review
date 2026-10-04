@@ -199,7 +199,7 @@ const treatmentPhotoFirsts = [
   "treatment-back-work-05.jpeg",
   "treatment-hand-work-01.jpeg",
   "assisted-stretching-04.jpeg",
-  "assisted-stretching-01.jpeg",
+  "treatment-hand-work-01.jpeg",
   "treatment-table-bodywork-01.jpeg",
   "treatment-back-work-04.jpeg",
 ];

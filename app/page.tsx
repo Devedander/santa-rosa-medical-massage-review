@@ -625,7 +625,7 @@ const approvedPhotoSelections: Record<string, string> = {
   "house-treatment-1": "/site-photo-intake/treatment-new-leg-work-01.jpeg",
   "house-treatment-6": "/site-photo-intake/treatment-hand-work-03.jpeg",
   "house-treatment-9": "/mockup-photos/google-gallery-19.jpg",
-  "house-treatment-5": "/site-photo-intake/assisted-stretching-01.jpeg",
+  "house-treatment-5": "/site-photo-intake/treatment-hand-work-01.jpeg",
   "house-treatment-3": "/site-photo-intake/treatment-shoulder-work-03.jpeg",
 };
 
