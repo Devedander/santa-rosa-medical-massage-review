@@ -18,8 +18,19 @@
       "_framework-D_rUT4EX.js"
     ]
   },
+  "app/gallery-selection/page.tsx": {
+    "file": "_next/static/chunks/page-Bvf0hiy9.js",
+    "name": "page",
+    "src": "app/gallery-selection/page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "app/page.tsx",
+      "_framework-D_rUT4EX.js"
+    ]
+  },
   "app/page.tsx": {
-    "file": "_next/static/chunks/page-CIqtfYEJ.js",
+    "file": "_next/static/chunks/page-TjUfFCmx.js",
     "name": "page",
     "src": "app/page.tsx",
     "isDynamicEntry": true,
@@ -30,7 +41,7 @@
     ]
   },
   "app/practitioners/profile-page.tsx": {
-    "file": "_next/static/chunks/profile-page-bOkTayV2.js",
+    "file": "_next/static/chunks/profile-page-Ko_MaCPO.js",
     "name": "profile-page",
     "src": "app/practitioners/profile-page.tsx",
     "isDynamicEntry": true,
@@ -41,7 +52,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "_next/static/chunks/app-route-prefetch-policy-CR_VpH60.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-BkLpWj1v.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -50,7 +61,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-C8CNdjJo.js",
+    "file": "_next/static/chunks/layout-segment-context-By_STU_4.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -61,7 +72,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/streamed-icons.js": {
-    "file": "_next/static/chunks/streamed-icons-Cs-m6aYg.js",
+    "file": "_next/static/chunks/streamed-icons-B7zI55ff.js",
     "name": "streamed-icons",
     "src": "node_modules/vinext/dist/shims/streamed-icons.js",
     "isDynamicEntry": true,
@@ -71,7 +82,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-Bihp-qoa.js",
+    "file": "_next/static/chunks/index-D5u1r1tk.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
@@ -82,6 +93,7 @@
     "dynamicImports": [
       "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
       "virtual:vinext-app-browser-entry",
+      "app/gallery-selection/page.tsx",
       "node_modules/vinext/dist/shims/layout-segment-context.js",
       "app/page.tsx",
       "node_modules/vinext/dist/shims/streamed-icons.js",
