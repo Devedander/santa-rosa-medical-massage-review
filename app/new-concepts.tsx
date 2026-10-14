@@ -1681,7 +1681,27 @@ function NewPages() {
     photoTools,
     galleryPhotos,
   } = useContent();
-  const [galleryIndex, setGalleryIndex] = useState(0);
+  const [galleryIndex, setGalleryIndex] = useState(() =>
+    Math.max(
+      0,
+      galleryPhotos.findIndex(([, alt]) => alt.toLowerCase().includes("google gallery 8")),
+    ),
+  );
+  const thumbnailRail = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const rail = thumbnailRail.current;
+    const active = rail?.querySelector<HTMLElement>(
+      `[data-gallery-index="${galleryIndex}"]`,
+    );
+    if (!rail || !active) return;
+    const frame = window.requestAnimationFrame(() => {
+      rail.scrollTo({
+        left: active.offsetLeft - (rail.clientWidth - active.offsetWidth) / 2,
+        behavior: "smooth",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [galleryIndex, galleryPhotos.length]);
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
@@ -1906,35 +1926,57 @@ function NewPages() {
           <Visit />
           <div className="n-final-gallery-carousel" aria-label="Visit gallery">
             {galleryPhotos.length > 0 && (
-              <figure>
-                <img
-                  src={assetPath(galleryPhotos[galleryIndex][0])}
-                  alt={galleryPhotos[galleryIndex][1]}
-                />
-              </figure>
+              <>
+                <figure
+                  key={`featured-${galleryPhotos[galleryIndex][0]}`}
+                  className="n-final-gallery-feature"
+                >
+                  <img
+                    src={assetPath(galleryPhotos[galleryIndex][0])}
+                    alt={galleryPhotos[galleryIndex][1]}
+                  />
+                </figure>
+                <div className="n-final-gallery-filmstrip">
+                <button
+                  type="button"
+                  className="n-final-gallery-edge-control"
+                  aria-label="Previous gallery photo"
+                  onClick={() =>
+                    setGalleryIndex(
+                      (galleryIndex + galleryPhotos.length - 1) % galleryPhotos.length,
+                    )
+                  }
+                >
+                  <ArrowLeft size={20} aria-hidden="true" />
+                </button>
+                  <div ref={thumbnailRail} className="n-final-gallery-thumbnails">
+                    {galleryPhotos.map(([image, alt], photoIndex) => (
+                      <button
+                        key={image}
+                        type="button"
+                        data-gallery-index={photoIndex}
+                        className={photoIndex === galleryIndex ? "is-selected" : ""}
+                        aria-label={`Show ${alt}`}
+                        aria-current={photoIndex === galleryIndex ? "true" : undefined}
+                        onClick={() => setGalleryIndex(photoIndex)}
+                      >
+                        <img src={assetPath(image)} alt="" loading="lazy" />
+                      </button>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    className="n-final-gallery-edge-control"
+                    aria-label="Next gallery photo"
+                    onClick={() =>
+                      setGalleryIndex((galleryIndex + 1) % galleryPhotos.length)
+                    }
+                  >
+                    <ArrowRight size={20} aria-hidden="true" />
+                  </button>
+                </div>
+              </>
             )}
-            <div className="n-final-gallery-controls">
-              <button
-                type="button"
-                aria-label="Previous gallery photo"
-                onClick={() =>
-                  setGalleryIndex(
-                    (galleryIndex + galleryPhotos.length - 1) % galleryPhotos.length,
-                  )
-                }
-              >
-                <ArrowLeft size={20} aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next gallery photo"
-                onClick={() =>
-                  setGalleryIndex((galleryIndex + 1) % galleryPhotos.length)
-                }
-              >
-                <ArrowRight size={20} aria-hidden="true" />
-              </button>
-            </div>
           </div>
         </>
       ) : page === "about" ? (
