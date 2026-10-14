@@ -872,7 +872,7 @@ function GalleryPage({ setPage }: { setPage: (page: string) => void }) {
             630 Third Street, Suite B<br />
             Santa Rosa, CA 95404
           </p>
-          <p>Private parking · Visits by appointment</p>
+          <p>Convenient street parking · Close to the 3rd Street and D Street garages · Visits by appointment</p>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Santa%20Rosa%20Medical%20Massage"
             target="_blank"
@@ -1260,7 +1260,9 @@ function MockPages({
             </p>
             <p>
               Clients describe the setting as clean, comforting, and
-              professional. Private rooms and private parking are available.
+              professional. Private rooms are available, with public street parking
+              and nearby parking lots across the street and behind the practice on
+              D Street.
             </p>
             <button onClick={() => setPage("contact")}>
               View hours & directions
@@ -1276,7 +1278,7 @@ function MockPages({
               Santa Rosa, CA 95404
             </p>
             <a href="tel:+17073037707">(707) 303-7707</a>
-            <p>Private parking · By appointment</p>
+            <p>Convenient street parking · Close to the 3rd Street and D Street garages · By appointment</p>
           </article>
           <form onSubmit={(event) => event.preventDefault()}>
             <label>
@@ -2676,8 +2678,9 @@ function StrategyContent({ onPage }: { onPage: (page: string) => void }) {
           <h3>Plan your arrival</h3>
           <p>
             Find us at 630 Third Street, Suite B, in downtown Santa Rosa.
-            Private parking is available. Call ahead with questions about access
-            or anything you need for a comfortable visit.
+            Public street parking is available, with nearby lots across the street
+            and behind the practice on D Street. Call ahead with questions about
+            access or anything you need for a comfortable visit.
           </p>
           <button onClick={() => onPage("contact")}>Location & contact</button>
         </article>

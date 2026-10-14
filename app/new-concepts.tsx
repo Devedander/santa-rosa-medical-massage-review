@@ -654,7 +654,7 @@ function Visit({
           <MapPin size={23} />
           <h3>Find us downtown</h3>
           <p>{address}</p>
-          <p>Private parking. Visits by appointment.</p>
+          <p>Convenient street parking, close to the 3rd Street and D Street garages. Visits by appointment.</p>
           <a
             className="n-link"
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Santa Rosa Medical Massage " + address)}`}
@@ -900,7 +900,7 @@ function Desk() {
         <div className="desk-location">
           <MapPin size={18} />
           <span>630 Third Street, Suite B</span>
-          <span>Private parking</span>
+          <span>Convenient street parking near the 3rd Street and D Street garages</span>
         </div>
       </section>
       <section id="n-treatments" className="desk-treatments n-section">
@@ -1079,8 +1079,9 @@ function Everyday() {
             can feel familiar.
           </h2>
           <p>
-            See the space before you arrive. There’s private parking, and you
-            can review the space before scheduling a comfortable visit.
+            See the space before you arrive. Public street parking is available,
+            along with parking lots across the street and behind the practice on
+            D Street.
           </p>
           <Action to="gallery" quiet>
             Have a look around
@@ -1680,6 +1681,7 @@ function NewPages() {
     photoTools,
     galleryPhotos,
   } = useContent();
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const service = page.startsWith("service-")
     ? services[Number(page.slice(8))]
     : null;
@@ -1902,13 +1904,37 @@ function NewPages() {
       ) : page === "gallery" ? (
         <>
           <Visit />
-          <div className="n-final-gallery-grid" aria-label="Visit gallery">
-            {galleryPhotos.map(([image, alt]) => (
-              <figure key={image}>
-                <img src={assetPath(image)} alt={alt} loading="lazy" />
-                <figcaption>{alt}</figcaption>
+          <div className="n-final-gallery-carousel" aria-label="Visit gallery">
+            {galleryPhotos.length > 0 && (
+              <figure>
+                <img
+                  src={assetPath(galleryPhotos[galleryIndex][0])}
+                  alt={galleryPhotos[galleryIndex][1]}
+                />
               </figure>
-            ))}
+            )}
+            <div className="n-final-gallery-controls">
+              <button
+                type="button"
+                aria-label="Previous gallery photo"
+                onClick={() =>
+                  setGalleryIndex(
+                    (galleryIndex + galleryPhotos.length - 1) % galleryPhotos.length,
+                  )
+                }
+              >
+                <ArrowLeft size={20} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next gallery photo"
+                onClick={() =>
+                  setGalleryIndex((galleryIndex + 1) % galleryPhotos.length)
+                }
+              >
+                <ArrowRight size={20} aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </>
       ) : page === "about" ? (
@@ -2123,7 +2149,7 @@ export default function NewConcepts(props: Props) {
               <p>
                 Downtown Santa Rosa
                 <br />
-                Private parking
+                Convenient street parking near the 3rd Street and D Street garages
               </p>
             </div>
           )}
