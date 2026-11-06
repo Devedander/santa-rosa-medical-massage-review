@@ -6,28 +6,48 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://santarosamedicalmassage.com/practitioners/andrea-cmt.html</loc>
+    <loc>https://santarosamedicalmassage.com/practitioners/andrea-cmt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://santarosamedicalmassage.com/practitioners/cat-cmt.html</loc>
+    <loc>https://santarosamedicalmassage.com/practitioners/cat-cmt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://santarosamedicalmassage.com/practitioners/jamie-cmt.html</loc>
+    <loc>https://santarosamedicalmassage.com/practitioners/jamie-cmt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://santarosamedicalmassage.com/practitioners/matty-cmt.html</loc>
+    <loc>https://santarosamedicalmassage.com/practitioners/matty-cmt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://santarosamedicalmassage.com/practitioners/stacy-cmt.html</loc>
+    <loc>https://santarosamedicalmassage.com/practitioners/stacy-cmt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://santarosamedicalmassage.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://santarosamedicalmassage.com/blog/medical-massage-santa-rosa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://santarosamedicalmassage.com/blog/massage-for-tmj-tension</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://santarosamedicalmassage.com/blog/massage-for-sciatica-questions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
