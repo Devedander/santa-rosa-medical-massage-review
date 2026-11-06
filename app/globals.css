@@ -6600,3 +6600,39 @@ footer img {
 .gallery-static-grid figcaption { padding: 10px 12px 12px; color: #53635b; font: 12px/1.35 Arial, sans-serif; }
 @media (max-width: 760px) { .gallery-static-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .gallery-static-grid { grid-template-columns: 1fr; } }
+/* Test-site blog routes. These routes keep the existing site navigation unchanged. */
+.srmm-blog-page {
+  box-sizing: border-box;
+  max-width: 1120px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 84px 28px;
+  color: #173c38;
+  background: #fbfaf6;
+}
+.srmm-blog-header { max-width: 710px; margin-bottom: 52px; }
+.srmm-blog-header > p,
+.srmm-article > p { margin: 0 0 14px; color: #8b5a3c; font-size: .88rem; font-weight: 700; letter-spacing: .04em; }
+.srmm-blog-header h1,
+.srmm-article h1 { max-width: 760px; margin: 0; font-family: Georgia, serif; font-size: clamp(2.5rem, 6vw, 4.7rem); font-weight: 400; line-height: 1.02; }
+.srmm-blog-header > span { display: block; max-width: 620px; margin-top: 20px; font-size: 1.08rem; line-height: 1.65; }
+.srmm-blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.srmm-blog-grid article { display: flex; min-height: 280px; flex-direction: column; padding: 28px; border: 1px solid #d9d8ce; background: #fff; }
+.srmm-blog-grid article > p { margin: 0 0 18px; color: #8b5a3c; font-size: .8rem; font-weight: 700; }
+.srmm-blog-grid h2 { margin: 0; font-family: Georgia, serif; font-size: 1.65rem; font-weight: 400; line-height: 1.15; }
+.srmm-blog-grid article > span { margin-top: 16px; line-height: 1.55; }
+.srmm-blog-grid a, .srmm-blog-home { color: #173c38; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.srmm-blog-grid a { margin-top: auto; padding-top: 24px; }
+.srmm-blog-home { display: inline-block; margin-top: 42px; }
+.srmm-article-page { max-width: 820px; }
+.srmm-article-page > .srmm-blog-home { margin-top: 0; margin-bottom: 56px; }
+.srmm-article { max-width: 720px; }
+.srmm-article > span { display: block; margin-top: 16px; color: #6c716a; font-size: .9rem; }
+.srmm-article section { margin-top: 46px; }
+.srmm-article h2 { margin: 0 0 16px; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 400; }
+.srmm-article section p { font-size: 1.06rem; line-height: 1.75; }
+@media (max-width: 760px) {
+  .srmm-blog-page { padding: 52px 22px; }
+  .srmm-blog-grid { grid-template-columns: 1fr; }
+  .srmm-blog-grid article { min-height: 0; }
+}

@@ -205,6 +205,24 @@ const treatmentPhotoFirsts = [
   "treatment-new-back-work-01.jpeg",
 ];
 
+type AnalyticsParams = Record<string, string | number | boolean>;
+
+/**
+ * Sends only interaction metadata to GA4. Never place names, email addresses,
+ * health details, or form responses in analytics events.
+ */
+function trackEvent(eventName: string, params: AnalyticsParams = {}) {
+  if (typeof window === "undefined") return;
+  const gtag = (window as Window & {
+    gtag?: (
+      command: "event",
+      event: string,
+      parameters: AnalyticsParams,
+    ) => void;
+  }).gtag;
+  gtag?.("event", eventName, { ...params, transport_type: "beacon" });
+}
+
 function Action({
   to,
   children,
@@ -215,19 +233,17 @@ function Action({
   quiet?: boolean;
 }) {
   const { onPage } = useContent();
-  const trackOutbound = (eventName: string, params: Record<string, string>) => {
-    if (typeof window === "undefined") return;
-    const gtag = (window as Window & {
-      gtag?: (command: string, event: string, params: Record<string, string>) => void;
-    }).gtag;
-    gtag?.("event", eventName, params);
-  };
   if (to === "book") {
     return (
       <a
         className={quiet ? "n-link" : "n-button"}
         href={squareBookingUrl}
-        onClick={() => trackOutbound("generate_lead", { method: "square_booking" })}
+        onClick={() =>
+          trackEvent("generate_lead", {
+            method: "square_booking",
+            link_text: typeof children === "string" ? children : "booking_cta",
+          })
+        }
       >
         {children}
         <ArrowUpRight size={18} aria-hidden="true" />
@@ -239,7 +255,12 @@ function Action({
       <a
         className={quiet ? "n-link" : "n-button"}
         href={squareGiftCardUrl}
-        onClick={() => trackOutbound("gift_card_click", { method: "square_gift_card" })}
+        onClick={() =>
+          trackEvent("gift_card_click", {
+            method: "square_gift_card",
+            link_text: typeof children === "string" ? children : "gift_card_cta",
+          })
+        }
       >
         {children}
         <ArrowUpRight size={18} aria-hidden="true" />
@@ -266,13 +287,9 @@ function TreatmentBookingLink({
   serviceName?: string;
 }) {
   const trackBooking = () => {
-    if (typeof window === "undefined") return;
-    const gtag = (window as Window & {
-      gtag?: (command: string, event: string, params: Record<string, string>) => void;
-    }).gtag;
-    gtag?.("event", "generate_lead", {
+    trackEvent("generate_lead", {
       method: "square_booking",
-      treatment: serviceName || "general",
+      service_name: serviceName || "general",
     });
   };
   return (
@@ -668,7 +685,16 @@ function Visit({
           <div>
             <Phone size={23} />
             <h3>Phone</h3>
-            <a className="n-phone" href="tel:+17073037707">
+            <a
+              className="n-phone"
+              href="tel:+17073037707"
+              onClick={() =>
+                trackEvent("generate_lead", {
+                  method: "phone_call",
+                  placement: "visit_section",
+                })
+              }
+            >
               (707) 303-7707
             </a>
             <p>
@@ -1494,7 +1520,16 @@ function Booking() {
               Gift certificates are purchased securely through the practice’s
               Square page.
             </p>
-            <a className="n-button" href={squareGiftCardUrl}>
+            <a
+              className="n-button"
+              href={squareGiftCardUrl}
+              onClick={() =>
+                trackEvent("gift_card_click", {
+                  method: "square_gift_card",
+                  placement: "booking_page",
+                })
+              }
+            >
               Continue to gift certificates <ArrowRight size={18} />
             </a>
           </article>
@@ -1505,7 +1540,16 @@ function Booking() {
               Choose a service and time through the practice’s Square booking
               page.
             </p>
-            <a className="n-button" href={squareBookingUrl}>
+            <a
+              className="n-button"
+              href={squareBookingUrl}
+              onClick={() =>
+                trackEvent("generate_lead", {
+                  method: "square_booking",
+                  placement: "booking_page",
+                })
+              }
+            >
               Continue to scheduling <ArrowRight size={18} />
             </a>
           </article>
@@ -2069,6 +2113,14 @@ export default function NewConcepts(props: Props) {
       });
   };
   useEffect(() => {
+    if (props.page === "home") return;
+    trackEvent("page_view", {
+      page_title: `Santa Rosa Medical Massage | ${props.page}`,
+      page_location: window.location.href,
+      page_path: `/${props.page}`,
+    });
+  }, [props.page]);
+  useEffect(() => {
     if (props.page === "home" && pendingSection.current) {
       document.getElementById(`n-${pendingSection.current}`)?.scrollIntoView();
       pendingSection.current = null;
@@ -2151,7 +2203,16 @@ export default function NewConcepts(props: Props) {
               </button>
             ))}
             <button onClick={() => go("blog")}>Blog</button>
-            <a className="n-gift-nav" href={squareGiftCardUrl}>
+            <a
+              className="n-gift-nav"
+              href={squareGiftCardUrl}
+              onClick={() =>
+                trackEvent("gift_card_click", {
+                  method: "square_gift_card",
+                  placement: "navigation",
+                })
+              }
+            >
               Gift cards
             </a>
             <div className="n-social" aria-label="Social media links">
@@ -2181,7 +2242,16 @@ export default function NewConcepts(props: Props) {
               </a>
             </div>
           </nav>
-          <a className="n-button" href={squareBookingUrl}>
+          <a
+            className="n-button"
+            href={squareBookingUrl}
+            onClick={() =>
+              trackEvent("generate_lead", {
+                method: "square_booking",
+                placement: "navigation",
+              })
+            }
+          >
             Schedule now
             <ArrowUpRight size={18} aria-hidden="true" />
           </a>
