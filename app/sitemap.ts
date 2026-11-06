@@ -18,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
+    { url: `${siteUrl}/treatments`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/meet-the-practice`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     {
       url: `${siteUrl}/blog`,
       lastModified: new Date(),

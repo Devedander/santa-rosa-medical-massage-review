@@ -6610,6 +6610,7 @@ footer img {
   color: #173c38;
   background: #fbfaf6;
 }
+.srmm-blog-header, .srmm-info-header { display: block; height: auto; padding: 0; background: transparent; border: 0; }
 .srmm-blog-header { max-width: 710px; margin-bottom: 52px; }
 .srmm-blog-header > p,
 .srmm-article > p { margin: 0 0 14px; color: #8b5a3c; font-size: .88rem; font-weight: 700; letter-spacing: .04em; }
@@ -6636,3 +6637,5 @@ footer img {
   .srmm-blog-grid { grid-template-columns: 1fr; }
   .srmm-blog-grid article { min-height: 0; }
 }
+.srmm-info-page { box-sizing: border-box; max-width: 1120px; min-height: 100vh; margin: 0 auto; padding: 84px 28px; color: #173c38; background: #fbfaf6; }
+.srmm-info-header { max-width: 800px; margin-bottom: 36px; }.srmm-info-header > p, .srmm-practitioner-card > p:first-child { margin: 0 0 14px; color: #8b5a3c; font-size: .86rem; font-weight: 700; letter-spacing: .045em; }.srmm-info-header h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.5rem, 6vw, 4.7rem); font-weight: 400; line-height: 1.02; }.srmm-info-header > span { display: block; max-width: 660px; margin-top: 20px; font-size: 1.08rem; line-height: 1.65; }.srmm-info-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 42px; }.srmm-info-intro p { margin: 0; padding: 22px; border-left: 3px solid #8b5a3c; background: #fff; line-height: 1.6; }.srmm-treatment-grid, .srmm-practitioner-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }.srmm-treatment-card, .srmm-practitioner-card { display: flex; flex-direction: column; padding: 28px; border: 1px solid #d9d8ce; background: #fff; }.srmm-treatment-card h2, .srmm-practitioner-card h2 { margin: 0; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 400; line-height: 1.13; }.srmm-treatment-card p, .srmm-practitioner-card p { line-height: 1.6; }.srmm-treatment-summary, .srmm-practitioner-card h3 { color: #8b5a3c; font-size: .95rem; line-height: 1.5; }.srmm-treatment-card span, .srmm-practitioner-card > span { color: #5e6863; line-height: 1.5; }.srmm-treatment-card a, .srmm-practitioner-card a, .srmm-info-home { color: #173c38; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 4px; }.srmm-treatment-card a, .srmm-practitioner-card a { margin-top: auto; padding-top: 24px; }.srmm-info-home { display: inline-block; margin-top: 42px; }@media (max-width: 760px) { .srmm-info-page { padding: 52px 22px; } .srmm-info-intro, .srmm-treatment-grid, .srmm-practitioner-grid { grid-template-columns: 1fr; } }
