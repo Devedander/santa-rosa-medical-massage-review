@@ -316,37 +316,6 @@ body {
   background: var(--paper);
   color: var(--ink);
 }
-.switcher {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 4vw;
-  background: #111827;
-  color: #fff;
-}
-.switcher > div {
-  margin-right: auto;
-}
-.switcher span,
-.switcher small {
-  display: block;
-  opacity: 0.68;
-}
-.switcher button {
-  color: #fff;
-  background: #ffffff10;
-  border: 1px solid #ffffff24;
-  border-radius: 8px;
-  padding: 7px 12px;
-  text-align: left;
-}
-.switcher button.active {
-  background: #fff;
-  color: #111827;
-}
 .site > header,
 .tpl-head,
 .navx-head,
@@ -659,57 +628,13 @@ footer img {
 .warm .service-grid article {
   background: #fff9;
 }
-.editorial {
-  --ink: #271b22;
-  --accent: #c23734;
-  --paper: #efe7dc;
-  --soft: #d7cfc3;
-}
-.editorial h1,
-.editorial h2,
-.editorial blockquote {
-  font-style: italic;
-}
-.editorial header {
-  background: var(--paper);
-}
-.editorial .hero-copy {
-  order: 2;
-}
-.editorial .hero-image {
-  order: 1;
-  margin: 28px 0 28px 4vw;
-}
-.editorial .service-grid {
-  gap: 18px;
-  border: 0;
-}
-.editorial .service-grid article {
-  background: #f8f2e9;
-  border: 0;
-}
-.warm-copy,
-.editorial-copy {
+.warm-copy {
   display: none;
 }
-.warm .clinical-copy,
-.editorial .clinical-copy {
-  display: none;
-}
-.warm .warm-copy,
-.editorial .editorial-copy {
+.warm .warm-copy {
   display: inline;
 }
 @media (max-width: 800px) {
-  .switcher {
-    overflow: auto;
-  }
-  .switcher > div {
-    display: none;
-  }
-  .switcher button {
-    min-width: 170px;
-  }
   .topbar .cred,
   nav {
     display: none;
@@ -728,13 +653,6 @@ footer img {
   }
   .hero-image {
     min-height: 460px;
-  }
-  .editorial .hero-copy {
-    order: 1;
-  }
-  .editorial .hero-image {
-    order: 2;
-    margin: 0;
   }
   .trust {
     grid-template-columns: 1fr;
@@ -2052,25 +1970,6 @@ footer img {
 }
 
 /* Keep the contact strip and primary navigation locked together on every viewport. */
-.switcher {
-  height: 70px;
-  min-height: 70px;
-  max-height: 70px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  flex-wrap: nowrap;
-  scrollbar-width: none;
-}
-.switcher::-webkit-scrollbar {
-  display: none;
-}
-.switcher > div,
-.switcher button {
-  flex: 0 0 auto;
-}
-.switcher button {
-  white-space: nowrap;
-}
 .topbar {
   position: sticky;
   top: 70px;
@@ -2952,58 +2851,6 @@ footer img {
     display: none;
   }
 }
-
-/* Approved concepts 1–3, unified in Beach Glass + Dinner Party. */
-.clinical,
-.editorial {
-  --ink: #2b2022;
-  --accent: #773738;
-  --paper: #eef2f0;
-  --soft: #b3beb9;
-}
-.clinical header,
-.editorial header {
-  background: #f8f6f1;
-}
-.clinical .hero,
-.clinical .conditions {
-  background: #eef2f0;
-}
-.clinical .section {
-  background: #f8f6f1;
-}
-.clinical .service-grid article {
-  background: #fffdfa;
-}
-.clinical .lede,
-.clinical .section-head > p,
-.clinical .service-grid p {
-  color: #51484a;
-}
-.clinical .trust,
-.editorial .trust {
-  background: #38272b;
-}
-.clinical footer,
-.editorial footer {
-  background: #2b2022;
-}
-.editorial {
-  --paper: #e4ebe7;
-  --soft: #b3beb9;
-}
-.editorial .hero-image {
-  box-shadow: 20px 20px 0 #773738;
-}
-.editorial .service-grid article {
-  background: #f6f4ef;
-}
-.editorial .review {
-  background: #b3beb9;
-}
-.editorial .cta {
-  background: #773738;
-}
 .webwell {
   --tpl-accent: #773738;
   --tpl-deep: #38272b;
@@ -3071,13 +2918,6 @@ footer img {
   background: #b3beb9;
 }
 .webwell .tpl-foot {
-  background: #f8f6f1;
-}
-.switcher {
-  background: #38272b;
-}
-.switcher button.active {
-  color: #773738;
   background: #f8f6f1;
 }
 .lede p {
@@ -3204,9 +3044,6 @@ footer img {
   font-size: 12px;
   line-height: 1.35;
   align-self: center;
-}
-.editorial .practice-intro {
-  background: #f6f4ef;
 }
 @media (max-width: 800px) {
   .practice-intro {
@@ -3670,88 +3507,7 @@ footer img {
 .service-grid article .schedule-dot ~ .service-photo-picker {
   margin-top: 55px;
 }
-.clinical-bridge {
-  display: grid;
-  grid-template-columns: 0.78fr 1.22fr;
-  gap: 7vw;
-  padding: 110px 8vw;
-  background: #38272b;
-  color: #f8f6f1;
-}
-.clinical-bridge-intro > p:first-child,
-.clinical-bridge-list span {
-  font: 700 10px Arial;
-  letter-spacing: 0.13em;
-  color: #b3beb9;
-  text-transform: uppercase;
-}
-.clinical-bridge h2 {
-  font: 400 clamp(42px, 4.8vw, 70px)/0.98 Georgia;
-  margin: 22px 0 26px;
-  max-width: 600px;
-}
-.clinical-bridge-intro > p:last-child {
-  font: 17px/1.7 Georgia;
-  max-width: 540px;
-  color: #eee7e2;
-}
-.clinical-bridge-list {
-  border-top: 1px solid #b3beb955;
-}
-.clinical-bridge-list article {
-  display: grid;
-  grid-template-columns: 150px 1fr auto;
-  gap: 24px;
-  align-items: center;
-  padding: 28px 0;
-  border-bottom: 1px solid #b3beb955;
-}
-.clinical-bridge-list h3 {
-  font: 400 24px/1.14 Georgia;
-  margin: 0;
-}
-.clinical-bridge-list p {
-  grid-column: 2;
-  font: 14px/1.55 Arial;
-  color: #d8d3cf;
-  margin: 0;
-}
-.clinical-bridge-list button {
-  grid-column: 3;
-  grid-row: 1/3;
-  border: 1px solid #b3beb9;
-  background: transparent;
-  color: #fff;
-  padding: 12px 14px;
-  font: 700 10px Arial;
-  letter-spacing: 0.06em;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  white-space: nowrap;
-}
-.clinical-bridge-list button:hover {
-  background: #b3beb9;
-  color: #38272b;
-}
 @media (max-width: 900px) {
-  .clinical-bridge {
-    grid-template-columns: 1fr;
-    padding: 75px 7vw;
-    gap: 45px;
-  }
-  .clinical-bridge-list article {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .clinical-bridge-list p,
-  .clinical-bridge-list button {
-    grid-column: auto;
-    grid-row: auto;
-  }
-  .clinical-bridge-list button {
-    justify-self: start;
-  }
 }
 .tpl-referral {
   display: grid;
@@ -5957,15 +5713,6 @@ footer img {
   border-radius: 18px;
   background: #f7fbfa;
 }
-.site.editorial .strategy-referral {
-  background: #38272b;
-}
-.site.editorial .strategy-profiles {
-  background: #b3beb9;
-}
-.site.editorial .strategy-aging {
-  background: #f6f4ef;
-}
 @media (max-width: 800px) {
   .strategy-referral,
   .strategy-profiles,
@@ -6000,7 +5747,6 @@ footer img {
   color: #38272b;
   border-radius: 999px;
 }
-.site.editorial > footer,
 .site.webwell .tpl-foot {
   display: none;
 }

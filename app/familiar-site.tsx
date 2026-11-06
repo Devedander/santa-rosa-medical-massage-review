@@ -1,25 +1,25 @@
-"use client";
+'use client';
 import {
   careCopy,
   agingCopy,
   referralCopy,
   practiceCopy,
-} from "./care-content";
+} from './care-content';
 import {
   practitioners,
   practiceAwardCopy,
   squareBookingUrl,
   squareGiftCardUrl,
-} from "./staff-content";
-import { getSquareService } from "./square-services";
+} from './staff-content';
+import { getSquareService } from './square-services';
 
 const practitionerProfileSuffix =
-  process.env.GITHUB_PAGES === "true" ||
-  (typeof window !== "undefined" &&
-    window.location.hostname !== "localhost" &&
-    window.location.hostname !== "127.0.0.1")
-    ? ".html"
-    : "/";
+  process.env.GITHUB_PAGES === 'true' ||
+  (typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1')
+    ? '.html'
+    : '/';
 
 import {
   createContext,
@@ -30,7 +30,7 @@ import {
   useState,
   type ComponentType,
   type ReactNode,
-} from "react";
+} from 'react';
 import {
   ArrowUpRight,
   ArrowLeft,
@@ -45,8 +45,8 @@ import {
   Check,
   Star,
   Menu,
-} from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+} from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 type PhotoProps = {
   images: string[][];
@@ -58,7 +58,7 @@ type PhotoProps = {
   imageClickLabel?: string;
   hideControls?: boolean;
 };
-type Design = "courtyard" | "desk" | "everyday" | "house";
+type Design = 'house';
 type Props = {
   design: Design;
   page: string;
@@ -78,131 +78,199 @@ function useContent() {
   return useContext(Content)!;
 }
 const concerns = [
-  "Headaches & migraines",
-  "Neck tension",
-  "Shoulder impingement",
-  "Hip pain",
-  "TMJ pain",
-  "Sciatica & piriformis",
-  "Rotator cuff recovery",
-  "Post-surgical stiffness",
-  "Carpal tunnel",
-  "Reduced range of motion",
-  "Chronic pain",
-  "Plantar fasciitis",
+  'Headaches & migraines',
+  'Neck tension',
+  'Shoulder impingement',
+  'Hip pain',
+  'TMJ pain',
+  'Sciatica & piriformis',
+  'Rotator cuff recovery',
+  'Post-surgical stiffness',
+  'Carpal tunnel',
+  'Reduced range of motion',
+  'Chronic pain',
+  'Plantar fasciitis',
 ];
 const conditionGuidance: Record<
   string,
   { intro: string; approach: string; consideration: string }
 > = {
-  "Headaches & migraines": {
-    intro: "For recurring head pain, the conversation often begins with tension through the neck, shoulders, jaw, and upper back—and with the patterns you notice before symptoms build.",
-    approach: "Trigger Point Therapy, Medical Massage, or a gentler relaxation-focused approach may be discussed to address muscle tightness and support comfort. Your therapist can tailor pressure and positioning around your preferences.",
-    consideration: "New, severe, or changing headaches should be discussed with a medical professional before massage.",
+  'Headaches & migraines': {
+    intro:
+      'For recurring head pain, the conversation often begins with tension through the neck, shoulders, jaw, and upper back—and with the patterns you notice before symptoms build.',
+    approach:
+      'Trigger Point Therapy, Medical Massage, or a gentler relaxation-focused approach may be discussed to address muscle tightness and support comfort. Your therapist can tailor pressure and positioning around your preferences.',
+    consideration:
+      'New, severe, or changing headaches should be discussed with a medical professional before massage.',
   },
-  "Neck tension": {
-    intro: "Neck tension can make driving, desk work, sleep, and ordinary turns of the head feel more demanding than they should.",
-    approach: "Medical Massage, Trigger Point Therapy, and focused Deep Tissue work can be adapted to the neck, shoulders, chest, and upper back—the connected areas that may be contributing to a sense of tightness.",
-    consideration: "Share any recent injury, dizziness, numbness, or guidance from your care team so the session can be planned appropriately.",
+  'Neck tension': {
+    intro:
+      'Neck tension can make driving, desk work, sleep, and ordinary turns of the head feel more demanding than they should.',
+    approach:
+      'Medical Massage, Trigger Point Therapy, and focused Deep Tissue work can be adapted to the neck, shoulders, chest, and upper back—the connected areas that may be contributing to a sense of tightness.',
+    consideration:
+      'Share any recent injury, dizziness, numbness, or guidance from your care team so the session can be planned appropriately.',
   },
-  "Shoulder impingement": {
-    intro: "Shoulder discomfort can show up when reaching overhead, getting dressed, lifting, or finding a comfortable sleeping position.",
-    approach: "A focused Medical Massage session may include the shoulder, upper back, chest, and surrounding soft tissue, with pressure and range kept within your comfort. Trigger Point Therapy may also be part of the conversation.",
-    consideration: "If you have a diagnosis, imaging, or a physical-therapy plan, bring that context so care can complement—not replace—your medical guidance.",
+  'Shoulder impingement': {
+    intro:
+      'Shoulder discomfort can show up when reaching overhead, getting dressed, lifting, or finding a comfortable sleeping position.',
+    approach:
+      'A focused Medical Massage session may include the shoulder, upper back, chest, and surrounding soft tissue, with pressure and range kept within your comfort. Trigger Point Therapy may also be part of the conversation.',
+    consideration:
+      'If you have a diagnosis, imaging, or a physical-therapy plan, bring that context so care can complement—not replace—your medical guidance.',
   },
-  "Hip pain": {
-    intro: "Hip discomfort often affects more than one movement: walking, stairs, sitting, sleeping, and the way the low back or legs feel through the day.",
-    approach: "Medical Massage and Deep Tissue / Full Body work can be tailored around the hips, glutes, low back, and legs, with the goal of supporting comfort and easier movement in the activities that matter to you.",
-    consideration: "Tell your therapist about any recent fall, joint replacement, radiating pain, or provider recommendations before your session.",
+  'Hip pain': {
+    intro:
+      'Hip discomfort often affects more than one movement: walking, stairs, sitting, sleeping, and the way the low back or legs feel through the day.',
+    approach:
+      'Medical Massage and Deep Tissue / Full Body work can be tailored around the hips, glutes, low back, and legs, with the goal of supporting comfort and easier movement in the activities that matter to you.',
+    consideration:
+      'Tell your therapist about any recent fall, joint replacement, radiating pain, or provider recommendations before your session.',
   },
-  "TMJ pain": {
-    intro: "Jaw tension can be connected to clenching, headaches, neck tightness, stress, or habits that build up over a busy day.",
-    approach: "Gentle Medical Massage or Trigger Point work may focus on the jaw, temples, scalp, neck, and shoulders. The plan is always paced to your comfort; you do not need to push through discomfort.",
-    consideration: "For new jaw pain, dental concerns, or a changing bite, it is wise to involve the appropriate medical or dental professional.",
+  'TMJ pain': {
+    intro:
+      'Jaw tension can be connected to clenching, headaches, neck tightness, stress, or habits that build up over a busy day.',
+    approach:
+      'Gentle Medical Massage or Trigger Point work may focus on the jaw, temples, scalp, neck, and shoulders. The plan is always paced to your comfort; you do not need to push through discomfort.',
+    consideration:
+      'For new jaw pain, dental concerns, or a changing bite, it is wise to involve the appropriate medical or dental professional.',
   },
-  "Sciatica & piriformis": {
-    intro: "Low-back, hip, and leg symptoms can make sitting, walking, driving, or sleeping feel complicated. Your experience and any diagnosis help guide the conversation.",
-    approach: "Medical Massage, Trigger Point Therapy, and carefully paced Deep Tissue work may be used to address soft-tissue tension around the low back, hips, and glutes while keeping your comfort in view.",
-    consideration: "New weakness, loss of bladder or bowel control, or rapidly worsening symptoms need prompt medical attention rather than massage.",
+  'Sciatica & piriformis': {
+    intro:
+      'Low-back, hip, and leg symptoms can make sitting, walking, driving, or sleeping feel complicated. Your experience and any diagnosis help guide the conversation.',
+    approach:
+      'Medical Massage, Trigger Point Therapy, and carefully paced Deep Tissue work may be used to address soft-tissue tension around the low back, hips, and glutes while keeping your comfort in view.',
+    consideration:
+      'New weakness, loss of bladder or bowel control, or rapidly worsening symptoms need prompt medical attention rather than massage.',
   },
-  "Rotator cuff recovery": {
-    intro: "Recovery around the shoulder is often gradual, and the best starting point depends on your stage of healing and your clinician’s guidance.",
-    approach: "When appropriate, gentle Medical Massage can focus on surrounding areas such as the neck, upper back, chest, and arm, helping make space for a more comfortable recovery routine.",
-    consideration: "Bring any post-injury or post-procedure restrictions. Massage does not replace a rehabilitation plan or clearance from your provider.",
+  'Rotator cuff recovery': {
+    intro:
+      'Recovery around the shoulder is often gradual, and the best starting point depends on your stage of healing and your clinician’s guidance.',
+    approach:
+      'When appropriate, gentle Medical Massage can focus on surrounding areas such as the neck, upper back, chest, and arm, helping make space for a more comfortable recovery routine.',
+    consideration:
+      'Bring any post-injury or post-procedure restrictions. Massage does not replace a rehabilitation plan or clearance from your provider.',
   },
-  "Post-surgical stiffness": {
-    intro: "After surgery, stiffness and changes in movement can make everyday tasks feel unfamiliar. The timing and approach should follow your surgical team’s guidance.",
-    approach: "With appropriate clearance, gentle Medical Massage or Lymphatic Facilitation may be discussed as supportive care around—not over—healing tissues, with pressure and positioning adjusted for your comfort.",
-    consideration: "Please share your procedure, recovery stage, medications, and any restrictions before booking so the practice can help determine an appropriate next step.",
+  'Post-surgical stiffness': {
+    intro:
+      'After surgery, stiffness and changes in movement can make everyday tasks feel unfamiliar. The timing and approach should follow your surgical team’s guidance.',
+    approach:
+      'With appropriate clearance, gentle Medical Massage or Lymphatic Facilitation may be discussed as supportive care around—not over—healing tissues, with pressure and positioning adjusted for your comfort.',
+    consideration:
+      'Please share your procedure, recovery stage, medications, and any restrictions before booking so the practice can help determine an appropriate next step.',
   },
-  "Carpal tunnel": {
-    intro: "Hand, wrist, and forearm discomfort can affect typing, gripping, sleep, and the small tasks that fill a day.",
-    approach: "Medical Massage and focused Trigger Point work may include the forearm, hand, wrist, shoulder, and neck, looking at the soft-tissue patterns around the areas that feel restricted or overworked.",
-    consideration: "Numbness, weakness, or symptoms that are progressing deserve medical evaluation; massage is supportive care, not a diagnosis.",
+  'Carpal tunnel': {
+    intro:
+      'Hand, wrist, and forearm discomfort can affect typing, gripping, sleep, and the small tasks that fill a day.',
+    approach:
+      'Medical Massage and focused Trigger Point work may include the forearm, hand, wrist, shoulder, and neck, looking at the soft-tissue patterns around the areas that feel restricted or overworked.',
+    consideration:
+      'Numbness, weakness, or symptoms that are progressing deserve medical evaluation; massage is supportive care, not a diagnosis.',
   },
-  "Reduced range of motion": {
-    intro: "When movement feels limited, it helps to start with the activity you want to do more comfortably—not just a measurement of how far something moves.",
-    approach: "Deep Tissue / Full Body work, Medical Massage, and Assisted Stretching can be tailored to the muscles and connective tissue around the movement that feels restricted, without forcing a range.",
-    consideration: "Tell us about injuries, surgery, joint conditions, and any movement guidance you have received before your appointment.",
+  'Reduced range of motion': {
+    intro:
+      'When movement feels limited, it helps to start with the activity you want to do more comfortably—not just a measurement of how far something moves.',
+    approach:
+      'Deep Tissue / Full Body work, Medical Massage, and Assisted Stretching can be tailored to the muscles and connective tissue around the movement that feels restricted, without forcing a range.',
+    consideration:
+      'Tell us about injuries, surgery, joint conditions, and any movement guidance you have received before your appointment.',
   },
-  "Chronic pain": {
-    intro: "Persistent pain can change energy, sleep, movement, and the confidence to make plans. A session starts with listening to what your day is like now.",
-    approach: "Medical Massage, Somatic Experiencing, Assisted Stretching, and focused Trigger Point work offer different ways to shape a session around comfort, pacing, and the areas that are asking for attention.",
-    consideration: "Massage can be one part of a broader care plan. Bring relevant medical guidance so your therapist can work thoughtfully alongside it.",
+  'Chronic pain': {
+    intro:
+      'Persistent pain can change energy, sleep, movement, and the confidence to make plans. A session starts with listening to what your day is like now.',
+    approach:
+      'Medical Massage, Somatic Experiencing, Assisted Stretching, and focused Trigger Point work offer different ways to shape a session around comfort, pacing, and the areas that are asking for attention.',
+    consideration:
+      'Massage can be one part of a broader care plan. Bring relevant medical guidance so your therapist can work thoughtfully alongside it.',
   },
-  "Plantar fasciitis": {
-    intro: "Foot pain can change a walk, a shift at work, an exercise routine, or simply the first few steps of the day.",
-    approach: "Medical Massage and focused Deep Tissue work may include the feet, calves, ankles, and legs—the connected soft-tissue areas that can be useful to explore when walking or standing feels uncomfortable.",
-    consideration: "Share any recent change in activity, injury, swelling, circulation concerns, or provider recommendations before treatment.",
+  'Plantar fasciitis': {
+    intro:
+      'Foot pain can change a walk, a shift at work, an exercise routine, or simply the first few steps of the day.',
+    approach:
+      'Medical Massage and focused Deep Tissue work may include the feet, calves, ankles, and legs—the connected soft-tissue areas that can be useful to explore when walking or standing feels uncomfortable.',
+    consideration:
+      'Share any recent change in activity, injury, swelling, circulation concerns, or provider recommendations before treatment.',
   },
 };
 const additionalConcernGroups = [
-  ["Injury & recovery", ["Low back pain", "Auto injuries & whiplash", "Pain associated with bulged or injured spinal discs", "Tendonitis"]],
-  ["Hands, arms & repetitive use", ["Tingling in hands", "Tennis elbow & golfer's elbow", "Other repetitive-use injuries"]],
-  ["Whole-body & chronic concerns", ["Stress", "Leg cramps", "Postural imbalances", "Joint aches", "Fibromyalgia pain"]],
-  ["Specialized support", ["Lymphedema", "Constipation", "Breast pain"]],
+  [
+    'Injury & recovery',
+    [
+      'Low back pain',
+      'Auto injuries & whiplash',
+      'Pain associated with bulged or injured spinal discs',
+      'Tendonitis',
+    ],
+  ],
+  [
+    'Hands, arms & repetitive use',
+    [
+      'Tingling in hands',
+      "Tennis elbow & golfer's elbow",
+      'Other repetitive-use injuries',
+    ],
+  ],
+  [
+    'Whole-body & chronic concerns',
+    [
+      'Stress',
+      'Leg cramps',
+      'Postural imbalances',
+      'Joint aches',
+      'Fibromyalgia pain',
+    ],
+  ],
+  ['Specialized support', ['Lymphedema', 'Constipation', 'Breast pain']],
 ] as const;
 function additionalGuidance(concern: string) {
-  if (concern === "Lymphedema")
+  if (concern === 'Lymphedema')
     return {
-      intro: "Lymphedema care needs an especially thoughtful starting point, including an understanding of your diagnosis, treatment history, and medical guidance.",
-      approach: "With appropriate referral or clearance, Lymphatic Facilitation may be discussed as a very light-touch supportive approach. The practice can help you talk through whether this service is an appropriate fit.",
-      consideration: "Please share any history of cancer treatment, infection, blood clots, swelling changes, or current provider instructions before booking.",
+      intro:
+        'Lymphedema care needs an especially thoughtful starting point, including an understanding of your diagnosis, treatment history, and medical guidance.',
+      approach:
+        'With appropriate referral or clearance, Lymphatic Facilitation may be discussed as a very light-touch supportive approach. The practice can help you talk through whether this service is an appropriate fit.',
+      consideration:
+        'Please share any history of cancer treatment, infection, blood clots, swelling changes, or current provider instructions before booking.',
     };
-  if (concern === "Breast pain")
+  if (concern === 'Breast pain')
     return {
-      intro: "Breast pain or a new breast change deserves medical evaluation first, so your care team can help identify the right next step.",
-      approach: "After appropriate guidance, a conversation about gentle, supportive massage around the upper body, neck, shoulders, or chest may be considered—always with your comfort and boundaries leading the plan.",
-      consideration: "Massage does not evaluate breast symptoms. Please contact a medical professional about new, persistent, or changing breast pain.",
+      intro:
+        'Breast pain or a new breast change deserves medical evaluation first, so your care team can help identify the right next step.',
+      approach:
+        'After appropriate guidance, a conversation about gentle, supportive massage around the upper body, neck, shoulders, or chest may be considered—always with your comfort and boundaries leading the plan.',
+      consideration:
+        'Massage does not evaluate breast symptoms. Please contact a medical professional about new, persistent, or changing breast pain.',
     };
   return {
     intro: `${concern} can affect the routines that make up a day—work, rest, movement, hobbies, and sleep. A useful starting point is what you want to do more comfortably.`,
-    approach: "Medical Massage, Trigger Point Therapy, Deep Tissue / Full Body work, Thai Massage, or Assisted Stretching may be discussed based on your symptoms, comfort, and any relevant care guidance.",
-    consideration: "Share any diagnosis, recent injury or surgery, medications, and recommendations from your medical or rehabilitation team before your session.",
+    approach:
+      'Medical Massage, Trigger Point Therapy, Deep Tissue / Full Body work, Thai Massage, or Assisted Stretching may be discussed based on your symptoms, comfort, and any relevant care guidance.',
+    consideration:
+      'Share any diagnosis, recent injury or surgery, medications, and recommendations from your medical or rehabilitation team before your session.',
   };
 }
-const address = "630 Third Street, Suite B, Santa Rosa, CA 95404";
+const address = '630 Third Street, Suite B, Santa Rosa, CA 95404';
 const squareTreatmentBookingUrl =
-  "https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services/HNPKAYWN4I2AUEHNBZY7XLWT";
-const assetPath = (src: string) => (src.startsWith("/") ? `.${src}` : src);
+  'https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services/HNPKAYWN4I2AUEHNBZY7XLWT';
+const assetPath = (src: string) => (src.startsWith('/') ? `.${src}` : src);
 const navItems = [
-  ["about", "The practice"],
-  ["staff", "Meet the practice"],
-  ["treatments", "Treatments"],
-  ["conditions", "Common concerns"],
-  ["reviews", "Reviews"],
-  ["visit", "Visit & gallery"],
+  ['about', 'The practice'],
+  ['staff', 'Meet the practice'],
+  ['treatments', 'Treatments'],
+  ['conditions', 'Common concerns'],
+  ['reviews', 'Reviews'],
+  ['visit', 'Visit & gallery'],
 ];
 const treatmentPhotoFirsts = [
-  "treatment-hand-work-02.jpeg",
-  "treatment-shoulder-work-02.jpeg",
-  "treatment-back-work-05.jpeg",
-  "treatment-hand-work-01.jpeg",
-  "assisted-stretching-04.jpeg",
-  "treatment-hand-work-01.jpeg",
-  "treatment-table-bodywork-01.jpeg",
-  "yelp-detail-4.jpg",
-  "treatment-new-back-work-01.jpeg",
+  'treatment-hand-work-02.jpeg',
+  'treatment-shoulder-work-02.jpeg',
+  'treatment-back-work-05.jpeg',
+  'treatment-hand-work-01.jpeg',
+  'assisted-stretching-04.jpeg',
+  'treatment-hand-work-01.jpeg',
+  'treatment-table-bodywork-01.jpeg',
+  'yelp-detail-4.jpg',
+  'treatment-new-back-work-01.jpeg',
 ];
 
 type AnalyticsParams = Record<string, string | number | boolean>;
@@ -212,15 +280,17 @@ type AnalyticsParams = Record<string, string | number | boolean>;
  * health details, or form responses in analytics events.
  */
 function trackEvent(eventName: string, params: AnalyticsParams = {}) {
-  if (typeof window === "undefined") return;
-  const gtag = (window as Window & {
-    gtag?: (
-      command: "event",
-      event: string,
-      parameters: AnalyticsParams,
-    ) => void;
-  }).gtag;
-  gtag?.("event", eventName, { ...params, transport_type: "beacon" });
+  if (typeof window === 'undefined') return;
+  const gtag = (
+    window as Window & {
+      gtag?: (
+        command: 'event',
+        event: string,
+        parameters: AnalyticsParams,
+      ) => void;
+    }
+  ).gtag;
+  gtag?.('event', eventName, { ...params, transport_type: 'beacon' });
 }
 
 function Action({
@@ -233,15 +303,15 @@ function Action({
   quiet?: boolean;
 }) {
   const { onPage } = useContent();
-  if (to === "book") {
+  if (to === 'book') {
     return (
       <a
-        className={quiet ? "n-link" : "n-button"}
+        className={quiet ? 'n-link' : 'n-button'}
         href={squareBookingUrl}
         onClick={() =>
-          trackEvent("generate_lead", {
-            method: "square_booking",
-            link_text: typeof children === "string" ? children : "booking_cta",
+          trackEvent('generate_lead', {
+            method: 'square_booking',
+            link_text: typeof children === 'string' ? children : 'booking_cta',
           })
         }
       >
@@ -250,15 +320,16 @@ function Action({
       </a>
     );
   }
-  if (to === "gift") {
+  if (to === 'gift') {
     return (
       <a
-        className={quiet ? "n-link" : "n-button"}
+        className={quiet ? 'n-link' : 'n-button'}
         href={squareGiftCardUrl}
         onClick={() =>
-          trackEvent("gift_card_click", {
-            method: "square_gift_card",
-            link_text: typeof children === "string" ? children : "gift_card_cta",
+          trackEvent('gift_card_click', {
+            method: 'square_gift_card',
+            link_text:
+              typeof children === 'string' ? children : 'gift_card_cta',
           })
         }
       >
@@ -269,7 +340,7 @@ function Action({
   }
   return (
     <button
-      className={quiet ? "n-link" : "n-button"}
+      className={quiet ? 'n-link' : 'n-button'}
       onClick={() => onPage(to)}
     >
       {children}
@@ -287,15 +358,18 @@ function TreatmentBookingLink({
   serviceName?: string;
 }) {
   const trackBooking = () => {
-    trackEvent("generate_lead", {
-      method: "square_booking",
-      service_name: serviceName || "general",
+    trackEvent('generate_lead', {
+      method: 'square_booking',
+      service_name: serviceName || 'general',
     });
   };
   return (
     <a
-      className={quiet ? "n-link" : "n-button"}
-      href={getSquareService(serviceName || "")?.bookingUrl || squareTreatmentBookingUrl}
+      className={quiet ? 'n-link' : 'n-button'}
+      href={
+        getSquareService(serviceName || '')?.bookingUrl ||
+        squareTreatmentBookingUrl
+      }
       onClick={trackBooking}
     >
       {children}
@@ -312,10 +386,7 @@ function PractitionerProfileLink({
 }) {
   const href = `./practitioners/${slug}${practitionerProfileSuffix}`;
   return (
-    <a
-      className="n-link"
-      href={href}
-    >
+    <a className="n-link" href={href}>
       Read {name}&rsquo;s full profile
       <ArrowUpRight size={18} aria-hidden="true" />
     </a>
@@ -323,8 +394,8 @@ function PractitionerProfileLink({
 }
 function Photo({
   name,
-  first = "google-remodel-room.jpg",
-  className = "",
+  first = 'google-remodel-room.jpg',
+  className = '',
   imageHref,
   photoOptions,
   additionalPhotos,
@@ -369,41 +440,36 @@ function Photo({
 function Brand() {
   const { onPage } = useContent();
   return (
-      <button
-        className="n-brand"
-        onClick={() => onPage("home")}
-        aria-label="Santa Rosa Medical Massage home"
-      >
-        <img
-          src="./logo-correct.png"
-          alt="Santa Rosa Medical Massage"
-          className="n-brand-logo"
-        />
-        <img
-          src="./mobile-menu-mark.png"
-          alt=""
-          className="n-mobile-brand-mark"
-          aria-hidden="true"
-        />
-      </button>
+    <button
+      className="n-brand"
+      onClick={() => onPage('home')}
+      aria-label="Santa Rosa Medical Massage home"
+    >
+      <img
+        src="./logo-correct.png"
+        alt="Santa Rosa Medical Massage"
+        className="n-brand-logo"
+      />
+      <img
+        src="./mobile-menu-mark.png"
+        alt=""
+        className="n-mobile-brand-mark"
+        aria-hidden="true"
+      />
+    </button>
   );
 }
 function ConcernLinks() {
-  const { onPage, design } = useContent();
   const [openConcern, setOpenConcern] = useState<string | null>(null);
   const [showMore, setShowMore] = useState(false);
   const renderConcern = (c: string) => {
-    const expanded = design === "house" && openConcern === c;
+    const expanded = openConcern === c;
     const guidance = conditionGuidance[c] || additionalGuidance(c);
     return (
-      <div className={`n-concern-item ${expanded ? "is-open" : ""}`} key={c}>
+      <div className={`n-concern-item ${expanded ? 'is-open' : ''}`} key={c}>
         <button
-          onClick={() =>
-            design === "house"
-              ? setOpenConcern(expanded ? null : c)
-              : onPage(`condition-${encodeURIComponent(c)}`)
-          }
-          aria-expanded={design === "house" ? expanded : undefined}
+          onClick={() => setOpenConcern(expanded ? null : c)}
+          aria-expanded={expanded}
         >
           {c}
           <Plus size={16} aria-hidden="true" />
@@ -423,90 +489,36 @@ function ConcernLinks() {
   return (
     <>
       <div className="n-concerns">{concerns.map(renderConcern)}</div>
-      {design === "house" && (
-        <>
-          <section className={`n-more-concerns ${showMore ? "is-open" : ""}`}>
-            <button
-              className="n-more-concerns-toggle"
-              onClick={() => setShowMore(!showMore)}
-              aria-expanded={showMore}
-            >
-              <span>
-                <b>More concerns we support</b>
-                <small>Explore additional reasons clients begin a conversation with us.</small>
-              </span>
-              <Plus size={20} aria-hidden="true" />
-            </button>
-            <div className="n-more-concern-groups">
-              {additionalConcernGroups.map(([group, groupConcerns]) => (
-                <section key={group}>
-                  <h3>{group}</h3>
-                  <div className="n-more-concern-list">
-                    {groupConcerns.map(renderConcern)}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+      <section className={`n-more-concerns ${showMore ? 'is-open' : ''}`}>
+        <button
+          className="n-more-concerns-toggle"
+          onClick={() => setShowMore(!showMore)}
+          aria-expanded={showMore}
+        >
+          <span>
+            <b>More concerns we support</b>
+            <small>
+              Explore additional reasons clients begin a conversation with us.
+            </small>
+          </span>
+          <Plus size={20} aria-hidden="true" />
+        </button>
+        <div className="n-more-concern-groups">
+          {additionalConcernGroups.map(([group, groupConcerns]) => (
+            <section key={group}>
+              <h3>{group}</h3>
+              <div className="n-more-concern-list">
+                {groupConcerns.map(renderConcern)}
+              </div>
+            </section>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
-function ServiceList({
-  mode = "cards",
-}: {
-  mode?: "cards" | "accordion" | "tabs";
-}) {
+function ServiceList() {
   const { services, onPage } = useContent();
-  if (mode === "tabs")
-    return (
-      <Tabs defaultValue="0" className="n-treatment-tabs">
-        <TabsList aria-label="Treatments">
-          {services.map(([name], i) => (
-            <TabsTrigger key={name} value={String(i)}>
-              {name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {services.map(([name, summary], i) => (
-          <TabsContent key={name} value={String(i)}>
-            <Photo
-              name={`treatment-${i}`}
-              first={treatmentPhotoFirsts[i] ?? "yelp-treatment.jpg"}
-            />
-            <div>
-              <h3>{name}</h3>
-              <p>{summary}</p>
-              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
-              <Action to={`service-${i}`} quiet>
-                More information
-              </Action>
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
-    );
-  if (mode === "accordion")
-    return (
-      <div className="n-treatment-accordion">
-        {services.map(([name, summary], i) => (
-          <details key={name} open={i === 0}>
-            <summary>
-              {name}
-              <Plus aria-hidden="true" size={20} />
-            </summary>
-            <div>
-              <p>{summary}</p>
-              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
-              <Action to={`service-${i}`} quiet>
-                More information
-              </Action>
-            </div>
-          </details>
-        ))}
-      </div>
-    );
   return (
     <div className="n-treatment-cards">
       {services.map(([name, summary], i) => (
@@ -516,11 +528,11 @@ function ServiceList({
           role="link"
           tabIndex={0}
           onClick={(event) => {
-            if ((event.target as HTMLElement).closest("a")) return;
+            if ((event.target as HTMLElement).closest('a')) return;
             onPage(`service-${i}`);
           }}
           onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
+            if (event.key === 'Enter' || event.key === ' ') {
               event.preventDefault();
               onPage(`service-${i}`);
             }
@@ -530,14 +542,16 @@ function ServiceList({
             name={`treatment-${i}`}
             first={
               treatmentPhotoFirsts[i] ??
-              (i % 2 ? "therapy-hands.jpg" : "yelp-treatment.jpg")
+              (i % 2 ? 'therapy-hands.jpg' : 'yelp-treatment.jpg')
             }
           />
           <div>
             <h3>{name}</h3>
             <p>{summary}</p>
             <span onClick={(event) => event.stopPropagation()}>
-              <TreatmentBookingLink serviceName={name}>Schedule now</TreatmentBookingLink>
+              <TreatmentBookingLink serviceName={name}>
+                Schedule now
+              </TreatmentBookingLink>
             </span>
             <Action to={`service-${i}`} quiet>
               More information
@@ -567,8 +581,8 @@ function Reviews() {
         );
       }, 280);
     };
-    document.addEventListener("pointerdown", closeOnAnyClick);
-    return () => document.removeEventListener("pointerdown", closeOnAnyClick);
+    document.addEventListener('pointerdown', closeOnAnyClick);
+    return () => document.removeEventListener('pointerdown', closeOnAnyClick);
   }, [expandedReview, closingReview]);
   const visibleReviews = Array.from(
     { length: Math.min(5, reviews.length) },
@@ -588,32 +602,42 @@ function Reviews() {
             }
             setClosingReview(name);
             window.setTimeout(() => {
-              setExpandedReview((current) => (current === name ? null : current));
-              setClosingReview((current) => (current === name ? null : current));
+              setExpandedReview((current) =>
+                current === name ? null : current,
+              );
+              setClosingReview((current) =>
+                current === name ? null : current,
+              );
             }, 280);
           };
           return (
-          <div className="n-review-card-slot" key={name}>
-          <article className={`${isExpanded ? "is-expanded" : ""} ${isClosing ? "is-closing" : ""}`}>
-            <span className="n-quote-mark" aria-hidden="true">
-              “
-            </span>
-            <blockquote className={isExpanded || isClosing ? "is-expanded" : ""}>
-              {quote}
-            </blockquote>
-            {quote.length > 110 && (
-              <button
-                className="n-review-expand"
-                aria-expanded={isExpanded && !isClosing}
-                onClick={toggleReview}
+            <div className="n-review-card-slot" key={name}>
+              <article
+                className={`${isExpanded ? 'is-expanded' : ''} ${isClosing ? 'is-closing' : ''}`}
               >
-                {isExpanded && !isClosing ? "Show less" : "Read full review"}
-              </button>
-            )}
-            <b>{name}</b>
-            <span>{source || "Google"}</span>
-          </article>
-          </div>
+                <span className="n-quote-mark" aria-hidden="true">
+                  “
+                </span>
+                <blockquote
+                  className={isExpanded || isClosing ? 'is-expanded' : ''}
+                >
+                  {quote}
+                </blockquote>
+                {quote.length > 110 && (
+                  <button
+                    className="n-review-expand"
+                    aria-expanded={isExpanded && !isClosing}
+                    onClick={toggleReview}
+                  >
+                    {isExpanded && !isClosing
+                      ? 'Show less'
+                      : 'Read full review'}
+                  </button>
+                )}
+                <b>{name}</b>
+                <span>{source || 'Google'}</span>
+              </article>
+            </div>
           );
         })}
       </div>
@@ -621,7 +645,9 @@ function Reviews() {
         <button
           aria-label="Previous review"
           onClick={() =>
-            setActiveReview((activeReview + reviews.length - 1) % reviews.length)
+            setActiveReview(
+              (activeReview + reviews.length - 1) % reviews.length,
+            )
           }
         >
           <ArrowLeft size={20} />
@@ -671,10 +697,13 @@ function Visit({
           <MapPin size={23} />
           <h3>Find us downtown</h3>
           <p>{address}</p>
-          <p>Convenient street parking, close to the 3rd Street and D Street garages. Visits by appointment.</p>
+          <p>
+            Convenient street parking, close to the 3rd Street and D Street
+            garages. Visits by appointment.
+          </p>
           <a
             className="n-link"
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Santa Rosa Medical Massage " + address)}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Santa Rosa Medical Massage ' + address)}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -689,9 +718,9 @@ function Visit({
               className="n-phone"
               href="tel:+17073037707"
               onClick={() =>
-                trackEvent("generate_lead", {
-                  method: "phone_call",
-                  placement: "visit_section",
+                trackEvent('generate_lead', {
+                  method: 'phone_call',
+                  placement: 'visit_section',
                 })
               }
             >
@@ -739,423 +768,15 @@ function Notes({ compact = false }: { compact?: boolean }) {
             <span>{category}</span>
             <h3>{title}</h3>
             <p>{excerpt}</p>
-            <Action to={`post-${slug}`} quiet>Read full article</Action>
+            <Action to={`post-${slug}`} quiet>
+              Read full article
+            </Action>
           </article>
         ))}
     </div>
   );
 }
-function Courtyard() {
-  return (
-    <div className="courtyard-home">
-      <section className="court-opening">
-        <Photo name="opening" />
-        <div className="court-welcome">
-          <span>Focused care. A welcoming place.</span>
-          <h1>
-            A little space to feel
-            <br />
-            more like yourself.
-          </h1>
-          <div>
-            <p>
-              When discomfort becomes part of everyday life, it can quietly
-              change the things you do. A walk gets shorter. Gardening waits for
-              another day. Finding a comfortable position at night takes a
-              little longer.
-            </p>
-            <p>
-              Here, you’re welcome to start with a conversation. We’ll listen to
-              what you’re experiencing, make room for your questions, and talk
-              about care with your comfort and everyday goals in mind.
-            </p>
-            <Action to="book">Schedule an appointment</Action>
-          </div>
-        </div>
-      </section>
-      <section id="n-about" className="court-introduction n-section">
-        <p className="n-kicker">Here in Santa Rosa</p>
-        <h2>
-          A little more ease.
-          <br />A little more you.
-        </h2>
-        <div>
-          <p>
-            At Santa Rosa Medical Massage, the conversation starts with you—what
-            you’ve been feeling, what you’ve tried, and what you would like to
-            do more comfortably. You don’t need to arrive knowing which
-            treatment to choose.
-          </p>
-          <p>
-            Our focus is targeted soft-tissue care, with attention to your
-            comfort, preferences, and goals. Whether you’re exploring massage
-            for the first time or returning for ongoing care, there’s room to
-            ask questions and talk through the next step.
-          </p>
-          <Action to="book" quiet>Schedule an appointment</Action>
-        </div>
-      </section>
-      <section id="n-treatments" className="n-section court-treatments">
-        <div className="n-section-heading">
-          <h2>Care, with intention.</h2>
-          <p>A range of approaches. One starting point: your needs.</p>
-        </div>
-        <ServiceList />
-      </section>
-      <section id="n-conditions" className="court-concerns n-section">
-        <div>
-          <h2>
-            What would you like
-            <br />
-            to feel easier?
-          </h2>
-          <p>
-            You don’t have to know the name of a treatment to start a
-            conversation.
-          </p>
-        </div>
-        <ConcernLinks />
-      </section>
-      <section className="court-life n-section">
-        <Photo name="everyday-care" first="therapy-hands.jpg" />
-        <div>
-          <span className="n-kicker">Care through the years</span>
-          <h2>
-            For the life
-            <br />
-            beyond the table.
-          </h2>
-          <p>{agingCopy}</p>
-          <Action to="book" quiet>
-            Schedule an appointment
-          </Action>
-        </div>
-      </section>
-      <section id="n-reviews" className="n-section court-reviews">
-        <div className="n-section-heading">
-          <h2>In our clients’ words.</h2>
-          <Action to="reviews" quiet>
-            All client reviews
-          </Action>
-        </div>
-        <Reviews />
-      </section>
-      <section className="court-gallery n-section">
-        <div>
-          <span className="n-kicker">Come on in</span>
-          <h2>
-            A familiar place
-            <br />
-            to return to.
-          </h2>
-          <p>
-            Explore the refreshed rooms and the details of the practice before
-            your visit.
-          </p>
-          <Action to="gallery" quiet>
-            Explore the gallery
-          </Action>
-        </div>
-        <Photo name="gallery" first="google-gallery-3.jpg" />
-      </section>
-      <section className="court-referral n-section">
-        <h2>
-          Supporting the care
-          <br />
-          already around you.
-        </h2>
-        <div>
-          <p>{referralCopy}</p>
-          <Action to="book">Schedule an appointment</Action>
-        </div>
-      </section>
-      <section id="n-visit" className="n-section">
-        <div className="n-section-heading">
-          <h2>Your next visit.</h2>
-          <Action to="book">Schedule an appointment</Action>
-        </div>
-        <Visit />
-      </section>
-      <section className="n-section court-notes">
-        <div className="n-section-heading">
-          <h2>A few helpful blog posts.</h2>
-          <Action to="blog" quiet>
-            Browse the journal
-          </Action>
-        </div>
-        <Notes compact />
-      </section>
-    </div>
-  );
-}
-function Desk() {
-  const { awards } = useContent();
-  return (
-    <div className="desk-home">
-      <section className="desk-opening">
-        <div className="desk-title">
-          <span>Soft-tissue care in Santa Rosa</span>
-          <h1>
-            Good care starts
-            <br />
-            with being heard.
-          </h1>
-          <p>
-            Perhaps there’s a particular place that keeps asking for attention.
-            Perhaps movement feels more restricted than it used to. Or perhaps
-            you’ve been encouraged to explore massage and aren’t quite sure
-            where to begin.
-          </p>
-          <p>
-            You can start with an ordinary conversation. Tell us what gets in
-            the way of your day, which activities matter to you, and any
-            relevant guidance from your medical or rehabilitation team.
-          </p>
-          <p>
-            Santa Rosa Medical Massage offers several approaches to soft-tissue
-            care. Understanding the differences can wait until we understand
-            what you’re looking for. Your questions, comfort, and preferences
-            belong in that discussion.
-          </p>
-          <div className="n-hero-awards">{awards}</div>
-          <div className="n-actions">
-            <Action to="book">Schedule an appointment</Action>
-          </div>
-        </div>
-        <Photo name="opening" first="yelp-treatment.jpg" />
-        <div className="desk-location">
-          <MapPin size={18} />
-          <span>630 Third Street, Suite B</span>
-          <span>Convenient street parking near the 3rd Street and D Street garages</span>
-        </div>
-      </section>
-      <section id="n-treatments" className="desk-treatments n-section">
-        <div>
-          <span className="n-kicker">Treatment directory</span>
-          <h2>Find your approach.</h2>
-          <p>
-            Open a treatment to compare the options. We can help you choose.
-          </p>
-          <Photo name="treatments-overview" first="therapy-hands.jpg" />
-        </div>
-        <ServiceList mode="accordion" />
-      </section>
-      <section id="n-conditions" className="desk-concerns n-section">
-        <h2>Start with the concern.</h2>
-        <ConcernLinks />
-      </section>
-      <section id="n-about" className="desk-practice n-section">
-        <div>
-          <h2>
-            Listening is part
-            <br />
-            of the work.
-          </h2>
-          <p>{practiceCopy}</p>
-          <Action to="about" quiet>
-            About the practice
-          </Action>
-        </div>
-        <div>
-          <h3>Keeping everyday life in view</h3>
-          <p>{agingCopy}</p>
-          <h3>For referring professionals</h3>
-          <p>{referralCopy}</p>
-          <Action to="book" quiet>
-            Schedule an appointment
-          </Action>
-        </div>
-      </section>
-      <section id="n-visit" className="desk-arrival n-section">
-        <div className="n-section-heading">
-          <h2>Before you arrive.</h2>
-          <Action to="book">Schedule an appointment</Action>
-        </div>
-        <Visit />
-      </section>
-      <section id="n-reviews" className="n-section desk-reviews">
-        <div className="n-section-heading">
-          <h2>Client perspectives.</h2>
-          <Action to="reviews" quiet>
-            All reviews
-          </Action>
-        </div>
-        <Reviews />
-      </section>
-      <section className="n-section desk-notes">
-        <div className="n-section-heading">
-          <h2>Questions & reading.</h2>
-          <Action to="blog" quiet>
-            View blog
-          </Action>
-        </div>
-        <Notes compact />
-      </section>
-    </div>
-  );
-}
-function Everyday() {
-  const { onPage } = useContent();
-  return (
-    <div className="everyday-home">
-      <section className="every-opening">
-        <span>Santa Rosa, California</span>
-        <h1>
-          For all the little things
-          <br />
-          that make a day yours.
-        </h1>
-        <p>
-          Walking a little farther. Spending an afternoon in the garden. Turning
-          your head more comfortably. Settling into bed with less muscle
-          tension.
-        </p>
-        <p>
-          These may seem like small things, but they shape how life feels. And
-          when discomfort gets in the way, they can become the things you miss
-          most.
-        </p>
-        <Action to="book">Schedule an appointment</Action>
-        <div className="every-window">
-          <Photo name="opening-left" first="google-gallery-3.jpg" />
-          <div>
-            <p>
-              Care for
-              <br />
-              your everyday.
-            </p>
-            <span>
-              Targeted massage.
-              <br />
-              Personal attention.
-            </span>
-          </div>
-          <Photo name="opening-right" first="yelp-treatment.jpg" />
-        </div>
-      </section>
-      <section id="n-about" className="every-letter n-section">
-        <span className="n-kicker">You bring the story. We listen.</span>
-        <h2>
-          You’re more than
-          <br />
-          the place that hurts.
-        </h2>
-        <p>
-          At Santa Rosa Medical Massage, those everyday goals are a place to
-          begin. We listen to what you’re experiencing and talk with you about
-          treatment options, your comfort, and what you hope to return to.
-        </p>
-        <p>
-          Your needs may change over time. Whether you’re looking for focused
-          attention to a recurring concern or considering follow-up care, the
-          conversation stays centered on you.
-        </p>
-        <p>{agingCopy}</p>
-        <Action to="book" quiet>Schedule an appointment</Action>
-      </section>
-      <section id="n-treatments" className="every-treatments n-section">
-        <h2>
-          There’s more than
-          <br />
-          one way to care.
-        </h2>
-        <p>Explore the available treatments. We’ll help you find a starting point.</p>
-        <div className="every-goals">
-          {[
-            ["A longer walk", "Plantar fasciitis"],
-            ["Time in the garden", "Reduced range of motion"],
-            ["An easier morning", "Chronic pain"],
-          ].map(([label, concern]) => (
-            <button
-              key={label}
-              onClick={() => onPage(`condition-${encodeURIComponent(concern)}`)}
-            >
-              {label}
-              <ArrowUpRight size={19} />
-            </button>
-          ))}
-        </div>
-        <ServiceList mode="tabs" />
-      </section>
-      <section id="n-conditions" className="every-concerns n-section">
-        <div>
-          <h2>
-            Let’s talk about
-            <br />
-            what you’re feeling.
-          </h2>
-          <p>Choose a concern to explore the next conversation.</p>
-        </div>
-        <ConcernLinks />
-      </section>
-      <section id="n-reviews" className="every-reviews n-section">
-        <h2>
-          Good care is personal.
-          <br />
-          So are these stories.
-        </h2>
-        <Reviews />
-      </section>
-      <section className="every-invitation n-section">
-        <Photo name="gallery" />
-        <div>
-          <h2>
-            Your first visit
-            <br />
-            can feel familiar.
-          </h2>
-          <p>
-            See the space before you arrive. Public street parking is available,
-            along with parking lots across the street and behind the practice on
-            D Street.
-          </p>
-          <Action to="gallery" quiet>
-            Have a look around
-          </Action>
-        </div>
-      </section>
-      <section className="every-referral n-section">
-        <p className="n-kicker">For professionals</p>
-        <h2>
-          Part of a bigger
-          <br />
-          care conversation.
-        </h2>
-        <p>{referralCopy}</p>
-        <Action to="book" quiet>
-          Schedule an appointment
-        </Action>
-      </section>
-      <section id="n-visit" className="every-visit n-section">
-        <h2>
-          We’re here
-          <br />
-          when you’re ready.
-        </h2>
-        <Visit />
-        <div className="every-two-actions">
-          <Action to="book">Make time for yourself</Action>
-          <Action to="gift">Give someone time for care</Action>
-        </div>
-      </section>
-      <section className="every-notes n-section">
-        <div className="n-section-heading">
-          <h2>
-            A little reading,
-            <br />
-            at your own pace.
-          </h2>
-          <Action to="blog" quiet>
-            View blog
-          </Action>
-        </div>
-        <Notes compact />
-      </section>
-    </div>
-  );
-}
-
-function House() {
+function FamiliarHome() {
   const { awards } = useContent();
   return (
     <div className="house-home">
@@ -1172,9 +793,9 @@ function House() {
           <div className="house-welcome-copy">
             <p>
               In the heart of downtown Santa Rosa, there’s a place to slow down,
-              share what you’ve been feeling, and talk about the things you would
-              like to do more comfortably. You don’t need to know which treatment
-              to choose, or have the perfect words for what’s wrong.
+              share what you’ve been feeling, and talk about the things you
+              would like to do more comfortably. You don’t need to know which
+              treatment to choose, or have the perfect words for what’s wrong.
             </p>
             <p>
               Our focus is soft-tissue care with personal attention. Whether
@@ -1187,7 +808,10 @@ function House() {
           <Action to="book">Schedule an appointment</Action>
         </div>
       </section>
-      <section className="house-staff-preview n-section" aria-label="Meet the practice">
+      <section
+        className="house-staff-preview n-section"
+        aria-label="Meet the practice"
+      >
         <div className="house-staff-preview-copy">
           <div>
             <span className="n-kicker">Meet the practice</span>
@@ -1198,18 +822,23 @@ function House() {
             therapeutic approaches they bring to each appointment.
           </p>
         </div>
-        <div className="house-photo-strip" aria-label="A preview of the practice team">
+        <div
+          className="house-photo-strip"
+          aria-label="A preview of the practice team"
+        >
           {practitioners.map((practitioner) => (
             <div className="house-team-member" key={practitioner.slug}>
               <Photo
-                name={`welcome-${practitioner.slug}${practitioner.slug === "stacy-cmt" ? "-new" : ""}`}
+                name={`welcome-${practitioner.slug}${practitioner.slug === 'stacy-cmt' ? '-new' : ''}`}
                 first={practitioner.teamPhoto}
                 additionalPhotos={
-                  practitioner.slug === "stacy-cmt"
-                    ? [[
-                        "/site-photo-intake/stacy-new-portrait.png",
-                        "Stacy — new portrait",
-                      ]]
+                  practitioner.slug === 'stacy-cmt'
+                    ? [
+                        [
+                          '/site-photo-intake/stacy-new-portrait.png',
+                          'Stacy — new portrait',
+                        ],
+                      ]
                     : undefined
                 }
                 imageHref={`./practitioners/${practitioner.slug}.html`}
@@ -1217,7 +846,7 @@ function House() {
                 hideControls
                 onImageClick={() =>
                   window.location.assign(
-                    window.location.hostname === "localhost"
+                    window.location.hostname === 'localhost'
                       ? `./practitioners/${practitioner.slug}/`
                       : `./practitioners/${practitioner.slug}.html`,
                   )
@@ -1252,7 +881,9 @@ function House() {
             makes it easy to select an appointment and note any preferences for
             your first visit.
           </p>
-          <Action to="book" quiet>Schedule an appointment</Action>
+          <Action to="book" quiet>
+            Schedule an appointment
+          </Action>
         </div>
         <Photo
           name="practice-story"
@@ -1331,11 +962,11 @@ function House() {
 
 function Booking() {
   const { services, page } = useContent();
-  const [notice, setNotice] = useState("");
-  const [bookingPath, setBookingPath] = useState<"direct" | "therapist">(
-    "direct",
+  const [notice, setNotice] = useState('');
+  const [bookingPath, setBookingPath] = useState<'direct' | 'therapist'>(
+    'direct',
   );
-  if (false && page === "gift")
+  if (false && page === 'gift')
     return (
       <section className="n-booking standalone-booking n-booking-gift">
         <div className="standalone-booking-card">
@@ -1351,7 +982,7 @@ function Booking() {
             className="n-button"
             onClick={() =>
               setNotice(
-                "Square gift-card link placeholder — no purchase was started.",
+                'Square gift-card link placeholder — no purchase was started.',
               )
             }
           >
@@ -1366,7 +997,7 @@ function Booking() {
         </div>
       </section>
     );
-  if (false && page === "book")
+  if (false && page === 'book')
     return (
       <section className="n-booking standalone-booking n-booking-book">
         <div className="standalone-booking-card">
@@ -1382,7 +1013,7 @@ function Booking() {
             className="n-button"
             onClick={() =>
               setNotice(
-                "Square booking link placeholder — no appointment was started.",
+                'Square booking link placeholder — no appointment was started.',
               )
             }
           >
@@ -1399,9 +1030,9 @@ function Booking() {
     );
   return (
     <Tabs
-      defaultValue={page === "gift" ? "gift" : "appointment"}
+      defaultValue={page === 'gift' ? 'gift' : 'appointment'}
       className={`n-booking n-booking-${page}`}
-      onValueChange={() => setNotice("")}
+      onValueChange={() => setNotice('')}
     >
       <TabsList aria-label="Appointments or gift certificates">
         <TabsTrigger value="appointment">
@@ -1417,19 +1048,21 @@ function Booking() {
         <div className="n-booking-paths" aria-label="Choose how to book">
           <button
             type="button"
-            className={bookingPath === "direct" ? "is-active" : ""}
-            onClick={() => setBookingPath("direct")}
+            className={bookingPath === 'direct' ? 'is-active' : ''}
+            onClick={() => setBookingPath('direct')}
           >
             <CalendarDays size={22} />
             <span>
               <strong>Find an appointment</strong>
-              <small>Choose a treatment and the next time that works for you.</small>
+              <small>
+                Choose a treatment and the next time that works for you.
+              </small>
             </span>
           </button>
           <button
             type="button"
-            className={bookingPath === "therapist" ? "is-active" : ""}
-            onClick={() => setBookingPath("therapist")}
+            className={bookingPath === 'therapist' ? 'is-active' : ''}
+            onClick={() => setBookingPath('therapist')}
           >
             <UserRound size={22} />
             <span>
@@ -1442,7 +1075,7 @@ function Booking() {
           onSubmit={(e) => {
             e.preventDefault();
             setNotice(
-              "Your appointment preferences are ready for the next step in scheduling.",
+              'Your appointment preferences are ready for the next step in scheduling.',
             );
           }}
         >
@@ -1458,7 +1091,7 @@ function Booking() {
                 ))}
               </select>
             </label>
-            {bookingPath === "therapist" ? (
+            {bookingPath === 'therapist' ? (
               <label>
                 Therapist
                 <select required defaultValue="">
@@ -1499,14 +1132,15 @@ function Booking() {
               <input type="email" autoComplete="email" required />
             </label>
             <p>
-              {bookingPath === "therapist"
-                ? "Choose your therapist first, then Square will show their available services, session lengths, and times."
-                : "Square will show current session lengths, pricing, and the next available times when you continue."}
+              {bookingPath === 'therapist'
+                ? 'Choose your therapist first, then Square will show their available services, session lengths, and times.'
+                : 'Square will show current session lengths, pricing, and the next available times when you continue.'}
             </p>
             <button className="n-button" type="submit">
-              {bookingPath === "therapist"
-                ? "Continue with this therapist"
-                : "Find an appointment"} <ArrowRight size={18} />
+              {bookingPath === 'therapist'
+                ? 'Continue with this therapist'
+                : 'Find an appointment'}{' '}
+              <ArrowRight size={18} />
             </button>
           </div>
         </form>
@@ -1524,9 +1158,9 @@ function Booking() {
               className="n-button"
               href={squareGiftCardUrl}
               onClick={() =>
-                trackEvent("gift_card_click", {
-                  method: "square_gift_card",
-                  placement: "booking_page",
+                trackEvent('gift_card_click', {
+                  method: 'square_gift_card',
+                  placement: 'booking_page',
                 })
               }
             >
@@ -1544,9 +1178,9 @@ function Booking() {
               className="n-button"
               href={squareBookingUrl}
               onClick={() =>
-                trackEvent("generate_lead", {
-                  method: "square_booking",
-                  placement: "booking_page",
+                trackEvent('generate_lead', {
+                  method: 'square_booking',
+                  placement: 'booking_page',
                 })
               }
             >
@@ -1665,30 +1299,31 @@ function StaffDirectory() {
         <h2>Care begins with the right conversation.</h2>
         <p>
           Meet the practitioners at this award-winning, award-recognized Santa
-          Rosa practice,
-          explore their backgrounds, and choose a profile that feels relevant
-          to your goals.
+          Rosa practice, explore their backgrounds, and choose a profile that
+          feels relevant to your goals.
         </p>
       </header>
       <div className="n-staff-grid">
         {practitioners.map((practitioner) => (
           <article key={practitioner.slug} className="n-staff-card">
             <Photo
-              name={`staff-${practitioner.slug}${practitioner.slug === "stacy-cmt" ? "-new" : ""}`}
+              name={`staff-${practitioner.slug}${practitioner.slug === 'stacy-cmt' ? '-new' : ''}`}
               first={practitioner.teamPhoto}
               additionalPhotos={
-                practitioner.slug === "stacy-cmt"
-                  ? [[
-                      "/site-photo-intake/stacy-new-portrait.png",
-                      "Stacy — new portrait",
-                    ]]
+                practitioner.slug === 'stacy-cmt'
+                  ? [
+                      [
+                        '/site-photo-intake/stacy-new-portrait.png',
+                        'Stacy — new portrait',
+                      ],
+                    ]
                   : undefined
               }
               imageHref={`./practitioners/${practitioner.slug}.html`}
               imageClickLabel={`Read ${practitioner.name}'s full profile`}
               onImageClick={() =>
                 window.location.assign(
-                  window.location.hostname === "localhost"
+                  window.location.hostname === 'localhost'
                     ? `./practitioners/${practitioner.slug}/`
                     : `./practitioners/${practitioner.slug}.html`,
                 )
@@ -1728,7 +1363,9 @@ function NewPages() {
   const [galleryIndex, setGalleryIndex] = useState(() =>
     Math.max(
       0,
-      galleryPhotos.findIndex(([, alt]) => alt.toLowerCase().includes("google gallery 8")),
+      galleryPhotos.findIndex(([, alt]) =>
+        alt.toLowerCase().includes('google gallery 8'),
+      ),
     ),
   );
   const thumbnailRail = useRef<HTMLDivElement>(null);
@@ -1741,82 +1378,90 @@ function NewPages() {
     const frame = window.requestAnimationFrame(() => {
       rail.scrollTo({
         left: active.offsetLeft - (rail.clientWidth - active.offsetWidth) / 2,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     });
     return () => window.cancelAnimationFrame(frame);
   }, [galleryIndex, galleryPhotos.length]);
-  const service = page.startsWith("service-")
+  const service = page.startsWith('service-')
     ? services[Number(page.slice(8))]
     : null;
   const serviceIndex = service ? services.indexOf(service) : -1;
   const servicePhoto = service
-    ? treatmentPhotoFirsts[serviceIndex] ?? "yelp-treatment.jpg"
-    : "yelp-treatment.jpg";
-  const concern = page.startsWith("condition-")
+    ? (treatmentPhotoFirsts[serviceIndex] ?? 'yelp-treatment.jpg')
+    : 'yelp-treatment.jpg';
+  const concern = page.startsWith('condition-')
     ? decodeURIComponent(page.slice(10))
-    : "";
+    : '';
   const concernCopy = conditionGuidance[concern];
   const squareService = service ? getSquareService(service[0]) : undefined;
   const post = posts.find(([slug]) => page === `post-${slug}`);
   const postIndex = post ? posts.findIndex(([slug]) => slug === post[0]) : -1;
-  const previousPost = postIndex >= 0 ? posts[(postIndex - 1 + posts.length) % posts.length] : null;
-  const nextPost = postIndex >= 0 ? posts[(postIndex + 1) % posts.length] : null;
-  const articleBody = post?.[5] || post?.[3] || "";
+  const previousPost =
+    postIndex >= 0
+      ? posts[(postIndex - 1 + posts.length) % posts.length]
+      : null;
+  const nextPost =
+    postIndex >= 0 ? posts[(postIndex + 1) % posts.length] : null;
+  const articleBody = post?.[5] || post?.[3] || '';
   const articleImage =
     post?.[6] ||
-    (post?.[0] === "testimonials" ? "blog-assets/testimonials.jpg" : undefined);
+    (post?.[0] === 'testimonials' ? 'blog-assets/testimonials.jpg' : undefined);
   const articleBlocks = articleBody.split(/\n\n+/);
   const wrapImageWithLead = [
-    "thai-foot-massage",
-    "sports-massage",
-    "trigger-point-therapy",
-    "treated-dysfunctions",
-    "medical-massage",
-  ].includes(post?.[0] || "");
+    'thai-foot-massage',
+    'sports-massage',
+    'trigger-point-therapy',
+    'treated-dysfunctions',
+    'medical-massage',
+  ].includes(post?.[0] || '');
   const renderArticleBlock = (block: string, index: number) => {
-    if (block.startsWith("## ")) return <h2 key={index}>{block.slice(3)}</h2>;
-    const lines = block.split("\n");
+    if (block.startsWith('## ')) return <h2 key={index}>{block.slice(3)}</h2>;
+    const lines = block.split('\n');
     const isList = lines.every((line) => /^(- |\d+\. |•)/.test(line));
     if (isList) {
       const ordered = lines.every((line) => /^\d+\. /.test(line));
       return ordered ? (
         <ol key={index}>
-          {lines.map((line) => <li key={line}>{line.replace(/^\d+\. /, "")}</li>)}
+          {lines.map((line) => (
+            <li key={line}>{line.replace(/^\d+\. /, '')}</li>
+          ))}
         </ol>
       ) : (
         <ul key={index}>
-          {lines.map((line) => <li key={line}>{line.replace(/^- |^•/, "")}</li>)}
+          {lines.map((line) => (
+            <li key={line}>{line.replace(/^- |^•/, '')}</li>
+          ))}
         </ul>
       );
     }
     return <p key={index}>{block}</p>;
   };
   const titles: Record<string, string> = {
-    treatments: "Care around your needs.",
-    conditions: "Start with what you’re feeling.",
-    about: "A practice that listens.",
-    reviews: "In our clients’ words.",
-    gallery: "Welcome inside.",
-    staff: "Meet the practice.",
-    blog: "Helpful articles for everyday care.",
-    contact: "Questions and contact details.",
-    book: "Appointments & gift cards.",
-    gift: "Appointments & gift cards.",
-    selections: "Your photo selections.",
+    treatments: 'Care around your needs.',
+    conditions: 'Start with what you’re feeling.',
+    about: 'A practice that listens.',
+    reviews: 'In our clients’ words.',
+    gallery: 'Welcome inside.',
+    staff: 'Meet the practice.',
+    blog: 'Helpful articles for everyday care.',
+    contact: 'Questions and contact details.',
+    book: 'Appointments & gift cards.',
+    gift: 'Appointments & gift cards.',
+    selections: 'Your photo selections.',
   };
   return (
-    <div className={`n-inner${post ? " n-blog-layout-test" : ""}`}>
+    <div className={`n-inner${post ? ' n-blog-layout-test' : ''}`}>
       <button
         className="n-link n-back"
         onClick={() =>
-          onPage(service ? `home#treatment-${serviceIndex}` : "home")
+          onPage(service ? `home#treatment-${serviceIndex}` : 'home')
         }
       >
         <ArrowLeft size={18} />
-        {service ? "Back to treatments" : "Back to home"}
+        {service ? 'Back to treatments' : 'Back to home'}
       </button>
-      {page !== "staff" && (
+      {page !== 'staff' && (
         <div className="n-inner-title">
           <span>Santa Rosa Medical Massage</span>
           <h1>
@@ -1830,7 +1475,7 @@ function NewPages() {
             {service?.[1] ||
               (concern
                 ? concernCopy?.intro ||
-                  "A place to begin a conversation about comfort, movement, and your goals."
+                  'A place to begin a conversation about comfort, movement, and your goals.'
                 : post?.[3])}
           </p>
         </div>
@@ -1844,14 +1489,14 @@ function NewPages() {
             <p>{practiceCopy}</p>
             {squareService && squareService.staff.length > 0 && (
               <p className="n-service-availability">
-                <b>Available with:</b>{" "}
+                <b>Available with:</b>{' '}
                 {squareService.staff.map((staffName, index) => {
                   const practitioner = practitioners.find(
                     (candidate) => candidate.name === staffName,
                   );
                   return (
                     <span key={staffName}>
-                      {index > 0 ? ", " : ""}
+                      {index > 0 ? ', ' : ''}
                       {practitioner ? (
                         <a
                           className="n-service-practitioner-link"
@@ -1867,7 +1512,9 @@ function NewPages() {
                 })}
               </p>
             )}
-            <TreatmentBookingLink serviceName={service[0]}>Schedule now</TreatmentBookingLink>
+            <TreatmentBookingLink serviceName={service[0]}>
+              Schedule now
+            </TreatmentBookingLink>
             <Action to="treatments" quiet>
               All treatments
             </Action>
@@ -1880,12 +1527,12 @@ function NewPages() {
             <p>{concernCopy?.approach || practiceCopy}</p>
             <p>
               {concernCopy?.consideration ||
-                "Tell us how long the concern has been present, what changes it, and any relevant guidance from your medical or rehabilitation team."}
+                'Tell us how long the concern has been present, what changes it, and any relevant guidance from your medical or rehabilitation team.'}
             </p>
             <p>
-              Massage does not diagnose a condition or replace medical care;
-              it can be discussed as supportive care alongside the right
-              medical or rehabilitation plan.
+              Massage does not diagnose a condition or replace medical care; it
+              can be discussed as supportive care alongside the right medical or
+              rehabilitation plan.
             </p>
             <Action to="treatments">Explore treatment options</Action>
           </div>
@@ -1953,19 +1600,19 @@ function NewPages() {
             Back to blog
           </Action>
         </div>
-      ) : page === "treatments" ? (
+      ) : page === 'treatments' ? (
         <ServiceList />
-      ) : page === "conditions" ? (
+      ) : page === 'conditions' ? (
         <ConcernLinks />
-      ) : page === "staff" ? (
+      ) : page === 'staff' ? (
         <StaffDirectory />
-      ) : page === "book" || page === "gift" ? (
+      ) : page === 'book' || page === 'gift' ? (
         <Booking key={page} />
-      ) : page === "reviews" ? (
+      ) : page === 'reviews' ? (
         <Reviews />
-      ) : page === "blog" ? (
+      ) : page === 'blog' ? (
         <Notes />
-      ) : page === "gallery" ? (
+      ) : page === 'gallery' ? (
         <>
           <Visit />
           <div className="n-final-gallery-carousel" aria-label="Visit gallery">
@@ -1981,27 +1628,35 @@ function NewPages() {
                   />
                 </figure>
                 <div className="n-final-gallery-filmstrip">
-                <button
-                  type="button"
-                  className="n-final-gallery-edge-control"
-                  aria-label="Previous gallery photo"
-                  onClick={() =>
-                    setGalleryIndex(
-                      (galleryIndex + galleryPhotos.length - 1) % galleryPhotos.length,
-                    )
-                  }
-                >
-                  <ArrowLeft size={20} aria-hidden="true" />
-                </button>
-                  <div ref={thumbnailRail} className="n-final-gallery-thumbnails">
+                  <button
+                    type="button"
+                    className="n-final-gallery-edge-control"
+                    aria-label="Previous gallery photo"
+                    onClick={() =>
+                      setGalleryIndex(
+                        (galleryIndex + galleryPhotos.length - 1) %
+                          galleryPhotos.length,
+                      )
+                    }
+                  >
+                    <ArrowLeft size={20} aria-hidden="true" />
+                  </button>
+                  <div
+                    ref={thumbnailRail}
+                    className="n-final-gallery-thumbnails"
+                  >
                     {galleryPhotos.map(([image, alt], photoIndex) => (
                       <button
                         key={image}
                         type="button"
                         data-gallery-index={photoIndex}
-                        className={photoIndex === galleryIndex ? "is-selected" : ""}
+                        className={
+                          photoIndex === galleryIndex ? 'is-selected' : ''
+                        }
                         aria-label={`Show ${alt}`}
-                        aria-current={photoIndex === galleryIndex ? "true" : undefined}
+                        aria-current={
+                          photoIndex === galleryIndex ? 'true' : undefined
+                        }
                         onClick={() => setGalleryIndex(photoIndex)}
                       >
                         <img src={assetPath(image)} alt="" loading="lazy" />
@@ -2023,7 +1678,7 @@ function NewPages() {
             )}
           </div>
         </>
-      ) : page === "about" ? (
+      ) : page === 'about' ? (
         <>
           <div className="n-detail">
             <Photo name="about" />
@@ -2049,7 +1704,7 @@ function NewPages() {
           </div>
           <Visit />
         </>
-      ) : page === "selections" ? (
+      ) : page === 'selections' ? (
         selections
       ) : (
         <div className="n-contact-layout">
@@ -2066,7 +1721,7 @@ function Footer() {
     <footer className="n-footer">
       <button
         className="n-footer-brand"
-        onClick={() => onPage("home")}
+        onClick={() => onPage('home')}
         aria-label="Santa Rosa Medical Massage home"
       >
         <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
@@ -2087,41 +1742,41 @@ function Footer() {
     </footer>
   );
 }
-export default function NewConcepts(props: Props) {
+export default function FamiliarSite(props: Props) {
   const [menu, setMenu] = useState(false);
   const pendingSection = useRef<string | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const nav = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const go = (page: string) => {
-    const [targetPage, targetSection] = page.split("#", 2);
+    const [targetPage, targetSection] = page.split('#', 2);
     pendingSection.current = targetSection || null;
     setMenu(false);
     props.onPage(targetPage);
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
   const jump = (section: string) => {
     setMenu(false);
-    if (props.page !== "home") {
+    if (props.page !== 'home') {
       pendingSection.current = section;
-      props.onPage("home");
+      props.onPage('home');
     } else
       document.getElementById(`n-${section}`)?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "instant"
-          : "smooth",
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
       });
   };
   useEffect(() => {
-    if (props.page === "home") return;
-    trackEvent("page_view", {
+    if (props.page === 'home') return;
+    trackEvent('page_view', {
       page_title: `Santa Rosa Medical Massage | ${props.page}`,
       page_location: window.location.href,
       page_path: `/${props.page}`,
     });
   }, [props.page]);
   useEffect(() => {
-    if (props.page === "home" && pendingSection.current) {
+    if (props.page === 'home' && pendingSection.current) {
       document.getElementById(`n-${pendingSection.current}`)?.scrollIntoView();
       pendingSection.current = null;
     }
@@ -2130,37 +1785,40 @@ export default function NewConcepts(props: Props) {
     if (!menu) return;
     const closeOutside = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!nav.current?.contains(target) && !menuToggle.current?.contains(target))
+      if (
+        !nav.current?.contains(target) &&
+        !menuToggle.current?.contains(target)
+      )
         setMenu(false);
     };
-    document.addEventListener("pointerdown", closeOutside);
-    return () => document.removeEventListener("pointerdown", closeOutside);
+    document.addEventListener('pointerdown', closeOutside);
+    return () => document.removeEventListener('pointerdown', closeOutside);
   }, [menu]);
   useEffect(() => {
-    const elements = root.current?.querySelectorAll(".n-section");
+    const elements = root.current?.querySelectorAll('.n-section');
     if (
       !elements ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      !("IntersectionObserver" in window)
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
     )
       return;
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("n-arrived");
+            entry.target.classList.add('n-arrived');
             observer.unobserve(entry.target);
           }
         }),
       { threshold: 0.04 },
     );
     elements.forEach((el) => {
-      el.classList.add("n-enter");
+      el.classList.add('n-enter');
       observer.observe(el);
     });
     return () => {
       observer.disconnect();
-      elements.forEach((el) => el.classList.remove("n-enter", "n-arrived"));
+      elements.forEach((el) => el.classList.remove('n-enter', 'n-arrived'));
     };
   }, [props.page, props.design]);
   return (
@@ -2174,7 +1832,7 @@ export default function NewConcepts(props: Props) {
           <button
             className="n-menu-toggle"
             ref={menuToggle}
-            aria-label={menu ? "Close menu" : "Open menu"}
+            aria-label={menu ? 'Close menu' : 'Open menu'}
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
@@ -2183,7 +1841,7 @@ export default function NewConcepts(props: Props) {
           <nav
             ref={nav}
             aria-label="Website navigation"
-            className={menu ? "n-nav-open" : ""}
+            className={menu ? 'n-nav-open' : ''}
           >
             <div className="n-mobile-menu-brand">
               <Brand />
@@ -2192,24 +1850,24 @@ export default function NewConcepts(props: Props) {
               <button
                 key={id}
                 onClick={() =>
-                  id === "visit"
-                    ? go("gallery")
-                    : id === "staff"
-                      ? go("staff")
+                  id === 'visit'
+                    ? go('gallery')
+                    : id === 'staff'
+                      ? go('staff')
                       : jump(id)
                 }
               >
                 {label}
               </button>
             ))}
-            <button onClick={() => go("blog")}>Blog</button>
+            <button onClick={() => go('blog')}>Blog</button>
             <a
               className="n-gift-nav"
               href={squareGiftCardUrl}
               onClick={() =>
-                trackEvent("gift_card_click", {
-                  method: "square_gift_card",
-                  placement: "navigation",
+                trackEvent('gift_card_click', {
+                  method: 'square_gift_card',
+                  placement: 'navigation',
                 })
               }
             >
@@ -2246,41 +1904,19 @@ export default function NewConcepts(props: Props) {
             className="n-button"
             href={squareBookingUrl}
             onClick={() =>
-              trackEvent("generate_lead", {
-                method: "square_booking",
-                placement: "navigation",
+              trackEvent('generate_lead', {
+                method: 'square_booking',
+                placement: 'navigation',
               })
             }
           >
             Schedule now
             <ArrowUpRight size={18} aria-hidden="true" />
           </a>
-          {props.design === "desk" && (
-            <div className="desk-nav-bottom">
-              <span>Here to help.</span>
-              <p>
-                Downtown Santa Rosa
-                <br />
-                Convenient street parking near the 3rd Street and D Street garages
-              </p>
-            </div>
-          )}
         </div>
-        {props.page === "home" && !["house", "desk"].includes(props.design) && props.awards}
+
         <div id="n-content" className="n-content" tabIndex={-1}>
-          {props.page === "home" ? (
-            props.design === "house" ? (
-              <House />
-            ) : props.design === "courtyard" ? (
-              <Courtyard />
-            ) : props.design === "desk" ? (
-              <Desk />
-            ) : (
-              <Everyday />
-            )
-          ) : (
-            <NewPages />
-          )}
+          {props.page === 'home' ? <FamiliarHome /> : <NewPages />}
           <Footer />
         </div>
       </div>
