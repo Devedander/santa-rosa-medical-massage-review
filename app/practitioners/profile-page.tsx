@@ -25,6 +25,7 @@ export default function PractitionerProfile({
 }: {
   practitioner: Practitioner;
 }) {
+  const practitionerSchema = { '@context': 'https://schema.org', '@type': 'Person', name: practitioner.name, jobTitle: 'Certified Massage Therapist', worksFor: { '@id': 'https://santarosamedicalmassage.com/#practice' }, url: `https://santarosamedicalmassage.com/practitioners/${practitioner.slug}`, description: practitioner.shortAnswer };
   const [menuOpen, setMenuOpen] = useState(false);
   const menu = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
@@ -46,6 +47,7 @@ export default function PractitionerProfile({
   const next = practitioners[(currentIndex + 1) % practitioners.length];
   return (
     <main className="staff-profile-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(practitionerSchema) }} />
       <header className="staff-profile-nav">
         <a href={`${profileBase}/`} className="staff-profile-brand" aria-label="Santa Rosa Medical Massage home">
           <img className="staff-profile-wordmark" src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />

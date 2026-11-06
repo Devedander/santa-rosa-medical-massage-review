@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './new-concepts.css';
+import { squareServices } from './square-services';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://santarosamedicalmassage.com'),
@@ -54,6 +55,7 @@ const practiceSchema = {
     addressCountry: 'US',
   },
   areaServed: { '@type': 'City', name: 'Santa Rosa' },
+  knowsAbout: ['Massage', 'Relaxation massage', 'Swedish massage', 'Deep tissue massage', 'Thai massage', 'Medical massage', 'Neuromuscular therapy', 'Trigger point therapy', 'Sports massage', 'TMJ work', 'Lymphatic facilitation'],
   sameAs: [
     'https://www.instagram.com/santarosamedicalmassage/',
     'https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4',
@@ -63,6 +65,7 @@ const practiceSchema = {
     target: 'https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services',
     name: 'Schedule an appointment',
   },
+  hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Massage treatments', itemListElement: squareServices.map((service) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: service.name, description: service.summary }, url: service.bookingUrl })) },
 };
 
 export default function RootLayout({
