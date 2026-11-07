@@ -64,8 +64,8 @@ export default function PractitionerProfile({
           {menuOpen ? <X /> : <Menu />}
         </button>
         <nav ref={menu} className={`staff-profile-menu${menuOpen ? " is-open" : ""}`} aria-label="Website navigation">
-          <a href={`${profileBase}/#n-content`}>The practice</a>
-          <a href={`${profileBase}/#n-content`}>Meet the practice</a>
+          <a href={`${profileBase}/#n-about`}>The practice</a>
+          <a href={`${profileBase}/meet-the-practice`}>Meet the practice</a>
           <a href={`${profileBase}/#n-treatments`}>Treatments</a>
           <a href={`${profileBase}/#n-conditions`}>Common concerns</a>
           <a href={`${profileBase}/#n-reviews`}>Reviews</a>

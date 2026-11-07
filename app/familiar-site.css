@@ -1988,3 +1988,25 @@
   .n-final-gallery-feature { animation: none; }
   .n-final-gallery-thumbnails button { transition: none; }
 }
+
+/* Familiar mobile navigation inherits these scrolling defaults without
+   retaining the retired prototype shell styles. */
+@media (max-width: 800px) {
+  .novel .n-site-nav nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .novel .n-site-nav nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* Keep long article headings inside narrow phone columns. */
+@media (max-width: 640px) {
+  .novel .n-reading h2,
+  .novel .n-reading h3 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}

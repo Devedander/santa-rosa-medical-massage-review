@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { blogPosts } from "./post-data";
 
 export const metadata: Metadata = {
@@ -26,13 +25,13 @@ export default function BlogIndexPage() {
             <p>{post.category}</p>
             <h2>{post.title}</h2>
             <span>{post.description}</span>
-            <Link href={`/blog/${post.slug}`}>Read article</Link>
+            <a href={`/blog/${post.slug}`}>Read article</a>
           </article>
         ))}
       </section>
-      <Link className="srmm-blog-home" href="/">
+      <a className="srmm-blog-home" href="/">
         Return to Santa Rosa Medical Massage
-      </Link>
+      </a>
     </main>
   );
 }

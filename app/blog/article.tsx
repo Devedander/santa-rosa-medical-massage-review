@@ -1,12 +1,11 @@
-import Link from "next/link";
 import type { BlogPost } from "./post-data";
 
 export function BlogArticle({ post }: { post: BlogPost }) {
   return (
     <main className="srmm-blog-page srmm-article-page">
-      <Link className="srmm-blog-home" href="/blog">
+      <a className="srmm-blog-home" href="/blog">
         All articles
-      </Link>
+      </a>
       <article className="srmm-article">
         <p>{post.category}</p>
         <h1>{post.title}</h1>
@@ -20,9 +19,9 @@ export function BlogArticle({ post }: { post: BlogPost }) {
           </section>
         ))}
       </article>
-      <Link className="srmm-blog-home" href="/">
+      <a className="srmm-blog-home" href="/">
         Return to Santa Rosa Medical Massage
-      </Link>
+      </a>
     </main>
   );
 }
