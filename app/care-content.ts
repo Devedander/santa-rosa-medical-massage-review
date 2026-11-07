@@ -1,4 +1,4 @@
-// Shared visitor-facing positioning for all seven design concepts.
+// Visitor-facing positioning for the Familiar website.
 // Unconfirmed credentials, payment eligibility, and partnerships belong in STACY-CONTENT-REVIEW.md.
 
 export const careCopy =

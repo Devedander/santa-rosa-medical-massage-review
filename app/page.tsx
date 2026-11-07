@@ -1,18 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FamiliarSite from './familiar-site';
 import { squareServices } from './square-services';
 
-const serviceImages = [
-  '/mockup-photos/yelp-treatment.jpg',
-  '/mockup-photos/therapy-hands.jpg',
-  '/mockup-photos/therapy-room.jpg',
-  '/mockup-photos/yelp-detail-4.jpg',
-  '/mockup-photos/yelp-treatment.jpg',
-  '/mockup-photos/therapy-hands.jpg',
-  '/mockup-photos/therapy-room.jpg',
-  '/mockup-photos/yelp-detail-4.jpg',
-];
 const serviceDetails = squareServices.map((service) => [
   service.name,
   service.summary,
@@ -239,10 +229,6 @@ const galleryImages = [
     'Light-blue recovery products · Yelp business photo',
   ],
 ];
-const treatmentPhotoOptions = serviceImages.map((src, i) => [
-  src,
-  `Hands-on massage treatment option ${i + 1}`,
-]);
 const remainingApprovedPhotos = [
   [
     '/mockup-photos/business-listing.jpg',
@@ -453,12 +439,7 @@ const newPracticePhotoOptions = newPracticePhotoFiles.map((file) => [
     .replace(/\.jpeg$/, '')
     .replaceAll('-', ' ')}`,
 ]);
-const initialPhotoOptions = [
-  ...galleryImages,
-  ...treatmentPhotoOptions.filter(
-    ([src]) => !galleryImages.some(([gallerySrc]) => gallerySrc === src),
-  ),
-];
+const initialPhotoOptions = [...galleryImages];
 // Stacy's definitive Visit & gallery allowlist. Other page imagery continues
 // to use allPhotoOptions, so this only controls the public gallery pool.
 const galleryPhotoFilenames = new Set([
@@ -519,10 +500,8 @@ const galleryPhotoFilenames = new Set([
 // Final photo assignments. These are static defaults for their assigned slots;
 // they are not part of the selectable gallery pool.
 const approvedPhotoSelections: Record<string, string> = {
-  'desk-treatments-overview': '/mockup-photos/therapy-hands.jpg',
   'house-referral-care': '/mockup-photos/google-gallery-8.jpg',
   'house-treatment-7': '/mockup-photos/yelp-detail-4.jpg',
-  'desk-opening': '/mockup-photos/google-remodel-room.jpg',
   'house-welcome': '/mockup-photos/google-gallery-3.jpg',
   'house-practice-story': '/mockup-photos/google-remodel-room.jpg',
   'house-treatment-10': '/mockup-photos/google-gallery-19.jpg',
@@ -537,7 +516,7 @@ const approvedPhotoSelections: Record<string, string> = {
   'house-treatment-3': '/site-photo-intake/treatment-shoulder-work-03.jpeg',
 };
 
-export const allPhotoOptions = Array.from(
+const allPhotoOptions = Array.from(
   new Map(
     [
       ...initialPhotoOptions,
@@ -558,7 +537,6 @@ function InlineGallery({
   imageHref,
   onImageClick,
   imageClickLabel,
-  hideControls = false,
 }: {
   images: string[][];
   className?: string;
@@ -618,150 +596,6 @@ function InlineGallery({
     </div>
   );
 }
-function SelectionPage({ setPage }: { setPage: (page: string) => void }) {
-  const [choices, setChoices] = useState<
-    Array<{ slot: string; src: string; label: string }>
-  >([]);
-  const [notice, setNotice] = useState('');
-  const refresh = () =>
-    setChoices(
-      Object.keys(window.localStorage)
-        .filter((key) => key.startsWith('srmm-photo-'))
-        .map((key) => JSON.parse(window.localStorage.getItem(key) || '{}'))
-        .filter((choice) => choice.slot),
-    );
-  useEffect(() => {
-    refresh();
-    window.addEventListener('srmm-photo-selection', refresh);
-    return () => window.removeEventListener('srmm-photo-selection', refresh);
-  }, []);
-  const copy = async () => {
-    const text = choices.length
-      ? `Santa Rosa Medical Massage photo selections\n\n${choices.map((choice) => `${choice.slot}: ${choice.src.split('/').pop()}`).join('\n')}`
-      : 'No photo choices have been locked yet.';
-    await navigator.clipboard.writeText(text);
-    setNotice('Selections copied — paste them into an email or message.');
-  };
-  const share = async () => {
-    const payload = btoa(encodeURIComponent(JSON.stringify(choices)));
-    await navigator.clipboard.writeText(
-      `${window.location.origin}${window.location.pathname}${window.location.search}#choices=${payload}`,
-    );
-    setNotice(
-      'Review link copied — anyone opening it will see the locked photos.',
-    );
-  };
-  const clear = () => {
-    Object.keys(window.localStorage)
-      .filter((key) => key.startsWith('srmm-photo-'))
-      .forEach((key) => window.localStorage.removeItem(key));
-    const url = new URL(window.location.href);
-    url.hash = '';
-    window.history.replaceState(null, '', url);
-    window.dispatchEvent(new Event('srmm-photo-clear'));
-    refresh();
-    setNotice('Selections cleared.');
-  };
-  return (
-    <section className="mock-page selections-page">
-      <button className="back-link" onClick={() => setPage('home')}>
-        ← Back to home
-      </button>
-      <span>Photo review board</span>
-      <h1>Locked photo choices</h1>
-      <p className="gallery-intro">
-        Use the arrows on any image, then select “Lock this photo.” Copy a
-        review link when finished so the same choices appear for anyone who
-        opens it.
-      </p>
-      <div className="selection-actions">
-        <button onClick={share}>Copy review link</button>
-        <button onClick={copy}>Copy selections</button>
-        <button onClick={clear}>Clear all</button>
-      </div>
-      {notice && <p className="selection-notice">{notice}</p>}
-      <div className="selection-list">
-        {choices.length ? (
-          choices.map((choice) => (
-            <article key={choice.slot}>
-              <img src={assetPath(choice.src)} alt="Selected option" />
-              <div>
-                <b>{choice.slot.replaceAll('-', ' ')}</b>
-                <span>{choice.src.split('/').pop()}</span>
-              </div>
-            </article>
-          ))
-        ) : (
-          <p>No selections yet. Start with any image on the site.</p>
-        )}
-      </div>
-    </section>
-  );
-}
-function PhotoSelectionTools() {
-  const [count, setCount] = useState(0);
-  const [notice, setNotice] = useState('');
-  const refresh = () =>
-    setCount(
-      Object.keys(window.localStorage).filter((key) =>
-        key.startsWith('srmm-photo-'),
-      ).length,
-    );
-  useEffect(() => {
-    refresh();
-    window.addEventListener('srmm-photo-selection', refresh);
-    window.addEventListener('srmm-photo-clear', refresh);
-    return () => {
-      window.removeEventListener('srmm-photo-selection', refresh);
-      window.removeEventListener('srmm-photo-clear', refresh);
-    };
-  }, []);
-  const clear = () => {
-    Object.keys(window.localStorage)
-      .filter((key) => key.startsWith('srmm-photo-'))
-      .forEach((key) => window.localStorage.removeItem(key));
-    window.dispatchEvent(new Event('srmm-photo-clear'));
-    setNotice('Photo selections cleared.');
-  };
-  const copyReviewLink = async () => {
-    const choices = Object.keys(window.localStorage)
-      .filter((key) => key.startsWith('srmm-photo-'))
-      .map((key) => JSON.parse(window.localStorage.getItem(key) || '{}'))
-      .filter((choice) => choice.slot);
-    const payload = btoa(encodeURIComponent(JSON.stringify(choices)));
-    await navigator.clipboard.writeText(
-      `${window.location.origin}${window.location.pathname}${window.location.search}#choices=${payload}`,
-    );
-    setNotice(
-      choices.length
-        ? 'Review link copied with the locked photos.'
-        : 'Review link copied. Lock photos first to include them.',
-    );
-  };
-  return (
-    <div className="n-photo-selection-tools" aria-label="Photo selection tools">
-      <div>
-        <strong>Photo selections</strong>
-        <span>
-          {count
-            ? `${count} photo${count === 1 ? '' : 's'} locked`
-            : 'Lock a photo from any gallery'}
-        </span>
-      </div>
-      <div>
-        <button onClick={copyReviewLink}>Copy review link</button>
-        <button onClick={clear} disabled={!count}>
-          Clear all
-        </button>
-      </div>
-      {notice && (
-        <p className="n-photo-tools-notice" role="status">
-          {notice}
-        </p>
-      )}
-    </div>
-  );
-}
 function AwardStrip() {
   return (
     <section className="award-strip" aria-label="Practice recognition">
@@ -782,17 +616,9 @@ function AwardStrip() {
 
 export default function Home() {
   const [page, setPage] = useState('home');
-  const [shareMode, setShareMode] = useState(false);
-
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('share') === 'familiar')
-      setShareMode(true);
-  }, []);
-
   return (
-    <main className={`site house ${shareMode ? 'share-mode' : ''}`}>
+    <main className="site house">
       <FamiliarSite
-        design="house"
         page={page}
         onPage={setPage}
         services={serviceDetails}
@@ -801,8 +627,6 @@ export default function Home() {
         posts={blogPosts}
         reviews={allReviews}
         Photo={InlineGallery}
-        selections={<SelectionPage setPage={setPage} />}
-        photoTools={<PhotoSelectionTools />}
         awards={<AwardStrip />}
       />
     </main>

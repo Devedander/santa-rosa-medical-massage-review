@@ -1,10 +1,5 @@
 'use client';
-import {
-  careCopy,
-  agingCopy,
-  referralCopy,
-  practiceCopy,
-} from './care-content';
+import { agingCopy, referralCopy, practiceCopy } from './care-content';
 import {
   practitioners,
   practiceAwardCopy,
@@ -39,14 +34,10 @@ import {
   MapPin,
   Phone,
   CalendarDays,
-  UserRound,
-  Gift,
   Plus,
-  Check,
   Star,
   Menu,
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 type PhotoProps = {
   images: string[][];
@@ -58,9 +49,7 @@ type PhotoProps = {
   imageClickLabel?: string;
   hideControls?: boolean;
 };
-type Design = 'house';
 type Props = {
-  design: Design;
   page: string;
   onPage: (page: string) => void;
   services: string[][];
@@ -69,8 +58,6 @@ type Props = {
   posts: string[][];
   reviews: string[][];
   Photo: ComponentType<PhotoProps>;
-  selections: ReactNode;
-  photoTools: ReactNode;
   awards: ReactNode;
 };
 const Content = createContext<Props | null>(null);
@@ -413,7 +400,7 @@ function Photo({
   imageClickLabel?: string;
   hideControls?: boolean;
 }) {
-  const { Photo: Picker, photos, design } = useContent();
+  const { Photo: Picker, photos } = useContent();
   const availablePhotos = [
     ...(photoOptions || photos),
     ...(additionalPhotos || []),
@@ -428,7 +415,7 @@ function Photo({
   return (
     <Picker
       images={ordered}
-      slot={`${design}-${name}`}
+      slot={`house-${name}`}
       className={`n-photo ${className}`}
       imageHref={imageHref}
       onImageClick={onImageClick}
@@ -726,10 +713,7 @@ function Visit({
             >
               (707) 303-7707
             </a>
-            <p>
-              For non-booking questions, use the form and our team will follow
-              up with you.
-            </p>
+            <p>For non-booking questions, please call the practice.</p>
           </div>
         ) : (
           <div>
@@ -960,336 +944,6 @@ function FamiliarHome() {
   );
 }
 
-function Booking() {
-  const { services, page } = useContent();
-  const [notice, setNotice] = useState('');
-  const [bookingPath, setBookingPath] = useState<'direct' | 'therapist'>(
-    'direct',
-  );
-  if (false && page === 'gift')
-    return (
-      <section className="n-booking standalone-booking n-booking-gift">
-        <div className="standalone-booking-card">
-          <Gift size={28} />
-          <span className="n-kicker">Gift cards</span>
-          <h1>Give someone time for care.</h1>
-          <p>
-            Gift certificates will be purchased securely through the practice’s
-            Square page. This review page does not collect an amount, recipient
-            information, or payment details.
-          </p>
-          <button
-            className="n-button"
-            onClick={() =>
-              setNotice(
-                'Square gift-card link placeholder — no purchase was started.',
-              )
-            }
-          >
-            Continue to Square gift cards <ArrowRight size={18} />
-          </button>
-          {notice && (
-            <p className="n-notice" role="status">
-              <Check size={18} />
-              {notice}
-            </p>
-          )}
-        </div>
-      </section>
-    );
-  if (false && page === 'book')
-    return (
-      <section className="n-booking standalone-booking n-booking-book">
-        <div className="standalone-booking-card">
-          <CalendarDays size={28} />
-          <span className="n-kicker">Appointments</span>
-          <h1>Find a time that works for you.</h1>
-          <p>
-            Appointment selection will continue to the practice’s Square booking
-            page. This review page is only showing the finished-form direction
-            and does not submit a booking.
-          </p>
-          <button
-            className="n-button"
-            onClick={() =>
-              setNotice(
-                'Square booking link placeholder — no appointment was started.',
-              )
-            }
-          >
-            Continue to Square booking <ArrowRight size={18} />
-          </button>
-          {notice && (
-            <p className="n-notice" role="status">
-              <Check size={18} />
-              {notice}
-            </p>
-          )}
-        </div>
-      </section>
-    );
-  return (
-    <Tabs
-      defaultValue={page === 'gift' ? 'gift' : 'appointment'}
-      className={`n-booking n-booking-${page}`}
-      onValueChange={() => setNotice('')}
-    >
-      <TabsList aria-label="Appointments or gift certificates">
-        <TabsTrigger value="appointment">
-          <CalendarDays size={18} />
-          Appointment
-        </TabsTrigger>
-        <TabsTrigger value="gift">
-          <Gift size={18} />
-          Gift card
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="appointment">
-        <div className="n-booking-paths" aria-label="Choose how to book">
-          <button
-            type="button"
-            className={bookingPath === 'direct' ? 'is-active' : ''}
-            onClick={() => setBookingPath('direct')}
-          >
-            <CalendarDays size={22} />
-            <span>
-              <strong>Find an appointment</strong>
-              <small>
-                Choose a treatment and the next time that works for you.
-              </small>
-            </span>
-          </button>
-          <button
-            type="button"
-            className={bookingPath === 'therapist' ? 'is-active' : ''}
-            onClick={() => setBookingPath('therapist')}
-          >
-            <UserRound size={22} />
-            <span>
-              <strong>Choose your therapist</strong>
-              <small>Start with the practitioner you would like to see.</small>
-            </span>
-          </button>
-        </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setNotice(
-              'Your appointment preferences are ready for the next step in scheduling.',
-            );
-          }}
-        >
-          <div>
-            <label>
-              Treatment
-              <select required defaultValue="">
-                <option value="" disabled>
-                  Choose a treatment
-                </option>
-                {services.map(([s]) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </label>
-            {bookingPath === 'therapist' ? (
-              <label>
-                Therapist
-                <select required defaultValue="">
-                  <option value="" disabled>
-                    Choose a therapist
-                  </option>
-                  {practitioners.map((practitioner) => (
-                    <option key={practitioner.slug}>{practitioner.name}</option>
-                  ))}
-                </select>
-              </label>
-            ) : (
-              <label>
-                Therapist
-                <input value="Any available therapist" readOnly />
-              </label>
-            )}
-            <label>
-              Preferred date
-              <input type="date" required />
-            </label>
-            <label>
-              Preferred time
-              <select defaultValue="Flexible">
-                <option>Flexible</option>
-                <option>Morning</option>
-                <option>Afternoon</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              Your name
-              <input autoComplete="name" required />
-            </label>
-            <label>
-              Email
-              <input type="email" autoComplete="email" required />
-            </label>
-            <p>
-              {bookingPath === 'therapist'
-                ? 'Choose your therapist first, then Square will show their available services, session lengths, and times.'
-                : 'Square will show current session lengths, pricing, and the next available times when you continue.'}
-            </p>
-            <button className="n-button" type="submit">
-              {bookingPath === 'therapist'
-                ? 'Continue with this therapist'
-                : 'Find an appointment'}{' '}
-              <ArrowRight size={18} />
-            </button>
-          </div>
-        </form>
-      </TabsContent>
-      <TabsContent value="gift">
-        <div className="n-gift-options">
-          <article>
-            <Gift size={24} />
-            <h2>Give a gift certificate</h2>
-            <p>
-              Gift certificates are purchased securely through the practice’s
-              Square page.
-            </p>
-            <a
-              className="n-button"
-              href={squareGiftCardUrl}
-              onClick={() =>
-                trackEvent('gift_card_click', {
-                  method: 'square_gift_card',
-                  placement: 'booking_page',
-                })
-              }
-            >
-              Continue to gift certificates <ArrowRight size={18} />
-            </a>
-          </article>
-          <article>
-            <CalendarDays size={24} />
-            <h2>Book an appointment</h2>
-            <p>
-              Choose a service and time through the practice’s Square booking
-              page.
-            </p>
-            <a
-              className="n-button"
-              href={squareBookingUrl}
-              onClick={() =>
-                trackEvent('generate_lead', {
-                  method: 'square_booking',
-                  placement: 'booking_page',
-                })
-              }
-            >
-              Continue to scheduling <ArrowRight size={18} />
-            </a>
-          </article>
-        </div>
-        {/*
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setNotice(
-              'Your gift details are ready to review. This mockup has not purchased or delivered a certificate.',
-            );
-          }}
-        >
-          <div>
-            <label>
-              Gift amount ($)
-              <input
-                type="number"
-                min="1"
-                step="1"
-                required
-                placeholder="Enter an amount"
-              />
-            </label>
-            <label>
-              Recipient’s name
-              <input required />
-            </label>
-            <label>
-              Recipient’s email
-              <input type="email" required />
-            </label>
-            <label>
-              Your message
-              <textarea rows={3} placeholder="A little time for you…" />
-            </label>
-          </div>
-          <div>
-            <label>
-              Your name
-              <input required autoComplete="name" />
-            </label>
-            <label>
-              Your email
-              <input required type="email" autoComplete="email" />
-            </label>
-            <p>
-              Choose a personal amount for this gift preview. Contact the
-              practice for available gift options and terms.
-            </p>
-            <button className="n-button" type="submit">
-              Review gift details <ArrowRight size={18} />
-            </button>
-          </div>
-        </form>*/}
-      </TabsContent>
-      {notice && (
-        <p role="status" className="n-notice">
-          <Check size={20} />
-          {notice}
-        </p>
-      )}
-    </Tabs>
-  );
-}
-function ContactForm() {
-  const [sent, setSent] = useState(false);
-  return (
-    <form
-      className="n-contact-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-    >
-      <h2>What’s on your mind?</h2>
-      <label>
-        Name
-        <input autoComplete="name" required />
-      </label>
-      <label>
-        Email
-        <input autoComplete="email" type="email" required />
-      </label>
-      <label>
-        Your question
-        <textarea
-          rows={5}
-          required
-          placeholder="Ask about treatments, your first visit, or referral inquiries. Please leave out private medical details."
-        />
-      </label>
-      <button className="n-button">
-        Preview message <ArrowUpRight size={18} />
-      </button>
-      <p className="n-prototype-note">
-        This review form does not send messages.
-      </p>
-      {sent && (
-        <p role="status" className="n-notice">
-          Your message preview is complete. Nothing has been sent.
-        </p>
-      )}
-    </form>
-  );
-}
 function StaffDirectory() {
   const { awards } = useContent();
   return (
@@ -1351,15 +1005,7 @@ function StaffDirectory() {
 }
 
 function NewPages() {
-  const {
-    page,
-    services,
-    posts,
-    onPage,
-    selections,
-    photoTools,
-    galleryPhotos,
-  } = useContent();
+  const { page, services, posts, onPage, galleryPhotos } = useContent();
   const [galleryIndex, setGalleryIndex] = useState(() =>
     Math.max(
       0,
@@ -1446,9 +1092,6 @@ function NewPages() {
     staff: 'Meet the practice.',
     blog: 'Helpful articles for everyday care.',
     contact: 'Questions and contact details.',
-    book: 'Appointments & gift cards.',
-    gift: 'Appointments & gift cards.',
-    selections: 'Your photo selections.',
   };
   return (
     <div className={`n-inner${post ? ' n-blog-layout-test' : ''}`}>
@@ -1606,8 +1249,6 @@ function NewPages() {
         <ConcernLinks />
       ) : page === 'staff' ? (
         <StaffDirectory />
-      ) : page === 'book' || page === 'gift' ? (
-        <Booking key={page} />
       ) : page === 'reviews' ? (
         <Reviews />
       ) : page === 'blog' ? (
@@ -1704,13 +1345,8 @@ function NewPages() {
           </div>
           <Visit />
         </>
-      ) : page === 'selections' ? (
-        selections
       ) : (
-        <div className="n-contact-layout">
-          <Visit showPhone />
-          <ContactForm />
-        </div>
+        <Visit showPhone />
       )}
     </div>
   );
@@ -1820,10 +1456,10 @@ export default function FamiliarSite(props: Props) {
       observer.disconnect();
       elements.forEach((el) => el.classList.remove('n-enter', 'n-arrived'));
     };
-  }, [props.page, props.design]);
+  }, [props.page]);
   return (
     <Content.Provider value={{ ...props, onPage: go }}>
-      <div ref={root} className={`novel n-${props.design}`}>
+      <div ref={root} className="novel n-house">
         <a className="n-skip" href="#n-content">
           Skip to content
         </a>
