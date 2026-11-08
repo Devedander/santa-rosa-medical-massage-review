@@ -1,3 +1,5 @@
+import { businessInfo } from './business-info';
+
 export type SquareService = {
   name: string;
   summary: string;
@@ -6,8 +8,7 @@ export type SquareService = {
   staff: string[];
 };
 
-const squareServiceBase =
-  "https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services/";
+const squareServiceBase = `${businessInfo.bookingUrl}/`;
 
 // Source: the public Square booking menu, reviewed September 26, 2026.
 // Keep booking URLs paired with Square's current service names so a treatment

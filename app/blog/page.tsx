@@ -29,6 +29,7 @@ export default function BlogIndexPage() {
           </article>
         ))}
       </section>
+      <a className="srmm-blog-home" href="/articles">Explore bodywork articles and client experiences</a>
       <a className="srmm-blog-home" href="/">
         Return to Santa Rosa Medical Massage
       </a>

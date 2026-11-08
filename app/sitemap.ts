@@ -1,34 +1,32 @@
 import type { MetadataRoute } from 'next';
 import { practitioners } from './staff-content';
+import { familiarRoutes } from './familiar-routes';
 import { blogPosts } from './blog/post-data';
 
 const siteUrl = 'https://santarosamedicalmassage.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
+    ...familiarRoutes.map((route) => ({ url: `${siteUrl}${route.path}` })),
     {
       url: `${siteUrl}/`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     ...practitioners.map((practitioner) => ({
       url: `${siteUrl}/practitioners/${practitioner.slug}`,
-      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
-    { url: `${siteUrl}/treatments`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${siteUrl}/meet-the-practice`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/treatments`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/meet-the-practice`, changeFrequency: 'monthly', priority: 0.8 },
     {
       url: `${siteUrl}/blog`,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     ...blogPosts.map((post) => ({
       url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),

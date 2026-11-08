@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import './familiar-site.css';
 import { squareServices } from './square-services';
+import { businessInfo } from './business-info';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://santarosamedicalmassage.com'),
+  metadataBase: new URL(businessInfo.website),
   title: {
     default: 'Santa Rosa Medical Massage | Santa Rosa, CA',
     template: '%s | Santa Rosa Medical Massage',
@@ -19,8 +20,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://santarosamedicalmassage.com/',
-    siteName: 'Santa Rosa Medical Massage',
+    url: businessInfo.website,
+    siteName: businessInfo.name,
     title: 'Santa Rosa Medical Massage | Santa Rosa, CA',
     description:
       'Medical massage in downtown Santa Rosa for pain, injury recovery, easier movement, and thoughtful ongoing care.',
@@ -38,21 +39,21 @@ export const metadata: Metadata = {
 const practiceSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://santarosamedicalmassage.com/#practice',
-  name: 'Santa Rosa Medical Massage',
+  '@id': `${businessInfo.website}#practice`,
+  name: businessInfo.name,
   description:
     'Medical massage in downtown Santa Rosa for pain, injury recovery, easier movement, and thoughtful ongoing care.',
-  url: 'https://santarosamedicalmassage.com/',
-  telephone: '+1-707-303-7707',
-  image: 'https://santarosamedicalmassage.com/logo-correct.png',
+  url: businessInfo.website,
+  telephone: businessInfo.phoneSchema,
+  image: `${businessInfo.website}logo-correct.png`,
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '630 Third Street, Suite B',
-    addressLocality: 'Santa Rosa',
-    addressRegion: 'CA',
-    postalCode: '95404',
-    addressCountry: 'US',
+    streetAddress: businessInfo.streetAddress,
+    addressLocality: businessInfo.addressLocality,
+    addressRegion: businessInfo.addressRegion,
+    postalCode: businessInfo.postalCode,
+    addressCountry: businessInfo.addressCountry,
   },
   areaServed: { '@type': 'City', name: 'Santa Rosa' },
   knowsAbout: ['Massage', 'Relaxation massage', 'Swedish massage', 'Deep tissue massage', 'Thai massage', 'Medical massage', 'Neuromuscular therapy', 'Trigger point therapy', 'Sports massage', 'TMJ work', 'Lymphatic facilitation'],
@@ -62,7 +63,7 @@ const practiceSchema = {
   ],
   potentialAction: {
     '@type': 'ReserveAction',
-    target: 'https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services',
+    target: businessInfo.bookingUrl,
     name: 'Schedule an appointment',
   },
   hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Massage treatments', itemListElement: squareServices.map((service) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: service.name, description: service.summary }, url: service.bookingUrl })) },

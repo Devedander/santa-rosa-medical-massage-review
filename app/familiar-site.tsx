@@ -7,14 +7,8 @@ import {
   squareGiftCardUrl,
 } from './staff-content';
 import { getSquareService } from './square-services';
-
-const practitionerProfileSuffix =
-  process.env.GITHUB_PAGES === 'true' ||
-  (typeof window !== 'undefined' &&
-    window.location.hostname !== 'localhost' &&
-    window.location.hostname !== '127.0.0.1')
-    ? '.html'
-    : '/';
+import { familiarHref, publicAsset } from './familiar-routes';
+import { businessInfo } from './business-info';
 
 import {
   createContext,
@@ -236,10 +230,10 @@ function additionalGuidance(concern: string) {
       'Share any diagnosis, recent injury or surgery, medications, and recommendations from your medical or rehabilitation team before your session.',
   };
 }
-const address = '630 Third Street, Suite B, Santa Rosa, CA 95404';
+const address = businessInfo.formattedAddress;
 const squareTreatmentBookingUrl =
   'https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services/HNPKAYWN4I2AUEHNBZY7XLWT';
-const assetPath = (src: string) => (src.startsWith('/') ? `.${src}` : src);
+const assetPath = publicAsset;
 const navItems = [
   ['about', 'The practice'],
   ['staff', 'Meet the practice'],
@@ -289,7 +283,6 @@ function Action({
   children: ReactNode;
   quiet?: boolean;
 }) {
-  const { onPage } = useContent();
   if (to === 'book') {
     return (
       <a
@@ -326,13 +319,10 @@ function Action({
     );
   }
   return (
-    <button
-      className={quiet ? 'n-link' : 'n-button'}
-      onClick={() => onPage(to)}
-    >
+    <a className={quiet ? 'n-link' : 'n-button'} href={familiarHref(to)}>
       {children}
       <ArrowUpRight size={18} aria-hidden="true" />
-    </button>
+    </a>
   );
 }
 function TreatmentBookingLink({
@@ -371,7 +361,7 @@ function PractitionerProfileLink({
   slug: string;
   name: string;
 }) {
-  const href = `./practitioners/${slug}${practitionerProfileSuffix}`;
+  const href = `/practitioners/${slug}`;
   return (
     <a className="n-link" href={href}>
       Read {name}&rsquo;s full profile
@@ -433,12 +423,12 @@ function Brand() {
       aria-label="Santa Rosa Medical Massage home"
     >
       <img
-        src="./logo-correct.png"
+        src="/logo-correct.png"
         alt="Santa Rosa Medical Massage"
         className="n-brand-logo"
       />
       <img
-        src="./mobile-menu-mark.png"
+        src="/mobile-menu-mark.png"
         alt=""
         className="n-mobile-brand-mark"
         aria-hidden="true"
@@ -519,7 +509,7 @@ function ServiceList() {
             onPage(`service-${i}`);
           }}
           onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
+            if (event.target === event.currentTarget && (event.key === 'Enter' || event.key === ' ')) {
               event.preventDefault();
               onPage(`service-${i}`);
             }
@@ -662,7 +652,7 @@ function Reviews() {
             target="_blank"
             rel="noreferrer"
           >
-            <img src="./social-yelp.svg" alt="" />
+            <img src="/social-yelp.svg" alt="" />
             <span>5-star reviews on Yelp</span>
           </a>
         </div>
@@ -703,7 +693,7 @@ function Visit({
             <h3>Phone</h3>
             <a
               className="n-phone"
-              href="tel:+17073037707"
+              href={businessInfo.phoneHref}
               onClick={() =>
                 trackEvent('generate_lead', {
                   method: 'phone_call',
@@ -711,7 +701,7 @@ function Visit({
                 })
               }
             >
-              (707) 303-7707
+              {businessInfo.phoneDisplay}
             </a>
             <p>For non-booking questions, please call the practice.</p>
           </div>
@@ -825,14 +815,14 @@ function FamiliarHome() {
                       ]
                     : undefined
                 }
-                imageHref={`./practitioners/${practitioner.slug}.html`}
+                imageHref={`/practitioners/${practitioner.slug}`}
                 imageClickLabel={`Read ${practitioner.name}'s full profile`}
                 hideControls
                 onImageClick={() =>
                   window.location.assign(
                     window.location.hostname === 'localhost'
-                      ? `./practitioners/${practitioner.slug}/`
-                      : `./practitioners/${practitioner.slug}.html`,
+                      ? `/practitioners/${practitioner.slug}`
+                      : `/practitioners/${practitioner.slug}`,
                   )
                 }
               />
@@ -950,7 +940,7 @@ function StaffDirectory() {
     <section className="n-staff-directory" aria-label="Meet the practice">
       <header className="n-staff-directory-heading">
         <span className="n-kicker">Meet the practice</span>
-        <h2>Care begins with the right conversation.</h2>
+        <h1>Care begins with the right conversation.</h1>
         <p>
           Meet the practitioners at this award-winning, award-recognized Santa
           Rosa practice, explore their backgrounds, and choose a profile that
@@ -973,13 +963,13 @@ function StaffDirectory() {
                     ]
                   : undefined
               }
-              imageHref={`./practitioners/${practitioner.slug}.html`}
+              imageHref={`/practitioners/${practitioner.slug}`}
               imageClickLabel={`Read ${practitioner.name}'s full profile`}
               onImageClick={() =>
                 window.location.assign(
                   window.location.hostname === 'localhost'
-                    ? `./practitioners/${practitioner.slug}/`
-                    : `./practitioners/${practitioner.slug}.html`,
+                    ? `/practitioners/${practitioner.slug}`
+                    : `/practitioners/${practitioner.slug}`,
                 )
               }
             />
@@ -1143,7 +1133,7 @@ function NewPages() {
                       {practitioner ? (
                         <a
                           className="n-service-practitioner-link"
-                          href={`./practitioners/${practitioner.slug}${practitionerProfileSuffix}`}
+                          href={`/practitioners/${practitioner.slug}`}
                         >
                           {staffName}
                         </a>
@@ -1360,10 +1350,16 @@ function Footer() {
         onClick={() => onPage('home')}
         aria-label="Santa Rosa Medical Massage home"
       >
-        <img src="./logo-correct.png" alt="Santa Rosa Medical Massage" />
+        <img src="/logo-correct.png" alt="Santa Rosa Medical Massage" />
       </button>
       <div className="n-footer-meta">
         <div className="n-footer-contact">
+          <nav className="n-footer-route-links" aria-label="Explore the site">
+          <a href="/treatments">All treatments</a>
+          <a href="/services">Treatment details</a>
+          <a href="/blog">Visit preparation articles</a>
+          <a href="/articles">Bodywork articles</a>
+          </nav>
           <span>{address}</span>
         </div>
         <a
@@ -1385,17 +1381,17 @@ export default function FamiliarSite(props: Props) {
   const nav = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const go = (page: string) => {
-    const [targetPage, targetSection] = page.split('#', 2);
+    const [, targetSection] = page.split('#', 2);
     pendingSection.current = targetSection || null;
     setMenu(false);
-    props.onPage(targetPage);
+    props.onPage(page);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
   const jump = (section: string) => {
     setMenu(false);
     if (props.page !== 'home') {
       pendingSection.current = section;
-      props.onPage('home');
+      props.onPage(`home#${section}`);
     } else
       document.getElementById(`n-${section}`)?.scrollIntoView({
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -1403,14 +1399,6 @@ export default function FamiliarSite(props: Props) {
           : 'smooth',
       });
   };
-  useEffect(() => {
-    if (props.page === 'home') return;
-    trackEvent('page_view', {
-      page_title: `Santa Rosa Medical Massage | ${props.page}`,
-      page_location: window.location.href,
-      page_path: `/${props.page}`,
-    });
-  }, [props.page]);
   useEffect(() => {
     if (props.page === 'home' && pendingSection.current) {
       document.getElementById(`n-${pendingSection.current}`)?.scrollIntoView();
@@ -1516,7 +1504,7 @@ export default function FamiliarSite(props: Props) {
                 rel="noreferrer"
                 aria-label="Facebook"
               >
-                <img src="./social-facebook.svg" alt="" />
+                <img src="/social-facebook.svg" alt="" />
               </a>
               <a
                 href="https://www.instagram.com/santarosamedicalmassage/"
@@ -1524,7 +1512,7 @@ export default function FamiliarSite(props: Props) {
                 rel="noreferrer"
                 aria-label="Instagram"
               >
-                <img src="./social-instagram.svg" alt="" />
+                <img src="/social-instagram.svg" alt="" />
               </a>
               <a
                 href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4"
@@ -1532,7 +1520,7 @@ export default function FamiliarSite(props: Props) {
                 rel="noreferrer"
                 aria-label="Yelp"
               >
-                <img src="./social-yelp.svg" alt="" />
+                <img src="/social-yelp.svg" alt="" />
               </a>
             </div>
           </nav>

@@ -1,3 +1,5 @@
+import { businessInfo } from './business-info';
+
 export type Practitioner = {
   slug: string;
   name: string;
@@ -9,12 +11,10 @@ export type Practitioner = {
   teamPhoto: string;
 };
 
-export const squareBookingUrl =
-  "https://book.squareup.com/appointments/60177225-a91d-4710-9923-a9f3871aca5c/location/1653W5FPZ4EP7/services";
+export const squareBookingUrl = businessInfo.bookingUrl;
 
 // Gift cards are completed securely by Square, separately from appointments.
-export const squareGiftCardUrl =
-  "https://squareup.com/gift/FH36RAWDBBZ1E/order";
+export const squareGiftCardUrl = businessInfo.giftCardUrl;
 
 export const practiceAwardCopy =
   "Santa Rosa Medical Massage is an award-winning, award-recognized practice, with BusinessRate Best of 2025 recognition and a 2026 BusinessRate Award Winner, Massage Therapist honor.";

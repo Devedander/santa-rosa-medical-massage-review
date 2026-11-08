@@ -1,5 +1,6 @@
 "use client";
 
+import { businessInfo } from '../business-info';
 import {
   type Practitioner,
   practitioners,
@@ -25,7 +26,7 @@ export default function PractitionerProfile({
 }: {
   practitioner: Practitioner;
 }) {
-  const practitionerSchema = { '@context': 'https://schema.org', '@type': 'Person', name: practitioner.name, jobTitle: 'Certified Massage Therapist', worksFor: { '@id': 'https://santarosamedicalmassage.com/#practice' }, url: `https://santarosamedicalmassage.com/practitioners/${practitioner.slug}`, description: practitioner.shortAnswer };
+  const practitionerSchema = { '@context': 'https://schema.org', '@type': 'Person', name: practitioner.name, jobTitle: 'Certified Massage Therapist', worksFor: { '@id': `${businessInfo.website}#practice` }, url: `${businessInfo.website}practitioners/${practitioner.slug}`, description: practitioner.shortAnswer };
   const [menuOpen, setMenuOpen] = useState(false);
   const menu = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
@@ -137,7 +138,7 @@ export default function PractitionerProfile({
         <div className="staff-profile-footer-wordmark">
           <img src={`${profileBase}/logo-correct.png`} alt="Santa Rosa Medical Massage" />
         </div>
-        <span>630 Third Street, Suite B, Santa Rosa, CA 95404</span>
+        <span>{businessInfo.formattedAddress}</span>
       </footer>
     </main>
   );

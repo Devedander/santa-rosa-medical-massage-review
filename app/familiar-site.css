@@ -1107,7 +1107,8 @@
   border: 0;
   margin-bottom: 44px;
 }
-.novel .n-staff-directory-heading h2 {
+.novel .n-staff-directory-heading h2,
+.novel .n-staff-directory-heading h1 {
   margin: 12px 0 18px;
   max-width: 18ch;
   font-size: clamp(42px, 4.2vw, 62px);
@@ -2010,3 +2011,6 @@
     hyphens: auto;
   }
 }
+
+/* Crawlable catalog links retain the Familiar footer styling. */
+.n-house .n-footer-route-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
