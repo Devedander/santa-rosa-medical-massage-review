@@ -1,7 +1,7 @@
 export const measurementId = "G-ETEHP7SZNF";
 
 type AnalyticsWindow = Window & {
-  dataLayer?: unknown[][];
+  dataLayer?: unknown[];
   gtag?: (...args: unknown[]) => void;
   srmmAnalyticsInitialized?: boolean;
 };
@@ -17,8 +17,9 @@ export function initializeAnalytics() {
   if (analyticsWindow.srmmAnalyticsInitialized) return;
   analyticsWindow.srmmAnalyticsInitialized = true;
   analyticsWindow.dataLayer ??= [];
-  analyticsWindow.gtag ??= (...args: unknown[]) => {
-    analyticsWindow.dataLayer!.push(args);
+  analyticsWindow.gtag ??= function gtag() {
+    // Match Google's snippet: gtag.js reads commands from the arguments object.
+    analyticsWindow.dataLayer!.push(arguments);
   };
   analyticsWindow.gtag("js", new Date());
   analyticsWindow.gtag("config", measurementId);

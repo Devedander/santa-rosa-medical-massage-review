@@ -51,6 +51,7 @@ test("a click before the mount effect queues once and repeated initialization ad
   analytics.initializeAnalytics();
   assert.equal(scripts.length, 1);
   assert.equal(scripts[0].src, "https://www.googletagmanager.com/gtag/js?id=G-ETEHP7SZNF");
+  assert.ok(window.dataLayer.every((entry) => Object.prototype.toString.call(entry) === "[object Arguments]"));
   assert.equal(window.dataLayer.filter(([command]) => command === "config").length, 1);
   const events = window.dataLayer.filter(([command]) => command === "event");
   assert.equal(events.length, 1);
