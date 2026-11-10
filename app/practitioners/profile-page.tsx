@@ -1,4 +1,5 @@
 "use client";
+import BookingLink from "../booking-link";
 
 import { businessInfo } from '../business-info';
 import {
@@ -79,9 +80,9 @@ export default function PractitionerProfile({
             <a href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4" target="_blank" rel="noreferrer" aria-label="Yelp"><img src={`${profileBase}/social-yelp.svg`} alt="" /></a>
           </div>
         </nav>
-        <a className="staff-profile-book" href={squareBookingUrl}>
+        <BookingLink className="staff-profile-book" href={squareBookingUrl} placement="practitioner_navigation">
           Schedule now <span aria-hidden="true">↗</span>
-        </a>
+        </BookingLink>
       </header>
       <article className="staff-profile-content">
         <a className="staff-profile-back" href={`${profileBase}/#n-content`}>
@@ -111,9 +112,9 @@ export default function PractitionerProfile({
           <aside>
             <p className="staff-profile-kicker">Choosing care</p>
             <p>{practitioner.fit}</p>
-            <a className="staff-profile-book" href={squareBookingUrl}>
+            <BookingLink className="staff-profile-book" href={squareBookingUrl} placement="practitioner_content">
               Schedule an appointment <span aria-hidden="true">↗</span>
-            </a>
+            </BookingLink>
           </aside>
         </section>
         <ProfilePager previous={previous} next={next} base={profileBase} />

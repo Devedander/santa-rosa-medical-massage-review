@@ -1,4 +1,6 @@
 'use client';
+import BookingLink from './booking-link';
+import { trackEvent } from './analytics';
 import { agingCopy, referralCopy, practiceCopy } from './care-content';
 import {
   practitioners,
@@ -254,26 +256,6 @@ const treatmentPhotoFirsts = [
   'treatment-new-back-work-01.jpeg',
 ];
 
-type AnalyticsParams = Record<string, string | number | boolean>;
-
-/**
- * Sends only interaction metadata to GA4. Never place names, email addresses,
- * health details, or form responses in analytics events.
- */
-function trackEvent(eventName: string, params: AnalyticsParams = {}) {
-  if (typeof window === 'undefined') return;
-  const gtag = (
-    window as Window & {
-      gtag?: (
-        command: 'event',
-        event: string,
-        parameters: AnalyticsParams,
-      ) => void;
-    }
-  ).gtag;
-  gtag?.('event', eventName, { ...params, transport_type: 'beacon' });
-}
-
 function Action({
   to,
   children,
@@ -285,19 +267,14 @@ function Action({
 }) {
   if (to === 'book') {
     return (
-      <a
+      <BookingLink
         className={quiet ? 'n-link' : 'n-button'}
         href={squareBookingUrl}
-        onClick={() =>
-          trackEvent('generate_lead', {
-            method: 'square_booking',
-            link_text: typeof children === 'string' ? children : 'booking_cta',
-          })
-        }
+        placement="content"
       >
         {children}
         <ArrowUpRight size={18} aria-hidden="true" />
-      </a>
+      </BookingLink>
     );
   }
   if (to === 'gift') {
@@ -334,24 +311,18 @@ function TreatmentBookingLink({
   quiet?: boolean;
   serviceName?: string;
 }) {
-  const trackBooking = () => {
-    trackEvent('generate_lead', {
-      method: 'square_booking',
-      service_name: serviceName || 'general',
-    });
-  };
   return (
-    <a
+    <BookingLink
       className={quiet ? 'n-link' : 'n-button'}
       href={
         getSquareService(serviceName || '')?.bookingUrl ||
         squareTreatmentBookingUrl
       }
-      onClick={trackBooking}
+      placement="treatment"
     >
       {children}
       <ArrowUpRight size={18} aria-hidden="true" />
-    </a>
+    </BookingLink>
   );
 }
 function PractitionerProfileLink({
@@ -695,8 +666,7 @@ function Visit({
               className="n-phone"
               href={businessInfo.phoneHref}
               onClick={() =>
-                trackEvent('generate_lead', {
-                  method: 'phone_call',
+                trackEvent('phone_click', {
                   placement: 'visit_section',
                 })
               }
@@ -1524,19 +1494,14 @@ export default function FamiliarSite(props: Props) {
               </a>
             </div>
           </nav>
-          <a
+          <BookingLink
             className="n-button"
             href={squareBookingUrl}
-            onClick={() =>
-              trackEvent('generate_lead', {
-                method: 'square_booking',
-                placement: 'navigation',
-              })
-            }
+            placement="navigation"
           >
             Schedule now
             <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
+          </BookingLink>
         </div>
 
         <div id="n-content" className="n-content" tabIndex={-1}>
