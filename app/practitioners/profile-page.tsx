@@ -1,4 +1,5 @@
 "use client";
+import CallPill from "../call-pill";
 import BookingLink from "../booking-link";
 
 import { businessInfo } from '../business-info';
@@ -80,6 +81,7 @@ export default function PractitionerProfile({
             <a href="https://www.yelp.com/biz/santa-rosa-medical-massage-santa-rosa-4" target="_blank" rel="noreferrer" aria-label="Yelp"><img src={`${profileBase}/social-yelp.svg`} alt="" /></a>
           </div>
         </nav>
+        <CallPill />
         <BookingLink className="staff-profile-book" href={squareBookingUrl} placement="practitioner_navigation">
           Schedule now <span aria-hidden="true">↗</span>
         </BookingLink>

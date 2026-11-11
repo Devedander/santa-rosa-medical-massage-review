@@ -1,4 +1,5 @@
 'use client';
+import CallPill from './call-pill';
 import BookingLink from './booking-link';
 import { trackEvent } from './analytics';
 import { agingCopy, referralCopy, practiceCopy } from './care-content';
@@ -1494,6 +1495,7 @@ export default function FamiliarSite(props: Props) {
               </a>
             </div>
           </nav>
+          <CallPill />
           <BookingLink
             className="n-button"
             href={squareBookingUrl}

@@ -2014,3 +2014,42 @@
 
 /* Crawlable catalog links retain the Familiar footer styling. */
 .n-house .n-footer-route-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
+
+/* Call action beside scheduling in the sticky site header. */
+.n-call-pill {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid #773738;
+  border-radius: 999px;
+  color: #773738;
+  background: transparent;
+  font: 600 14px/1.4 "Segoe UI", sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.n-call-pill:focus-visible { outline: 3px solid #304438; outline-offset: 4px; }
+.n-call-label { display: none; }
+@media (max-width: 1500px) {
+  .n-call-number { display: none; }
+  .n-call-label { display: inline; }
+  .n-call-pill { padding-inline: 14px; }
+  .n-house .n-site-nav { gap: 12px; }
+  .n-house .n-site-nav nav { gap: 12px; }
+}
+@media (max-width: 960px) {
+  .novel .n-site-nav > .n-call-pill { margin-left: auto; }
+  .novel .n-menu-toggle { margin-right: 0; }
+}
+@media (max-width: 640px) {
+  .n-call-pill { min-height: 44px; padding-inline: 12px; gap: 6px; }
+  .novel .n-site-nav > .n-button { margin-left: 0; }
+}
+.staff-profile-nav > .n-call-pill { margin-left: auto; }
+@media (max-width: 760px) {
+  .staff-profile-nav > .staff-profile-book { margin-left: 0; }
+}
